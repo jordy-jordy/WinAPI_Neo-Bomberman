@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{7508d805-7cbe-4039-893b-e9cb21095d88}</ProjectGuid>
-    <RootNamespace>ProjectNeoBomberman</RootNamespace>
+    <ProjectGuid>{02a68b4b-6a41-4ec9-ac41-a1138fe0204d}</ProjectGuid>
+    <RootNamespace>ContentsProject</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
