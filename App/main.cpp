@@ -7,4 +7,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 {
 	return 0;
+
+	int TEST = 0;
+
 }
