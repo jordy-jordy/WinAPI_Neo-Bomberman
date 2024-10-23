@@ -157,8 +157,7 @@ void UEngineWindow::Create(std::string_view _TitleName, std::string_view _ClassN
         return;
     }
 
-    WindowHandle = CreateWindowA(_ClassName.data(), _TitleName.data(), WS_OVERLAPPEDWINDOW,
-        0, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+    WindowHandle = CreateWindowA(_ClassName.data(), _TitleName.data(), WS_OVERLAPPEDWINDOW, 0, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
 
     if (nullptr == WindowHandle)
     {
