@@ -148,11 +148,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="EngineDebug.h" />
+    <ClInclude Include="EngineDelegate.h" />
     <ClInclude Include="EngineFile.h" />
     <ClInclude Include="EngineMath.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineDebug.cpp" />
+    <ClCompile Include="EngineDelegate.cpp" />
     <ClCompile Include="EngineFile.cpp" />
     <ClCompile Include="EngineMath.cpp" />
   </ItemGroup>
