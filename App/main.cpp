@@ -9,7 +9,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	_In_ int       nCmdShow)
 {
 
-	// UGameEngine::Start(hInstance);
 
 	UEngineWindow::EngineWindowInit(hInstance);
 
