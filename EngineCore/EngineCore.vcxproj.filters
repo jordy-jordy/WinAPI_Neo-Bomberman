@@ -10,9 +10,11 @@
     <ClInclude Include="Level.h">
       <Filter>Object\Level</Filter>
     </ClInclude>
-    <ClInclude Include="Actor.h" />
     <ClInclude Include="GameMode.h">
       <Filter>Object\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor.h">
+      <Filter>Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -25,9 +27,11 @@
     <ClCompile Include="Level.cpp">
       <Filter>Object\Level</Filter>
     </ClCompile>
-    <ClCompile Include="Actor.cpp" />
     <ClCompile Include="GameMode.cpp">
       <Filter>Object\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor.cpp">
+      <Filter>Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

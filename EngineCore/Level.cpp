@@ -7,11 +7,6 @@ ULevel::ULevel()
 
 ULevel::~ULevel()
 {
-	//if (nullptr != GameMode)
-	//{
-	//	delete GameMode;
-	//	GameMode = nullptr;
-	//}
 
 	std::list<AActor*>::iterator StartIter = AllActors.begin();
 	std::list<AActor*>::iterator EndIter = AllActors.end();
