@@ -79,8 +79,6 @@ void UEngineAPICore::OpenLevel(std::string_view _LevelName)
 {
 	std::string ChangeName = _LevelName.data();
 
-
-
 	std::map<std::string, class ULevel*>::iterator FindIter = Levels.find(ChangeName);
 	std::map<std::string, class ULevel*>::iterator EndIter = Levels.end();
 

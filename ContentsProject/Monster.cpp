@@ -1,23 +1,23 @@
 #include "PreCompile.h"
-#include "Player.h"
+#include "Monster.h"
 #include <EngineCore/EngineAPICore.h>
 
-APlayer::APlayer()
+AMonster::AMonster()
 {
-	SetActorLoaction({ 200, 200 });
+	SetActorLoaction({ 100, 100 });
 	SetActorScale({ 100, 100 });
-}
+};
 
-APlayer::~APlayer()
+AMonster::~AMonster()
+{
+
+};
+
+void AMonster::BeginPlay()
 {
 }
 
-
-void APlayer::BeginPlay()
-{
-}
-
-void APlayer::Tick()
+void AMonster::Tick()
 {
 	AddActorLoaction(FVector2D::DOWN * 0.0001f);
 }
