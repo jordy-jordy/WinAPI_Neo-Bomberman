@@ -11,6 +11,17 @@
 #pragma comment (lib, "EngineBase.lib")
 #pragma comment (lib, "EnginePlatform.lib")
 
+
+// 함수포인터
+// 가상함수
+
+class UContentsCore
+{
+public:
+	virtual void BeginPlay() = 0;
+	virtual void Tick() = 0;
+};
+
 // 설명 :
 class UEngineAPICore
 {
@@ -25,7 +36,7 @@ public:
 	UEngineAPICore& operator=(const UEngineAPICore& _Other) = delete;
 	UEngineAPICore& operator=(UEngineAPICore&& _Other) noexcept = delete;
 
-	static int EngineStart(HINSTANCE _Inst);
+	static int EngineStart(HINSTANCE _Inst, UContentsCore* _UserCore);
 
 	class UEngineAPICore* GetCore()
 	{
@@ -40,14 +51,13 @@ public:
 protected:
 
 private:
-	static void EngineLoop();
+	static void EngineBeginPlay();
+	static void EngineTick();
 	static UEngineAPICore* MainCore;
+	static UContentsCore* UserCore;
 
 	UEngineWindow EngineMainWindow; // 엔진 메인 윈도우
 
-	// 이녀석들이 돌아가야 게임이 돌아간다.
 	void Tick();
-	void Render();
 
 };
-
