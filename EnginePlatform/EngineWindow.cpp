@@ -74,7 +74,7 @@ int UEngineWindow::WindowMessageLoop(EngineDelegate _StartFunction, EngineDelega
 {
     // 단축키 인데 게임
     // HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_WINDOWSPROJECT2));
-    MSG msg;
+    MSG msg = MSG();
 
     // 기본 메시지 루프입니다:
     // 메세지 루프가 getMessage라면 게임의 루프를 돌릴수 없다.
@@ -94,7 +94,7 @@ int UEngineWindow::WindowMessageLoop(EngineDelegate _StartFunction, EngineDelega
     // 프로그램 시작하고 딱 1번 해야할일 있다면 여기에 넣어라.
     _StartFunction();
 
-    while (WindowCount)
+    while (0 != WindowCount)
     {
         // if (!TranslateAccelerator(msg.hwnd, nullptr, &msg))  => 윈도우 단축키 자체를 사용하지
         // 않을 것이므로 그냥 무시
@@ -174,10 +174,15 @@ void UEngineWindow::Create(std::string_view _TitleName, std::string_view _ClassN
 void UEngineWindow::Open(std::string_view _TitleName /*= "Window"*/)
 {
     // 어 window 안만들고 띄우려고 하네?
-    if (nullptr == WindowHandle)
+    if (0 == WindowHandle)
     {
         // 만들어
         Create("Window");
+    }
+
+    if (0 == WindowHandle)
+    {
+        return;
     }
 
     // 단순히 윈도창을 보여주는 것만이 아니라

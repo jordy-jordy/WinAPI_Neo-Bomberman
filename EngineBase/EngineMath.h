@@ -23,7 +23,7 @@ public:
 
 	FIntPoint operator+(FIntPoint _Other) const
 	{
-		FIntPoint Result; 
+		FIntPoint Result;
 		Result.X = X + _Other.X;
 		Result.Y = Y + _Other.Y;
 		return Result;

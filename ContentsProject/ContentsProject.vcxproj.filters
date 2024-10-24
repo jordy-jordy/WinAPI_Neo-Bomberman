@@ -10,6 +10,9 @@
     <Filter Include="Core">
       <UniqueIdentifier>{2f6ba058-48aa-47e6-b7a8-d9dce4090505}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ContentsObject\GameMode">
+      <UniqueIdentifier>{d5c68273-48d4-4381-abee-d6e5a822754e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Player.cpp">
@@ -21,6 +24,9 @@
     <ClCompile Include="EduContentsCore.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="PlayGameMode.cpp">
+      <Filter>ContentsObject\GameMode</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h">
@@ -31,6 +37,9 @@
     </ClInclude>
     <ClInclude Include="EduContentsCore.h">
       <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayGameMode.h">
+      <Filter>ContentsObject\GameMode</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
