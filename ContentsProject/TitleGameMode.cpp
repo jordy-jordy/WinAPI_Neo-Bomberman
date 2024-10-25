@@ -5,15 +5,12 @@
 
 ATitleGameMode::ATitleGameMode()
 {
-
 };
 
 ATitleGameMode::~ATitleGameMode()
 {
-
 };
 
 void ATitleGameMode::BeginPlay()
 {
-	int a = 0;
 }

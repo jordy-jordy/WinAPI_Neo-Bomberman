@@ -5,15 +5,12 @@
 
 AEndGameMode::AEndGameMode()
 {
-
 };
 
 AEndGameMode::~AEndGameMode()
 {
-
 };
 
 void AEndGameMode::BeginPlay()
 {
-	int a = 0;
 }

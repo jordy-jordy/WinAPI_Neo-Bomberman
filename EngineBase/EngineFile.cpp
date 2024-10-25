@@ -20,7 +20,7 @@ void UEngineFile::FileOpen(const char* _Mode)
 	if (nullptr == File)
 	{
 
-		MSGASSERT(Path /*+ "파일 오픈에 실패했습니다"*/);
+		MSGASSERT(Path );
 	}
 }
 

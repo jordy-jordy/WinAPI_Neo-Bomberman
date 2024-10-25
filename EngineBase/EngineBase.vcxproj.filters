@@ -1,24 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http:  <ItemGroup>
-    <ClInclude Include="EngineDebug.h">
-      <Filter>Debug</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineFile.h">
-      <Filter>IO</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineMath.h">
-      <Filter>Math</Filter>
-    </ClInclude>
-    <ClInclude Include="PreCompile.h">
-      <Filter>PreCompile</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineDelegate.h">
-      <Filter>Function</Filter>
-    </ClInclude>
-  </ItemGroup>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="EngineDebug.cpp">
       <Filter>Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineDelegate.cpp">
+      <Filter>Function</Filter>
     </ClCompile>
     <ClCompile Include="EngineFile.cpp">
       <Filter>IO</Filter>
@@ -29,25 +16,48 @@
     <ClCompile Include="PreCompile.cpp">
       <Filter>PreCompile</Filter>
     </ClCompile>
-    <ClCompile Include="EngineDelegate.cpp">
-      <Filter>Function</Filter>
+    <ClCompile Include="EngineTimer.cpp">
+      <Filter>Time</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EngineDebug.h">
+      <Filter>Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineDelegate.h">
+      <Filter>Function</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineFile.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineMath.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="PreCompile.h">
+      <Filter>PreCompile</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineTimer.h">
+      <Filter>Time</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
     <Filter Include="Debug">
-      <UniqueIdentifier>{78b6108e-3fc1-4750-8641-f8bd572d937d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="IO">
-      <UniqueIdentifier>{61834f60-1002-4071-9e28-34087dfb4d09}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Math">
-      <UniqueIdentifier>{ea7ef493-e79b-4081-9ac6-502c8d1eb677}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="PreCompile">
-      <UniqueIdentifier>{45721e27-71ab-456d-a6c2-7740950d663c}</UniqueIdentifier>
+      <UniqueIdentifier>{f1e230d6-11e3-468f-8011-f72cdd721c15}</UniqueIdentifier>
     </Filter>
     <Filter Include="Function">
-      <UniqueIdentifier>{623c88df-dbab-4168-a179-e30e1603d9a7}</UniqueIdentifier>
+      <UniqueIdentifier>{e01de18a-852d-4490-8ac8-29e736f7ce67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IO">
+      <UniqueIdentifier>{bde88a06-43da-4fa5-8b61-957f479d0711}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{e51fc3b5-516d-46d7-b5dc-7f4b15e2c8ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PreCompile">
+      <UniqueIdentifier>{ffbb19aa-5036-40a0-b94c-a5a6f268cd93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Time">
+      <UniqueIdentifier>{29c82ee8-5f70-45d2-a929-9c3cc07c7b3a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

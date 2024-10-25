@@ -4,7 +4,7 @@
 
 APlayer::APlayer()
 {
-	SetActorLoaction({ 200, 200 });
+	SetActorLoaction({ 100, 100 });
 	SetActorScale({ 100, 100 });
 }
 
@@ -17,7 +17,7 @@ void APlayer::BeginPlay()
 {
 }
 
-void APlayer::Tick()
+void APlayer::Tick(float _DeltaTime)
 {
-	AddActorLoaction(FVector2D::DOWN * 0.0001f);
+	AddActorLoaction(FVector2D::RIGHT * _DeltaTime * Speed);
 }

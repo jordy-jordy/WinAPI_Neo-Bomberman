@@ -13,11 +13,3 @@ AMonster::~AMonster()
 
 };
 
-void AMonster::BeginPlay()
-{
-}
-
-void AMonster::Tick()
-{
-	AddActorLoaction(FVector2D::DOWN * 0.0001f);
-}
