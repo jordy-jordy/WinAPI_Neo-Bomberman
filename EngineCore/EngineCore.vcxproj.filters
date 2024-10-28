@@ -1,53 +1,54 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http:  <ItemGroup>
-    <ClInclude Include="EngineAPICore.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="PreCompile.h">
-      <Filter>PreCompile</Filter>
-    </ClInclude>
-    <ClInclude Include="Level.h">
-      <Filter>Object\Level</Filter>
-    </ClInclude>
-    <ClInclude Include="GameMode.h">
-      <Filter>Object\Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="Actor.h">
-      <Filter>Object</Filter>
-    </ClInclude>
-  </ItemGroup>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="EngineAPICore.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="PreCompile.cpp">
       <Filter>PreCompile</Filter>
-    </ClCompile>
-    <ClCompile Include="Level.cpp">
-      <Filter>Object\Level</Filter>
-    </ClCompile>
-    <ClCompile Include="GameMode.cpp">
-      <Filter>Object\Actor</Filter>
     </ClCompile>
     <ClCompile Include="Actor.cpp">
       <Filter>Object</Filter>
     </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>Object\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineAPICore.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMode.cpp">
+      <Filter>Object\Actor</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PreCompile.h">
+      <Filter>PreCompile</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Object\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineAPICore.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMode.h">
+      <Filter>Object\Actor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
-      <UniqueIdentifier>{fed33ccd-1cb7-4c10-8554-b3c64bca0c03}</UniqueIdentifier>
+      <UniqueIdentifier>{3d8b3ef7-717b-4613-9c1f-133e58db28cb}</UniqueIdentifier>
     </Filter>
     <Filter Include="Object">
-      <UniqueIdentifier>{682aa135-ba69-4b87-a37b-7a7929af7177}</UniqueIdentifier>
+      <UniqueIdentifier>{3e3fc8c8-b4a9-447f-8efd-8378de45a9bd}</UniqueIdentifier>
     </Filter>
     <Filter Include="PreCompile">
-      <UniqueIdentifier>{cf926c78-2590-44b9-9cd6-696ec118f90d}</UniqueIdentifier>
+      <UniqueIdentifier>{86678fbc-1a17-431b-bcba-26fba042b507}</UniqueIdentifier>
     </Filter>
     <Filter Include="Object\Actor">
-      <UniqueIdentifier>{c217fbb7-2644-4ac8-b25c-28c0bf90138e}</UniqueIdentifier>
+      <UniqueIdentifier>{6d4fe931-ddd7-4baa-b8a8-527305131e19}</UniqueIdentifier>
     </Filter>
     <Filter Include="Object\Level">
-      <UniqueIdentifier>{de0f3188-833e-49b4-a9e7-b236ba2af82b}</UniqueIdentifier>
+      <UniqueIdentifier>{3eb51248-b4fc-406f-87f7-b49f4bcfd3c2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

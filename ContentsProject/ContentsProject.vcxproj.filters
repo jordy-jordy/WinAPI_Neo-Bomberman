@@ -1,21 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http:  <ItemGroup>
-    <Filter Include="ContentsObject">
-      <UniqueIdentifier>{febde08b-d955-465d-af40-36c25c018e3c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="PreCompile">
-      <UniqueIdentifier>{33249823-3129-4e47-a377-ada836371023}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Core">
-      <UniqueIdentifier>{2f6ba058-48aa-47e6-b7a8-d9dce4090505}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ContentsObject\GameMode">
-      <UniqueIdentifier>{d5c68273-48d4-4381-abee-d6e5a822754e}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Player.cpp">
-      <Filter>ContentsObject</Filter>
+    <ClCompile Include="PlayGameMode.cpp">
+      <Filter>ContentsObject\GameMode</Filter>
     </ClCompile>
     <ClCompile Include="PreCompile.cpp">
       <Filter>PreCompile</Filter>
@@ -23,22 +10,22 @@
     <ClCompile Include="EduContentsCore.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="PlayGameMode.cpp">
+    <ClCompile Include="EndGameMode.cpp">
       <Filter>ContentsObject\GameMode</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleGameMode.cpp">
+      <Filter>ContentsObject</Filter>
     </ClCompile>
     <ClCompile Include="Monster.cpp">
       <Filter>ContentsObject</Filter>
     </ClCompile>
-    <ClCompile Include="TitleGameMode.cpp">
-      <Filter>ContentsObject\GameMode</Filter>
-    </ClCompile>
-    <ClCompile Include="EndGameMode.cpp">
-      <Filter>ContentsObject\GameMode</Filter>
+    <ClCompile Include="Player.cpp">
+      <Filter>ContentsObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Player.h">
-      <Filter>ContentsObject</Filter>
+    <ClInclude Include="PlayGameMode.h">
+      <Filter>ContentsObject\GameMode</Filter>
     </ClInclude>
     <ClInclude Include="PreCompile.h">
       <Filter>PreCompile</Filter>
@@ -46,17 +33,31 @@
     <ClInclude Include="EduContentsCore.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="PlayGameMode.h">
+    <ClInclude Include="EndGameMode.h">
       <Filter>ContentsObject\GameMode</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleGameMode.h">
+      <Filter>ContentsObject</Filter>
     </ClInclude>
     <ClInclude Include="Monster.h">
       <Filter>ContentsObject</Filter>
     </ClInclude>
-    <ClInclude Include="TitleGameMode.h">
-      <Filter>ContentsObject\GameMode</Filter>
+    <ClInclude Include="Player.h">
+      <Filter>ContentsObject</Filter>
     </ClInclude>
-    <ClInclude Include="EndGameMode.h">
-      <Filter>ContentsObject\GameMode</Filter>
-    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Core">
+      <UniqueIdentifier>{e64ff30b-aac1-450f-bd19-7bfbb1721129}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PreCompile">
+      <UniqueIdentifier>{b4259974-663e-4ddd-92c7-edbc04596b92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContentsObject">
+      <UniqueIdentifier>{7d69905a-f12b-4389-84f3-94c304a7afc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContentsObject\GameMode">
+      <UniqueIdentifier>{44a6d2fd-0227-4b77-a9f6-11dc56acf790}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
