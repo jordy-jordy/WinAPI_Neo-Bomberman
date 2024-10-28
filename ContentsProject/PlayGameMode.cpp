@@ -14,5 +14,6 @@ APlayGameMode::~APlayGameMode()
 
 void APlayGameMode::BeginPlay()
 {
-	int a = 0;
+	//APlayer* player = GetWorld()->SpawnActor<APlayer>();
+	//player->SetActorLocation({ 500, 500 });
 }

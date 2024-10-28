@@ -3,7 +3,7 @@
 
 ABullet::ABullet()
 {
-	SetActorScale({ 50, 50 });
+	SetActorScale({ 20, 20 });
 }
 
 ABullet::~ABullet()
@@ -12,5 +12,5 @@ ABullet::~ABullet()
 
 void ABullet::Tick(float _DeltaTime)
 {
-	AddActorLocation(FVector2D::RIGHT * _DeltaTime * 300.0f);
+	AddActorLocation(FVector2D::RIGHT * _DeltaTime * 500.0f);
 }

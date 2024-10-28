@@ -16,7 +16,7 @@ EduContentsCore::~EduContentsCore()
 
 void EduContentsCore::BeginPlay()
 {
-	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle("EduWindow");
+	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle(":: LHJ Win API :: Neo-Bomberman ::");
 
 	UEngineAPICore::GetCore()->CreateLevel<APlayGameMode, APlayer>("Play");
 
