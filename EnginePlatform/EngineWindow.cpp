@@ -129,11 +129,11 @@ void UEngineWindow::Create(std::string_view _TitleName, std::string_view _ClassN
 	BackBuffer = GetDC(WindowHandle);
 }
 
-void UEngineWindow::Open(std::string_view _TitleName)
+void UEngineWindow::Open(std::string_view _TitleName /*= "Window"*/)
 {
 	if (0 == WindowHandle)
 	{
-		Create("Window");
+		Create(_TitleName);
 	}
 
 	if (0 == WindowHandle)

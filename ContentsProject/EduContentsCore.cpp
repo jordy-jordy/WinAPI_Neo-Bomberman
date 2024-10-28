@@ -5,6 +5,7 @@
 #include "PlayGameMode.h"
 #include "Player.h"
 
+
 EduContentsCore::EduContentsCore()
 {
 }
@@ -15,9 +16,12 @@ EduContentsCore::~EduContentsCore()
 
 void EduContentsCore::BeginPlay()
 {
+	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle("EduWindow");
+
 	UEngineAPICore::GetCore()->CreateLevel<APlayGameMode, APlayer>("Play");
 
 	UEngineAPICore::GetCore()->OpenLevel("Play");
+
 }
 
 void EduContentsCore::Tick()

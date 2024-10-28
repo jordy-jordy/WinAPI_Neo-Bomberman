@@ -13,13 +13,16 @@
     <ClCompile Include="EndGameMode.cpp">
       <Filter>ContentsObject\GameMode</Filter>
     </ClCompile>
-    <ClCompile Include="TitleGameMode.cpp">
-      <Filter>ContentsObject</Filter>
-    </ClCompile>
     <ClCompile Include="Monster.cpp">
       <Filter>ContentsObject</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
+      <Filter>ContentsObject</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleGameMode.cpp">
+      <Filter>ContentsObject\GameMode</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
       <Filter>ContentsObject</Filter>
     </ClCompile>
   </ItemGroup>
@@ -36,13 +39,16 @@
     <ClInclude Include="EndGameMode.h">
       <Filter>ContentsObject\GameMode</Filter>
     </ClInclude>
-    <ClInclude Include="TitleGameMode.h">
-      <Filter>ContentsObject</Filter>
-    </ClInclude>
     <ClInclude Include="Monster.h">
       <Filter>ContentsObject</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
+      <Filter>ContentsObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleGameMode.h">
+      <Filter>ContentsObject\GameMode</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
       <Filter>ContentsObject</Filter>
     </ClInclude>
   </ItemGroup>
