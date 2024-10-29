@@ -2,7 +2,7 @@
 #include "Player.h"
 #include <EngineCore/EngineAPICore.h>
 #include <EnginePlatform/EngineInput.h>
-#include "Bullet.h"
+#include "Bomb.h"
 
 APlayer::APlayer()
 {
@@ -47,7 +47,7 @@ void APlayer::Tick(float _DeltaTime)
 {
 	if (true == UEngineInput::GetInst().IsDown(VK_LBUTTON))
 	{
-		ABullet* Ptr = GetWorld()->SpawnActor<ABullet>();
+		ABomb* Ptr = GetWorld()->SpawnActor<ABomb>();
 		Ptr->SetActorLocation(GetActorLocation());
 	}
 

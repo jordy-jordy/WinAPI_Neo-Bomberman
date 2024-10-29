@@ -151,11 +151,11 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Bullet.h">
+    <ClInclude Include="Bomb.h">
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="EduContentsCore.h">
+    <ClInclude Include="BombmanCore.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -179,11 +179,11 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Bullet.cpp">
+    <ClCompile Include="Bomb.cpp">
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="EduContentsCore.cpp">
+    <ClCompile Include="BombmanCore.cpp">
       <SubType>
       </SubType>
     </ClCompile>

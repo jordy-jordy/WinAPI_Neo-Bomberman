@@ -1,20 +1,20 @@
 #include "PreCompile.h"
-#include "EduContentsCore.h"
+#include "BombmanCore.h"
 #include <EngineCore/EngineAPICore.h>
 
 #include "PlayGameMode.h"
 #include "Player.h"
 
 
-EduContentsCore::EduContentsCore()
+BombmanCore::BombmanCore()
 {
 }
 
-EduContentsCore::~EduContentsCore()
+BombmanCore::~BombmanCore()
 {
 }
 
-void EduContentsCore::BeginPlay()
+void BombmanCore::BeginPlay()
 {
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle(":: LHJ Win API :: Neo-Bomberman ::");
 
@@ -24,6 +24,6 @@ void EduContentsCore::BeginPlay()
 
 }
 
-void EduContentsCore::Tick()
+void BombmanCore::Tick()
 {
 }
