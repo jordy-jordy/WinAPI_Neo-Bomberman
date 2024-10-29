@@ -13,17 +13,20 @@
     <ClCompile Include="EndGameMode.cpp">
       <Filter>ContentsObject\GameMode</Filter>
     </ClCompile>
-    <ClCompile Include="Monster.cpp">
-      <Filter>ContentsObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>ContentsObject</Filter>
-    </ClCompile>
     <ClCompile Include="TitleGameMode.cpp">
       <Filter>ContentsObject\GameMode</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>ContentsObject\Global</Filter>
+    </ClCompile>
     <ClCompile Include="Bomb.cpp">
-      <Filter>ContentsObject</Filter>
+      <Filter>ContentsObject\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>ContentsObject\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayMap.cpp">
+      <Filter>ContentsObject\Play</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -39,17 +42,20 @@
     <ClInclude Include="EndGameMode.h">
       <Filter>ContentsObject\GameMode</Filter>
     </ClInclude>
-    <ClInclude Include="Monster.h">
-      <Filter>ContentsObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>ContentsObject</Filter>
-    </ClInclude>
     <ClInclude Include="TitleGameMode.h">
       <Filter>ContentsObject\GameMode</Filter>
     </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>ContentsObject\Global</Filter>
+    </ClInclude>
     <ClInclude Include="Bomb.h">
-      <Filter>ContentsObject</Filter>
+      <Filter>ContentsObject\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>ContentsObject\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayMap.h">
+      <Filter>ContentsObject\Play</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -64,6 +70,12 @@
     </Filter>
     <Filter Include="ContentsObject\GameMode">
       <UniqueIdentifier>{44a6d2fd-0227-4b77-a9f6-11dc56acf790}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContentsObject\Global">
+      <UniqueIdentifier>{4bfaef8e-daa6-4977-b974-e5b909f290db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContentsObject\Play">
+      <UniqueIdentifier>{c4fac68f-60cc-4b9b-b7a2-3d2db87be598}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

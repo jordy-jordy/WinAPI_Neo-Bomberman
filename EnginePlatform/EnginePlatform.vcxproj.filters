@@ -1,22 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="EngineWindow.cpp" />
-    <ClCompile Include="PreCompile.cpp" />
     <ClCompile Include="EngineInput.cpp">
       <Filter>Input</Filter>
     </ClCompile>
+    <ClCompile Include="PreCompile.cpp">
+      <Filter>PreCompile</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineWindow.cpp">
+      <Filter>Window</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineWinImage.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="EngineWindow.h" />
-    <ClInclude Include="PreCompile.h" />
     <ClInclude Include="EngineInput.h">
       <Filter>Input</Filter>
     </ClInclude>
+    <ClInclude Include="PreCompile.h">
+      <Filter>PreCompile</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineWindow.h">
+      <Filter>Window</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineWinImage.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Input">
       <UniqueIdentifier>{0b4edeb1-da05-449d-b3d9-168cde1aae6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PreCompile">
+      <UniqueIdentifier>{715e0809-550d-41c7-8bd1-267a162c3c5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Window">
+      <UniqueIdentifier>{bfbdb03b-9df3-401a-a865-e937bf376c0a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

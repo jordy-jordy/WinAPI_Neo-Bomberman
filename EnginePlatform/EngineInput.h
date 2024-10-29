@@ -6,10 +6,6 @@
 #include <functional>
 
 
-
-
-
-
 enum class KeyEvent
 {
 	Down,
@@ -38,9 +34,6 @@ public:
 	}
 
 
-
-
-
 private:
 	class UEngineKey
 	{
@@ -61,8 +54,6 @@ private:
 		std::vector<std::function<void(float)>> DownEvents;
 		std::vector<std::function<void(float)>> UpEvents;
 		std::vector<std::function<void(float)>> FreeEvents;
-
-
 
 		UEngineKey()
 		{
