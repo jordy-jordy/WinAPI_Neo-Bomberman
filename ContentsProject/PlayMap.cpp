@@ -6,8 +6,8 @@ APlayMap::APlayMap()
 {
 	FVector2D WindowSize = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
 
-	SetActorScale(WindowSize.Half());
-	SetActorLocation(WindowSize.Half());
+	//SetActorScale(WindowSize.Half());
+	//SetActorLocation(WindowSize.Half());
 }
 
 APlayMap::~APlayMap()
