@@ -7,23 +7,19 @@
 APlayer::APlayer()
 {
 	SetActorLocation({ 100, 100 });
-	SetActorScale({ 100, 100 });
+	SetActorScale({ 32, 32 });
+
+	SetSprite("bomb_000.png");
 }
 
 APlayer::~APlayer()
 {
 }
 
+
 void APlayer::BeginPlay()
 {
 	Super::BeginPlay();
-}
-
-void APlayer::MoveFunction(FVector2D _Dir/*, AMonster* Monster*/)
-{
-	float DeltaTime = UEngineAPICore::GetCore()->GetDeltaTime();
-
-	AddActorLocation(_Dir * DeltaTime * Speed);
 }
 
 
@@ -48,10 +44,6 @@ void APlayer::Tick(float _DeltaTime)
 		AddActorLocation(FVector2D::UP * _DeltaTime * Speed);
 	}
 
-	if (true == UEngineInput::GetInst().IsDown(VK_LBUTTON))
-	{
-		ABomb* Ptr = GetWorld()->SpawnActor<ABomb>();
-		Ptr->SetActorLocation(GetActorLocation());
-	}
+
 
 }

@@ -38,6 +38,9 @@ void BombmanCore::BeginPlay()
 	}
 
 
+	UImageManager::GetInst().CuttingSprite("bomb_000.png", { 32, 32 });
+
+
 
 
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle(":: LHJ Win API :: Neo-Bomberman ::");

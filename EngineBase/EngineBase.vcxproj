@@ -163,7 +163,15 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="EngineString.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="EngineTimer.h" />
+    <ClInclude Include="Object.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="PreCompile.h" />
   </ItemGroup>
   <ItemGroup>
@@ -179,7 +187,15 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="EngineString.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="EngineTimer.cpp" />
+    <ClCompile Include="Object.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="PreCompile.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>

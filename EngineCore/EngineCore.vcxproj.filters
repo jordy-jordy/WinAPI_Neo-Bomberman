@@ -19,6 +19,9 @@
     <ClCompile Include="ImageManager.cpp">
       <Filter>Resources</Filter>
     </ClCompile>
+    <ClCompile Include="EngineSprite.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -37,6 +40,9 @@
       <Filter>Object\Actor</Filter>
     </ClInclude>
     <ClInclude Include="ImageManager.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineSprite.h">
       <Filter>Resources</Filter>
     </ClInclude>
   </ItemGroup>
