@@ -38,7 +38,7 @@ void BombmanCore::BeginPlay()
 	}
 
 
-	UImageManager::GetInst().CuttingSprite("bomb_000.png", { 32, 32 });
+	//UImageManager::GetInst().CuttingSprite("bomb_000.png", { 32, 32 });
 
 
 
