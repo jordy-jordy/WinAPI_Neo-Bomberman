@@ -12,16 +12,19 @@ public:
 	// constrcuter destructer
 	UEngineDirectory();
 	UEngineDirectory(std::string_view _Path);
+	UEngineDirectory(std::filesystem::path _Path);
 	~UEngineDirectory();
 
-	// delete Function
-	UEngineDirectory(const UEngineDirectory& _Other) = delete;
-	UEngineDirectory(UEngineDirectory&& _Other) noexcept = delete;
-	UEngineDirectory& operator=(const UEngineDirectory& _Other) = delete;
-	UEngineDirectory& operator=(UEngineDirectory&& _Other) noexcept = delete;
+	//// delete Function
+	//UEngineDirectory(const UEngineDirectory& _Other) = delete;
+	//UEngineDirectory(UEngineDirectory&& _Other) noexcept = delete;
+	//UEngineDirectory& operator=(const UEngineDirectory& _Other) = delete;
+	//UEngineDirectory& operator=(UEngineDirectory&& _Other) noexcept = delete;
 
 	// 시간이 너무 없다고 안만듬. 나중에 만들어야지.
 	std::vector<class UEngineFile> GetAllFile(bool _IsRecursive = true);
+
+	std::vector<class UEngineDirectory> GetAllDirectory();
 
 protected:
 

@@ -9,7 +9,7 @@ APlayer::APlayer()
 	SetActorLocation({ 100, 100 });
 	SetActorScale({ 32, 32 });
 
-	SetSprite("bomb_000.png");
+	SetSprite("bomb");
 }
 
 APlayer::~APlayer()
@@ -44,6 +44,11 @@ void APlayer::Tick(float _DeltaTime)
 		AddActorLocation(FVector2D::UP * _DeltaTime * Speed);
 	}
 
+	if (true == UEngineInput::GetInst().IsDown('R'))
+	{
+		++MySpriteIndex;
+		SetSprite("bomb", MySpriteIndex);
+	}
 
 
 }

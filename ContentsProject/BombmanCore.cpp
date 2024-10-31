@@ -23,12 +23,12 @@ BombmanCore::~BombmanCore()
 void BombmanCore::BeginPlay()
 {
 	UEngineDirectory Dir;
+
 	if (false == Dir.MoveParentToDirectory("Resources"))
 	{
 		MSGASSERT("리소스 폴더를 찾지 못했습니다.");
 		return;
 	}
-
 	std::vector<UEngineFile> ImageFiles = Dir.GetAllFile();
 
 	for (size_t i = 0; i < ImageFiles.size(); i++)
@@ -38,19 +38,30 @@ void BombmanCore::BeginPlay()
 	}
 
 
-	//UImageManager::GetInst().CuttingSprite("bomb_000.png", { 32, 32 });
+
+	{
+
+		UEngineDirectory BombDir;
+		BombDir.MoveParentToDirectory("Resources");
+		BombDir.Append("play\\bomb");
+
+		UImageManager::GetInst().LoadFolder(BombDir.GetPathToString());
+
+	}
 
 
 
 
-	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle(":: LHJ Win API :: Neo-Bomberman ::");
 
-	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale({ 0, 0 }, { 800, 600 });
+	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle("EduWindow");
+
+	// 이거 꼭 호출해줘야 합니다.
+	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale({ 0, 0 }, { 1280, 720 });
 
 	UEngineAPICore::GetCore()->CreateLevel<APlayGameMode, APlayer>("Play");
+	//UEngineAPICore::GetCore()->CreateLevel("End");
 
 	UEngineAPICore::GetCore()->OpenLevel("Play");
-
 }
 
 void BombmanCore::Tick()

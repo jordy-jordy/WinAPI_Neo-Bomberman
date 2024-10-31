@@ -39,36 +39,13 @@ void AActor::Render()
 	CurData.Transform;
 	CurData.Image->CopyToTrans(BackBufferImage, Transform, CurData.Transform);
 
-	// fhem
-
-
-
-
-	////                  100 100  - 50 50 => 50 50
-	//FVector2D LeftTop = Transform.Location - Transform.Scale.Half();
-	////                  100 100  + 50 50 => 150 150
-	//FVector2D RightBot = Transform.Location + Transform.Scale.Half();
-
-	// // MainWindowDc에 그리면 그려지는 애들의 영역이 겹칠경우에는 깜박이는 경합현상이 벌어진다.
-	// // HDC의 특정 영역을 다투는 것이다 2개의 랜더링
-	////Rectangle(MainWindow.GetWindowMainDC(), LeftTop.iX(), LeftTop.iY(), RightBot.iX(), RightBot.iY());
-
-	//// 
-	//UEngineWindow& MainWindow = UEngineAPICore::GetCore()->GetMainWindow();
-	//UEngineWinImage* BackBufferImage = MainWindow.GetBackBuffer();
-	//HDC BackBufferDC = BackBufferImage->GetDC();
-	//Rectangle(BackBufferDC, LeftTop.iX(), LeftTop.iY(), RightBot.iX(), RightBot.iY());
 }
 
 
 
 void AActor::SetSprite(std::string_view _Name, int _CurIndex /*= 0*/)
 {
-	// 싱글톤에 대해서 설명할때
-	// 값을 편하게 공유하기 위해서 사용하는 거라고 하면 틀렸다.
-	// 객체를 단 1개 만드는 패턴이라는 것을 잊지 마시고
 
-	// 액터가 만들어졌을때는 로드가 끝난 상황이어야 한다.
 	Sprite = UImageManager::GetInst().FindSprite(_Name);
 
 	if (nullptr == Sprite)

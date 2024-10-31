@@ -18,6 +18,16 @@ public:
 	UObject& operator=(const UObject& _Other) = delete;
 	UObject& operator=(UObject&& _Other) noexcept = delete;
 
+	std::string GetName() const
+	{
+		return Name;
+	}
+
+	std::string_view GetNameView() const
+	{
+		return Name.c_str();
+	}
+
 	// 이름 지정할때 뭔가 하고 싶으면 오버라이드해.
 	virtual void SetName(std::string_view _Name)
 	{
