@@ -28,6 +28,9 @@
     <ClCompile Include="PlayMap.cpp">
       <Filter>ContentsObject\Play</Filter>
     </ClCompile>
+    <ClCompile Include="ContentsEnum.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayGameMode.h">
@@ -57,6 +60,9 @@
     <ClInclude Include="PlayMap.h">
       <Filter>ContentsObject\Play</Filter>
     </ClInclude>
+    <ClInclude Include="ContentsEnum.h">
+      <Filter>Global</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
@@ -76,6 +82,9 @@
     </Filter>
     <Filter Include="ContentsObject\Play">
       <UniqueIdentifier>{c4fac68f-60cc-4b9b-b7a2-3d2db87be598}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Global">
+      <UniqueIdentifier>{e9fe401b-b121-409f-8edf-3cca141edcef}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

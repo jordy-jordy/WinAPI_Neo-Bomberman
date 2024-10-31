@@ -26,5 +26,7 @@ private:
 	float Speed = 300.0f;
 	int MySpriteIndex = 0;
 
+	class USpriteRenderer* SpriteRenderer;
+
 };
 

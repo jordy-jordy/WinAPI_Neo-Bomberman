@@ -1,15 +1,20 @@
 #include "PreCompile.h"
 #include "Player.h"
+
 #include <EngineCore/EngineAPICore.h>
+#include <EngineCore/SpriteRenderer.h>
+
 #include <EnginePlatform/EngineInput.h>
 #include "Bomb.h"
 
 APlayer::APlayer()
 {
 	SetActorLocation({ 100, 100 });
-	SetActorScale({ 32, 32 });
-
-	SetSprite("bomb");
+	{
+		SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
+		SpriteRenderer->SetSprite("01_Bomb");
+		SpriteRenderer->SetComponentScale({ 32, 32 });
+	}
 }
 
 APlayer::~APlayer()
@@ -43,12 +48,5 @@ void APlayer::Tick(float _DeltaTime)
 	{
 		AddActorLocation(FVector2D::UP * _DeltaTime * Speed);
 	}
-
-	if (true == UEngineInput::GetInst().IsDown('R'))
-	{
-		++MySpriteIndex;
-		SetSprite("bomb", MySpriteIndex);
-	}
-
 
 }
