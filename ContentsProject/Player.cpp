@@ -14,7 +14,12 @@ APlayer::APlayer()
 		SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 		SpriteRenderer->SetSprite("01_Bomb");
 		SpriteRenderer->SetComponentScale({ 32, 32 });
+		
+		SpriteRenderer->CreateAnimation("Bomb", "01_Bomb", { 0, 1, 2, 1 }, {0.2f, 0.2f ,0.2f ,0.2f });
+
 	}
+
+
 }
 
 APlayer::~APlayer()
@@ -34,6 +39,7 @@ void APlayer::Tick(float _DeltaTime)
 
 	if (true == UEngineInput::GetInst().IsPress('D'))
 	{
+		SpriteRenderer->ChangeAnimation("Bomb");
 		AddActorLocation(FVector2D::RIGHT * _DeltaTime * Speed);
 	}
 	if (true == UEngineInput::GetInst().IsPress('A'))

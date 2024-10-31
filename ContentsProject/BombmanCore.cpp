@@ -22,6 +22,7 @@ BombmanCore::~BombmanCore()
 
 void BombmanCore::BeginPlay()
 {
+
 	UEngineDirectory Dir;
 
 	if (false == Dir.MoveParentToDirectory("Resources"))

@@ -18,7 +18,7 @@ public:
 	ULevel& operator=(ULevel&& _Other) noexcept = delete;
 
 	void Tick(float _DeltaTime);
-	void Render();
+	void Render(float _DeltaTime);
 
 	template<typename ActorType>
 	ActorType* SpawnActor()
@@ -33,6 +33,16 @@ public:
 		// NewActor->BeginPlay();
 		// AllActors.push_back(NewActor);
 		return NewActor;
+	}
+
+	void SetCameraToMainPawn(bool _IsCameraToMainPawn)
+	{
+		IsCameraToMainPawn = _IsCameraToMainPawn;
+	}
+
+	void SetCameraPivot(FVector2D _Pivot)
+	{
+		CameraPivot = _Pivot;
 	}
 
 protected:
@@ -84,6 +94,11 @@ private:
 	std::list<AActor*> AllActors;
 
 	std::list<AActor*> BeginPlayList;
+
+	bool IsCameraToMainPawn = false;
+	// 아래 포지션 2개가 카메라.
+	FVector2D CameraPos;
+	FVector2D CameraPivot;
 
 	// 오더링을 할것이다.
 	std::map<int, std::list<class USpriteRenderer*>> Renderers;

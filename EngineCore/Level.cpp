@@ -66,7 +66,7 @@ void ULevel::Tick(float _DeltaTime)
 	}
 }
 
-void ULevel::Render()
+void ULevel::Render(float _DeltaTime)
 {
 	ScreenClear();
 
@@ -75,6 +75,12 @@ void ULevel::Render()
 
 	// 액터가 SpriteRenderer를 만들면
 	// Level도 그 스프라이트 랜더러를 알아야 한다.
+
+	if (true == IsCameraToMainPawn)
+	{
+		// CameraPivot = FVector2D(-1280, -720) * 0.5f;
+		CameraPos = MainPawn->GetTransform().Location + CameraPivot;
+	}
 
 
 	std::map<int, std::list<class USpriteRenderer*>>::iterator StartOrderIter = Renderers.begin();
@@ -89,7 +95,7 @@ void ULevel::Render()
 
 		for (; RenderStartIter != RenderEndIter; ++RenderStartIter)
 		{
-			(*RenderStartIter)->Render();
+			(*RenderStartIter)->Render(_DeltaTime);
 		}
 
 	}
