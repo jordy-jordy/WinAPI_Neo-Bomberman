@@ -49,7 +49,6 @@ void BombmanCore::BeginPlay()
 
 	}
 
-
 	{
 
 		UEngineDirectory Play_Bomb_Dir;
@@ -59,9 +58,6 @@ void BombmanCore::BeginPlay()
 		UImageManager::GetInst().LoadFolder(Play_Bomb_Dir.GetPathToString());
 
 	}
-
-
-
 
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle(":: LHJ :: Neo-Bomberman ::");
 

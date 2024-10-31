@@ -16,7 +16,6 @@ APlayer::APlayer()
 		SpriteRenderer->SetComponentScale({ 32, 32 });
 		
 		SpriteRenderer->CreateAnimation("Bomb", "01_Bomb", { 0, 1, 2, 1 }, {0.2f, 0.2f ,0.2f ,0.2f });
-
 	}
 
 
