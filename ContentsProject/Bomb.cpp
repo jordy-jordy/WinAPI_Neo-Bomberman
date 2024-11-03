@@ -3,7 +3,6 @@
 
 ABomb::ABomb()
 {
-	SetActorScale({ 50, 50 });
 }
 
 ABomb::~ABomb()

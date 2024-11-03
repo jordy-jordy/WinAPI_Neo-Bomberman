@@ -34,6 +34,9 @@
     <ClCompile Include="SceneComponent.cpp">
       <Filter>Object\Actor\Component</Filter>
     </ClCompile>
+    <ClCompile Include="EngineCoreDebug.cpp">
+      <Filter>Debug</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -69,6 +72,9 @@
     <ClInclude Include="SceneComponent.h">
       <Filter>Object\Actor\Component</Filter>
     </ClInclude>
+    <ClInclude Include="EngineCoreDebug.h">
+      <Filter>Debug</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
@@ -97,6 +103,9 @@
     </Filter>
     <Filter Include="Object\Actor\Component\Rendering">
       <UniqueIdentifier>{b0acfcf5-22a6-4c57-8740-00b49d14f88b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Debug">
+      <UniqueIdentifier>{a5259283-c236-4a22-b745-5eb1c13409c5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

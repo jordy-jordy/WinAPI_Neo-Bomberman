@@ -20,6 +20,12 @@ public:
 
 	void MoveFunction(FVector2D _Dir);
 
+	void RunSoundPlay();
+
+	void LevelChangeStart();
+	void LevelChangeEnd();
+
+
 protected:
 
 private:

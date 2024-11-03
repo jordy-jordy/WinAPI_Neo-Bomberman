@@ -8,7 +8,7 @@
 APlayMap::APlayMap()
 {
 	USpriteRenderer* SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-	SpriteRenderer->SetOrder(ERenderOrder::BACKGROUND);
+	SpriteRenderer->SetOrder(ERenderOrder::BACKGROUND1);
 	SpriteRenderer->SetSprite("01_Background");
 
 	FVector2D MapScale = SpriteRenderer->SetSpriteScale(1.0f);

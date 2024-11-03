@@ -13,12 +13,8 @@ USpriteRenderer::~USpriteRenderer()
 {
 }
 
-// SpriteRenderer : public URenderer
-// MeshRenderer : public URenderer
-// StaticMeshRenderer : public URenderer
 void USpriteRenderer::Render(float _DeltaTime)
 {
-	// 일단 여기서 다 짠다.
 	if (nullptr != CurAnimation)
 	{
 		std::vector<int>& Indexs = CurAnimation->FrameIndex;
@@ -31,7 +27,6 @@ void USpriteRenderer::Render(float _DeltaTime)
 
 		float CurFrameTime = Times[CurAnimation->CurIndex];
 
-		//                           0.1 0.1 0.1
 		if (CurAnimation->CurTime > CurFrameTime)
 		{
 			CurAnimation->CurTime -= CurFrameTime;
@@ -47,6 +42,12 @@ void USpriteRenderer::Render(float _DeltaTime)
 				if (true == CurAnimation->Loop)
 				{
 					CurAnimation->CurIndex = 0;
+
+					if (CurAnimation->Events.contains(CurAnimation->CurIndex))
+					{
+						CurAnimation->Events[CurAnimation->CurIndex]();
+					}
+
 				}
 				else
 				{
@@ -57,9 +58,7 @@ void USpriteRenderer::Render(float _DeltaTime)
 		}
 
 
-		//         2 3 4           0
 		CurIndex = Indexs[CurAnimation->CurIndex];
-		// ++CurAnimation->CurIndex;
 	}
 
 	if (nullptr == Sprite)
@@ -78,18 +77,14 @@ void USpriteRenderer::Render(float _DeltaTime)
 
 	Trans.Location = Trans.Location - Level->CameraPos;
 
-	// Trans.Location -= 카메라포스
 
 	CurData.Image->CopyToTrans(BackBufferImage, Trans, CurData.Transform);
 }
 
 void USpriteRenderer::BeginPlay()
 {
-	// 부모 클래스의 함수를 호출하는걸 깜빡하면 안된다.
-	// 습관되면 가장 언리얼 학습에서 걸림돌이 되는 습관이 된다.
 	Super::BeginPlay();
 
-	// 스프라이트 랜더러가 
 
 	AActor* Actor = GetActor();
 	ULevel* Level = Actor->GetWorld();
@@ -104,11 +99,7 @@ void USpriteRenderer::ComponentTick(float _DeltaTime)
 
 void USpriteRenderer::SetSprite(std::string_view _Name, int _CurIndex /*= 0*/)
 {
-	// 싱글톤에 대해서 설명할때
-	// 값을 편하게 공유하기 위해서 사용하는 거라고 하면 틀렸다.
-	// 객체를 단 1개 만드는 패턴이라는 것을 잊지 마시고
 
-	// 액터가 만들어졌을때는 로드가 끝난 상황이어야 한다.
 	Sprite = UImageManager::GetInst().FindSprite(_Name);
 
 	if (nullptr == Sprite)
@@ -126,8 +117,6 @@ void USpriteRenderer::SetOrder(int _Order)
 
 	Order = _Order;
 
-	// 동적으로 해야할때는 레벨이 세팅되어 있을 것이므로
-	// 레벨이 세팅되어 있다면 즉각 바꿔준다.
 	ULevel* Level = GetActor()->GetWorld();
 
 	if (nullptr != Level)
@@ -144,7 +133,7 @@ FVector2D USpriteRenderer::SetSpriteScale(float _Ratio /*= 1.0f*/, int _CurIndex
 		return FVector2D::ZERO;
 	}
 
-	UEngineSprite::USpriteData CurData = Sprite->GetSpriteData(CurIndex);
+	UEngineSprite::USpriteData CurData = Sprite->GetSpriteData(_CurIndex);
 
 	FVector2D Scale = CurData.Transform.Scale * _Ratio;
 
@@ -175,6 +164,19 @@ void USpriteRenderer::CreateAnimation(std::string_view _AnimationName, std::stri
 	}
 
 	CreateAnimation(_AnimationName, _SpriteName, Indexs, Times, _Loop);
+}
+
+
+void USpriteRenderer::CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, std::vector<int> _Indexs, float _Frame, bool _Loop /*= true*/)
+{
+	std::vector<float> Times;
+
+	for (size_t i = 0; i < _Indexs.size(); i++)
+	{
+		Times.push_back(_Frame);
+	}
+
+	CreateAnimation(_AnimationName, _SpriteName, _Indexs, Times, _Loop);
 }
 
 void USpriteRenderer::CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, std::vector<int> _Indexs, std::vector<float> _Frame, bool _Loop /*= true*/)
@@ -230,6 +232,13 @@ void USpriteRenderer::ChangeAnimation(std::string_view _AnimationName, bool _For
 
 	CurAnimation = &FrameAnimations[UpperName];
 	CurAnimation->Reset();
+
+	if (CurAnimation->Events.contains(CurAnimation->CurIndex))
+	{
+		CurAnimation->Events[CurAnimation->CurIndex]();
+	}
+
+	Sprite = CurAnimation->Sprite;
 }
 
 

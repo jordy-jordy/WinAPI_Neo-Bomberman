@@ -8,17 +8,27 @@
 
 #include "SpriteRenderer.h"
 
+#include "EngineCoreDebug.h"
+
 ULevel::ULevel()
 {
 }
 
 ULevel::~ULevel()
 {
-	//if (nullptr != GameMode)
-	//{
-	//	delete GameMode;
-	//	GameMode = nullptr;
-	//}
+	{
+
+		std::list<AActor*>::iterator StartIter = BeginPlayList.begin();
+		std::list<AActor*>::iterator EndIter = BeginPlayList.end();
+
+		for (; StartIter != EndIter; ++StartIter)
+		{
+			AActor* CurActor = *StartIter;
+			delete CurActor;
+		}
+	}
+
+
 
 	std::list<AActor*>::iterator StartIter = AllActors.begin();
 	std::list<AActor*>::iterator EndIter = AllActors.end();
@@ -32,6 +42,38 @@ ULevel::~ULevel()
 			delete* StartIter;
 		}
 	}
+}
+
+void ULevel::LevelChangeStart()
+{
+	{
+		std::list<AActor*>::iterator StartIter = AllActors.begin();
+		std::list<AActor*>::iterator EndIter = AllActors.end();
+
+		for (; StartIter != EndIter; ++StartIter)
+		{
+			AActor* CurActor = *StartIter;
+
+			CurActor->LevelChangeStart();
+		}
+	}
+
+}
+
+void ULevel::LevelChangeEnd()
+{
+	{
+		std::list<AActor*>::iterator StartIter = AllActors.begin();
+		std::list<AActor*>::iterator EndIter = AllActors.end();
+
+		for (; StartIter != EndIter; ++StartIter)
+		{
+			AActor* CurActor = *StartIter;
+
+			CurActor->LevelChangeEnd();
+		}
+	}
+
 }
 
 void ULevel::Tick(float _DeltaTime)
@@ -49,7 +91,6 @@ void ULevel::Tick(float _DeltaTime)
 
 		BeginPlayList.clear();
 
-		// todtjdtl 
 		AActor::ComponentBeginPlay();
 	}
 
@@ -70,15 +111,10 @@ void ULevel::Render(float _DeltaTime)
 {
 	ScreenClear();
 
-	// 지금 이제 랜더링의 주체가 USpriteRenderer 바뀌었다.
-	// 액터를 기반으로 랜더링을 돌리는건 곧 지워질 겁니다.
 
-	// 액터가 SpriteRenderer를 만들면
-	// Level도 그 스프라이트 랜더러를 알아야 한다.
 
 	if (true == IsCameraToMainPawn)
 	{
-		// CameraPivot = FVector2D(-1280, -720) * 0.5f;
 		CameraPos = MainPawn->GetTransform().Location + CameraPivot;
 	}
 
@@ -100,6 +136,7 @@ void ULevel::Render(float _DeltaTime)
 
 	}
 
+	UEngineDebug::PrintEngineDebugText();
 
 	DoubleBuffering();
 }
@@ -115,7 +152,6 @@ void ULevel::ScreenClear()
 
 void ULevel::DoubleBuffering()
 {
-	// 레벨의 랜더링이 끝났다.
 	UEngineWindow& MainWindow = UEngineAPICore::GetCore()->GetMainWindow();
 
 	UEngineWinImage* WindowImage = MainWindow.GetWindowImage();
@@ -125,7 +161,6 @@ void ULevel::DoubleBuffering()
 	Trans.Location = MainWindow.GetWindowSize().Half();
 	Trans.Scale = MainWindow.GetWindowSize();
 
-	// 이미지 들은 백버퍼에 다 그려졌을 것이다.
 	BackBufferImage->CopyToBit(WindowImage, Trans);
 
 }
@@ -139,12 +174,7 @@ void ULevel::PushRenderer(class USpriteRenderer* _Renderer)
 
 void ULevel::ChangeRenderOrder(class USpriteRenderer* _Renderer, int _PrevOrder)
 {
-	//std::vector<int> Value;
-	// 벡터는 리무브가 없다.
-	//Value.remove
 
-	// 0번에 들어있었을 것이다.
-	// 별로 빠른 함수는 아닙니다.
 	Renderers[_PrevOrder].remove(_Renderer);
 
 	Renderers[_Renderer->GetOrder()].push_back(_Renderer);
