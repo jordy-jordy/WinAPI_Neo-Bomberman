@@ -94,9 +94,9 @@ void BombmanCore::BeginPlay()
 
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale({ 0, 0 }, { 608, 448 });
 
-	UEngineAPICore::GetCore()->CreateLevel<APlayGameMode, APlayer>("Play");
-
 	UEngineAPICore::GetCore()->CreateLevel<ATitleGameMode, AActor>("Title");
+
+	UEngineAPICore::GetCore()->CreateLevel<APlayGameMode, APlayer>("Play");
 
 	UEngineAPICore::GetCore()->OpenLevel("Title");
 }

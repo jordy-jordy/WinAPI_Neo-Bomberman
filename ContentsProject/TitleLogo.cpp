@@ -15,18 +15,22 @@ UTitleLogo::UTitleLogo()
 		FVector2D MapScale = SpriteRenderer->SetSpriteScale(1.0f);
 		SpriteRenderer->SetComponentLocation(MapScale.Half());
 
-		SpriteRenderer->CreateAnimation("Neo-Geo_Logo", "00_Neo-Geo_LOGO", 0, 88, 0.035f);
+		SpriteRenderer->CreateAnimation("Neo-Geo_Logo", "00_Neo-Geo_LOGO", 0, 88, 0.035f, false);
 		SpriteRenderer->ChangeAnimation("Neo-Geo_Logo");
-	}
-	{
-		USpriteRenderer* SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-		SpriteRenderer->SetOrder(ERenderOrder::BACKGROUND0);
-		SpriteRenderer->SetSprite("01_WARNING");
 
-		FVector2D MapScale = SpriteRenderer->SetSpriteScale(1.0f);
-		SpriteRenderer->SetComponentLocation(MapScale.Half());
+		SpriteRenderer->CreateAnimation("Warning", "01_WARNING", 0, 1, 2.0f, false);
+		SpriteRenderer->ChangeAnimation("Warning");
 
 	}
+	//{
+	//	USpriteRenderer* SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
+	//	SpriteRenderer->SetOrder(ERenderOrder::BACKGROUND0);
+	//	SpriteRenderer->SetSprite("01_WARNING");
+
+	//	FVector2D MapScale = SpriteRenderer->SetSpriteScale(1.0f);
+	//	SpriteRenderer->SetComponentLocation(MapScale.Half());
+
+	//}
 
 
 
