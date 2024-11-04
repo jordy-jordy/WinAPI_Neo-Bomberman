@@ -34,6 +34,12 @@
     <ClCompile Include="TitleLogo.cpp">
       <Filter>ContentsObject\Title</Filter>
     </ClCompile>
+    <ClCompile Include="ATileMap.cpp">
+      <Filter>TileMap</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMapGameMode.cpp">
+      <Filter>ContentsObject\GameMode</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayGameMode.h">
@@ -69,6 +75,12 @@
     <ClInclude Include="TitleLogo.h">
       <Filter>ContentsObject\Title</Filter>
     </ClInclude>
+    <ClInclude Include="ATileMap.h">
+      <Filter>TileMap</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMapGameMode.h">
+      <Filter>ContentsObject\GameMode</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
@@ -94,6 +106,9 @@
     </Filter>
     <Filter Include="ContentsObject\Title">
       <UniqueIdentifier>{77b34b9b-e690-42cc-b141-c3742844be4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TileMap">
+      <UniqueIdentifier>{97059f21-d2fb-46a6-82eb-822464da6c1b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

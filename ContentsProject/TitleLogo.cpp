@@ -18,8 +18,6 @@ UTitleLogo::UTitleLogo()
 		SpriteRenderer->CreateAnimation("Neo-Geo_Logo", "00_Neo-Geo_LOGO", 0, 88, 0.035f, false);
 		SpriteRenderer->ChangeAnimation("Neo-Geo_Logo");
 
-		SpriteRenderer->CreateAnimation("Warning", "01_WARNING", 0, 1, 2.0f, false);
-		SpriteRenderer->ChangeAnimation("Warning");
 
 	}
 	//{
