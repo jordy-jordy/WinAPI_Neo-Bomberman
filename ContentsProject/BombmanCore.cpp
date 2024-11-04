@@ -41,6 +41,14 @@ void BombmanCore::BeginPlay()
 		UImageManager::GetInst().Load(FilePath);
 	}
 
+
+	{
+		UEngineDirectory Title_Basic_Dir;
+		Title_Basic_Dir.MoveParentToDirectory("Resources");
+		Title_Basic_Dir.Append("01_TITLE//00_00_BASIC");
+		UImageManager::GetInst().LoadFolder(Title_Basic_Dir.GetPathToString());
+	}
+
 	{
 		UEngineDirectory Title_NeoGeo_Dir;
 		Title_NeoGeo_Dir.MoveParentToDirectory("Resources");

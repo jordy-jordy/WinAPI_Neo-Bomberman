@@ -10,13 +10,16 @@ UTitleLogo::UTitleLogo()
 	{
 		USpriteRenderer* SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 		SpriteRenderer->SetOrder(ERenderOrder::BACKGROUND1);
-		SpriteRenderer->SetSprite("00_Neo-Geo_LOGO");
+		SpriteRenderer->SetSprite("00_00_BASIC");
 
 		FVector2D MapScale = SpriteRenderer->SetSpriteScale(1.0f);
 		SpriteRenderer->SetComponentLocation(MapScale.Half());
 
 		SpriteRenderer->CreateAnimation("Neo-Geo_Logo", "00_Neo-Geo_LOGO", 0, 88, 0.035f, false);
+		SpriteRenderer->CreateAnimation("OP_Animation", "03_OP_ANIMATION", 0, 353, 0.035f, false);
+
 		SpriteRenderer->ChangeAnimation("Neo-Geo_Logo");
+		SpriteRenderer->ChangeAnimation("OP_Animation");
 
 
 	}
