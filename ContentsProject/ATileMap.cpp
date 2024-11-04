@@ -49,6 +49,8 @@ void ATileMap::SetTileLocation(FVector2D _Location, int _SpriteIndex)
 	SetTileIndex(Point, _SpriteIndex);
 }
 
+
+
 bool ATileMap::IsIndexOver(FIntPoint _Index)
 {
 	if (0 > _Index.X)
@@ -74,10 +76,13 @@ bool ATileMap::IsIndexOver(FIntPoint _Index)
 	return false;
 }
 
+
+
 void ATileMap::SetTileIndex(FIntPoint _Index, int _SpriteIndex)
 {
 	SetTileIndex(_Index, { 0,0 }, TileSize, _SpriteIndex);
 }
+
 
 void ATileMap::SetTileIndex(FIntPoint _Index, FVector2D _Pivot, FVector2D _SpriteScale, int _SpriteIndex)
 {
@@ -85,8 +90,6 @@ void ATileMap::SetTileIndex(FIntPoint _Index, FVector2D _Pivot, FVector2D _Sprit
 	{
 		return;
 	}
-
-
 
 
 	if (nullptr == AllTiles[_Index.Y][_Index.X].SpriteRenderer)

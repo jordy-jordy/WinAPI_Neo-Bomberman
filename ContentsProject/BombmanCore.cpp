@@ -83,6 +83,13 @@ void BombmanCore::BeginPlay()
 		Title_CoinInsert_Dir.Append("01_TITLE//04_COIN_INSERT");
 		UImageManager::GetInst().LoadFolder(Title_CoinInsert_Dir.GetPathToString());
 	}
+	{
+
+		UEngineDirectory Title_ChooseStage_Dir;
+		Title_ChooseStage_Dir.MoveParentToDirectory("Resources");
+		Title_ChooseStage_Dir.Append("01_TITLE//05_CHOOSE_STAGE");
+		UImageManager::GetInst().LoadFolder(Title_ChooseStage_Dir.GetPathToString());
+	}
 
 
 
@@ -110,10 +117,12 @@ void BombmanCore::BeginPlay()
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale({ 200,200 }, { 608, 448 });
 
 	UEngineAPICore::GetCore()->CreateLevel<ATitleGameMode, AActor>("Title");
-
 	UEngineAPICore::GetCore()->CreateLevel<APlayGameMode, APlayer>("Play");
 
-	UEngineAPICore::GetCore()->OpenLevel("Title");
+	UEngineAPICore::GetCore()->CreateLevel<ATileMapGameMode, AActor>("Tile");
+
+
+	UEngineAPICore::GetCore()->OpenLevel("Tile");
 }
 
 void BombmanCore::Tick()

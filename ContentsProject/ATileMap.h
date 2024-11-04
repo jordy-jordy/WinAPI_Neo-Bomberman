@@ -60,7 +60,6 @@ public:
 
 	void Create(std::string_view _Sprite, FIntPoint _Count, FVector2D _TileSize);
 
-
 	void SetTileLocation(FVector2D _Location, int _SpriteIndex);
 
 	void SetTileIndex(FIntPoint _Index, int _SpriteIndex);

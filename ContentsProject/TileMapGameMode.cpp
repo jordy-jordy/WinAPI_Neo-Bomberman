@@ -7,6 +7,8 @@
 #include <EngineBase/EngineDirectory.h>
 #include <EngineBase/EngineRandom.h>
 
+
+
 ATileMapGameMode::ATileMapGameMode()
 {
 }
@@ -21,18 +23,17 @@ void ATileMapGameMode::BeginPlay()
 
 	{
 		GroundTileMap = GetWorld()->SpawnActor<ATileMap>();
-
 	}
 
 	{
 		WallTileMap = GetWorld()->SpawnActor<ATileMap>();
-		WallTileMap->Create("00_Tiles", { 100, 100 }, { 32, 32 });
+		WallTileMap->Create("00_Tiles", { 13, 11 }, { 32, 32 });
 
-		for (int y = 0; y < 20; y++)
+		for (int y = 0; y < 13; y++)
 		{
-			for (int x = 0; x < 20; x++)
+			for (int x = 0; x < 11; x++)
 			{
-				WallTileMap->SetTileIndex({ y,x }, { 0, -6 }, { 32, 44 }, 2);
+				WallTileMap->SetTileIndex({ y,x }, { 0, 0 }, { 32, 32 }, 0);
 			}
 		}
 	}
@@ -45,7 +46,8 @@ void ATileMapGameMode::Tick(float _DeltaTime)
 	if (true == UEngineInput::GetInst().IsPress(VK_LBUTTON))
 	{
 		FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
-		WallTileMap->SetTileLocation(MousePos, 1);
+		int CurTileType = static_cast<int>(CurrentTileType);
+		WallTileMap->SetTileLocation(MousePos, static_cast<int>(CurrentTileType));
 	}
 
 	if (true == UEngineInput::GetInst().IsPress(VK_RBUTTON))
@@ -54,10 +56,17 @@ void ATileMapGameMode::Tick(float _DeltaTime)
 		Tile* Tile = WallTileMap->GetTileRef(MousePos);
 		if (nullptr != Tile->SpriteRenderer)
 		{
-			Tile->SpriteRenderer->Destroy(5.0f);
+			Tile->SpriteRenderer->Destroy(0.0f);
 			Tile->SpriteRenderer = nullptr;
 		}
 	}
+
+	if (UEngineInput::GetInst().IsDown('Q'))
+	{
+		// ATiles enum을 순환하며 업데이트
+		CurrentTileType = static_cast<ATiles>((static_cast<int>(CurrentTileType) + 1) % static_cast<int>(ATiles::Max));
+	}
+
 
 
 	if (true == UEngineInput::GetInst().IsPress('R'))

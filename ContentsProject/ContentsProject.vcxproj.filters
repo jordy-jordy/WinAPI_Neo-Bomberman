@@ -40,6 +40,9 @@
     <ClCompile Include="TileMapGameMode.cpp">
       <Filter>ContentsObject\GameMode</Filter>
     </ClCompile>
+    <ClCompile Include="ChooseStage.cpp">
+      <Filter>ContentsObject\Title</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayGameMode.h">
@@ -80,6 +83,9 @@
     </ClInclude>
     <ClInclude Include="TileMapGameMode.h">
       <Filter>ContentsObject\GameMode</Filter>
+    </ClInclude>
+    <ClInclude Include="ChooseStage.h">
+      <Filter>ContentsObject\Title</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

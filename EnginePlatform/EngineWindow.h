@@ -54,6 +54,8 @@ public:
 
 	FVector2D GetMousePos();
 
+	FIntPoint GetMousePosInt();
+
 
 protected:
 

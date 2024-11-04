@@ -199,3 +199,13 @@ FVector2D UEngineWindow::GetMousePos()
 
 	return FVector2D(MousePoint.x, MousePoint.y);
 }
+
+FIntPoint UEngineWindow::GetMousePosInt()
+{
+	POINT MousePoint;
+
+	GetCursorPos(&MousePoint);
+	ScreenToClient(WindowHandle, &MousePoint);
+
+	return FIntPoint(MousePoint.x, MousePoint.y);
+}

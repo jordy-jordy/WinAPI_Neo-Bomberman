@@ -7,6 +7,14 @@
 class ATileMapGameMode : public AGameMode
 {
 public:
+	enum class ATiles
+	{
+		Background = 0,
+		Object_Broken = 1,
+		Object_Unbroken = 2,
+		Max
+	};
+
 	// constrcuter destructer
 	ATileMapGameMode();
 	~ATileMapGameMode();
@@ -16,6 +24,8 @@ public:
 	ATileMapGameMode(ATileMapGameMode&& _Other) noexcept = delete;
 	ATileMapGameMode& operator=(const ATileMapGameMode& _Other) = delete;
 	ATileMapGameMode& operator=(ATileMapGameMode&& _Other) noexcept = delete;
+
+	ATiles CurrentTileType = ATiles::Background;
 
 protected:
 	void BeginPlay() override;
