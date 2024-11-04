@@ -5,6 +5,7 @@
 #include <EngineCore/EngineAPICore.h>
 #include <EngineBase/EngineFile.h>
 #include <EngineBase/EngineDirectory.h>
+#include <EngineBase/EngineRandom.h>
 
 ATileMapGameMode::ATileMapGameMode()
 {
@@ -20,6 +21,7 @@ void ATileMapGameMode::BeginPlay()
 
 	{
 		GroundTileMap = GetWorld()->SpawnActor<ATileMap>();
+
 	}
 
 	{
@@ -43,8 +45,20 @@ void ATileMapGameMode::Tick(float _DeltaTime)
 	if (true == UEngineInput::GetInst().IsPress(VK_LBUTTON))
 	{
 		FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
-		WallTileMap->SetTileLocation(MousePos, 2);
+		WallTileMap->SetTileLocation(MousePos, 1);
 	}
+
+	if (true == UEngineInput::GetInst().IsPress(VK_RBUTTON))
+	{
+		FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
+		Tile* Tile = WallTileMap->GetTileRef(MousePos);
+		if (nullptr != Tile->SpriteRenderer)
+		{
+			Tile->SpriteRenderer->Destroy(5.0f);
+			Tile->SpriteRenderer = nullptr;
+		}
+	}
+
 
 	if (true == UEngineInput::GetInst().IsPress('R'))
 	{
@@ -64,6 +78,16 @@ void ATileMapGameMode::Tick(float _DeltaTime)
 		UEngineFile NewFile = SaveFilePath;
 		NewFile.FileOpen("wb");
 		NewFile.Write(_Ser);
+	}
+
+	if (true == UEngineInput::GetInst().IsPress('P'))
+	{
+		UEngineRandom Random;
+		for (size_t i = 0; i < 10; i++)
+		{
+			int Value = Random.RandomInt(0, 100);
+			UEngineDebug::OutPutString(std::to_string(Value));
+		}
 	}
 
 	if (true == UEngineInput::GetInst().IsPress('T'))

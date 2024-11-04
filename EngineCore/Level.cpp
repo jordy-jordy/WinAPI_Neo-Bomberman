@@ -102,6 +102,11 @@ void ULevel::Tick(float _DeltaTime)
 		{
 			AActor* CurActor = *StartIter;
 
+			if (false == CurActor->IsActive())
+			{
+				continue;
+			}
+
 			CurActor->Tick(_DeltaTime);
 		}
 	}
@@ -131,6 +136,11 @@ void ULevel::Render(float _DeltaTime)
 
 		for (; RenderStartIter != RenderEndIter; ++RenderStartIter)
 		{
+			if (false == (*RenderStartIter)->IsActive())
+			{
+				continue;
+			}
+
 			(*RenderStartIter)->Render(_DeltaTime);
 		}
 
@@ -139,6 +149,53 @@ void ULevel::Render(float _DeltaTime)
 	UEngineDebug::PrintEngineDebugText();
 
 	DoubleBuffering();
+}
+
+void ULevel::Release(float _DeltaTime)
+{
+
+	std::map<int, std::list<class USpriteRenderer*>>::iterator StartOrderIter = Renderers.begin();
+	std::map<int, std::list<class USpriteRenderer*>>::iterator EndOrderIter = Renderers.end();
+
+	for (; StartOrderIter != EndOrderIter; ++StartOrderIter)
+	{
+		std::list<class USpriteRenderer*>& RendererList = StartOrderIter->second;
+
+		std::list<class USpriteRenderer*>::iterator RenderStartIter = RendererList.begin();
+		std::list<class USpriteRenderer*>::iterator RenderEndIter = RendererList.end();
+
+		for (; RenderStartIter != RenderEndIter; )
+		{
+			if (false == (*RenderStartIter)->IsDestroy())
+			{
+				++RenderStartIter;
+				continue;
+			}
+
+			RenderStartIter = RendererList.erase(RenderStartIter);
+		}
+	}
+
+	{
+		std::list<AActor*>::iterator StartIter = AllActors.begin();
+		std::list<AActor*>::iterator EndIter = AllActors.end();
+
+		for (; StartIter != EndIter; )
+		{
+			AActor* CurActor = *StartIter;
+
+
+			if (false == CurActor->IsDestroy())
+			{
+				CurActor->ReleaseCheck(_DeltaTime);
+				++StartIter;
+				continue;
+			}
+
+			delete CurActor;
+			StartIter = AllActors.erase(StartIter);
+		}
+	}
 }
 
 void ULevel::ScreenClear()

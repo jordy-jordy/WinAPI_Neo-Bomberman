@@ -86,6 +86,9 @@ void ATileMap::SetTileIndex(FIntPoint _Index, FVector2D _Pivot, FVector2D _Sprit
 		return;
 	}
 
+
+
+
 	if (nullptr == AllTiles[_Index.Y][_Index.X].SpriteRenderer)
 	{
 		USpriteRenderer* NewSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
@@ -109,8 +112,27 @@ void ATileMap::SetTileIndex(FIntPoint _Index, FVector2D _Pivot, FVector2D _Sprit
 
 
 
+Tile* ATileMap::GetTileRef(FVector2D _Location)
+{
+	FIntPoint Point = LocationToIndex(_Location);
+
+	return GetTileRef(Point);
+}
+
+Tile* ATileMap::GetTileRef(FIntPoint _Index)
+{
+	if (true == IsIndexOver(_Index))
+	{
+		return nullptr;
+	}
+
+	return &AllTiles[_Index.Y][_Index.X];
+}
+
 void ATileMap::Serialize(UEngineSerializer& _Ser)
 {
+
+
 	_Ser << TileCount;
 	_Ser << TileSize;
 	_Ser << SpriteName;
@@ -119,6 +141,7 @@ void ATileMap::Serialize(UEngineSerializer& _Ser)
 
 void ATileMap::DeSerialize(UEngineSerializer& _Ser)
 {
+
 	_Ser >> TileCount;
 	_Ser >> TileSize;
 	_Ser >> SpriteName;

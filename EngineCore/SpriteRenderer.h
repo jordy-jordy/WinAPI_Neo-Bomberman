@@ -73,6 +73,17 @@ public:
 		return Sprite->GetName();
 	}
 
+	bool IsActive() override
+	{
+		return UObject::IsActive() && GetActor()->IsActive();
+	}
+
+
+	bool IsDestroy() override
+	{
+		return UObject::IsDestroy() || GetActor()->IsDestroy();
+	}
+
 protected:
 
 public:

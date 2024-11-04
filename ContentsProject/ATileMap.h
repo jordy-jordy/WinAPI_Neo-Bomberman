@@ -32,6 +32,8 @@ public:
 
 	void DeSerialize(UEngineSerializer& _Ser)
 	{
+
+
 		std::string SpriteName;
 		_Ser >> SpriteName;
 		_Ser >> IsMove;
@@ -39,7 +41,9 @@ public:
 		_Ser >> Scale;
 		_Ser >> Pivot;
 		_Ser >> SpriteIndex;
+
 	}
+
 };
 
 
@@ -56,10 +60,14 @@ public:
 
 	void Create(std::string_view _Sprite, FIntPoint _Count, FVector2D _TileSize);
 
+
 	void SetTileLocation(FVector2D _Location, int _SpriteIndex);
 
 	void SetTileIndex(FIntPoint _Index, int _SpriteIndex);
 	void SetTileIndex(FIntPoint _Index, FVector2D _Pivot, FVector2D _SpriteScale, int _SpriteIndex);
+
+	Tile* GetTileRef(FIntPoint _Index);
+	Tile* GetTileRef(FVector2D _Location);
 
 	FVector2D IndexToTileLocation(FIntPoint _Index);
 
