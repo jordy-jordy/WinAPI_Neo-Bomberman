@@ -45,9 +45,26 @@ void ATileMapGameMode::Tick(float _DeltaTime)
 
 	if (true == UEngineInput::GetInst().IsPress(VK_LBUTTON))
 	{
+		//FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
+		//int CurTileType = static_cast<int>(CurrentTileType);
+		//WallTileMap->SetTileLocation(MousePos, static_cast<int>(CurrentTileType));
+
 		FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
-		int CurTileType = static_cast<int>(CurrentTileType);
-		WallTileMap->SetTileLocation(MousePos, static_cast<int>(CurrentTileType));
+		FIntPoint TileIndex = WallTileMap->LocationToIndex(MousePos);
+
+		FVector2D Pivot = FVector2D::ZERO;
+		FVector2D SpriteScale = FVector2D(32, 32); 
+
+		if (CurrentTileType == ATiles::Object_Unbroken)
+		{
+			Pivot = FVector2D(0, -6);
+			SpriteScale = FVector2D(32, 44);
+		}
+
+		int SpriteIndex = static_cast<int>(CurrentTileType);
+
+		// SetTileIndex를 사용하여 현재 타일 타입에 맞는 인덱스 설정
+		WallTileMap->SetTileIndex(TileIndex, Pivot, SpriteScale, SpriteIndex);
 	}
 
 	if (true == UEngineInput::GetInst().IsPress(VK_RBUTTON))
@@ -69,7 +86,7 @@ void ATileMapGameMode::Tick(float _DeltaTime)
 
 
 
-	if (true == UEngineInput::GetInst().IsPress('R'))
+	if (true == UEngineInput::GetInst().IsDown('R'))
 	{
 		UEngineSerializer _Ser;
 		WallTileMap->Serialize(_Ser);
@@ -99,7 +116,7 @@ void ATileMapGameMode::Tick(float _DeltaTime)
 		}
 	}
 
-	if (true == UEngineInput::GetInst().IsPress('T'))
+	if (true == UEngineInput::GetInst().IsDown('T'))
 	{
 		UEngineDirectory Dir;
 

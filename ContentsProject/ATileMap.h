@@ -32,8 +32,6 @@ public:
 
 	void DeSerialize(UEngineSerializer& _Ser)
 	{
-
-
 		std::string SpriteName;
 		_Ser >> SpriteName;
 		_Ser >> IsMove;
@@ -41,9 +39,7 @@ public:
 		_Ser >> Scale;
 		_Ser >> Pivot;
 		_Ser >> SpriteIndex;
-
 	}
-
 };
 
 
