@@ -1,11 +1,15 @@
 #include "PreCompile.h"
 #include "TileMapGameMode.h"
+
 #include <EngineCore/Level.h>
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/EngineAPICore.h>
 #include <EngineBase/EngineFile.h>
 #include <EngineBase/EngineDirectory.h>
 #include <EngineBase/EngineRandom.h>
+
+#include "PlayMap.h"
+
 
 
 
@@ -20,14 +24,18 @@ ATileMapGameMode::~ATileMapGameMode()
 void ATileMapGameMode::BeginPlay()
 {
 	Super::BeginPlay();
-
 	{
-		GroundTileMap = GetWorld()->SpawnActor<ATileMap>();
+		APlayMap* NewActor = GetWorld()->SpawnActor<APlayMap>();
 	}
+
+	//{
+	//	GroundTileMap = GetWorld()->SpawnActor<ATileMap>();
+	//}
 
 	{
 		WallTileMap = GetWorld()->SpawnActor<ATileMap>();
 		WallTileMap->Create("00_Tiles", { 13, 11 }, { 32, 32 });
+		WallTileMap->SetActorLocation({ 96, 64 });
 
 		for (int y = 0; y < 13; y++)
 		{
@@ -45,12 +53,17 @@ void ATileMapGameMode::Tick(float _DeltaTime)
 
 	if (true == UEngineInput::GetInst().IsPress(VK_LBUTTON))
 	{
+		// 예전 방식
 		//FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
 		//int CurTileType = static_cast<int>(CurrentTileType);
 		//WallTileMap->SetTileLocation(MousePos, static_cast<int>(CurrentTileType));
 
 		FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
-		FIntPoint TileIndex = WallTileMap->LocationToIndex(MousePos);
+
+		FVector2D TileMapLocation = WallTileMap->GetActorLocation();
+		FVector2D LocalMousePos = MousePos - TileMapLocation;
+
+		FIntPoint TileIndex = WallTileMap->LocationToIndex(LocalMousePos);
 
 		FVector2D Pivot = FVector2D::ZERO;
 		FVector2D SpriteScale = FVector2D(32, 32); 
@@ -70,7 +83,13 @@ void ATileMapGameMode::Tick(float _DeltaTime)
 	if (true == UEngineInput::GetInst().IsPress(VK_RBUTTON))
 	{
 		FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
-		Tile* Tile = WallTileMap->GetTileRef(MousePos);
+
+		FVector2D TileMapLocation = WallTileMap->GetActorLocation();
+		FVector2D LocalMousePos = MousePos - TileMapLocation;
+
+		FIntPoint TileIndex = WallTileMap->LocationToIndex(LocalMousePos);
+
+		Tile* Tile = WallTileMap->GetTileRef(LocalMousePos);
 		if (nullptr != Tile->SpriteRenderer)
 		{
 			Tile->SpriteRenderer->Destroy(0.0f);
@@ -82,6 +101,11 @@ void ATileMapGameMode::Tick(float _DeltaTime)
 	{
 		// ATiles enum을 순환하며 업데이트
 		CurrentTileType = static_cast<ATiles>((static_cast<int>(CurrentTileType) + 1) % static_cast<int>(ATiles::Max));
+	}
+
+	if (true == UEngineInput::GetInst().IsDown('L'))
+	{
+		UEngineAPICore::GetCore()->OpenLevel("Play");
 	}
 
 

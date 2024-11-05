@@ -12,6 +12,8 @@ public:
 		Background = 0,
 		Object_Broken = 1,
 		Object_Unbroken = 2,
+		Object_Portal = 3,
+		Player_Spawn = 4,
 		Max
 	};
 

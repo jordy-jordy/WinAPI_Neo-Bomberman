@@ -1,6 +1,13 @@
 #pragma once
 #include <EngineCore/Actor.h>
 
+enum class PlayerState
+{
+	Idle,
+	Move,
+	Jump,
+};
+
 // Ό³Έν :
 class APlayer : public AActor
 {
@@ -18,8 +25,6 @@ public:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
-	void MoveFunction(FVector2D _Dir);
-
 	void RunSoundPlay();
 
 	void LevelChangeStart();
@@ -33,6 +38,15 @@ private:
 	int MySpriteIndex = 0;
 
 	class USpriteRenderer* SpriteRenderer;
+
+	PlayerState CurPlayerState = PlayerState::Idle;
+	void ChangeState(PlayerState CurPlayerState);
+
+	void IdleStart();
+	void Idle(float _DeltaTime);
+	void MoveStart();
+	void Move(float _DeltaTime);
+
 
 };
 
