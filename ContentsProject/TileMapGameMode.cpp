@@ -8,6 +8,7 @@
 #include <EngineBase/EngineDirectory.h>
 #include <EngineBase/EngineRandom.h>
 
+#include "ContentsEnum.h"
 #include "TestMap.h"
 
 
@@ -162,4 +163,24 @@ void ATileMapGameMode::Tick(float _DeltaTime)
 
 	}
 
+}
+
+std::vector<FIntPoint> ATileMap::FindTileType(ATiles TileType)
+{
+	std::vector<FIntPoint> positions;
+
+	for (int y = 0; y < 13; ++y) 
+	{
+		for (int x = 0; x < 11; ++x) 
+		{
+			FIntPoint index = { x, y };
+			Tile* tile = GetTileRef(index);
+
+			if (tile && tile->TileType == static_cast<int>(TileType)) 
+			{
+				positions.push_back(index);
+			}
+		}
+	}
+	return positions;
 }

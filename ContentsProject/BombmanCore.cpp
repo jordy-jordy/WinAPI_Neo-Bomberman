@@ -166,7 +166,7 @@ void BombmanCore::BeginPlay()
 	UEngineAPICore::GetCore()->CreateLevel<ATileMapGameMode, AActor>("Tile");
 
 
-	UEngineAPICore::GetCore()->OpenLevel("Tile");
+	UEngineAPICore::GetCore()->OpenLevel("Play");
 }
 
 void BombmanCore::Tick()

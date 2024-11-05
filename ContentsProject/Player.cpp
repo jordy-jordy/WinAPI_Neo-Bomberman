@@ -22,8 +22,6 @@ APlayer::APlayer()
 		SpriteRenderer->SetSprite("01_Mushroom_00_Idle");
 		SpriteRenderer->SetComponentScale({ 32, 32 });
 
-		SpriteRenderer->CreateAnimation("Bomb", "01_Bomb", { 0, 1, 2, 1 }, { 0.2f, 0.2f ,0.2f ,0.2f });
-
 		SpriteRenderer->CreateAnimation("Mush_Idle", "01_Mushroom_00_Idle", 0, 1, 0.1f);
 		SpriteRenderer->CreateAnimation("Mush_Left", "01_Mushroom_01_Left", 0, 5, 0.1f);
 		SpriteRenderer->CreateAnimation("Mush_Right", "01_Mushroom_02_Right", 0, 5, 0.1f);

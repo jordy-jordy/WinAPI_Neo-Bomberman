@@ -46,6 +46,10 @@ void APlayGameMode::BeginPlay()
 
 	WallTileMap->DeSerialize(Ser);
 
+	std::vector<FIntPoint> PlayerStartposS = WallTileMap->FindTileType(ATiles::Player_Spawn);
+	//FIntPoint TestPos = PlayerStartposS[0];
+
+
 }
 
 void APlayGameMode::Tick(float _DeltaTime)

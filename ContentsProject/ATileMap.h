@@ -3,6 +3,8 @@
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineBase/EngineSerializer.h>
 
+#include "ContentsEnum.h"
+
 
 class Tile : public ISerializObject
 {
@@ -72,6 +74,9 @@ public:
 
 	void Serialize(UEngineSerializer& _Ser);
 	void DeSerialize(UEngineSerializer& _Ser);
+
+	std::vector<FIntPoint> FindTileType(ATiles TileType);
+
 
 protected:
 

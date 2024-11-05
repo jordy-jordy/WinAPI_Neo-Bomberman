@@ -2,20 +2,12 @@
 #include <EngineCore/GameMode.h>
 
 #include "ATileMap.h"
+#include "ContentsEnum.h"
 
 // Ό³Έν :
 class ATileMapGameMode : public AGameMode
 {
 public:
-	enum class ATiles
-	{
-		Background = 0,
-		Object_Broken = 1,
-		Object_Unbroken = 2,
-		Object_Portal = 3,
-		Player_Spawn = 4,
-		Max
-	};
 
 	// constrcuter destructer
 	ATileMapGameMode();
@@ -28,7 +20,6 @@ public:
 	ATileMapGameMode& operator=(ATileMapGameMode&& _Other) noexcept = delete;
 
 	ATiles CurrentTileType = ATiles::Background;
-
 
 protected:
 	void BeginPlay() override;

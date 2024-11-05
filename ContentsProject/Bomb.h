@@ -15,6 +15,8 @@ public:
 	ABomb& operator=(const ABomb& _Other) = delete;
 	ABomb& operator=(ABomb&& _Other) noexcept = delete;
 
+	class USpriteRenderer* SpriteRenderer;
+
 protected:
 	void Tick(float _DeltaTime) override;
 
