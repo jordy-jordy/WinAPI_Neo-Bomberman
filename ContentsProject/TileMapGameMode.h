@@ -29,6 +29,7 @@ public:
 
 	ATiles CurrentTileType = ATiles::Background;
 
+
 protected:
 	void BeginPlay() override;
 

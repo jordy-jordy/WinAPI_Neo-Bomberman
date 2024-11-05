@@ -43,6 +43,7 @@
     <ClCompile Include="ChooseStage.cpp">
       <Filter>ContentsObject\Title</Filter>
     </ClCompile>
+    <ClCompile Include="TestMap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayGameMode.h">
@@ -87,6 +88,7 @@
     <ClInclude Include="ChooseStage.h">
       <Filter>ContentsObject\Title</Filter>
     </ClInclude>
+    <ClInclude Include="TestMap.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">

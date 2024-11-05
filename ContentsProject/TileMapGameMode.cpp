@@ -8,9 +8,7 @@
 #include <EngineBase/EngineDirectory.h>
 #include <EngineBase/EngineRandom.h>
 
-#include "PlayMap.h"
-
-
+#include "TestMap.h"
 
 
 ATileMapGameMode::ATileMapGameMode()
@@ -25,7 +23,7 @@ void ATileMapGameMode::BeginPlay()
 {
 	Super::BeginPlay();
 	{
-		APlayMap* NewActor = GetWorld()->SpawnActor<APlayMap>();
+		ATestMap* NewActor = GetWorld()->SpawnActor<ATestMap>();
 	}
 
 	//{
@@ -37,13 +35,13 @@ void ATileMapGameMode::BeginPlay()
 		WallTileMap->Create("00_Tiles", { 13, 11 }, { 32, 32 });
 		WallTileMap->SetActorLocation({ 96, 64 });
 
-		for (int y = 0; y < 13; y++)
-		{
-			for (int x = 0; x < 11; x++)
-			{
-				WallTileMap->SetTileIndex({ y,x }, { 0, 0 }, { 32, 32 }, 0);
-			}
-		}
+		//for (int y = 0; y < 13; y++)
+		//{
+		//	for (int x = 0; x < 11; x++)
+		//	{
+		//		WallTileMap->SetTileIndex({ y,x }, { 0, 0 }, { 32, 32 }, 0);
+		//	}
+		//}
 	}
 }
 

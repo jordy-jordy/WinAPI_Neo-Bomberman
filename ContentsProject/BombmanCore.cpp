@@ -148,6 +148,14 @@ void BombmanCore::BeginPlay()
 		UImageManager::GetInst().LoadFolder(Play_Mushroom_Uniq_Dir.GetPathToString());
 	}
 
+	{
+		UEngineDirectory Play_TestBG_Dir;
+		Play_TestBG_Dir.MoveParentToDirectory("Resources//Imgs");
+		Play_TestBG_Dir.Append("02_PLAY//EX_BG");
+		UImageManager::GetInst().LoadFolder(Play_TestBG_Dir.GetPathToString());
+	}
+
+
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle(":: LHJ :: Neo-Bomberman ::");
 
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale({ 200,200 }, { 608, 448 });
