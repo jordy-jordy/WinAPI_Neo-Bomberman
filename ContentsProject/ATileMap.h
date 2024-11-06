@@ -85,6 +85,11 @@ public:
 	std::vector<FIntPoint> FindSpriteIndex(int _TileType);
 
 
+	FVector2D GetTileHalfSize()
+	{
+		return FVector2D( TileSize.X / 2, TileSize.Y / 2);
+	}
+
 
 protected:
 

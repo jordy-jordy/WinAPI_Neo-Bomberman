@@ -7,6 +7,7 @@
 #include <EnginePlatform/EngineInput.h>
 
 #include "Bomb.h"
+#include "ATileMap.h"
 
 void APlayer::RunSoundPlay()
 {
@@ -21,6 +22,7 @@ APlayer::APlayer()
 		SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 		SpriteRenderer->SetSprite("01_Mushroom_00_Idle");
 		SpriteRenderer->SetComponentScale({ 32, 32 });
+		SpriteRenderer->SetPivotType(PivotType::Center);
 
 		SpriteRenderer->CreateAnimation("Mush_Idle", "01_Mushroom_00_Idle", 0, 1, 0.1f);
 		SpriteRenderer->CreateAnimation("Mush_Left", "01_Mushroom_01_Left", 0, 5, 0.1f);
@@ -142,6 +144,11 @@ void APlayer::Tick(float _DeltaTime)
 	default:
 		break;
 	}
+
+	WallTileMap = GetWorld()->SpawnActor<ATileMap>();
+	WallTileMap->SetActorLocation({ 96, 64 });
+
+	SpriteRenderer->SetOrder(GetActorLocation().Y - WallTileMap->GetActorLocation().Y);
 }
 
 void APlayer::LevelChangeStart()

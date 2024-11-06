@@ -14,7 +14,7 @@ APlayMap::APlayMap()
 	FVector2D MapScale = SpriteRenderer->SetSpriteScale(1.0f);
 	SpriteRenderer->SetComponentLocation(MapScale.Half());
 
-	SpriteRenderer->CreateAnimation("Stage1_BG", "01_Background", 0, 24, 0.1f);
+	SpriteRenderer->CreateAnimation("Stage1_BG", "01_Background", 0, 22, 0.1f);
 	SpriteRenderer->ChangeAnimation("Stage1_BG");
 
 

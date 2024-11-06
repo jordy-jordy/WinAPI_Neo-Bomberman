@@ -24,6 +24,7 @@ APlayGameMode::~APlayGameMode()
 void APlayGameMode::BeginPlay()
 {
 	APlayMap* NewActor = GetWorld()->SpawnActor<APlayMap>();
+
 	WallTileMap = GetWorld()->SpawnActor<ATileMap>();
 	WallTileMap->SetActorLocation({ 96, 64 });
 
@@ -51,11 +52,11 @@ void APlayGameMode::BeginPlay()
 	std::vector<FIntPoint> PlayerStartposS = WallTileMap->FindSpriteIndex(ATiles::Player_Spawn);
 
 	UEngineRandom StartRandom;
-
 	FIntPoint Point = PlayerStartposS[StartRandom.RandomInt(0, PlayerStartposS.size()-2)];
 	FVector2D TileLocation = WallTileMap->IndexToTileLocation(Point) + WallTileMap->GetActorLocation();
-
-	GetWorld()->GetPawn()->SetActorLocation(TileLocation);
+	FVector2D HalfTiles = WallTileMap->GetTileHalfSize();
+	FVector2D LocalLocation = TileLocation + HalfTiles;
+	GetWorld()->GetPawn()->SetActorLocation(LocalLocation);
 
 
 

@@ -47,6 +47,9 @@ private:
 	void MoveStart();
 	void Move(float _DeltaTime);
 
+	class ATileMap* WallTileMap = nullptr;
+
+
 
 };
 
