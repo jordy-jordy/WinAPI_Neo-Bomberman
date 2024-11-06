@@ -11,6 +11,7 @@
 #include "PlayMap.h"
 #include "TileMapGameMode.h"
 #include "ATileMap.h"
+#include "Player.h"
 
 APlayGameMode::APlayGameMode()
 {
@@ -53,12 +54,14 @@ void APlayGameMode::BeginPlay()
 
 	UEngineRandom StartRandom;
 	FIntPoint Point = PlayerStartposS[StartRandom.RandomInt(0, PlayerStartposS.size()-2)];
+
 	FVector2D TileLocation = WallTileMap->IndexToTileLocation(Point) + WallTileMap->GetActorLocation();
 	FVector2D HalfTiles = WallTileMap->GetTileHalfSize();
 	FVector2D LocalLocation = TileLocation + HalfTiles;
 	GetWorld()->GetPawn()->SetActorLocation(LocalLocation);
 
-
+	APlayer* Player = GetWorld()->GetPawn<APlayer>();
+	Player->SetWallTileMap(WallTileMap);
 
 
 }

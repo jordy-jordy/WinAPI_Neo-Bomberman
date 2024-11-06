@@ -124,12 +124,42 @@ void APlayer::Move(float _DeltaTime)
 		return;
 	}
 
-	AddActorLocation(Vector * _DeltaTime * Speed);
+	FVector2D TileLocation = GetActorLocation() - WallTileMap->GetActorLocation();
+	FVector2D PlayerLocation = TileLocation / 32;
+	FVector2D NextTilePos = TileLocation + Vector * _DeltaTime* Speed;
+	FVector2D NextPlayerPos = PlayerLocation + Vector * _DeltaTime * Speed;
+
+	UEngineDebug::CoreOutPutString("NextPlayerPos : " + NextPlayerPos.ToString());
+
+	Tile* TileData = WallTileMap->GetTileRef(NextTilePos);
+
+	// 고쳐야 함
+	if (TileData->SpriteIndex != 2 && TileData->SpriteIndex != 1 && TileData != nullptr)
+	{
+		AddActorLocation(Vector * _DeltaTime * Speed);
+	}
+
+	
+
 }
 
 void APlayer::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
+
+	FVector2D TileLocation = GetActorLocation() - WallTileMap->GetActorLocation();
+	FVector2D PlayerLocation = TileLocation / 32;
+
+	// 창의 왼쪽 위를 (0, 0)으로 두고 플레이어 위치 반환
+	UEngineDebug::CoreOutPutString("PlayerPosOrigin : " + GetActorLocation().ToString());
+
+	// 위 결과에서 플레이어 위치에서 타일맵 위치를 뺌s
+	UEngineDebug::CoreOutPutString("TilePos : " + TileLocation.ToString());
+
+	// 위 결과에서 타일 크기(32)를 나눔
+	UEngineDebug::CoreOutPutString("PlayerPos : " + PlayerLocation.ToString());
+
+
 
 	switch (CurPlayerState)
 	{
@@ -144,11 +174,13 @@ void APlayer::Tick(float _DeltaTime)
 	default:
 		break;
 	}
-
-	WallTileMap = GetWorld()->SpawnActor<ATileMap>();
-	WallTileMap->SetActorLocation({ 96, 64 });
-
+	
 	SpriteRenderer->SetOrder(GetActorLocation().Y - WallTileMap->GetActorLocation().Y);
+
+	if (nullptr == WallTileMap)
+	{
+		MSGASSERT("타일 맵이 세팅되지 않았습니다.")
+	}
 }
 
 void APlayer::LevelChangeStart()

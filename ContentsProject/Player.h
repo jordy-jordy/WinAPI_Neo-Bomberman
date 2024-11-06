@@ -30,6 +30,12 @@ public:
 	void LevelChangeStart();
 	void LevelChangeEnd();
 
+	void SetWallTileMap(class ATileMap* _TileMap)
+	{
+		WallTileMap = _TileMap;
+	}
+
+
 
 protected:
 
@@ -48,7 +54,7 @@ private:
 	void Move(float _DeltaTime);
 
 	class ATileMap* WallTileMap = nullptr;
-
+	
 
 
 };
