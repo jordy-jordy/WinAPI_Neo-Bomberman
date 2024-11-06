@@ -164,3 +164,20 @@ void ATileMap::DeSerialize(UEngineSerializer& _Ser)
 
 }
 
+std::vector<FIntPoint> ATileMap::FindSpriteIndex(int _TileType)
+{
+	std::vector<FIntPoint> positions;
+
+	for (int y = 0; y < TileCount.Y; ++y)
+	{
+		for (int x = 0; x < TileCount.X; ++x)
+		{
+			if (AllTiles[y][x].SpriteIndex == _TileType)
+			{
+				positions.push_back({x, y});
+			}
+		}
+	}
+	return positions;
+}
+

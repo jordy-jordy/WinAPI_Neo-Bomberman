@@ -75,7 +75,15 @@ public:
 	void Serialize(UEngineSerializer& _Ser);
 	void DeSerialize(UEngineSerializer& _Ser);
 
-	std::vector<FIntPoint> FindTileType(ATiles TileType);
+
+	template<typename EnumType>
+	std::vector<FIntPoint> FindSpriteIndex(EnumType _TileType)
+	{
+		return FindSpriteIndex(static_cast<int>(_TileType));
+	}
+
+	std::vector<FIntPoint> FindSpriteIndex(int _TileType);
+
 
 
 protected:

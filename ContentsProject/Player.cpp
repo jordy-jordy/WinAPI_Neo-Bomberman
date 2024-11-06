@@ -4,8 +4,8 @@
 #include <EngineCore/EngineAPICore.h>
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/EngineCoreDebug.h>
-
 #include <EnginePlatform/EngineInput.h>
+
 #include "Bomb.h"
 
 void APlayer::RunSoundPlay()
