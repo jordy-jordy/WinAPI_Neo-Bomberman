@@ -151,6 +151,10 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ANewPlayer.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="ATileMap.h">
       <SubType>
       </SubType>
@@ -179,6 +183,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Score.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="TestMap.h">
       <SubType>
       </SubType>
@@ -204,6 +212,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ANewPlayer.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="ATileMap.cpp">
       <SubType>
       </SubType>
@@ -229,6 +241,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Monster.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Score.cpp">
       <SubType>
       </SubType>
     </ClCompile>

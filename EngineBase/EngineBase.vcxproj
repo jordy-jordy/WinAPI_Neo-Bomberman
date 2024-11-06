@@ -176,6 +176,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="EngineTimer.h" />
+    <ClInclude Include="FSMStateManager.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Object.h">
       <SubType>
       </SubType>
@@ -208,6 +212,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="EngineTimer.cpp" />
+    <ClCompile Include="FSMStateManager.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Object.cpp">
       <SubType>
       </SubType>

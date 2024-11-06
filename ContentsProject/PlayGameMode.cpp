@@ -49,6 +49,7 @@ void APlayGameMode::BeginPlay()
 
 	std::vector<FIntPoint> PlayerStartposS = WallTileMap->FindSpriteIndex(ATiles::Player_Spawn);
 
+	GetWorld()->GetPawn()
 
 
 }
