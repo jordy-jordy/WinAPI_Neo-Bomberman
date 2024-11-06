@@ -6,6 +6,7 @@
 #include <EngineCore/EngineAPICore.h>
 #include <EngineBase/EngineFile.h>
 #include <EngineBase/EngineDirectory.h>
+#include <EngineBase/EngineRandom.h>
 
 #include "PlayMap.h"
 #include "TileMapGameMode.h"
@@ -49,7 +50,14 @@ void APlayGameMode::BeginPlay()
 
 	std::vector<FIntPoint> PlayerStartposS = WallTileMap->FindSpriteIndex(ATiles::Player_Spawn);
 
-	GetWorld()->GetPawn()
+	UEngineRandom StartRandom;
+
+	FIntPoint Point = PlayerStartposS[StartRandom.RandomInt(0, PlayerStartposS.size()-2)];
+	FVector2D TileLocation = WallTileMap->IndexToTileLocation(Point) + WallTileMap->GetActorLocation();
+
+	GetWorld()->GetPawn()->SetActorLocation(TileLocation);
+
+
 
 
 }

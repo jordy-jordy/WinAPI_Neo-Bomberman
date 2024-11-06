@@ -231,6 +231,15 @@ public:
 		return *this;
 	}
 
+	// 곱하기 추가
+	FIntPoint& operator*(int _Value) const
+	{
+		FIntPoint Result;
+		Result.X = X * _Value;
+		Result.Y = Y * _Value;
+		return Result;
+	}
+
 
 };
 
