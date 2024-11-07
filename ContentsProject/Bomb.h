@@ -17,10 +17,17 @@ public:
 
 	class USpriteRenderer* SpriteRenderer;
 
+	void SetWallTileMap(class ATileMap* _TileMap)
+	{
+		WallTileMap = _TileMap;
+	}
+
+
 protected:
 	void Tick(float _DeltaTime) override;
 
 private:
+	class ATileMap* WallTileMap = nullptr;
 
 };
 

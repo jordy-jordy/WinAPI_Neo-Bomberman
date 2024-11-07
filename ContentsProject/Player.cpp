@@ -16,8 +16,6 @@ void APlayer::RunSoundPlay()
 
 APlayer::APlayer()
 {
-
-	SetActorLocation({ 108, 80 });
 	{
 		SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 		SpriteRenderer->SetSprite("01_Mushroom_00_Idle");
@@ -42,9 +40,6 @@ APlayer::~APlayer()
 void APlayer::BeginPlay()
 {
 	Super::BeginPlay();
-
-	FVector2D Size = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
-	GetWorld()->SetCameraPivot(Size.Half() * -1.0f);
 
 	ChangeState(PlayerState::Idle);
 }
@@ -99,17 +94,17 @@ void APlayer::Move(float _DeltaTime)
 		Vector += FVector2D::RIGHT;
 		SpriteRenderer->ChangeAnimation("Mush_Right");
 	}
-	if (true == UEngineInput::GetInst().IsPress('A'))
+	else if (true == UEngineInput::GetInst().IsPress('A'))
 	{
 		Vector += FVector2D::LEFT;
 		SpriteRenderer->ChangeAnimation("Mush_Left");
 	}
-	if (true == UEngineInput::GetInst().IsPress('S'))
+	else if (true == UEngineInput::GetInst().IsPress('S'))
 	{
 		Vector += FVector2D::DOWN;
 		SpriteRenderer->ChangeAnimation("Mush_Down");
 	}
-	if (true == UEngineInput::GetInst().IsPress('W'))
+	else if (true == UEngineInput::GetInst().IsPress('W'))
 	{
 		Vector += FVector2D::UP;
 		SpriteRenderer->ChangeAnimation("Mush_Up");
@@ -125,41 +120,41 @@ void APlayer::Move(float _DeltaTime)
 	}
 
 	FVector2D TileLocation = GetActorLocation() - WallTileMap->GetActorLocation();
-	FVector2D PlayerLocation = TileLocation / 32;
 	FVector2D NextTilePos = TileLocation + Vector * _DeltaTime* Speed;
-	FVector2D NextPlayerPos = PlayerLocation + Vector * _DeltaTime * Speed;
-
-	UEngineDebug::CoreOutPutString("NextPlayerPos : " + NextPlayerPos.ToString());
 
 	Tile* TileData = WallTileMap->GetTileRef(NextTilePos);
 
-	// 고쳐야 함
-	if (TileData->SpriteIndex != 2 && TileData->SpriteIndex != 1 && TileData != nullptr)
+	FVector2D TileSize = WallTileMap->GetTileSize();
+
+	FVector2D PlayerLocation = TileLocation / TileSize;
+	FVector2D NextPlayerPos = PlayerLocation + Vector * _DeltaTime * Speed;
+
+	if (NextPlayerPos.X < 0 || NextPlayerPos.Y < 0 || NextPlayerPos.X > 13 || NextPlayerPos.Y > 11)
+	{
+		return;
+	}
+	else if (TileData->SpriteIndex != 2 && TileData->SpriteIndex != 1)
 	{
 		AddActorLocation(Vector * _DeltaTime * Speed);
 	}
-
-	
-
 }
 
 void APlayer::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
-	FVector2D TileLocation = GetActorLocation() - WallTileMap->GetActorLocation();
-	FVector2D PlayerLocation = TileLocation / 32;
-
-	// 창의 왼쪽 위를 (0, 0)으로 두고 플레이어 위치 반환
-	UEngineDebug::CoreOutPutString("PlayerPosOrigin : " + GetActorLocation().ToString());
-
-	// 위 결과에서 플레이어 위치에서 타일맵 위치를 뺌s
-	UEngineDebug::CoreOutPutString("TilePos : " + TileLocation.ToString());
-
-	// 위 결과에서 타일 크기(32)를 나눔
-	UEngineDebug::CoreOutPutString("PlayerPos : " + PlayerLocation.ToString());
+	//FVector2D TileLocation = GetActorLocation() - WallTileMap->GetActorLocation();
+	//FVector2D PlayerLocation = TileLocation / 32;
 
 
+	//// 창의 왼쪽 위를 (0, 0)으로 두고 플레이어 위치 반환
+	//UEngineDebug::CoreOutPutString("PlayerPosOrigin : " + GetActorLocation().ToString());
+
+	//// 위 결과에서 플레이어 위치에서 타일맵 위치를 뺌s
+	//UEngineDebug::CoreOutPutString("TilePos : " + TileLocation.ToString());
+
+	//// 위 결과에서 타일 크기(32)를 나눔
+	//UEngineDebug::CoreOutPutString("PlayerPos : " + PlayerLocation.ToString());
 
 	switch (CurPlayerState)
 	{

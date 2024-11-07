@@ -12,6 +12,7 @@
 #include "TileMapGameMode.h"
 #include "ATileMap.h"
 #include "Player.h"
+#include "Bomb.h"
 
 APlayGameMode::APlayGameMode()
 {
@@ -24,10 +25,13 @@ APlayGameMode::~APlayGameMode()
 
 void APlayGameMode::BeginPlay()
 {
-	APlayMap* NewActor = GetWorld()->SpawnActor<APlayMap>();
+	APlayMap* BG = GetWorld()->SpawnActor<APlayMap>();
 
 	WallTileMap = GetWorld()->SpawnActor<ATileMap>();
 	WallTileMap->SetActorLocation({ 96, 64 });
+
+	ABomb* Bomb = GetWorld()->SpawnActor<ABomb>();
+	Bomb->SetWallTileMap(WallTileMap);
 
 	UEngineDirectory Dir;
 
@@ -62,6 +66,7 @@ void APlayGameMode::BeginPlay()
 
 	APlayer* Player = GetWorld()->GetPawn<APlayer>();
 	Player->SetWallTileMap(WallTileMap);
+
 
 
 }

@@ -29,6 +29,7 @@ protected:
 private:
 	ATileMap* WallTileMap = nullptr;
 	ATileMap* GroundTileMap = nullptr;
+	
 
 };
 

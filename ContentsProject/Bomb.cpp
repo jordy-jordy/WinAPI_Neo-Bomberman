@@ -2,6 +2,10 @@
 #include "Bomb.h"
 
 #include <EngineCore/SpriteRenderer.h>
+#include <EnginePlatform/EngineInput.h>
+
+#include "ATileMap.h"
+
 
 ABomb::ABomb()
 {
@@ -19,4 +23,22 @@ ABomb::~ABomb()
 
 void ABomb::Tick(float _DeltaTime)
 {
+	Super::Tick(_DeltaTime);
+
+	if (true == UEngineInput::GetInst().IsDown(VK_LBUTTON))
+	{
+		FVector2D PlayerPos = GetWorld()->GetPawn()->GetActorLocation();
+		SetActorLocation(PlayerPos);
+		SpriteRenderer->ChangeAnimation("Bomb");
+	}
+
+
+	SpriteRenderer->SetOrder(GetActorLocation().Y - WallTileMap->GetActorLocation().Y);
+
+	if (nullptr == WallTileMap)
+	{
+		MSGASSERT("타일 맵이 세팅되지 않았습니다.")
+	}
+
+
 }

@@ -76,6 +76,30 @@ bool ATileMap::IsIndexOver(FIntPoint _Index)
 	return false;
 }
 
+bool ATileMap::IsIndexOverF(FIntPoint _Index)
+{
+	if (0.0f > static_cast<float>(_Index.X))
+	{
+		return true;
+	}
+
+	if (0.0f > static_cast<float>(_Index.Y))
+	{
+		return true;
+	}
+
+	if (static_cast<float>(TileCount.X - 1) < static_cast<float>(_Index.X))
+	{
+		return true;
+	}
+
+	if (static_cast<float>(TileCount.Y - 1) < static_cast<float>(_Index.Y))
+	{
+		return true;
+	}
+
+	return false;
+}
 
 
 void ATileMap::SetTileIndex(FIntPoint _Index, int _SpriteIndex)

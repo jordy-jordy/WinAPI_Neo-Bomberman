@@ -55,6 +55,11 @@ private:
 
 	class ATileMap* WallTileMap = nullptr;
 	
+	float TileMapMin_X = 0.0f;
+	float TileMapMax_X = 13.0f;
+	float TileMapMin_Y = 0.0f;
+	float TileMapMax_Y = 11.0f;
+
 
 
 };

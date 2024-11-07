@@ -71,6 +71,8 @@ public:
 	FIntPoint LocationToIndex(FVector2D _Location);
 
 	bool IsIndexOver(FIntPoint _Index);
+	bool IsIndexOverF(FIntPoint _Index);
+
 
 	void Serialize(UEngineSerializer& _Ser);
 	void DeSerialize(UEngineSerializer& _Ser);
@@ -88,6 +90,11 @@ public:
 	FVector2D GetTileHalfSize()
 	{
 		return FVector2D( TileSize.X / 2, TileSize.Y / 2);
+	}
+
+	FVector2D GetTileSize()
+	{
+		return TileSize;
 	}
 
 
