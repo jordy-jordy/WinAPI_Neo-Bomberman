@@ -7,6 +7,7 @@
 enum class PivotType
 {
 	Center,
+	MidBot,
 	Bot,
 	Top,
 };

@@ -321,6 +321,10 @@ void USpriteRenderer::SetPivotType(PivotType _Type)
 
 	switch (_Type)
 	{
+	case PivotType::MidBot:
+		Pivot.X = 0.0f;
+		Pivot.Y -= CurData.Transform.Scale.Y * 0.2f;
+		break;
 	case PivotType::Bot:
 		Pivot.X = 0.0f;
 		Pivot.Y -= CurData.Transform.Scale.Y * 0.5f;

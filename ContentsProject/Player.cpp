@@ -19,8 +19,8 @@ APlayer::APlayer()
 	{
 		SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 		SpriteRenderer->SetSprite("01_Mushroom_00_Idle");
-		SpriteRenderer->SetComponentScale({ 32, 32 });
-		SpriteRenderer->SetPivotType(PivotType::Center);
+		SpriteRenderer->SetComponentScale({ 38, 42 });
+		SpriteRenderer->SetPivotType(PivotType::MidBot);
 
 		SpriteRenderer->CreateAnimation("Mush_Idle", "01_Mushroom_00_Idle", 0, 1, 0.1f);
 		SpriteRenderer->CreateAnimation("Mush_Left", "01_Mushroom_01_Left", 0, 5, 0.1f);
