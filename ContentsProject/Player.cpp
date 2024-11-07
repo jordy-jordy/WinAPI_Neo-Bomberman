@@ -100,6 +100,13 @@ void APlayer::Idle(float _DeltaTime)
 		ChangeState(PlayerState::Move);
 		return;
 	}
+	if (true == UEngineInput::GetInst().IsPress('F'))
+	{
+		ChangeState(PlayerState::PlaceBomb);
+		return;
+	}
+
+
 }
 
 void APlayer::Move(float _DeltaTime)
