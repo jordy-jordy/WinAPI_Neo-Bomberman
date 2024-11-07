@@ -35,11 +35,6 @@ public:
 		WallTileMap = _TileMap;
 	}
 
-	FVector2D GetMyPos(FVector2D _Pos)
-	{
-		return MyPos = _Pos;
-	}
-
 
 protected:
 
@@ -58,15 +53,6 @@ private:
 	void Move(float _DeltaTime);
 
 	class ATileMap* WallTileMap = nullptr;
-	
-	FVector2D MyPos;
-
-	float TileMapMin_X = 0.0f;
-	float TileMapMax_X = 13.0f;
-	float TileMapMin_Y = 0.0f;
-	float TileMapMax_Y = 11.0f;
-
-
 
 };
 

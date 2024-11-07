@@ -66,7 +66,6 @@ void APlayGameMode::BeginPlay()
 
 	APlayer* Player = GetWorld()->GetPawn<APlayer>();
 	Player->SetWallTileMap(WallTileMap);
-	Player->GetMyPos(GetWorld()->GetPawn()->GetActorLocation());
 
 
 
