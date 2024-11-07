@@ -141,10 +141,10 @@ void APlayer::Move(float _DeltaTime)
 	FVector2D NextLocalLocation = LocalLocation + PlusPos + (Vector * _DeltaTime* Speed); // 플레이어 피봇에 더해지는 크기
 	UEngineDebug::CoreOutPutString("NextLocalLocation : " + NextLocalLocation.ToString());
 
-	FVector2D LocationAtIndex = LocalLocation / TileSize;
+	FVector2D LocationAtIndex = LocalLocation / TileSize; // 플레이어 위치를 타일맵 인덱스로 보기 위함
 	UEngineDebug::CoreOutPutString("LocationAtIndex : " + LocationAtIndex.ToString());
 
-	FVector2D NextLocationAtIndex = NextLocalLocation / TileSize;
+	FVector2D NextLocationAtIndex = NextLocalLocation / TileSize; // 플레이어가 이동하는 방향의 타일맵 인덱스
 	UEngineDebug::CoreOutPutString("NextLocationAtIndex : " + NextLocationAtIndex.ToString());
 
 	Tile* TileData = WallTileMap->GetTileRef(NextLocalLocation);
