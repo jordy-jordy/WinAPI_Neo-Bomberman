@@ -122,6 +122,14 @@ public:
 		return Result;
 	}
 
+	FVector2D& operator*=(float _val)
+	{
+		X *= _val;
+		Y *= _val;
+		return *this;
+	}
+
+
 	// ture가 나오는 
 	bool operator==(FVector2D _Other) const
 	{
@@ -239,7 +247,6 @@ public:
 		Result.Y = Y * _Value;
 		return Result;
 	}
-
 
 };
 
