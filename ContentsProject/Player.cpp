@@ -44,6 +44,17 @@ void APlayer::BeginPlay()
 	ChangeState(PlayerState::Idle);
 }
 
+void APlayer::PlaceBomb(float _DeltaTime)
+{
+	if (true == UEngineInput::GetInst().IsDown('F'))
+	{
+		FVector2D LocalLocation = GetActorLocation() - WallTileMap->GetActorLocation();
+		Bomb->SetActorLocation(LocalLocation);
+		Bomb->Destroy(2.0f);
+	}
+}
+
+
 void APlayer::ChangeState(PlayerState _CurPlayerState)
 {
 	switch (_CurPlayerState)
@@ -54,7 +65,8 @@ void APlayer::ChangeState(PlayerState _CurPlayerState)
 	case PlayerState::Move:
 		MoveStart();
 		break;
-	case PlayerState::Jump:
+	case PlayerState::PlaceBomb:
+		LetsBomb();
 		break;
 	default:
 		break;
@@ -69,6 +81,11 @@ void APlayer::IdleStart()
 
 void APlayer::MoveStart()
 {
+}
+
+void APlayer::LetsBomb()
+{
+
 }
 
 void APlayer::Idle(float _DeltaTime)
@@ -178,7 +195,8 @@ void APlayer::Tick(float _DeltaTime)
 	case PlayerState::Move:
 		Move(_DeltaTime);
 		break;
-	case PlayerState::Jump:
+	case PlayerState::PlaceBomb:
+		PlaceBomb(_DeltaTime);
 		break;
 	default:
 		break;

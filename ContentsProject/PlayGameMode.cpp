@@ -65,9 +65,7 @@ void APlayGameMode::BeginPlay()
 	Player->SetWallTileMap(WallTileMap);
 
 	ABomb* Bomb = GetWorld()->SpawnActor<ABomb>();
-	//Bomb->SetWallTileMap(WallTileMap);
-	//Bomb->SetActorLocation(GetWorld()->GetPawn()->GetActorLocation());
-
+	Player->SetBomb(Bomb);
 }
 
 void APlayGameMode::Tick(float _DeltaTime)

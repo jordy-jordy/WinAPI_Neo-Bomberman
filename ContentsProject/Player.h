@@ -5,7 +5,7 @@ enum class PlayerState
 {
 	Idle,
 	Move,
-	Jump,
+	PlaceBomb,
 };
 
 // Ό³Έν :
@@ -35,6 +35,11 @@ public:
 		WallTileMap = _TileMap;
 	}
 
+	void SetBomb(class ABomb* _Bomb)
+	{
+		Bomb = _Bomb;
+	}
+
 
 protected:
 
@@ -51,8 +56,12 @@ private:
 	void Idle(float _DeltaTime);
 	void MoveStart();
 	void Move(float _DeltaTime);
+	void LetsBomb();
+	void PlaceBomb(float _DeltaTime);
 
 	class ATileMap* WallTileMap = nullptr;
+
+	class ABomb* Bomb = nullptr;
 
 };
 

@@ -26,13 +26,13 @@ void ABomb::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
-	if (true == UEngineInput::GetInst().IsDown('F'))
-	{
-		FVector2D PlayerPos = GetWorld()->GetPawn()->GetActorLocation();
-		SpriteRenderer->SetComponentLocation(PlayerPos);
-		SpriteRenderer->Destroy(2.0f);
-		SpriteRenderer = nullptr;
-	}
+	//if (true == UEngineInput::GetInst().IsDown('F'))
+	//{
+	//	FVector2D PlayerPos = GetWorld()->GetPawn()->GetActorLocation();
+	//	SpriteRenderer->SetComponentLocation(PlayerPos);
+	//	SpriteRenderer->Destroy(2.0f);
+	//	SpriteRenderer = nullptr;
+	//}
 
 
 
