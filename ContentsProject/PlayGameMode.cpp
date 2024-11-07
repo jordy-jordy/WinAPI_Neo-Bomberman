@@ -30,9 +30,6 @@ void APlayGameMode::BeginPlay()
 	WallTileMap = GetWorld()->SpawnActor<ATileMap>();
 	WallTileMap->SetActorLocation({ 96, 64 });
 
-	ABomb* Bomb = GetWorld()->SpawnActor<ABomb>();
-	Bomb->SetWallTileMap(WallTileMap);
-
 	UEngineDirectory Dir;
 
 	if (false == Dir.MoveParentToDirectory("Resources"))
@@ -67,7 +64,9 @@ void APlayGameMode::BeginPlay()
 	APlayer* Player = GetWorld()->GetPawn<APlayer>();
 	Player->SetWallTileMap(WallTileMap);
 
-
+	ABomb* Bomb = GetWorld()->SpawnActor<ABomb>();
+	//Bomb->SetWallTileMap(WallTileMap);
+	//Bomb->SetActorLocation(GetWorld()->GetPawn()->GetActorLocation());
 
 }
 

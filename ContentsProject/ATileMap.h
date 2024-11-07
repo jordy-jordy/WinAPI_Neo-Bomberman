@@ -71,7 +71,6 @@ public:
 	FIntPoint LocationToIndex(FVector2D _Location);
 
 	bool IsIndexOver(FIntPoint _Index);
-	bool IsIndexOverF(FIntPoint _Index);
 
 
 	void Serialize(UEngineSerializer& _Ser);
