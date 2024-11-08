@@ -44,17 +44,28 @@ void APlayer::BeginPlay()
 	ChangeState(PlayerState::Idle);
 }
 
+FVector2D APlayer::PosToTileIndex(FVector2D _Pos)
+{
+	FVector2D Location = _Pos;
+	FIntPoint Index = WallTileMap->LocationToIndex(Location);
+	FVector2D InvertResult = {Index.X, Index.Y};
+	return InvertResult;
+}
+
+
 // 폭탄 설치
 void APlayer::PlaceBomb(float _DeltaTime)
 {
-	FVector2D Location = GetActorLocation();
-	FIntPoint index = WallTileMap->LocationToIndex(GetActorLocation()); // 타일 기반으로 폭탄이 깔리도록 해야함
+	FVector2D Location = GetActorLocation() - WallTileMap->GetActorLocation();
+	FVector2D index = PosToTileIndex(Location);
+
+	int a = 0;
 
 	if (true == UEngineInput::GetInst().IsDown('F')
-		/*&& 이자리에 폭탄이 없다면 조건 추가되어야 함*/)
+		/*&& 이자리에 폭탄이 없다면 이라는 조건이 추가되어야 함*/)
 	{
 		ABomb* Bomb = GetWorld()->SpawnActor<ABomb>();
-		Bomb->SetActorLocation(Location);
+		Bomb->SetActorLocation(index);
 	}
 	ChangeState(PlayerState::Idle);
 
@@ -171,9 +182,17 @@ void APlayer::Move(float _DeltaTime)
 	FVector2D NextLocalLocation = LocalLocation + PlusPos + (Vector * _DeltaTime* Speed); // 플레이어 피봇에 더해지는 크기
 	UEngineDebug::CoreOutPutString("NextLocalLocation : " + NextLocalLocation.ToString());
 
+
+	FVector2D CurTileIndex = PosToTileIndex(LocalLocation); 
+	UEngineDebug::CoreOutPutString("CurTileIndex : " + CurTileIndex.ToString());
+
+	FVector2D NextTileIndex = PosToTileIndex(NextLocalLocation);
+	UEngineDebug::CoreOutPutString("NextTileIndex : " + NextTileIndex.ToString());
+
+
+	// 타일 사이즈를 나눠서 타일 인덱스 도출
 	FVector2D LocationAtIndex = LocalLocation / TileSize; // 플레이어 위치를 타일맵 인덱스로 보기 위함
 	UEngineDebug::CoreOutPutString("LocationAtIndex : " + LocationAtIndex.ToString());
-
 	FVector2D NextLocationAtIndex = NextLocalLocation / TileSize; // 플레이어가 이동하는 방향의 타일맵 인덱스
 	UEngineDebug::CoreOutPutString("NextLocationAtIndex : " + NextLocationAtIndex.ToString());
 

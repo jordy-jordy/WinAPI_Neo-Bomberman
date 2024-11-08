@@ -40,6 +40,7 @@ public:
 		Bomb = _Bomb;
 	}
 
+	FVector2D PosToTileIndex(FVector2D _Pos);
 
 protected:
 
