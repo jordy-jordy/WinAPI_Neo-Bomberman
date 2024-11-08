@@ -46,12 +46,14 @@ void APlayer::BeginPlay()
 
 void APlayer::PlaceBomb(float _DeltaTime)
 {
-	if (true == UEngineInput::GetInst().IsDown('F'))
+	FVector2D Location = GetActorLocation();
+
+	if (true == UEngineInput::GetInst().IsPress('F'))
 	{
-		FVector2D LocalLocation = GetActorLocation() - WallTileMap->GetActorLocation();
-		Bomb->SetActorLocation(LocalLocation);
-		Bomb->Destroy(2.0f);
+		Bomb->SetActorLocation(Location);
 	}
+	ChangeState(PlayerState::Idle);
+
 }
 
 

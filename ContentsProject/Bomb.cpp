@@ -26,22 +26,4 @@ void ABomb::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
-	//if (true == UEngineInput::GetInst().IsDown('F'))
-	//{
-	//	FVector2D PlayerPos = GetWorld()->GetPawn()->GetActorLocation();
-	//	SpriteRenderer->SetComponentLocation(PlayerPos);
-	//	SpriteRenderer->Destroy(2.0f);
-	//	SpriteRenderer = nullptr;
-	//}
-
-
-
-	//SpriteRenderer->SetOrder(GetActorLocation().Y - WallTileMap->GetActorLocation().Y);
-
-	//if (nullptr == WallTileMap)
-	//{
-	//	MSGASSERT("타일 맵이 세팅되지 않았습니다.")
-	//}
-
-
 }
