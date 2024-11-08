@@ -23,6 +23,7 @@ void ATileMap::Create(std::string_view _Sprite, FIntPoint _Count, FVector2D _Til
 	}
 }
 
+// 해당 위치에 폭탄이 있는지 체크하는 함수
 bool ATileMap::IsBomb(FIntPoint _Index)
 {
 	if (true == IsIndexOver(_Index))
@@ -33,6 +34,7 @@ bool ATileMap::IsBomb(FIntPoint _Index)
 	return AllTiles[_Index.Y][_Index.X].bomb != nullptr;
 }
 
+// 해당 위치에 폭탄을 세팅하는 함수
 void ATileMap::SetBomb(FIntPoint _Index, class ABomb* _Bomb)
 {
 	if (true == IsIndexOver(_Index))

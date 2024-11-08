@@ -17,7 +17,7 @@ public:
 	FVector2D Pivot;
 	int SpriteIndex;
 
-	// ÆøÅºÀÎÁö Ã¼Å©ÇÏ´Â ¸â¹ö º¯¼ö
+	// ÆøÅº
 	class ABomb* bomb = nullptr;
 
 	void Serialize(UEngineSerializer& _Ser)

@@ -32,6 +32,10 @@ ABomb::~ABomb()
 {
 }
 
+
+
+
+
 void ABomb::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);

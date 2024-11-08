@@ -71,8 +71,10 @@ void APlayer::PlaceBomb(float _DeltaTime)
 
 	FIntPoint TileIndex =  WallTileMap->LocationToIndex(Location);
 
-	Bomb->SetActorLocation(Pos + HalfTiles);
+	// Å¸ÀÏ¸Ê¿¡ ÆøÅº ¼¼ÆÃ (¿¬°á)
 	WallTileMap->SetBomb(TileIndex, Bomb);
+	// À§Ä¡¿¡ ÆøÅº ¼³Ä¡
+	Bomb->SetActorLocation(Pos + HalfTiles);
 
 	ChangeState(PlayerState::Idle);
 
