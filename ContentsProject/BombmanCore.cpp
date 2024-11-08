@@ -106,10 +106,64 @@ void BombmanCore::BeginPlay()
 		UImageManager::GetInst().LoadFolder(Play_BG_Dir.GetPathToString());
 	}
 	{
-		UEngineDirectory Play_Bomb_Dir;
-		Play_Bomb_Dir.MoveParentToDirectory("Resources//Imgs");
-		Play_Bomb_Dir.Append("02_PLAY//02_Objects//01_Bomb");
-		UImageManager::GetInst().LoadFolder(Play_Bomb_Dir.GetPathToString());
+		UEngineDirectory Play_Bomb00_Dir;
+		Play_Bomb00_Dir.MoveParentToDirectory("Resources//Imgs");
+		Play_Bomb00_Dir.Append("02_PLAY//02_Objects//01_Bomb//01_Bomb_00_Idle");
+		UImageManager::GetInst().LoadFolder(Play_Bomb00_Dir.GetPathToString());
+	}
+	{
+		UEngineDirectory Play_Bomb01_Dir;
+		Play_Bomb01_Dir.MoveParentToDirectory("Resources//Imgs");
+		Play_Bomb01_Dir.Append("02_PLAY//02_Objects//01_Bomb//01_Bomb_01_Center");
+		UImageManager::GetInst().LoadFolder(Play_Bomb01_Dir.GetPathToString());
+	}
+	{
+		UEngineDirectory Play_Bomb02_Dir;
+		Play_Bomb02_Dir.MoveParentToDirectory("Resources//Imgs");
+		Play_Bomb02_Dir.Append("02_PLAY//02_Objects//01_Bomb//01_Bomb_02_Up");
+		UImageManager::GetInst().LoadFolder(Play_Bomb02_Dir.GetPathToString());
+	}
+	{
+		UEngineDirectory Play_Bomb03_Dir;
+		Play_Bomb03_Dir.MoveParentToDirectory("Resources//Imgs");
+		Play_Bomb03_Dir.Append("02_PLAY//02_Objects//01_Bomb//01_Bomb_03_UpMid");
+		UImageManager::GetInst().LoadFolder(Play_Bomb03_Dir.GetPathToString());
+	}
+	{
+		UEngineDirectory Play_Bomb04_Dir;
+		Play_Bomb04_Dir.MoveParentToDirectory("Resources//Imgs");
+		Play_Bomb04_Dir.Append("02_PLAY//02_Objects//01_Bomb//01_Bomb_04_Down");
+		UImageManager::GetInst().LoadFolder(Play_Bomb04_Dir.GetPathToString());
+	}
+	{
+		UEngineDirectory Play_Bomb05_Dir;
+		Play_Bomb05_Dir.MoveParentToDirectory("Resources//Imgs");
+		Play_Bomb05_Dir.Append("02_PLAY//02_Objects//01_Bomb//01_Bomb_05_DownMid");
+		UImageManager::GetInst().LoadFolder(Play_Bomb05_Dir.GetPathToString());
+	}
+	{
+		UEngineDirectory Play_Bomb06_Dir;
+		Play_Bomb06_Dir.MoveParentToDirectory("Resources//Imgs");
+		Play_Bomb06_Dir.Append("02_PLAY//02_Objects//01_Bomb//01_Bomb_06_Left");
+		UImageManager::GetInst().LoadFolder(Play_Bomb06_Dir.GetPathToString());
+	}
+	{
+		UEngineDirectory Play_Bomb07_Dir;
+		Play_Bomb07_Dir.MoveParentToDirectory("Resources//Imgs");
+		Play_Bomb07_Dir.Append("02_PLAY//02_Objects//01_Bomb//01_Bomb_07_LeftMid");
+		UImageManager::GetInst().LoadFolder(Play_Bomb07_Dir.GetPathToString());
+	}
+	{
+		UEngineDirectory Play_Bomb08_Dir;
+		Play_Bomb08_Dir.MoveParentToDirectory("Resources//Imgs");
+		Play_Bomb08_Dir.Append("02_PLAY//02_Objects//01_Bomb//01_Bomb_08_Right");
+		UImageManager::GetInst().LoadFolder(Play_Bomb08_Dir.GetPathToString());
+	}
+	{
+		UEngineDirectory Play_Bomb09_Dir;
+		Play_Bomb09_Dir.MoveParentToDirectory("Resources//Imgs");
+		Play_Bomb09_Dir.Append("02_PLAY//02_Objects//01_Bomb//01_Bomb_09_RightMid");
+		UImageManager::GetInst().LoadFolder(Play_Bomb09_Dir.GetPathToString());
 	}
 	{
 		UEngineDirectory Play_Mushroom_Idle_Dir;

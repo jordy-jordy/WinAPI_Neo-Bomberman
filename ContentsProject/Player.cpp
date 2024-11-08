@@ -44,6 +44,7 @@ void APlayer::BeginPlay()
 	ChangeState(PlayerState::Idle);
 }
 
+// ÆøÅº ¼³Ä¡
 void APlayer::PlaceBomb(float _DeltaTime)
 {
 	FVector2D Location = GetActorLocation();
