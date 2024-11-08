@@ -17,7 +17,8 @@ enum class ATiles
 	Object_Unbroken = 2,
 	Object_Portal = 3,
 	Player_Spawn = 4,
-	Max
+	Max,
+	Object_Bomb = 6
 };
 
 enum class ECollisionGroup

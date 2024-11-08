@@ -23,6 +23,26 @@ void ATileMap::Create(std::string_view _Sprite, FIntPoint _Count, FVector2D _Til
 	}
 }
 
+bool ATileMap::IsBomb(FIntPoint _Index)
+{
+	if (true == IsIndexOver(_Index))
+	{
+		return true;
+	}
+
+	return AllTiles[_Index.Y][_Index.X].bomb != nullptr;
+}
+
+void ATileMap::SetBomb(FIntPoint _Index, class ABomb* _Bomb)
+{
+	if (true == IsIndexOver(_Index))
+	{
+		return;
+	}
+
+	AllTiles[_Index.Y][_Index.X].bomb = _Bomb;
+}
+
 FVector2D ATileMap::IndexToTileLocation(FIntPoint _Index)
 {
 	return FVector2D(_Index.X * TileSize.X, _Index.Y * TileSize.Y);

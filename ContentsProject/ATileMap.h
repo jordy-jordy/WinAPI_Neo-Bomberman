@@ -18,7 +18,7 @@ public:
 	int SpriteIndex;
 
 	// ÆøÅºÀÎÁö Ã¼Å©ÇÏ´Â ¸â¹ö º¯¼ö
-	bool Isbomb = false;
+	class ABomb* bomb = nullptr;
 
 	void Serialize(UEngineSerializer& _Ser)
 	{
@@ -75,6 +75,9 @@ public:
 
 	bool IsIndexOver(FIntPoint _Index);
 
+	bool IsBomb(FIntPoint _Index);
+
+	void SetBomb(FIntPoint _Index, class ABomb* _Bomb);
 
 	void Serialize(UEngineSerializer& _Ser);
 	void DeSerialize(UEngineSerializer& _Ser);

@@ -58,7 +58,6 @@ private:
 	void Idle(float _DeltaTime);
 	void MoveStart();
 	void Move(float _DeltaTime);
-	void LetsBomb();
 	void PlaceBomb(float _DeltaTime);
 
 	class ATileMap* WallTileMap = nullptr;

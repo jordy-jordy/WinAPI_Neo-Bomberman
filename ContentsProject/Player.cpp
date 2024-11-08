@@ -22,12 +22,12 @@ APlayer::APlayer()
 		SpriteRenderer->SetComponentScale({ 38, 42 });
 		SpriteRenderer->SetPivotType(PivotType::MidBot);
 
-		SpriteRenderer->CreateAnimation("Mush_Idle", "01_Mushroom_00_Idle", 0, 1, 0.1f);
-		SpriteRenderer->CreateAnimation("Mush_Left", "01_Mushroom_01_Left", 0, 5, 0.1f);
-		SpriteRenderer->CreateAnimation("Mush_Right", "01_Mushroom_02_Right", 0, 5, 0.1f);
-		SpriteRenderer->CreateAnimation("Mush_Up", "01_Mushroom_03_Up", 0, 5, 0.1f);
-		SpriteRenderer->CreateAnimation("Mush_Down", "01_Mushroom_04_Down", 0, 5, 0.1f);
-		SpriteRenderer->CreateAnimation("Mush_Uniq", "01_Mushroom_05_Uniq", 0, 10, 0.1f);
+		SpriteRenderer->CreateAnimation("Mush_Idle",  "01_Mushroom_00_Idle",  0,  1, 0.1f);
+		SpriteRenderer->CreateAnimation("Mush_Left",  "01_Mushroom_01_Left",  0,  5, 0.1f);
+		SpriteRenderer->CreateAnimation("Mush_Right", "01_Mushroom_02_Right", 0,  5, 0.1f);
+		SpriteRenderer->CreateAnimation("Mush_Up",    "01_Mushroom_03_Up",    0,  5, 0.1f);
+		SpriteRenderer->CreateAnimation("Mush_Down",  "01_Mushroom_04_Down",  0,  5, 0.1f);
+		SpriteRenderer->CreateAnimation("Mush_Uniq",  "01_Mushroom_05_Uniq",  0, 10, 0.1f);
 
 		std::string Name = SpriteRenderer->GetCurSpriteName();
 	}
@@ -62,17 +62,18 @@ FVector2D APlayer::IndexToTilePos(FVector2D _Index)
 // 폭탄 설치
 void APlayer::PlaceBomb(float _DeltaTime)
 {
+	ABomb* Bomb = GetWorld()->SpawnActor<ABomb>();
+
 	FVector2D Location = GetActorLocation();
 	FVector2D index = PosToTileIndex(Location);
+	FVector2D Pos = IndexToTilePos(index);
+	FVector2D HalfTiles = WallTileMap->GetTileHalfSize();
 
-	int a = 0;
+	FIntPoint TileIndex =  WallTileMap->LocationToIndex(Location);
 
-	if (true == UEngineInput::GetInst().IsDown('F')
-		/*&& 이자리에 폭탄이 없다면 이라는 조건이 추가되어야 함*/)
-	{
-		ABomb* Bomb = GetWorld()->SpawnActor<ABomb>();
-		Bomb->SetActorLocation(Location);
-	}
+	Bomb->SetActorLocation(Pos + HalfTiles);
+	WallTileMap->SetBomb(TileIndex, Bomb);
+
 	ChangeState(PlayerState::Idle);
 
 }
@@ -101,11 +102,6 @@ void APlayer::IdleStart()
 
 void APlayer::MoveStart()
 {
-}
-
-void APlayer::LetsBomb()
-{
-
 }
 
 void APlayer::Idle(float _DeltaTime)
@@ -230,7 +226,13 @@ void APlayer::Tick(float _DeltaTime)
 	
 	if (true == UEngineInput::GetInst().IsDown('F'))
 	{
-		PlaceBomb(_DeltaTime);
+		FVector2D LocalLocation = GetActorLocation() - WallTileMap->GetActorLocation();
+		FIntPoint CurTileIndex = WallTileMap->LocationToIndex(LocalLocation);
+
+		if (false == WallTileMap->IsBomb(CurTileIndex))
+		{
+			PlaceBomb(_DeltaTime);
+		}
 	}
 
 
