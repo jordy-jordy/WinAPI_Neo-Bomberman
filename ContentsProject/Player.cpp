@@ -48,9 +48,12 @@ void APlayer::BeginPlay()
 void APlayer::PlaceBomb(float _DeltaTime)
 {
 	FVector2D Location = GetActorLocation();
+	FIntPoint index = WallTileMap->LocationToIndex(GetActorLocation()); // 타일 기반으로 폭탄이 깔리도록 해야함
 
-	if (true == UEngineInput::GetInst().IsPress('F'))
+	if (true == UEngineInput::GetInst().IsDown('F')
+		/*&& 이자리에 폭탄이 없다면 조건 추가되어야 함*/)
 	{
+		ABomb* Bomb = GetWorld()->SpawnActor<ABomb>();
 		Bomb->SetActorLocation(Location);
 	}
 	ChangeState(PlayerState::Idle);

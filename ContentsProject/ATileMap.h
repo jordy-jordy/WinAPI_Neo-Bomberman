@@ -17,6 +17,9 @@ public:
 	FVector2D Pivot;
 	int SpriteIndex;
 
+	// ÆøÅºÀÎÁö Ã¼Å©ÇÏ´Â ¸â¹ö º¯¼ö
+	bool Isbomb = false;
+
 	void Serialize(UEngineSerializer& _Ser)
 	{
 		std::string SpriteName;
@@ -88,7 +91,7 @@ public:
 
 	FVector2D GetTileHalfSize()
 	{
-		return FVector2D( TileSize.X / 2, TileSize.Y / 2);
+		return FVector2D( TileSize.X * 0.5f, TileSize.Y * 0.5f);
 	}
 
 	FVector2D GetTileSize()

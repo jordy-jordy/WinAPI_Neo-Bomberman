@@ -54,7 +54,7 @@ void APlayGameMode::BeginPlay()
 	std::vector<FIntPoint> PlayerStartposS = WallTileMap->FindSpriteIndex(ATiles::Player_Spawn);
 
 	UEngineRandom StartRandom;
-	FIntPoint Point = PlayerStartposS[StartRandom.RandomInt(0, PlayerStartposS.size()-2)];
+	FIntPoint Point = PlayerStartposS[StartRandom.RandomInt(0, static_cast<int>(PlayerStartposS.size())-2)];
 
 	FVector2D TileLocation = WallTileMap->IndexToTileLocation(Point) + WallTileMap->GetActorLocation();
 	FVector2D HalfTiles = WallTileMap->GetTileHalfSize();
@@ -64,8 +64,8 @@ void APlayGameMode::BeginPlay()
 	APlayer* Player = GetWorld()->GetPawn<APlayer>();
 	Player->SetWallTileMap(WallTileMap);
 
-	ABomb* Bomb = GetWorld()->SpawnActor<ABomb>();
-	Player->SetBomb(Bomb);
+
+	
 }
 
 void APlayGameMode::Tick(float _DeltaTime)
