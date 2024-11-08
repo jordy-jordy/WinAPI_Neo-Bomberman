@@ -52,11 +52,17 @@ FVector2D APlayer::PosToTileIndex(FVector2D _Pos)
 	return InvertResult;
 }
 
+FVector2D APlayer::IndexToTilePos(FVector2D _Index)
+{
+	FIntPoint Index = { static_cast<int>(_Index.X), static_cast<int>(_Index.Y) };
+	FVector2D Location = WallTileMap->IndexToTileLocation(Index);
+	return Location;
+}
 
 // 폭탄 설치
 void APlayer::PlaceBomb(float _DeltaTime)
 {
-	FVector2D Location = GetActorLocation() - WallTileMap->GetActorLocation();
+	FVector2D Location = GetActorLocation();
 	FVector2D index = PosToTileIndex(Location);
 
 	int a = 0;
@@ -65,7 +71,7 @@ void APlayer::PlaceBomb(float _DeltaTime)
 		/*&& 이자리에 폭탄이 없다면 이라는 조건이 추가되어야 함*/)
 	{
 		ABomb* Bomb = GetWorld()->SpawnActor<ABomb>();
-		Bomb->SetActorLocation(index);
+		Bomb->SetActorLocation(Location);
 	}
 	ChangeState(PlayerState::Idle);
 
@@ -81,9 +87,6 @@ void APlayer::ChangeState(PlayerState _CurPlayerState)
 		break;
 	case PlayerState::Move:
 		MoveStart();
-		break;
-	case PlayerState::PlaceBomb:
-		LetsBomb();
 		break;
 	default:
 		break;
@@ -117,12 +120,6 @@ void APlayer::Idle(float _DeltaTime)
 		ChangeState(PlayerState::Move);
 		return;
 	}
-	if (true == UEngineInput::GetInst().IsPress('F'))
-	{
-		ChangeState(PlayerState::PlaceBomb);
-		return;
-	}
-
 
 }
 
@@ -227,13 +224,16 @@ void APlayer::Tick(float _DeltaTime)
 	case PlayerState::Move:
 		Move(_DeltaTime);
 		break;
-	case PlayerState::PlaceBomb:
-		PlaceBomb(_DeltaTime);
-		break;
 	default:
 		break;
 	}
 	
+	if (true == UEngineInput::GetInst().IsDown('F'))
+	{
+		PlaceBomb(_DeltaTime);
+	}
+
+
 	SpriteRenderer->SetOrder(GetActorLocation().Y - WallTileMap->GetActorLocation().Y);
 
 	if (nullptr == WallTileMap)
