@@ -62,8 +62,6 @@ FVector2D APlayer::IndexToTilePos(FVector2D _Index)
 // ∆¯≈∫ º≥ƒ°
 void APlayer::PlaceBomb(float _DeltaTime)
 {
-	ABomb* Bomb = GetWorld()->SpawnActor<ABomb>();
-
 	FVector2D Location = GetActorLocation();
 	FVector2D index = PosToTileIndex(Location);
 	FVector2D Pos = IndexToTilePos(index);
@@ -71,10 +69,21 @@ void APlayer::PlaceBomb(float _DeltaTime)
 
 	FIntPoint TileIndex =  WallTileMap->LocationToIndex(Location);
 
+	// ∆¯≈∫ º≥ƒ° ∞°¥… ø©∫Œ ¿Á»Æ¿Œ
+	if (WallTileMap->IsBomb(TileIndex))
+	{
+		return; // ¿ÃπÃ ∆¯≈∫¿Ã º≥ƒ°µ» ∞ÊøÏ
+	}
+
+	ABomb* Bomb = GetWorld()->SpawnActor<ABomb>();
+
 	// ≈∏¿œ∏ ø° ∆¯≈∫ ºº∆√ (ø¨∞·)
 	WallTileMap->SetBomb(TileIndex, Bomb);
 	// ¿ßƒ°ø° ∆¯≈∫ º≥ƒ°
 	Bomb->SetActorLocation(Pos + HalfTiles);
+
+	Bomb->SetWallTileMap(WallTileMap, TileIndex); // ≈∏¿œ∏  ¡§∫∏ º≥¡§
+	Bomb->StartDestroyTimer(); // ≈∏¿Ã∏” Ω√¿€
 
 	ChangeState(PlayerState::Idle);
 

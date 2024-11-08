@@ -27,17 +27,23 @@ public:
 
 	class USpriteRenderer* SpriteRenderer;
 
-	void SetWallTileMap(class ATileMap* _TileMap)
-	{
-		WallTileMap = _TileMap;
-	}
+	void SetWallTileMap(class ATileMap* _TileMap, FIntPoint _Index);
 
+	void StartDestroyTimer();
 
 protected:
 	void Tick(float _DeltaTime) override;
+	void ReleaseCheck(float _DeltaTime);
 
 private:
 	class ATileMap* WallTileMap = nullptr;
+	FIntPoint BombTileIndex;
+
+	bool IsDeathTimeCheck = false;
+	float DeathTime = 2.0f; // 2초 후에 폭탄이 없어지도록 설정
+	float CurDeathTime = 0.0f;
+
+	void ClearBombTile(); // 폭탄 제거 후 타일맵 업데이트
 
 };
 

@@ -30,14 +30,46 @@ ABomb::ABomb()
 
 ABomb::~ABomb()
 {
+	ClearBombTile(); // 소멸자에서 타일맵 업데이트
 }
-
-
-
-
 
 void ABomb::Tick(float _DeltaTime)
 {
-	Super::Tick(_DeltaTime);
+    Super::Tick(_DeltaTime);
+    ReleaseCheck(_DeltaTime);
+}
 
+void ABomb::SetWallTileMap(ATileMap* _TileMap, FIntPoint _Index)
+{
+    WallTileMap = _TileMap;
+    BombTileIndex = _Index;
+}
+
+void ABomb::StartDestroyTimer()
+{
+    IsDeathTimeCheck = true;
+}
+
+void ABomb::ReleaseCheck(float _DeltaTime)
+{
+    if (!IsDeathTimeCheck)
+    {
+        return;
+    }
+
+    CurDeathTime += _DeltaTime;
+
+    if (CurDeathTime >= DeathTime)
+    {
+        ClearBombTile(); // 폭탄 제거 전 타일맵 업데이트
+        Destroy();
+    }
+}
+
+void ABomb::ClearBombTile()
+{
+    if (WallTileMap != nullptr)
+    {
+        WallTileMap->SetBomb(BombTileIndex, nullptr); // 폭탄 포인터를 nullptr로 설정
+    }
 }
