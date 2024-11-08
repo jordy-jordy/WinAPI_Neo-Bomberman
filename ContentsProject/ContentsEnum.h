@@ -19,3 +19,10 @@ enum class ATiles
 	Player_Spawn = 4,
 	Max
 };
+
+enum class ECollisionGroup
+{
+	PlayerBody,
+	MonsterBody,
+};
+

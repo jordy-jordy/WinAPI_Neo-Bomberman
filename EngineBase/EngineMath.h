@@ -1,9 +1,14 @@
 #pragma once
-// FVector로 통일하겠습니다.
-// FVector2D xy
-// FVector3D xyz
-// FVector4D xyzw
-// FVector4D == FVector;
+
+
+class UEngineMath
+{
+public:
+	static float Sqrt(float _Value)
+	{
+		return ::sqrtf(_Value);
+	}
+};
 
 class FVector2D
 {
@@ -47,7 +52,6 @@ public:
 		return static_cast<int>(Y);
 	}
 
-	// X든 Y든 0이있으면 터트리는 함수.
 	bool IsZeroed() const
 	{
 		return X == 0.0f || Y == 0.0f;
@@ -60,10 +64,16 @@ public:
 
 	float Length() const
 	{
-		return sqrtf(X * X + Y * Y);
+		return UEngineMath::Sqrt(X * X + Y * Y);
 	}
 
 	class FIntPoint ConvertToPoint() const;
+
+	static FVector2D Normalize(FVector2D _Value)
+	{
+		_Value.Normalize();
+		return _Value;
+	}
 
 	void Normalize()
 	{
@@ -71,7 +81,7 @@ public:
 		if (0.0f < Len && false == isnan(Len))
 		{
 			X = X / Len;
-			X = Y / Len;
+			Y = Y / Len;
 		}
 		return;
 	}
@@ -97,6 +107,14 @@ public:
 		return Result;
 	}
 
+	FVector2D& operator-=(FVector2D _Other)
+	{
+		X -= _Other.X;
+		Y -= _Other.Y;
+		return *this;
+	}
+
+
 	FVector2D operator-(FVector2D _Other) const
 	{
 		FVector2D Result;
@@ -105,6 +123,13 @@ public:
 		return Result;
 	}
 
+	FVector2D operator-() const
+	{
+		FVector2D Result;
+		Result.X = -X;
+		Result.Y = -Y;
+		return Result;
+	}
 
 	FVector2D operator/(int _Value) const
 	{
@@ -130,25 +155,16 @@ public:
 	}
 
 
-	// ture가 나오는 
 	bool operator==(FVector2D _Other) const
 	{
 		return X == _Other.X && Y == _Other.Y;
 	}
 
-	// float은 비교가 굉장히 위험
-	// const가 붙은 함수에서는 const가 붙은 함수 호출할수 없다.
 	bool EqualToInt(FVector2D _Other) const
 	{
-		// const FVector* const Ptr;
-		// this = nullptr;
 		return iX() == _Other.iX() && iY() == _Other.iY();
 	}
 
-	//bool Compare(FVector2D _Other, float _limite = 0.0f) const
-	//{
-	//	return X == _Other.X && Y == _Other.Y;
-	//}
 
 	FVector2D& operator+=(FVector2D _Other)
 	{
@@ -170,8 +186,6 @@ public:
 	}
 };
 
-// 대부분 오브젝트에서 크기와 위치는 한쌍입니다.
-// 그래서 그 2가지를 모두 묶는 자료형을 만들어서 그걸 써요.
 class FTransform
 {
 public:
@@ -239,21 +253,8 @@ public:
 		return *this;
 	}
 
-	// 곱하기 추가
-	FIntPoint& operator*(int _Value) const
-	{
-		FIntPoint Result;
-		Result.X = X * _Value;
-		Result.Y = Y * _Value;
-		return Result;
-	}
 
 };
-
-class EngineMath
-{
-};
-
 
 
 class UColor

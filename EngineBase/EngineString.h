@@ -4,10 +4,8 @@
 class UEngineString
 {
 public:
-	// constrcuter destructer
 	~UEngineString();
 
-	// delete Function
 	UEngineString(const UEngineString& _Other) = delete;
 	UEngineString(UEngineString&& _Other) noexcept = delete;
 	UEngineString& operator=(const UEngineString& _Other) = delete;

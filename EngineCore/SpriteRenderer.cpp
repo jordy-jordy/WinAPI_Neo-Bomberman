@@ -13,12 +13,8 @@ USpriteRenderer::~USpriteRenderer()
 {
 }
 
-// SpriteRenderer : public URenderer
-// MeshRenderer : public URenderer
-// StaticMeshRenderer : public URenderer
 void USpriteRenderer::Render(float _DeltaTime)
 {
-	// 일단 여기서 다 짠다.
 	if (nullptr != CurAnimation)
 	{
 		std::vector<int>& Indexs = CurAnimation->FrameIndex;
@@ -31,7 +27,6 @@ void USpriteRenderer::Render(float _DeltaTime)
 
 		float CurFrameTime = Times[CurAnimation->CurIndex];
 
-		//                           0.1 0.1 0.1
 		if (CurAnimation->CurTime > CurFrameTime)
 		{
 			CurAnimation->CurTime -= CurFrameTime;
@@ -63,9 +58,7 @@ void USpriteRenderer::Render(float _DeltaTime)
 		}
 
 
-		//         2 3 4           0
 		CurIndex = Indexs[CurAnimation->CurIndex];
-		// ++CurAnimation->CurIndex;
 	}
 
 	if (nullptr == Sprite)
@@ -89,18 +82,14 @@ void USpriteRenderer::Render(float _DeltaTime)
 
 	Trans.Location += Pivot;
 
-	// Trans.Location -= 카메라포스
 
 	CurData.Image->CopyToTrans(BackBufferImage, Trans, CurData.Transform);
 }
 
 void USpriteRenderer::BeginPlay()
 {
-	// 부모 클래스의 함수를 호출하는걸 깜빡하면 안된다.
-	// 습관되면 가장 언리얼 학습에서 걸림돌이 되는 습관이 된다.
 	Super::BeginPlay();
 
-	// 스프라이트 랜더러가 
 
 	AActor* Actor = GetActor();
 	ULevel* Level = Actor->GetWorld();
@@ -115,11 +104,7 @@ void USpriteRenderer::ComponentTick(float _DeltaTime)
 
 void USpriteRenderer::SetSprite(std::string_view _Name, int _CurIndex /*= 0*/)
 {
-	// 싱글톤에 대해서 설명할때
-	// 값을 편하게 공유하기 위해서 사용하는 거라고 하면 틀렸다.
-	// 객체를 단 1개 만드는 패턴이라는 것을 잊지 마시고
 
-	// 액터가 만들어졌을때는 로드가 끝난 상황이어야 한다.
 	Sprite = UImageManager::GetInst().FindSprite(_Name);
 
 	if (nullptr == Sprite)
@@ -137,8 +122,6 @@ void USpriteRenderer::SetOrder(int _Order)
 
 	Order = _Order;
 
-	// 동적으로 해야할때는 레벨이 세팅되어 있을 것이므로
-	// 레벨이 세팅되어 있다면 즉각 바꿔준다.
 	ULevel* Level = GetActor()->GetWorld();
 
 	if (nullptr != Level)
@@ -302,7 +285,6 @@ void USpriteRenderer::SetCameraEffectScale(float _Effect)
 	CameraEffectScale = _Effect;
 }
 
-// 여러분들이 애니메이션을 하거나
 void USpriteRenderer::SetPivotType(PivotType _Type)
 {
 	if (PivotType::Center == _Type)
@@ -321,10 +303,6 @@ void USpriteRenderer::SetPivotType(PivotType _Type)
 
 	switch (_Type)
 	{
-	case PivotType::MidBot:
-		Pivot.X = 0.0f;
-		Pivot.Y -= CurData.Transform.Scale.Y * 0.2f;
-		break;
 	case PivotType::Bot:
 		Pivot.X = 0.0f;
 		Pivot.Y -= CurData.Transform.Scale.Y * 0.5f;
@@ -332,6 +310,10 @@ void USpriteRenderer::SetPivotType(PivotType _Type)
 	case PivotType::Top:
 		Pivot.X = 0.0f;
 		Pivot.Y += CurData.Transform.Scale.Y * 0.5f;
+		break;
+	case PivotType::MidBot:
+		Pivot.X = 0.0f;
+		Pivot.Y -= CurData.Transform.Scale.Y * 0.2f;
 		break;
 	default:
 		break;

@@ -29,7 +29,6 @@ std::vector<class UEngineFile> UEngineDirectory::GetAllFile(bool _IsRecursive /*
 {
 	std::vector<class UEngineFile> Result;
 
-	// 경로를 넣어주면 그 경로의 첫번째 파일을 가리키게 된다.
 	std::filesystem::directory_iterator Diriter = std::filesystem::directory_iterator(Path);
 
 	while (false == Diriter._At_end())
