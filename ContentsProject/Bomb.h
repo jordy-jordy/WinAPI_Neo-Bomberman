@@ -29,21 +29,28 @@ public:
 
 	void SetWallTileMap(class ATileMap* _TileMap, FIntPoint _Index);
 
+	void StartExplodeTimer();
 	void StartDestroyTimer();
+
 
 protected:
 	void Tick(float _DeltaTime) override;
-	void ReleaseCheck(float _DeltaTime);
+	void Bomb_Explode(float _DeltaTime);
+	void Bomb_Destroy(float _DeltaTime);
 
 private:
 	class ATileMap* WallTileMap = nullptr;
 	FIntPoint BombTileIndex;
 
-	bool IsDeathTimeCheck = false;
-	float DeathTime = 2.0f; // 2초 후에 폭탄이 없어지도록 설정
-	float CurDeathTime = 0.0f;
+	bool ExplodeTimer_On = false;
+	float Explode_Start_Time = 2.0f; // 폭탄 설치 후 4초 뒤에 폭탄이 폭발하도록 설정
+	float Explodecheck_Start_Timer = 0.0f; // 폭탄 폭발 타이머
 
-	void ClearBombTile(); // 폭탄 제거 후 타일맵 업데이트
+	bool DestroyTimer_On = false;
+	float Bomb_DestroyTime = 3.0f; // 폭탄이 터진 후 2초 뒤에 폭탄이 없어지도록 설정
+	float Bomb_DestroyTimer = 0.0f; // 폭탄 제거 타이머
+
+	void ClearBombTile(); // 폭탄 제거 전후 타일맵 업데이트
 
 };
 

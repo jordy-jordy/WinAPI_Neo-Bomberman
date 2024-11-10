@@ -83,7 +83,7 @@ void APlayer::PlaceBomb(float _DeltaTime)
 	Bomb->SetActorLocation(Pos + HalfTiles);
 
 	Bomb->SetWallTileMap(WallTileMap, TileIndex); // 타일맵 정보 설정
-	Bomb->StartDestroyTimer(); // 타이머 시작
+	Bomb->StartExplodeTimer(); // 폭발 타이머 시작
 
 	ChangeState(PlayerState::Idle);
 
