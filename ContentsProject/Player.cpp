@@ -24,16 +24,18 @@ APlayer::APlayer()
 		SpriteRendererHead->SetPivotType(PivotType::Bot);
 
 		SpriteRendererHead->CreateAnimation("Idle_Up_Head", "MainCharater_White.png", 17, 17, 0.1f);
-		SpriteRendererHead->CreateAnimation("Run_Up_Head", "MainCharater_White.png", 18, 22, 0.1f);
+		SpriteRendererHead->CreateAnimation("Run_Up_Head", "MainCharater_White.png", 18, 22 , 0.1f);
 
 		SpriteRendererHead->CreateAnimation("Idle_Down_Head", "MainCharater_White.png", 0, 0, 0.1f);
 		SpriteRendererHead->CreateAnimation("Run_Down_Head", "MainCharater_White.png", 1, 6, 0.1f);
 
-		SpriteRendererHead->CreateAnimation("Idle_Left_Head", "MainCharater_White.png", 9, 9, 0.1f);
-		SpriteRendererHead->CreateAnimation("Run_Left_Head", "MainCharater_White.png", 10, 14, 0.1f);
+		SpriteRendererHead->CreateAnimation("Idle_Left_Head", "MainCharater_White.png", 8, 8, 0.1f);
+		SpriteRendererHead->CreateAnimation("Run_Left_Head", "MainCharater_White.png", 9, 14, 0.1f);
 
 		SpriteRendererHead->CreateAnimation("Idle_Right_Head", "MainCharater_White.png", 24, 24, 0.1f);
 		SpriteRendererHead->CreateAnimation("Run_Right_Head", "MainCharater_White.png", 25, 30, 0.1f);
+
+		SpriteRendererHead->CreateAnimation("Idle_Anim_Head", "MainCharater_White.png", { 580, 581, 580, 581 }, { 0.3f, 0.2f, 0.3f, 0.2f });
 
 		//std::string Name = SpriteRenderer->GetCurSpriteName();
 	}
@@ -46,7 +48,7 @@ APlayer::APlayer()
 		SpriteRendererBody->SetPivotType(PivotType::Bot);
 
 		SpriteRendererBody->CreateAnimation("Idle_Up_Body", "MainCharater_White.png", 48, 48, 0.1f);
-		SpriteRendererBody->CreateAnimation("Run_Up_Body", "MainCharater_White.png", 49, 54, 0.1f);
+		SpriteRendererBody->CreateAnimation("Run_Up_Body", "MainCharater_White.png", 50, 54 , 0.1f);
 
 		SpriteRendererBody->CreateAnimation("Idle_Down_Body", "MainCharater_White.png", 32, 32, 0.1f);
 		SpriteRendererBody->CreateAnimation("Run_Down_Body", "MainCharater_White.png", 33, 38, 0.1f);
@@ -56,6 +58,8 @@ APlayer::APlayer()
 
 		SpriteRendererBody->CreateAnimation("Idle_Right_Body", "MainCharater_White.png", 56, 56, 0.1f);
 		SpriteRendererBody->CreateAnimation("Run_Right_Body", "MainCharater_White.png", 57, 62, 0.1f);
+
+		SpriteRendererBody->CreateAnimation("Idle_Anim_Body", "MainCharater_White.png", { 612, 613, 612, 613 }, { 0.3f, 0.2f, 0.3f, 0.2f });
 	}
 
 	SpriteRendererHead->ChangeAnimation("Idle_Down_Head");
@@ -141,8 +145,8 @@ void APlayer::ChangeState(PlayerState _CurPlayerState)
 
 void APlayer::IdleStart()
 {
-	SpriteRendererHead->ChangeAnimation("Idle_Down_Head");
-	SpriteRendererBody->ChangeAnimation("Idle_Down_Body");
+	SpriteRendererHead->ChangeAnimation("Idle_Anim_Head");
+	SpriteRendererBody->ChangeAnimation("Idle_Anim_Body");
 }
 
 void APlayer::MoveStart()
