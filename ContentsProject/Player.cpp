@@ -223,21 +223,20 @@ void APlayer::Move(float _DeltaTime)
 	FVector2D TileSize = WallTileMap->GetTileSize(); // 32
 	FVector2D LocalLocation = GetActorLocation() - WallTileMap->GetActorLocation(); // 타일맵 기준으로 변경
 	FVector2D NextLocalLocation = LocalLocation + PlusPos + (Vector * _DeltaTime* Speed); // 플레이어 피봇에 더해지는 크기
-	UEngineDebug::CoreOutPutString("NextLocalLocation : " + NextLocalLocation.ToString());
-
 
 	FVector2D CurTileIndex = PosToTileIndex(LocalLocation); 
-	UEngineDebug::CoreOutPutString("CurTileIndex : " + CurTileIndex.ToString());
 
 	FVector2D NextTileIndex = PosToTileIndex(NextLocalLocation);
-	UEngineDebug::CoreOutPutString("NextTileIndex : " + NextTileIndex.ToString());
-
 
 	// 타일 사이즈를 나눠서 타일 인덱스 도출
 	FVector2D LocationAtIndex = LocalLocation / TileSize; // 플레이어 위치를 타일맵 인덱스로 보기 위함
-	UEngineDebug::CoreOutPutString("LocationAtIndex : " + LocationAtIndex.ToString());
 	FVector2D NextLocationAtIndex = NextLocalLocation / TileSize; // 플레이어가 이동하는 방향의 타일맵 인덱스
-	UEngineDebug::CoreOutPutString("NextLocationAtIndex : " + NextLocationAtIndex.ToString());
+	
+	//UEngineDebug::CoreOutPutString("NextLocalLocation : " + NextLocalLocation.ToString());
+	//UEngineDebug::CoreOutPutString("CurTileIndex : " + CurTileIndex.ToString());
+	//UEngineDebug::CoreOutPutString("NextTileIndex : " + NextTileIndex.ToString());
+	//UEngineDebug::CoreOutPutString("LocationAtIndex : " + LocationAtIndex.ToString());
+	//UEngineDebug::CoreOutPutString("NextLocationAtIndex : " + NextLocationAtIndex.ToString());
 
 	Tile* TileData = WallTileMap->GetTileRef(NextLocalLocation);
 
@@ -256,11 +255,8 @@ void APlayer::Tick(float _DeltaTime)
 	Super::Tick(_DeltaTime);
 	
 	//FVector2D LocalLocation = GetActorLocation() - WallTileMap->GetActorLocation();
-
 	//UEngineDebug::CoreOutPutString("GetActorLocation() : " + GetActorLocation().ToString());
-
 	//UEngineDebug::CoreOutPutString("LocalLocation : " + LocalLocation.ToString());
-
 
 	switch (CurPlayerState)
 	{
