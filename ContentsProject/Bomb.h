@@ -2,16 +2,6 @@
 #include <EngineCore/Actor.h>
 
 
-enum class BombState
-{
-	Idle_Bomb = 0,
-	Start_Exploding = 1,
-	Running_Exploding = 2,
-	End_Exploding = 3,
-	Over = 4
-
-};
-
 class ABomb : public AActor
 {
 public:

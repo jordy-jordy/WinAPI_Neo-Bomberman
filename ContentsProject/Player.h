@@ -49,7 +49,9 @@ private:
 	float Speed = 300.0f;
 	int MySpriteIndex = 0;
 
-	class USpriteRenderer* SpriteRenderer;
+	class USpriteRenderer* SpriteRendererHead = nullptr;
+	class USpriteRenderer* SpriteRendererBody = nullptr;
+
 
 	PlayerState CurPlayerState = PlayerState::Idle;
 	void ChangeState(PlayerState CurPlayerState);

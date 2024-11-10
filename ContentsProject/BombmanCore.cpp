@@ -41,7 +41,7 @@ void BombmanCore::BeginPlay()
 		UImageManager::GetInst().Load(FilePath);
 	}
 
-
+	// 타이틀 레벨 리소스 로드
 	{
 		UEngineDirectory Title_Basic_Dir;
 		Title_Basic_Dir.MoveParentToDirectory("Resources//Imgs");
@@ -92,7 +92,18 @@ void BombmanCore::BeginPlay()
 	}
 
 
-
+	// 플레이 레벨 리소스 로드
+	{
+		UEngineDirectory Play_Player_Dir;
+		Play_Player_Dir.MoveParentToDirectory("Resources//Imgs");
+		Play_Player_Dir.Append("02_PLAY//04_Player");
+		UImageManager::GetInst().LoadFolder(Play_Player_Dir.GetPathToString());
+	}
+	// 플레이어 스프라이트 시트 커팅
+	{
+		UImageManager& imgManager = UImageManager::GetInst();
+		imgManager.CuttingSprite("MainCharater_White.png", { 64, 64 });
+	}
 	{
 		UEngineDirectory Play_TILE_Dir;
 		Play_TILE_Dir.MoveParentToDirectory("Resources//Imgs");
@@ -202,6 +213,7 @@ void BombmanCore::BeginPlay()
 		UImageManager::GetInst().LoadFolder(Play_Mushroom_Uniq_Dir.GetPathToString());
 	}
 
+	// 타일 맵 제작용 BG
 	{
 		UEngineDirectory Play_TestBG_Dir;
 		Play_TestBG_Dir.MoveParentToDirectory("Resources//Imgs");

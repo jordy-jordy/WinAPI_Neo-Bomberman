@@ -26,6 +26,7 @@ ABomb::ABomb()
 	SpriteRenderer->CreateAnimation("Bomb_Right", "01_Bomb_08_Right", 0, 19, 0.2f);
 	SpriteRenderer->CreateAnimation("Bomb_RightMid", "01_Bomb_09_RightMid", 0, 19, 0.2f);
 
+	SpriteRenderer->SetOrder(ERenderOrder::BOMB);
 }
 
 ABomb::~ABomb()

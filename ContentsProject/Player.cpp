@@ -17,20 +17,53 @@ void APlayer::RunSoundPlay()
 APlayer::APlayer()
 {
 	{
-		SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-		SpriteRenderer->SetSprite("01_Mushroom_00_Idle");
-		SpriteRenderer->SetComponentScale({ 38, 42 });
-		SpriteRenderer->SetPivotType(PivotType::MidBot);
+		SpriteRendererHead = CreateDefaultSubObject<USpriteRenderer>();
+		SpriteRendererHead->SetSprite("MainCharater_White.png");
+		SpriteRendererHead->SetComponentLocation({ 0, 0 });
+		SpriteRendererHead->SetComponentScale({ 64, 64 });
+		SpriteRendererHead->SetPivotType(PivotType::Bot);
 
-		SpriteRenderer->CreateAnimation("Mush_Idle",  "01_Mushroom_00_Idle",  0,  1, 0.1f);
-		SpriteRenderer->CreateAnimation("Mush_Left",  "01_Mushroom_01_Left",  0,  5, 0.1f);
-		SpriteRenderer->CreateAnimation("Mush_Right", "01_Mushroom_02_Right", 0,  5, 0.1f);
-		SpriteRenderer->CreateAnimation("Mush_Up",    "01_Mushroom_03_Up",    0,  5, 0.1f);
-		SpriteRenderer->CreateAnimation("Mush_Down",  "01_Mushroom_04_Down",  0,  5, 0.1f);
-		SpriteRenderer->CreateAnimation("Mush_Uniq",  "01_Mushroom_05_Uniq",  0, 10, 0.1f);
+		SpriteRendererHead->CreateAnimation("Idle_Up_Head", "MainCharater_White.png", 17, 17, 0.1f);
+		SpriteRendererHead->CreateAnimation("Run_Up_Head", "MainCharater_White.png", 18, 22, 0.1f);
 
-		std::string Name = SpriteRenderer->GetCurSpriteName();
+		SpriteRendererHead->CreateAnimation("Idle_Down_Head", "MainCharater_White.png", 0, 0, 0.1f);
+		SpriteRendererHead->CreateAnimation("Run_Down_Head", "MainCharater_White.png", 1, 6, 0.1f);
+
+		SpriteRendererHead->CreateAnimation("Idle_Left_Head", "MainCharater_White.png", 9, 9, 0.1f);
+		SpriteRendererHead->CreateAnimation("Run_Left_Head", "MainCharater_White.png", 10, 14, 0.1f);
+
+		SpriteRendererHead->CreateAnimation("Idle_Right_Head", "MainCharater_White.png", 24, 24, 0.1f);
+		SpriteRendererHead->CreateAnimation("Run_Right_Head", "MainCharater_White.png", 25, 30, 0.1f);
+
+		//std::string Name = SpriteRenderer->GetCurSpriteName();
 	}
+
+	{
+		SpriteRendererBody = CreateDefaultSubObject<USpriteRenderer>();
+		SpriteRendererBody->SetSprite("MainCharater_White.png");
+		SpriteRendererBody->SetComponentLocation({ 0, static_cast<int>(64 * 0.5f) });
+		SpriteRendererBody->SetComponentScale({ 64, 64 });
+		SpriteRendererBody->SetPivotType(PivotType::Bot);
+
+		SpriteRendererBody->CreateAnimation("Idle_Up_Body", "MainCharater_White.png", 48, 48, 0.1f);
+		SpriteRendererBody->CreateAnimation("Run_Up_Body", "MainCharater_White.png", 49, 54, 0.1f);
+
+		SpriteRendererBody->CreateAnimation("Idle_Down_Body", "MainCharater_White.png", 32, 32, 0.1f);
+		SpriteRendererBody->CreateAnimation("Run_Down_Body", "MainCharater_White.png", 33, 38, 0.1f);
+
+		SpriteRendererBody->CreateAnimation("Idle_Left_Body", "MainCharater_White.png", 40, 40, 0.1f);
+		SpriteRendererBody->CreateAnimation("Run_Left_Body", "MainCharater_White.png", 41, 46, 0.1f);
+
+		SpriteRendererBody->CreateAnimation("Idle_Right_Body", "MainCharater_White.png", 56, 56, 0.1f);
+		SpriteRendererBody->CreateAnimation("Run_Right_Body", "MainCharater_White.png", 57, 62, 0.1f);
+	}
+
+	SpriteRendererHead->ChangeAnimation("Idle_Down_Head");
+	SpriteRendererBody->ChangeAnimation("Idle_Down_Body");
+
+	SpriteRendererHead->SetOrder(ERenderOrder::PLAYER);
+	SpriteRendererBody->SetOrder(ERenderOrder::PLAYER);
+
 }
 
 APlayer::~APlayer()
@@ -108,7 +141,8 @@ void APlayer::ChangeState(PlayerState _CurPlayerState)
 
 void APlayer::IdleStart()
 {
-	SpriteRenderer->ChangeAnimation("Mush_Idle");
+	SpriteRendererHead->ChangeAnimation("Idle_Down_Head");
+	SpriteRendererBody->ChangeAnimation("Idle_Down_Body");
 }
 
 void APlayer::MoveStart()
@@ -117,7 +151,8 @@ void APlayer::MoveStart()
 
 void APlayer::Idle(float _DeltaTime)
 {
-	SpriteRenderer->ChangeAnimation("Mush_Idle");
+	SpriteRendererHead->ChangeAnimation("Idle_Down_Head");
+	SpriteRendererBody->ChangeAnimation("Idle_Down_Body");
 
 	if (true == UEngineInput::GetInst().IsPress('A') ||
 		true == UEngineInput::GetInst().IsPress('D') ||
@@ -138,25 +173,29 @@ void APlayer::Move(float _DeltaTime)
 	if (true == UEngineInput::GetInst().IsPress('D'))
 	{
 		Vector = FVector2D::RIGHT;
-		SpriteRenderer->ChangeAnimation("Mush_Right");
+		SpriteRendererHead->ChangeAnimation("Run_Right_Head");
+		SpriteRendererBody->ChangeAnimation("Run_Right_Body");
 		Temp = 1;
 	}
 	else if (true == UEngineInput::GetInst().IsPress('A'))
 	{
 		Vector = FVector2D::LEFT;
-		SpriteRenderer->ChangeAnimation("Mush_Left");
+		SpriteRendererHead->ChangeAnimation("Run_Left_Head");
+		SpriteRendererBody->ChangeAnimation("Run_Left_Body");
 		Temp = 2;
 	}
 	else if (true == UEngineInput::GetInst().IsPress('S'))
 	{
 		Vector = FVector2D::DOWN;
-		SpriteRenderer->ChangeAnimation("Mush_Down");
+		SpriteRendererHead->ChangeAnimation("Run_Down_Head");
+		SpriteRendererBody->ChangeAnimation("Run_Down_Body");
 		Temp = 3;
 	}
 	else if (true == UEngineInput::GetInst().IsPress('W'))
 	{
 		Vector = FVector2D::UP;
-		SpriteRenderer->ChangeAnimation("Mush_Up");
+		SpriteRendererHead->ChangeAnimation("Run_Up_Head");
+		SpriteRendererBody->ChangeAnimation("Run_Up_Body");
 		Temp = 4;
 	}
 
@@ -176,7 +215,7 @@ void APlayer::Move(float _DeltaTime)
 	{
 	case 1: PlusPos *= 16.0f; break;
 	case 2: PlusPos *= 16.0f; break;
-	case 3: PlusPos *= 12.0f; break;
+	case 3: PlusPos *= 5.0f; break;
 	case 4: PlusPos *= 19.0f; break;
 	default: break;
 	}
@@ -246,8 +285,8 @@ void APlayer::Tick(float _DeltaTime)
 		}
 	}
 
-
-	SpriteRenderer->SetOrder(GetActorLocation().Y - WallTileMap->GetActorLocation().Y);
+	SpriteRendererHead->SetOrder(GetActorLocation().Y - WallTileMap->GetActorLocation().Y);
+	SpriteRendererBody->SetOrder(GetActorLocation().Y - WallTileMap->GetActorLocation().Y);
 
 	if (nullptr == WallTileMap)
 	{
