@@ -104,62 +104,51 @@ void ABomb::SetPower(int _Power)
 	CurBombPower = _Power;
 
 	USpriteRenderer* Explode_Center = CreateDefaultSubObject<USpriteRenderer>();
-	Explode_Center->SetSprite("01_Bomb_06_Left");
+	Explode_Center->SetSprite("01_Bomb_01_Center");
 	//Explode_Center->CreateAnimation("Bomb_Left", "01_Bomb_06_Left", 0, 19, 0.15f);
 	Explode_Center->SetComponentScale({ 32, 32 });
 	Explode_Center->SetComponentLocation({ 0, 0 });
 
+	FVector2D Pos = GetActorLocation() - WallTileMap->GetActorLocation(); // X, Y에 TILE HALF SIZE (16)을 더한 값
+	// 이대로 사용하면 float가 int로 변환되는 과정에 값 왜곡이 일어남
 
-	for (int i = 1; i < _Power + 1; i++)
+	FVector2D Pos_Plus_TileHalfSize = Pos - WallTileMap->GetTileHalfSize(); // X, Y에 TILE HALF SIZE (16)을 뺀 값
+	// 정확한 값을 얻기 위해 사용
+
+	// 왼쪽 확산 처리
+	for (int i = 1; i <= _Power; i++)
 	{
-		FVector2D Pos = GetActorLocation() - WallTileMap->GetActorLocation();
+		Tile* TileDataLeft = WallTileMap->GetTileRef(Pos_Plus_TileHalfSize + FVector2D{ -32, 0 } * i );
 
-		Tile* TileDataRight = WallTileMap->GetTileRef(Pos + FVector2D{ 32, 0 } *i);
-		Tile* TileDataLeft = WallTileMap->GetTileRef(Pos + FVector2D{ -32, 0 } *i);
-
-		FIntPoint Index = { Pos.iX() / 32, Pos.iY() / 32 }; // 32 == 타일 사이즈
-
-		FIntPoint LeftIndex = { -i, 0 };
-		FIntPoint RightIndex = { i, 0 };
-		bool WasIt1 = WallTileMap->IsIndexOver(Index + LeftIndex);
-		bool WasIt2 = WallTileMap->IsIndexOver(Index + RightIndex);
-
-		int a = 0;
-
-		//if (false != WasIt1 || false != WasIt2)
-		//{
-		//	return;
-		//}
-
-
-		if (TileDataLeft->SpriteIndex != 1 &&
-			TileDataLeft->SpriteIndex != 2 &&
-			true != WallTileMap->IsIndexOver(Index + LeftIndex))
+		if (TileDataLeft == nullptr || TileDataLeft->SpriteIndex == 1 || TileDataLeft->SpriteIndex == 2)
 		{
-			USpriteRenderer* Explode_Left = CreateDefaultSubObject<USpriteRenderer>();
-			Explode_Left->SetSprite("01_Bomb_06_Left");
-			//Explode_Left->CreateAnimation("Bomb_Left", "01_Bomb_06_Left", 0, 19, 0.15f);
-			Explode_Left->SetComponentScale({ 32, 32 });
-			Explode_Left->SetOrder((GetActorLocation() + FVector2D{ -32, 0 } *i).Y);
-			//Explode_Left->SetOrder(1000000);
-			Explode_Left->SetComponentLocation(FVector2D{ -32, 0 } *i);
-			return;
-		}
-		if (TileDataRight->SpriteIndex != 1 &&
-			TileDataRight->SpriteIndex != 2 &&
-			true != WallTileMap->IsIndexOver(Index + RightIndex))
-		{
-			USpriteRenderer* Explode_Right = CreateDefaultSubObject<USpriteRenderer>();
-			Explode_Right->SetSprite("01_Bomb_06_Left");
-			//Explode_Right->CreateAnimation("Bomb_Left", "01_Bomb_06_Left", 0, 19, 0.15f);
-			Explode_Right->SetComponentScale({ 32, 32 });
-			Explode_Right->SetOrder((GetActorLocation() + FVector2D{ -32, 0 } *i).Y);
-			//Explode_Left->SetOrder(1000000);
-			Explode_Right->SetComponentLocation(FVector2D{ 32, 0 } *i);
-			return;
+			break; // 왼쪽 확산 중단
 		}
 
+		USpriteRenderer* Explode_Left = CreateDefaultSubObject<USpriteRenderer>();
+		Explode_Left->SetSprite("01_Bomb_06_Left");
+		Explode_Left->SetComponentScale({ 32, 32 });
+		Explode_Left->SetOrder((Pos_Plus_TileHalfSize + FVector2D{ -32, 0 } * i ).Y);
+		Explode_Left->SetComponentLocation(FVector2D{ -32, 0 } * i );
 	}
+
+	// 오른쪽 확산 처리
+	for (int i = 1; i <= _Power; i++)
+	{
+		Tile* TileDataRight = WallTileMap->GetTileRef(Pos_Plus_TileHalfSize + FVector2D{ 32, 0 } * i );
+
+		if (TileDataRight == nullptr || TileDataRight->SpriteIndex == 1 || TileDataRight->SpriteIndex == 2)
+		{
+			break; // 오른쪽 확산 중단
+		}
+
+		USpriteRenderer* Explode_Right = CreateDefaultSubObject<USpriteRenderer>();
+		Explode_Right->SetSprite("01_Bomb_08_Right");
+		Explode_Right->SetComponentScale({ 32, 32 });
+		Explode_Right->SetOrder((Pos_Plus_TileHalfSize + FVector2D{ 32, 0 } * i ).Y);
+		Explode_Right->SetComponentLocation(FVector2D{ 32, 0 } * i );
+	}
+
 
 
 	//Explode_Down = CreateDefaultSubObject<USpriteRenderer>();

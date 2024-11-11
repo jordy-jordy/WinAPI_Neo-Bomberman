@@ -14,7 +14,7 @@ class FVector2D
 {
 public:
 	float X = 0.0f;
-	float Y = 0;
+	float Y = 0.0f;
 
 	static const FVector2D ZERO;
 	static const FVector2D LEFT;
