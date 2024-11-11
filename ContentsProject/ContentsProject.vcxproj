@@ -232,10 +232,6 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="ContentsEnum.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="EndGameMode.cpp">
       <SubType>
       </SubType>

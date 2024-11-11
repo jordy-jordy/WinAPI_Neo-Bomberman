@@ -28,9 +28,6 @@
     <ClCompile Include="PlayMap.cpp">
       <Filter>ContentsObject\Play</Filter>
     </ClCompile>
-    <ClCompile Include="ContentsEnum.cpp">
-      <Filter>Global</Filter>
-    </ClCompile>
     <ClCompile Include="TitleLogo.cpp">
       <Filter>ContentsObject\Title</Filter>
     </ClCompile>

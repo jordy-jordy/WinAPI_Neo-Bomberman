@@ -22,6 +22,7 @@ public:
 	void StartExplodeTimer();
 	void StartDestroyTimer();
 
+	void SetPower(int _Power);
 
 protected:
 	void Tick(float _DeltaTime) override;
@@ -37,23 +38,29 @@ private:
 	float Explodecheck_Start_Timer = 0.0f; // 폭탄 폭발 타이머
 
 	bool DestroyTimer_On = false;
-	float Bomb_DestroyTime = 4.0f; // 폭탄이 터진 후 3초 뒤에 폭탄이 없어지도록 설정
+	float Bomb_DestroyTime = 3.0f; // 폭탄이 터진 후 3.0초 뒤에 폭탄이 없어지도록 설정
 	float Bomb_DestroyTimer = 0.0f; // 폭탄 제거 타이머
 
 	void ClearBombTile(); // 폭탄 제거 전후 타일맵 업데이트
 
-	int BombMaxPower = 5; // 폭탄의 최대 파워
 	int CurBombPower = 1; // 현재 폭탄의 파워
 
-	// 폭발 렌더러
-	class USpriteRenderer* Explode_Up = nullptr;
-	class USpriteRenderer* Explode_Left = nullptr;
-	class USpriteRenderer* Explode_Down = nullptr;
-	class USpriteRenderer* Explode_Right = nullptr;
+	//// 폭발 렌더러
+	//class USpriteRenderer* Explode_Up = nullptr;
+	//class USpriteRenderer* Explode_Left = nullptr;
+	//class USpriteRenderer* Explode_Down = nullptr;
+	//class USpriteRenderer* Explode_Right = nullptr;
 
-	class USpriteRenderer* Explode_Up_Mid = nullptr;
-	class USpriteRenderer* Explode_Left_Mid = nullptr;
-	class USpriteRenderer* Explode_Down_Mid = nullptr;
-	class USpriteRenderer* Explode_Right_Mid = nullptr;
+	//class USpriteRenderer* Explode_Up_Mid = nullptr;
+	//class USpriteRenderer* Explode_Left_Mid = nullptr;
+	//class USpriteRenderer* Explode_Down_Mid = nullptr;
+	//class USpriteRenderer* Explode_Right_Mid = nullptr;
+
+	FIntPoint Explosion_Index_Up = { BombTileIndex.X, BombTileIndex.Y - 1 };
+	FIntPoint Explosion_Index_Left = { BombTileIndex.X - 1, BombTileIndex.Y };
+	FIntPoint Explosion_Index_Down = { BombTileIndex.X, BombTileIndex.Y + 1 };
+	FIntPoint Explosion_Index_Right = { BombTileIndex.X + 1, BombTileIndex.Y };
+
+
 };
 

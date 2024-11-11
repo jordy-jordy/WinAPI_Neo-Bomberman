@@ -41,7 +41,6 @@ public:
 	}
 
 	FVector2D PosToTileIndex(FVector2D _Pos);
-	FVector2D IndexToTilePos(FVector2D _Pos);
 
 
 protected:

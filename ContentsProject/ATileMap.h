@@ -18,7 +18,7 @@ public:
 	int SpriteIndex;
 
 	// 폭탄
-	class ABomb* bomb = nullptr;
+	class ABomb* Bomb = nullptr;
 
 	void Serialize(UEngineSerializer& _Ser)
 	{
@@ -75,13 +75,8 @@ public:
 
 	bool IsIndexOver(FIntPoint _Index);
 
-	bool IsBomb(FIntPoint _Index);
-
-	void SetBomb(FIntPoint _Index, class ABomb* _Bomb);
-
 	void Serialize(UEngineSerializer& _Ser);
 	void DeSerialize(UEngineSerializer& _Ser);
-
 
 	template<typename EnumType>
 	std::vector<FIntPoint> FindSpriteIndex(EnumType _TileType)
@@ -102,6 +97,9 @@ public:
 		return TileSize;
 	}
 
+	// 폭탄 관련 함수
+	bool IsBomb(FIntPoint _Index); // 해당 위치에 폭탄이 있는지 체크하는 함수
+	void SetBomb(FIntPoint _Index, class ABomb* _Bomb); // 해당 위치에 폭탄을 세팅하는 함수
 
 protected:
 

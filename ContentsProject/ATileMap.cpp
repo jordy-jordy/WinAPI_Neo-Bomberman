@@ -23,6 +23,7 @@ void ATileMap::Create(std::string_view _Sprite, FIntPoint _Count, FVector2D _Til
 	}
 }
 
+
 // 해당 위치에 폭탄이 있는지 체크하는 함수
 bool ATileMap::IsBomb(FIntPoint _Index)
 {
@@ -31,7 +32,7 @@ bool ATileMap::IsBomb(FIntPoint _Index)
 		return true;
 	}
 
-	return AllTiles[_Index.Y][_Index.X].bomb != nullptr;
+	return AllTiles[_Index.Y][_Index.X].Bomb != nullptr;
 }
 
 // 해당 위치에 폭탄을 세팅하는 함수
@@ -42,7 +43,7 @@ void ATileMap::SetBomb(FIntPoint _Index, class ABomb* _Bomb)
 		return;
 	}
 
-	AllTiles[_Index.Y][_Index.X].bomb = _Bomb;
+	AllTiles[_Index.Y][_Index.X].Bomb = _Bomb;
 }
 
 FVector2D ATileMap::IndexToTileLocation(FIntPoint _Index)
