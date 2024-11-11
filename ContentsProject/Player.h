@@ -5,6 +5,7 @@ enum class PlayerState
 {
 	Idle,
 	Move,
+	Idle_Anim
 };
 
 // 설명 :
@@ -52,9 +53,13 @@ private:
 	class USpriteRenderer* SpriteRendererHead = nullptr;
 	class USpriteRenderer* SpriteRendererBody = nullptr;
 
+	float IdleAnimTime = 2.0f; // 2초 동안 입력이 없으면 실행되는 Idle 애니메이션
+	float IdleAnimTimer = 0.0f; // Idle 애니메이션 타이머
 
 	PlayerState CurPlayerState = PlayerState::Idle;
 	void ChangeState(PlayerState CurPlayerState);
+
+	void Idle_Anim(float _DeltaTime);
 
 	void IdleStart();
 	void Idle(float _DeltaTime);

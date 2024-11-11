@@ -33,14 +33,27 @@ private:
 	FIntPoint BombTileIndex;
 
 	bool ExplodeTimer_On = false;
-	float Explode_Start_Time = 2.0f; // 폭탄 설치 후 4초 뒤에 폭탄이 폭발하도록 설정
+	float Explode_Start_Time = 2.0f; // 폭탄 설치 후 2초 뒤에 폭탄이 폭발하도록 설정
 	float Explodecheck_Start_Timer = 0.0f; // 폭탄 폭발 타이머
 
 	bool DestroyTimer_On = false;
-	float Bomb_DestroyTime = 3.0f; // 폭탄이 터진 후 2초 뒤에 폭탄이 없어지도록 설정
+	float Bomb_DestroyTime = 4.0f; // 폭탄이 터진 후 3초 뒤에 폭탄이 없어지도록 설정
 	float Bomb_DestroyTimer = 0.0f; // 폭탄 제거 타이머
 
 	void ClearBombTile(); // 폭탄 제거 전후 타일맵 업데이트
 
+	int BombMaxPower = 5; // 폭탄의 최대 파워
+	int CurBombPower = 1; // 현재 폭탄의 파워
+
+	// 폭발 렌더러
+	class USpriteRenderer* Explode_Up = nullptr;
+	class USpriteRenderer* Explode_Left = nullptr;
+	class USpriteRenderer* Explode_Down = nullptr;
+	class USpriteRenderer* Explode_Right = nullptr;
+
+	class USpriteRenderer* Explode_Up_Mid = nullptr;
+	class USpriteRenderer* Explode_Left_Mid = nullptr;
+	class USpriteRenderer* Explode_Down_Mid = nullptr;
+	class USpriteRenderer* Explode_Right_Mid = nullptr;
 };
 
