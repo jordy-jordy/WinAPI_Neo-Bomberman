@@ -105,20 +105,21 @@ void ABomb::SetPower(int _Power)
 
 	USpriteRenderer* Explode_Center = CreateDefaultSubObject<USpriteRenderer>();
 	Explode_Center->SetSprite("01_Bomb_01_Center");
-	//Explode_Center->CreateAnimation("Bomb_Left", "01_Bomb_06_Left", 0, 19, 0.15f);
+	Explode_Center->CreateAnimation("Bomb_Center", "01_Bomb_01_Center", 0, 19, 0.15f);
+	Explode_Center->ChangeAnimation("Bomb_Center");
 	Explode_Center->SetComponentScale({ 32, 32 });
 	Explode_Center->SetComponentLocation({ 0, 0 });
 
 	FVector2D Pos = GetActorLocation() - WallTileMap->GetActorLocation(); // X, Y에 TILE HALF SIZE (16)을 더한 값
 	// 이대로 사용하면 float가 int로 변환되는 과정에 값 왜곡이 일어남
 
-	FVector2D Pos_Plus_TileHalfSize = Pos - WallTileMap->GetTileHalfSize(); // X, Y에 TILE HALF SIZE (16)을 뺀 값
+	FVector2D Pos_Minus_TileHalfSize = Pos - WallTileMap->GetTileHalfSize(); // X, Y에 TILE HALF SIZE (16)을 뺀 값
 	// 정확한 값을 얻기 위해 사용
 
 	// 왼쪽 확산 처리
 	for (int i = 1; i <= _Power; i++)
 	{
-		Tile* TileDataLeft = WallTileMap->GetTileRef(Pos_Plus_TileHalfSize + FVector2D{ -32, 0 } * i );
+		Tile* TileDataLeft = WallTileMap->GetTileRef(Pos_Minus_TileHalfSize + FVector2D{ -32, 0 } * i );
 
 		if (TileDataLeft == nullptr || TileDataLeft->SpriteIndex == 1 || TileDataLeft->SpriteIndex == 2)
 		{
@@ -127,15 +128,17 @@ void ABomb::SetPower(int _Power)
 
 		USpriteRenderer* Explode_Left = CreateDefaultSubObject<USpriteRenderer>();
 		Explode_Left->SetSprite("01_Bomb_06_Left");
+		Explode_Left->CreateAnimation("Bomb_Left", "01_Bomb_06_Left", 0, 19, 0.15f);
+		Explode_Left->ChangeAnimation("Bomb_Left");
 		Explode_Left->SetComponentScale({ 32, 32 });
-		Explode_Left->SetOrder((Pos_Plus_TileHalfSize + FVector2D{ -32, 0 } * i ).Y);
+		Explode_Left->SetOrder((Pos_Minus_TileHalfSize + FVector2D{ -32, 0 } * i ).Y);
 		Explode_Left->SetComponentLocation(FVector2D{ -32, 0 } * i );
 	}
 
 	// 오른쪽 확산 처리
 	for (int i = 1; i <= _Power; i++)
 	{
-		Tile* TileDataRight = WallTileMap->GetTileRef(Pos_Plus_TileHalfSize + FVector2D{ 32, 0 } * i );
+		Tile* TileDataRight = WallTileMap->GetTileRef(Pos_Minus_TileHalfSize + FVector2D{ 32, 0 } * i );
 
 		if (TileDataRight == nullptr || TileDataRight->SpriteIndex == 1 || TileDataRight->SpriteIndex == 2)
 		{
@@ -144,8 +147,10 @@ void ABomb::SetPower(int _Power)
 
 		USpriteRenderer* Explode_Right = CreateDefaultSubObject<USpriteRenderer>();
 		Explode_Right->SetSprite("01_Bomb_08_Right");
+		Explode_Right->CreateAnimation("Bomb_Right", "01_Bomb_08_Right", 0, 19, 0.15f);
+		Explode_Right->ChangeAnimation("Bomb_Right");
 		Explode_Right->SetComponentScale({ 32, 32 });
-		Explode_Right->SetOrder((Pos_Plus_TileHalfSize + FVector2D{ 32, 0 } * i ).Y);
+		Explode_Right->SetOrder((Pos_Minus_TileHalfSize + FVector2D{ 32, 0 } * i ).Y);
 		Explode_Right->SetComponentLocation(FVector2D{ 32, 0 } * i );
 	}
 
