@@ -28,7 +28,7 @@ void APlayGameMode::BeginPlay()
 	APlayMap* BG = GetWorld()->SpawnActor<APlayMap>();
 
 	WallTileMap = GetWorld()->SpawnActor<ATileMap>();
-	WallTileMap->SetActorLocation({ 96, 64 });
+	WallTileMap->SetActorLocation(WallTileMapLocation);
 
 	UEngineDirectory Dir;
 

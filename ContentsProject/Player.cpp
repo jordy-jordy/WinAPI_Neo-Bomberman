@@ -146,15 +146,21 @@ FVector2D APlayer::IndexToTilePos(FVector2D _Index)
 // 폭탄 설치
 void APlayer::PlaceBomb(float _DeltaTime)
 {
-	FVector2D Location = GetActorLocation();
-	FVector2D index = PosToTileIndex(Location);
-	FVector2D Pos = IndexToTilePos(index);
+	FVector2D Location = GetActorLocation() - WallTileMap->GetActorLocation();
+	FVector2D WallTileMapLocation = WallTileMap->GetActorLocation();
+	FVector2D TileIndex = PosToTileIndex(Location);
+	FVector2D TilePos = IndexToTilePos(TileIndex);
 	FVector2D HalfTiles = WallTileMap->GetTileHalfSize();
 
-	FIntPoint TileIndex =  WallTileMap->LocationToIndex(Location);
+	//FIntPoint IndexBefore =  WallTileMap->LocationToIndex(TileIndex);
+	FIntPoint Index = {static_cast<int>(floorf(TileIndex.X)), static_cast<int>(floorf(TileIndex.Y))};
+	FVector2D Pos = {(( WallTileMapLocation.X + HalfTiles.X ) + Index.X * WallTileMap->GetTileSize().X),(( WallTileMapLocation.Y+ HalfTiles.Y ) + Index.Y * WallTileMap->GetTileSize().Y)};
+
+
+	int a = 0;
 
 	// 폭탄 설치 가능 여부 재확인
-	if (WallTileMap->IsBomb(TileIndex))
+	if (WallTileMap->IsBomb(Index))
 	{
 		return; // 이미 폭탄이 설치된 경우
 	}
@@ -162,11 +168,11 @@ void APlayer::PlaceBomb(float _DeltaTime)
 	ABomb* Bomb = GetWorld()->SpawnActor<ABomb>();
 
 	// 타일맵에 폭탄 세팅 (연결)
-	WallTileMap->SetBomb(TileIndex, Bomb);
+	WallTileMap->SetBomb(Index, Bomb);
 	// 위치에 폭탄 설치
-	Bomb->SetActorLocation(Pos + HalfTiles);
+	Bomb->SetActorLocation(Pos);
 
-	Bomb->SetWallTileMap(WallTileMap, TileIndex); // 타일맵 정보 설정
+	Bomb->SetWallTileMap(WallTileMap, Index); // 타일맵 정보 설정
 	Bomb->StartExplodeTimer(); // 폭발 타이머 시작
 
 	ChangeState(PlayerState::Idle);
@@ -302,12 +308,19 @@ void APlayer::Move(float _DeltaTime)
 	// 타일 사이즈를 나눠서 타일 인덱스 도출
 	FVector2D LocationAtIndex = LocalLocation / TileSize; // 플레이어 위치를 타일맵 인덱스로 보기 위함
 	FVector2D NextLocationAtIndex = NextLocalLocation / TileSize; // 플레이어가 이동하는 방향의 타일맵 인덱스
-	
-	//UEngineDebug::CoreOutPutString("NextLocalLocation : " + NextLocalLocation.ToString());
-	//UEngineDebug::CoreOutPutString("CurTileIndex : " + CurTileIndex.ToString());
-	//UEngineDebug::CoreOutPutString("NextTileIndex : " + NextTileIndex.ToString());
-	//UEngineDebug::CoreOutPutString("LocationAtIndex : " + LocationAtIndex.ToString());
-	//UEngineDebug::CoreOutPutString("NextLocationAtIndex : " + NextLocationAtIndex.ToString());
+
+	// 확인
+	FVector2D Location = GetActorLocation() - WallTileMap->GetActorLocation();
+	FIntPoint TileIndex = WallTileMap->LocationToIndex(Location);
+	FVector2D TileIndexFVector = { TileIndex.X, TileIndex.Y };
+ 
+	UEngineDebug::CoreOutPutString("NextLocalLocation : " + NextLocalLocation.ToString());
+	UEngineDebug::CoreOutPutString("CurTileIndex : " + CurTileIndex.ToString());
+	UEngineDebug::CoreOutPutString("NextTileIndex : " + NextTileIndex.ToString());
+	UEngineDebug::CoreOutPutString("LocationAtIndex : " + LocationAtIndex.ToString());
+	UEngineDebug::CoreOutPutString("NextLocationAtIndex : " + NextLocationAtIndex.ToString());
+
+	UEngineDebug::CoreOutPutString("TileIndex : " + TileIndexFVector.ToString());
 
 	Tile* TileData = WallTileMap->GetTileRef(NextLocalLocation);
 

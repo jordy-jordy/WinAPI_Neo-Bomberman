@@ -17,6 +17,8 @@ public:
 
 	void BeginPlay();
 
+	FVector2D WallTileMapLocation = { 96, 64 };
+
 protected:
 	void Tick(float _DeltaTime) override;
 
