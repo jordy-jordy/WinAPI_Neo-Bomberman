@@ -35,7 +35,7 @@ APlayer::APlayer()
 		SpriteRendererHead->CreateAnimation("Idle_Right_Head", "MainCharater_White.png", 24, 24, 0.1f);
 		SpriteRendererHead->CreateAnimation("Run_Right_Head", "MainCharater_White.png", 25, 30, 0.1f);
 
-		SpriteRendererHead->CreateAnimation("Idle_Anim_Head", "MainCharater_White.png", 580, 581, 0.2f, true);
+		SpriteRendererHead->CreateAnimation("Idle_Anim_Head", "MainCharater_White.png", { 580, 581 }, { 1.5f, 0.2f }, true);
 
 		//std::string Name = SpriteRenderer->GetCurSpriteName();
 	}
@@ -59,7 +59,7 @@ APlayer::APlayer()
 		SpriteRendererBody->CreateAnimation("Idle_Right_Body", "MainCharater_White.png", 56, 56, 0.1f);
 		SpriteRendererBody->CreateAnimation("Run_Right_Body", "MainCharater_White.png", 57, 62, 0.1f);
 
-		SpriteRendererBody->CreateAnimation("Idle_Anim_Body", "MainCharater_White.png", 612, 613, 0.2f, true);
+		SpriteRendererBody->CreateAnimation("Idle_Anim_Body", "MainCharater_White.png", { 612, 613 }, { 1.5f, 0.2f }, true);
 	}
 
 	SpriteRendererBody->ChangeAnimation("Idle_Down_Body");
