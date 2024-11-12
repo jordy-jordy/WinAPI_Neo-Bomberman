@@ -124,7 +124,7 @@ void ABomb::SetPower(int _Power)
 	{
 		Tile* TileDataLeft = WallTileMap->GetTileRef(Pos_Minus_TileHalfSize + FVector2D{ -32, 0 } * i );
 
-		if (TileDataLeft == nullptr || TileDataLeft->SpriteIndex == 1 || TileDataLeft->SpriteIndex == 2)
+		if (TileDataLeft == nullptr || TileDataLeft->SpriteIndex == 2)
 		{
 			break; // 왼쪽 확산 중단
 		}
@@ -136,13 +136,18 @@ void ABomb::SetPower(int _Power)
 		Explode_LeftMid->SetComponentScale({ 32, 32 });
 		Explode_LeftMid->SetOrder((Pos + FVector2D{ -32, 0 } *i).Y);
 		Explode_LeftMid->SetComponentLocation(FVector2D{ -32, 0 } *i);
+
+		if (TileDataLeft->SpriteIndex == 1)
+		{
+			break;
+		}
 		
 		LeftCount = i;
 	}
 	Tile* TileDataLeft = WallTileMap->GetTileRef(Pos_Minus_TileHalfSize + FVector2D{ -32, 0 } *(LeftCount + 1));
 	if (TileDataLeft != nullptr)
 	{
-		if (TileDataLeft->SpriteIndex != 2)
+		if (TileDataLeft->SpriteIndex != 1 && TileDataLeft->SpriteIndex != 2)
 		{
 			USpriteRenderer* Explode_Left = CreateDefaultSubObject<USpriteRenderer>();
 			Explode_Left->SetSprite("01_Bomb_06_Left");
@@ -161,7 +166,7 @@ void ABomb::SetPower(int _Power)
 	{
 		Tile* TileDataRight = WallTileMap->GetTileRef(Pos_Minus_TileHalfSize + FVector2D{ 32, 0 } *i);
 
-		if (TileDataRight == nullptr || TileDataRight->SpriteIndex == 1 || TileDataRight->SpriteIndex == 2)
+		if (TileDataRight == nullptr || TileDataRight->SpriteIndex == 2)
 		{
 			break; // 오른쪽 확산 중단
 		}
@@ -171,15 +176,19 @@ void ABomb::SetPower(int _Power)
 		Explode_RightMid->CreateAnimation("Bomb_RightMid", "01_Bomb_09_RightMid", 0, 19, 0.15f);
 		Explode_RightMid->ChangeAnimation("Bomb_RightMid");
 		Explode_RightMid->SetComponentScale({ 32, 32 });
-		Explode_RightMid->SetOrder((Pos + FVector2D{ 32, 0 } * i ).Y);
-		Explode_RightMid->SetComponentLocation(FVector2D{ 32, 0 } * i );
-
+		Explode_RightMid->SetOrder((Pos + FVector2D{ 32, 0 } *i).Y);
+		Explode_RightMid->SetComponentLocation(FVector2D{ 32, 0 } *i);
+		
+		if (TileDataRight->SpriteIndex == 1)
+		{
+			break;
+		}
 		RightCount = i;
 	}
 	Tile* TileDataRight = WallTileMap->GetTileRef(Pos_Minus_TileHalfSize + FVector2D{ 32, 0 } *(RightCount + 1));
 	if (TileDataRight != nullptr)
 	{
-		if (TileDataRight->SpriteIndex != 2)
+		if (TileDataRight->SpriteIndex != 1 && TileDataRight->SpriteIndex != 2)
 		{
 			USpriteRenderer* Explode_Right = CreateDefaultSubObject<USpriteRenderer>();
 			Explode_Right->SetSprite("01_Bomb_08_Right");
