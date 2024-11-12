@@ -41,9 +41,6 @@
       <Filter>ContentsObject\Title</Filter>
     </ClCompile>
     <ClCompile Include="TestMap.cpp" />
-    <ClCompile Include="ANewPlayer.cpp">
-      <Filter>ContentsObject\Global</Filter>
-    </ClCompile>
     <ClCompile Include="Score.cpp">
       <Filter>ContentsObject\Global</Filter>
     </ClCompile>
@@ -92,9 +89,6 @@
       <Filter>ContentsObject\Title</Filter>
     </ClInclude>
     <ClInclude Include="TestMap.h" />
-    <ClInclude Include="ANewPlayer.h">
-      <Filter>ContentsObject\Global</Filter>
-    </ClInclude>
     <ClInclude Include="Score.h">
       <Filter>ContentsObject\Global</Filter>
     </ClInclude>

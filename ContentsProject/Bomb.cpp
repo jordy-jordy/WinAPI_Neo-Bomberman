@@ -103,9 +103,9 @@ void ABomb::SetPower(int _Power)
 {
 	CurBombPower = _Power;
 
-	USpriteRenderer* Explode_Center = CreateDefaultSubObject<USpriteRenderer>();
+	Explode_Center = CreateDefaultSubObject<USpriteRenderer>();
 	Explode_Center->SetSprite("01_Bomb_01_Center");
-	Explode_Center->CreateAnimation("Bomb_Center", "01_Bomb_01_Center", 0, 19, 0.15f);
+	Explode_Center->CreateAnimation("Bomb_Center", "01_Bomb_01_Center", 0, 19, 0.15f, false);
 	Explode_Center->ChangeAnimation("Bomb_Center");
 	Explode_Center->SetComponentScale({ 32, 32 });
 	Explode_Center->SetComponentLocation({ 0, 0 });
@@ -131,7 +131,7 @@ void ABomb::SetPower(int _Power)
 
 		USpriteRenderer* Explode_LeftMid = CreateDefaultSubObject<USpriteRenderer>();
 		Explode_LeftMid->SetSprite("01_Bomb_07_LeftMid");
-		Explode_LeftMid->CreateAnimation("Bomb_LeftMid", "01_Bomb_07_LeftMid", 0, 19, 0.15f);
+		Explode_LeftMid->CreateAnimation("Bomb_LeftMid", "01_Bomb_07_LeftMid", 0, 19, 0.15f, false);
 		Explode_LeftMid->ChangeAnimation("Bomb_LeftMid");
 		Explode_LeftMid->SetComponentScale({ 32, 32 });
 		Explode_LeftMid->SetOrder((Pos + FVector2D{ -32, 0 } *i).Y);
@@ -151,7 +151,7 @@ void ABomb::SetPower(int _Power)
 		{
 			USpriteRenderer* Explode_Left = CreateDefaultSubObject<USpriteRenderer>();
 			Explode_Left->SetSprite("01_Bomb_06_Left");
-			Explode_Left->CreateAnimation("Bomb_Left", "01_Bomb_06_Left", 0, 19, 0.15f);
+			Explode_Left->CreateAnimation("Bomb_Left", "01_Bomb_06_Left", 0, 19, 0.15f, false);
 			Explode_Left->ChangeAnimation("Bomb_Left");
 			Explode_Left->SetComponentScale({ 32, 32 });
 			Explode_Left->SetOrder((Pos + FVector2D{ -32, 0 }).Y);
@@ -173,7 +173,7 @@ void ABomb::SetPower(int _Power)
 
 		USpriteRenderer* Explode_RightMid = CreateDefaultSubObject<USpriteRenderer>();
 		Explode_RightMid->SetSprite("01_Bomb_09_RightMid");
-		Explode_RightMid->CreateAnimation("Bomb_RightMid", "01_Bomb_09_RightMid", 0, 19, 0.15f);
+		Explode_RightMid->CreateAnimation("Bomb_RightMid", "01_Bomb_09_RightMid", 0, 19, 0.15f, false);
 		Explode_RightMid->ChangeAnimation("Bomb_RightMid");
 		Explode_RightMid->SetComponentScale({ 32, 32 });
 		Explode_RightMid->SetOrder((Pos + FVector2D{ 32, 0 } *i).Y);
@@ -192,7 +192,7 @@ void ABomb::SetPower(int _Power)
 		{
 			USpriteRenderer* Explode_Right = CreateDefaultSubObject<USpriteRenderer>();
 			Explode_Right->SetSprite("01_Bomb_08_Right");
-			Explode_Right->CreateAnimation("Bomb_Right", "01_Bomb_08_Right", 0, 19, 0.15f);
+			Explode_Right->CreateAnimation("Bomb_Right", "01_Bomb_08_Right", 0, 19, 0.15f, false);
 			Explode_Right->ChangeAnimation("Bomb_Right");
 			Explode_Right->SetComponentScale({ 32, 32 });
 			Explode_Right->SetOrder((Pos + FVector2D{ 32, 0 }).Y);

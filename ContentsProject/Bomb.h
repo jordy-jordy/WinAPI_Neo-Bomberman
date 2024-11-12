@@ -56,6 +56,8 @@ private:
 	//class USpriteRenderer* Explode_Down_Mid = nullptr;
 	//class USpriteRenderer* Explode_Right_Mid = nullptr;
 
+	USpriteRenderer* Explode_Center;
+
 	FIntPoint Explosion_Index_Up = { BombTileIndex.X, BombTileIndex.Y - 1 };
 	FIntPoint Explosion_Index_Left = { BombTileIndex.X - 1, BombTileIndex.Y };
 	FIntPoint Explosion_Index_Down = { BombTileIndex.X, BombTileIndex.Y + 1 };

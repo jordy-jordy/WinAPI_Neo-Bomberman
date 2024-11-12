@@ -151,10 +151,6 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="ANewPlayer.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="ATileMap.h">
       <SubType>
       </SubType>
@@ -212,10 +208,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ANewPlayer.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="ATileMap.cpp">
       <SubType>
       </SubType>
