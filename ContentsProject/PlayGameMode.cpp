@@ -25,6 +25,8 @@ APlayGameMode::~APlayGameMode()
 
 void APlayGameMode::BeginPlay()
 {
+	Super::BeginPlay();
+
 	APlayMap* BG = GetWorld()->SpawnActor<APlayMap>();
 
 	WallTileMap = GetWorld()->SpawnActor<ATileMap>();
@@ -70,6 +72,8 @@ void APlayGameMode::BeginPlay()
 
 void APlayGameMode::Tick(float _DeltaTime)
 {
+	Super::Tick(_DeltaTime);
+
 	if (true == UEngineInput::GetInst().IsDown('L'))
 	{
 		UEngineAPICore::GetCore()->OpenLevel("Tile");

@@ -40,9 +40,11 @@
     <ClCompile Include="ChooseStage.cpp">
       <Filter>ContentsObject\Title</Filter>
     </ClCompile>
-    <ClCompile Include="TestMap.cpp" />
     <ClCompile Include="Score.cpp">
       <Filter>ContentsObject\Global</Filter>
+    </ClCompile>
+    <ClCompile Include="TestMap.cpp">
+      <Filter>TileMap</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -88,9 +90,11 @@
     <ClInclude Include="ChooseStage.h">
       <Filter>ContentsObject\Title</Filter>
     </ClInclude>
-    <ClInclude Include="TestMap.h" />
     <ClInclude Include="Score.h">
       <Filter>ContentsObject\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="TestMap.h">
+      <Filter>TileMap</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

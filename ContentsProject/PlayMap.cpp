@@ -16,9 +16,6 @@ APlayMap::APlayMap()
 
 	SpriteRenderer->CreateAnimation("Stage1_BG", "01_Background", 0, 22, 0.1f);
 	SpriteRenderer->ChangeAnimation("Stage1_BG");
-
-
-
 }
 
 APlayMap::~APlayMap()

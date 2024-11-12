@@ -19,6 +19,7 @@ ATitleGameMode::~ATitleGameMode()
 void ATitleGameMode::BeginPlay()
 {
 	Super::BeginPlay();
+
 	UTitleLogo* NewActor0 = GetWorld()->SpawnActor<UTitleLogo>();
 	UChooseStage* NewActor1 = GetWorld()->SpawnActor<UChooseStage>();
 
