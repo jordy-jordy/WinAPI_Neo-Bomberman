@@ -110,6 +110,8 @@ void ABomb::SetPower(int _Power)
 	Explode_Center->SetComponentScale({ 32, 32 });
 	Explode_Center->SetComponentLocation({ 0, 0 });
 
+	FVector2D TileSize = WallTileMap->GetTileHalfSize();
+
 	FVector2D Pos = GetActorLocation() - WallTileMap->GetActorLocation(); // X, Y에 TILE HALF SIZE (16)을 더한 값
 	// 이대로 사용하면 float가 int로 변환되는 과정에 값 왜곡이 일어남
 
@@ -117,7 +119,8 @@ void ABomb::SetPower(int _Power)
 	// 정확한 값을 얻기 위해 사용
 
 	// 왼쪽 확산 처리
-	for (int i = 1; i <= _Power; i++)
+	int LeftCount = 0;
+	for (int i = 1; i <= _Power -1; i++)
 	{
 		Tile* TileDataLeft = WallTileMap->GetTileRef(Pos_Minus_TileHalfSize + FVector2D{ -32, 0 } * i );
 
@@ -126,32 +129,66 @@ void ABomb::SetPower(int _Power)
 			break; // 왼쪽 확산 중단
 		}
 
-		USpriteRenderer* Explode_Left = CreateDefaultSubObject<USpriteRenderer>();
-		Explode_Left->SetSprite("01_Bomb_06_Left");
-		Explode_Left->CreateAnimation("Bomb_Left", "01_Bomb_06_Left", 0, 19, 0.15f);
-		Explode_Left->ChangeAnimation("Bomb_Left");
-		Explode_Left->SetComponentScale({ 32, 32 });
-		Explode_Left->SetOrder((Pos_Minus_TileHalfSize + FVector2D{ -32, 0 } * i ).Y);
-		Explode_Left->SetComponentLocation(FVector2D{ -32, 0 } * i );
+		USpriteRenderer* Explode_LeftMid = CreateDefaultSubObject<USpriteRenderer>();
+		Explode_LeftMid->SetSprite("01_Bomb_07_LeftMid");
+		Explode_LeftMid->CreateAnimation("Bomb_LeftMid", "01_Bomb_07_LeftMid", 0, 19, 0.15f);
+		Explode_LeftMid->ChangeAnimation("Bomb_LeftMid");
+		Explode_LeftMid->SetComponentScale({ 32, 32 });
+		Explode_LeftMid->SetOrder((Pos + FVector2D{ -32, 0 } *i).Y);
+		Explode_LeftMid->SetComponentLocation(FVector2D{ -32, 0 } *i);
+		
+		LeftCount = i;
+	}
+	Tile* TileDataLeft = WallTileMap->GetTileRef(Pos_Minus_TileHalfSize + FVector2D{ -32, 0 } *(LeftCount + 1));
+	if (TileDataLeft != nullptr)
+	{
+		if (TileDataLeft->SpriteIndex != 2)
+		{
+			USpriteRenderer* Explode_Left = CreateDefaultSubObject<USpriteRenderer>();
+			Explode_Left->SetSprite("01_Bomb_06_Left");
+			Explode_Left->CreateAnimation("Bomb_Left", "01_Bomb_06_Left", 0, 19, 0.15f);
+			Explode_Left->ChangeAnimation("Bomb_Left");
+			Explode_Left->SetComponentScale({ 32, 32 });
+			Explode_Left->SetOrder((Pos + FVector2D{ -32, 0 }).Y);
+			Explode_Left->SetComponentLocation(FVector2D{ -32, 0 } *(LeftCount + 1));
+		}
 	}
 
+
 	// 오른쪽 확산 처리
-	for (int i = 1; i <= _Power; i++)
+	int RightCount = 0;
+	for (int i = 1; i <= _Power -1; i++)
 	{
-		Tile* TileDataRight = WallTileMap->GetTileRef(Pos_Minus_TileHalfSize + FVector2D{ 32, 0 } * i );
+		Tile* TileDataRight = WallTileMap->GetTileRef(Pos_Minus_TileHalfSize + FVector2D{ 32, 0 } *i);
 
 		if (TileDataRight == nullptr || TileDataRight->SpriteIndex == 1 || TileDataRight->SpriteIndex == 2)
 		{
 			break; // 오른쪽 확산 중단
 		}
 
-		USpriteRenderer* Explode_Right = CreateDefaultSubObject<USpriteRenderer>();
-		Explode_Right->SetSprite("01_Bomb_08_Right");
-		Explode_Right->CreateAnimation("Bomb_Right", "01_Bomb_08_Right", 0, 19, 0.15f);
-		Explode_Right->ChangeAnimation("Bomb_Right");
-		Explode_Right->SetComponentScale({ 32, 32 });
-		Explode_Right->SetOrder((Pos_Minus_TileHalfSize + FVector2D{ 32, 0 } * i ).Y);
-		Explode_Right->SetComponentLocation(FVector2D{ 32, 0 } * i );
+		USpriteRenderer* Explode_RightMid = CreateDefaultSubObject<USpriteRenderer>();
+		Explode_RightMid->SetSprite("01_Bomb_09_RightMid");
+		Explode_RightMid->CreateAnimation("Bomb_RightMid", "01_Bomb_09_RightMid", 0, 19, 0.15f);
+		Explode_RightMid->ChangeAnimation("Bomb_RightMid");
+		Explode_RightMid->SetComponentScale({ 32, 32 });
+		Explode_RightMid->SetOrder((Pos + FVector2D{ 32, 0 } * i ).Y);
+		Explode_RightMid->SetComponentLocation(FVector2D{ 32, 0 } * i );
+
+		RightCount = i;
+	}
+	Tile* TileDataRight = WallTileMap->GetTileRef(Pos_Minus_TileHalfSize + FVector2D{ 32, 0 } *(RightCount + 1));
+	if (TileDataRight != nullptr)
+	{
+		if (TileDataRight->SpriteIndex != 2)
+		{
+			USpriteRenderer* Explode_Right = CreateDefaultSubObject<USpriteRenderer>();
+			Explode_Right->SetSprite("01_Bomb_08_Right");
+			Explode_Right->CreateAnimation("Bomb_Right", "01_Bomb_08_Right", 0, 19, 0.15f);
+			Explode_Right->ChangeAnimation("Bomb_Right");
+			Explode_Right->SetComponentScale({ 32, 32 });
+			Explode_Right->SetOrder((Pos + FVector2D{ 32, 0 }).Y);
+			Explode_Right->SetComponentLocation(FVector2D{ 32, 0 } *(RightCount + 1));
+		}
 	}
 
 
