@@ -37,6 +37,9 @@
     <ClCompile Include="EngineCoreDebug.cpp">
       <Filter>Debug</Filter>
     </ClCompile>
+    <ClCompile Include="PathFindAStar.cpp">
+      <Filter>Contents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -75,6 +78,9 @@
     <ClInclude Include="EngineCoreDebug.h">
       <Filter>Debug</Filter>
     </ClInclude>
+    <ClInclude Include="PathFindAStar.h">
+      <Filter>Contents</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
@@ -106,6 +112,9 @@
     </Filter>
     <Filter Include="Debug">
       <UniqueIdentifier>{a5259283-c236-4a22-b745-5eb1c13409c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents">
+      <UniqueIdentifier>{4d2a2a39-5a9d-45ce-8a02-e2b31fd79b42}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
