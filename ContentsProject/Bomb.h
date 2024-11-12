@@ -24,7 +24,12 @@ protected:
 	friend class APlayer;
 	void Tick(float _DeltaTime) override;
 
-	void SetPower(int _Power);
+	void SetPower(int _Power)
+	{
+		CurBombPower = _Power;
+	}
+	void Bomb_ExPlode();
+
 	void Bomb_Destroy();
 
 private:

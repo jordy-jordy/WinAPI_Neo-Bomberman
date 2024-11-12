@@ -17,6 +17,9 @@ ABomb::ABomb()
 	SpriteRenderer->ChangeAnimation("Bomb_Idle");
 
 	SpriteRenderer->SetOrder(ERenderOrder::BOMB);
+
+	//TimeEventer.PushEvent(2.0f, std::bind(&ABomb::SetPower, this), false);
+
 }
 
 ABomb::~ABomb()
@@ -54,9 +57,9 @@ void ABomb::ClearBombTile()
 }
 
 
-void ABomb::SetPower(int _Power)
+void ABomb::Bomb_ExPlode()
 {
-	CurBombPower = _Power;
+	int _Power = CurBombPower;
 
 	Explode_Center = CreateDefaultSubObject<USpriteRenderer>();
 	Explode_Center->SetSprite("01_Bomb_01_Center");
