@@ -49,6 +49,6 @@ void ATile_Destroy::ClearObjectTile()
 {
 	if (WallTileMap != nullptr)
 	{
-		WallTileMap->SetBomb(ObjectTileIndex, nullptr); // 오브젝트 포인터를 nullptr로 설정
+		WallTileMap->SetDestroyObject(ObjectTileIndex, nullptr); // 오브젝트 포인터를 nullptr로 설정
 	}
 }

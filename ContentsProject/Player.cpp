@@ -161,7 +161,7 @@ void APlayer::PlaceBomb(float _DeltaTime)
 	Bomb->SetWallTileMap(WallTileMap, Index); // 타일맵 정보 설정
 	Bomb->SetActorLocation(Pos);
 
-	Bomb->SetPower(5);
+	Bomb->SetPower(1);
 
 	ChangeState(PlayerState::Idle);
 
