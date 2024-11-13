@@ -66,7 +66,7 @@ void ABomb::Bomb_ExPlode()
 
 	Explode_Center = CreateDefaultSubObject<USpriteRenderer>();
 	Explode_Center->SetSprite("01_Bomb_01_Center");
-	Explode_Center->CreateAnimation("Bomb_Center", "01_Bomb_01_Center", 0, 11, 0.12f, false);
+	Explode_Center->CreateAnimation("Bomb_Center", "01_Bomb_01_Center", 0, 11, 0.1f, false);
 	Explode_Center->ChangeAnimation("Bomb_Center");
 	Explode_Center->SetComponentScale({ 32, 32 });
 	Explode_Center->SetComponentLocation({ 0, 0 });
@@ -121,7 +121,7 @@ void ABomb::Bomb_ExPlode()
 	Tile* TileDataLeft = WallTileMap->GetTileRef(Pos_Minus_TileHalfSize + FVector2D{ -32, 0 } *(static_cast<float>(LeftCount + 1)));
 	if (TileDataLeft != nullptr)
 	{
-		if (TileDataLeft->SpriteIndex != 2 && LeftCount <= 1)
+		if (TileDataLeft->SpriteIndex != 2 && LeftCount + 1 > 0)
 		{
 			USpriteRenderer* Explode_Left = CreateDefaultSubObject<USpriteRenderer>();
 			Explode_Left->SetSprite("01_Bomb_06_Left");
@@ -190,7 +190,7 @@ void ABomb::Bomb_ExPlode()
 	Tile* TileDataUp = WallTileMap->GetTileRef(Pos_Minus_TileHalfSize + FVector2D{ 0, -32 } *(static_cast<float>(UpCount + 1)));
 	if (TileDataUp != nullptr)
 	{
-		if (TileDataUp->SpriteIndex != 2 && UpCount <= 1)
+		if (TileDataUp->SpriteIndex != 2 && UpCount + 1 > 0)
 		{
 			USpriteRenderer* Explode_Up = CreateDefaultSubObject<USpriteRenderer>();
 			Explode_Up->SetSprite("01_Bomb_02_Up");
@@ -259,7 +259,7 @@ void ABomb::Bomb_ExPlode()
 	Tile* TileDataRight = WallTileMap->GetTileRef(Pos_Minus_TileHalfSize + FVector2D{ 32, 0 } *(static_cast<float>(RightCount + 1)));
 	if (TileDataRight != nullptr)
 	{
-		if (TileDataRight->SpriteIndex != 2 && RightCount <= 1)
+		if (TileDataRight->SpriteIndex != 2 && RightCount + 1 > 0)
 		{
 			USpriteRenderer* Explode_Right = CreateDefaultSubObject<USpriteRenderer>();
 			Explode_Right->SetSprite("01_Bomb_08_Right");
@@ -328,7 +328,7 @@ void ABomb::Bomb_ExPlode()
 	Tile* TileDataDown = WallTileMap->GetTileRef(Pos_Minus_TileHalfSize + FVector2D{ 0, 32 } *(static_cast<float>(DownCount + 1)));
 	if (TileDataDown != nullptr)
 	{
-		if (TileDataDown->SpriteIndex != 2 && DownCount <= 1)
+		if (TileDataDown->SpriteIndex != 2 && DownCount + 1 > 0)
 		{
 			USpriteRenderer* Explode_Down = CreateDefaultSubObject<USpriteRenderer>();
 			Explode_Down->SetSprite("01_Bomb_04_Down");
