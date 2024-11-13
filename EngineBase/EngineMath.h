@@ -27,7 +27,7 @@ public:
 	}
 
 	template <typename DataType>
-	DataType Clamp(DataType value, DataType minValue, DataType maxValue)
+	static DataType Clamp(DataType value, DataType minValue, DataType maxValue)
 	{
 		if (value < minValue)
 			return minValue;

@@ -18,8 +18,7 @@ ABomb::ABomb()
 
 	SpriteRenderer->SetOrder(ERenderOrder::BOMB);
 
-	//TimeEventer.PushEvent(2.0f, std::bind(&ABomb::SetPower, this), false);
-
+	TimeEventer.PushEvent(2.0f, std::bind(&ABomb::Bomb_ExPlode, this), false, false);
 }
 
 ABomb::~ABomb()
@@ -41,10 +40,13 @@ void ABomb::SetWallTileMap(ATileMap* _TileMap, FIntPoint _Index)
 
 void ABomb::Bomb_Destroy()
 {
-	if (true == Explode_Center->IsCurAnimationEnd())
+	if (nullptr != Explode_Center)
 	{
-		// 气藕 力芭
-		Destroy();
+		if (true == Explode_Center->IsCurAnimationEnd())
+		{
+			// 气藕 力芭
+			Destroy();
+		}
 	}
 }
 

@@ -28,8 +28,8 @@ protected:
 	{
 		CurBombPower = _Power;
 	}
-	void Bomb_ExPlode();
 
+	void Bomb_ExPlode();
 	void Bomb_Destroy();
 
 private:

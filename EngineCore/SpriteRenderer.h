@@ -3,6 +3,7 @@
 #include "EngineSprite.h"
 #include <EngineBase/EngineDelegate.h>
 #include <map>
+#include <EngineBase/EngineMath.h>
 
 enum class PivotType
 {
@@ -95,7 +96,6 @@ public:
 		return Sprite->GetName();
 	}
 
-
 	void SetCameraEffect(bool _Value)
 	{
 		IsCameraEffect = _Value;
@@ -118,6 +118,22 @@ public:
 		return CurAnimation->IsEnd;
 	}
 
+	// 0 완전투명 255면 불투명
+	void SetAlphaChar(unsigned char _Value)
+	{
+		Alpha = _Value;
+	}
+
+	void SetAlphafloat(float _Value)
+	{
+		_Value = UEngineMath::Clamp(_Value, 0.0f, 1.0f);
+		// 언제든지 쉽게 다른 차원의 값으로 변경될수 있다.
+		// 다이렉트가 색깔 단위를 0~1을 기준으로 하는 이유이다.
+		// 그래픽 라이브러리는 색깔을 데이터일 뿐이므로 이걸 언제든지
+		// 다른 데이터로 변환하는 일을 수행할때 0~1단위가 유리하기 때문에 0~1단위를 사용한다.
+		Alpha = static_cast<unsigned char>(_Value * 255.0f);
+	}
+
 protected:
 
 private:
@@ -125,6 +141,10 @@ private:
 	int CurIndex = 0;
 	bool IsCameraEffect = true;
 	float CameraEffectScale = 1.0f;
+
+	// 다이렉트는 모든 색상을 0~1.0f로 표현한다.
+	unsigned char Alpha = 255;
+
 	FVector2D Pivot = FVector2D::ZERO;
 
 	class UEngineSprite* Sprite = nullptr;
