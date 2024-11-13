@@ -17,8 +17,9 @@ ABomb::ABomb()
 	SpriteRenderer->CreateAnimation("Bomb_Idle", "01_Bomb_00_Idle", { 0, 1, 2, 1 }, { 0.2f, 0.2f ,0.2f ,0.2f });
 	SpriteRenderer->ChangeAnimation("Bomb_Idle");
 
-	SpriteRenderer->SetOrder(ERenderOrder::BOMB);
+	SpriteRenderer->CreateAnimation("Bomb_Gone", "01_Bomb_00_Idle", 3, 3, FrameSpeed, false);
 
+	SpriteRenderer->SetOrder(ERenderOrder::BOMB);
 	TimeEventer.PushEvent(Bomb_Explode_Time, std::bind(&ABomb::Bomb_ExPlode, this), false, false);
 }
 
@@ -64,9 +65,10 @@ void ABomb::Bomb_ExPlode()
 {
 	int _Power = CurBombPower;
 
+	SpriteRenderer->ChangeAnimation("Bomb_Gone");
 	Explode_Center = CreateDefaultSubObject<USpriteRenderer>();
-	Explode_Center->SetSprite("01_Bomb_01_Center");
-	Explode_Center->CreateAnimation("Bomb_Center", "01_Bomb_01_Center", 0, 11, 0.1f, false);
+	Explode_Center->SetSprite("ExplodeCenter.png");
+	Explode_Center->CreateAnimation("Bomb_Center", "ExplodeCenter.png", 0, 19, FrameSpeed, false);
 	Explode_Center->ChangeAnimation("Bomb_Center");
 	Explode_Center->SetComponentScale({ 32, 32 });
 	Explode_Center->SetComponentLocation({ 0, 0 });
@@ -92,8 +94,8 @@ void ABomb::Bomb_ExPlode()
 		}
 
 		USpriteRenderer* Explode_LeftMid = CreateDefaultSubObject<USpriteRenderer>();
-		Explode_LeftMid->SetSprite("01_Bomb_07_LeftMid");
-		Explode_LeftMid->CreateAnimation("Bomb_LeftMid", "01_Bomb_07_LeftMid", 0, 19, 0.15f, false);
+		Explode_LeftMid->SetSprite("ExplodeLeftMid.png");
+		Explode_LeftMid->CreateAnimation("Bomb_LeftMid", "ExplodeLeftMid.png", 0, 19, FrameSpeed, false);
 		Explode_LeftMid->ChangeAnimation("Bomb_LeftMid");
 		Explode_LeftMid->SetComponentScale({ 32, 32 });
 		Explode_LeftMid->SetOrder((Pos + FVector2D{ -32, 0 } *static_cast<float>(i)).Y);
@@ -124,8 +126,8 @@ void ABomb::Bomb_ExPlode()
 		if (TileDataLeft->SpriteIndex != 2 && LeftCount + 1 > 0)
 		{
 			USpriteRenderer* Explode_Left = CreateDefaultSubObject<USpriteRenderer>();
-			Explode_Left->SetSprite("01_Bomb_06_Left");
-			Explode_Left->CreateAnimation("Bomb_Left", "01_Bomb_06_Left", 0, 19, 0.15f, false);
+			Explode_Left->SetSprite("ExplodeLeft.png");
+			Explode_Left->CreateAnimation("Bomb_Left", "ExplodeLeft.png", 0, 19, FrameSpeed, false);
 			Explode_Left->ChangeAnimation("Bomb_Left");
 			Explode_Left->SetComponentScale({ 32, 32 });
 			Explode_Left->SetOrder((Pos + FVector2D{ -32, 0 }).Y);
@@ -162,8 +164,8 @@ void ABomb::Bomb_ExPlode()
 		}
 
 		USpriteRenderer* Explode_UpMid = CreateDefaultSubObject<USpriteRenderer>();
-		Explode_UpMid->SetSprite("01_Bomb_03_UpMid");
-		Explode_UpMid->CreateAnimation("Bomb_UpMid", "01_Bomb_03_UpMid", 0, 19, 0.15f, false);
+		Explode_UpMid->SetSprite("ExplodeUpMid.png");
+		Explode_UpMid->CreateAnimation("Bomb_UpMid", "ExplodeUpMid.png", 0, 19, FrameSpeed, false);
 		Explode_UpMid->ChangeAnimation("Bomb_UpMid");
 		Explode_UpMid->SetComponentScale({ 32, 32 });
 		Explode_UpMid->SetOrder((Pos + FVector2D{ 0, -32 } *static_cast<float>(i)).Y);
@@ -193,8 +195,8 @@ void ABomb::Bomb_ExPlode()
 		if (TileDataUp->SpriteIndex != 2 && UpCount + 1 > 0)
 		{
 			USpriteRenderer* Explode_Up = CreateDefaultSubObject<USpriteRenderer>();
-			Explode_Up->SetSprite("01_Bomb_02_Up");
-			Explode_Up->CreateAnimation("Bomb_Up", "01_Bomb_02_Up", 0, 19, 0.15f, false);
+			Explode_Up->SetSprite("ExplodeUp.png");
+			Explode_Up->CreateAnimation("Bomb_Up", "ExplodeUp.png", 0, 19, FrameSpeed, false);
 			Explode_Up->ChangeAnimation("Bomb_Up");
 			Explode_Up->SetComponentScale({ 32, 32 });
 			Explode_Up->SetOrder((Pos + FVector2D{ 0, -32 }).Y);
@@ -231,8 +233,8 @@ void ABomb::Bomb_ExPlode()
 		}
 
 		USpriteRenderer* Explode_RightMid = CreateDefaultSubObject<USpriteRenderer>();
-		Explode_RightMid->SetSprite("01_Bomb_09_RightMid");
-		Explode_RightMid->CreateAnimation("Bomb_RightMid", "01_Bomb_09_RightMid", 0, 19, 0.15f, false);
+		Explode_RightMid->SetSprite("ExplodeRightMid.png");
+		Explode_RightMid->CreateAnimation("Bomb_RightMid", "ExplodeRightMid.png", 0, 19, FrameSpeed, false);
 		Explode_RightMid->ChangeAnimation("Bomb_RightMid");
 		Explode_RightMid->SetComponentScale({ 32, 32 });
 		Explode_RightMid->SetOrder((Pos + FVector2D{ 32, 0 } *static_cast<float>(i)).Y);
@@ -262,8 +264,8 @@ void ABomb::Bomb_ExPlode()
 		if (TileDataRight->SpriteIndex != 2 && RightCount + 1 > 0)
 		{
 			USpriteRenderer* Explode_Right = CreateDefaultSubObject<USpriteRenderer>();
-			Explode_Right->SetSprite("01_Bomb_08_Right");
-			Explode_Right->CreateAnimation("Bomb_Right", "01_Bomb_08_Right", 0, 19, 0.15f, false);
+			Explode_Right->SetSprite("ExplodeRight.png");
+			Explode_Right->CreateAnimation("Bomb_Right", "ExplodeRight.png", 0, 19, FrameSpeed, false);
 			Explode_Right->ChangeAnimation("Bomb_Right");
 			Explode_Right->SetComponentScale({ 32, 32 });
 			Explode_Right->SetOrder((Pos + FVector2D{ 32, 0 }).Y);
@@ -300,8 +302,8 @@ void ABomb::Bomb_ExPlode()
 		}
 
 		USpriteRenderer* Explode_DownMid = CreateDefaultSubObject<USpriteRenderer>();
-		Explode_DownMid->SetSprite("01_Bomb_05_DownMid");
-		Explode_DownMid->CreateAnimation("Bomb_DownMid", "01_Bomb_05_DownMid", 0, 19, 0.15f, false);
+		Explode_DownMid->SetSprite("ExplodeDownMid.png");
+		Explode_DownMid->CreateAnimation("Bomb_DownMid", "ExplodeDownMid.png", 0, 19, FrameSpeed, false);
 		Explode_DownMid->ChangeAnimation("Bomb_DownMid");
 		Explode_DownMid->SetComponentScale({ 32, 32 });
 		Explode_DownMid->SetOrder((Pos + FVector2D{ 0, 32 } *static_cast<float>(i)).Y);
@@ -331,8 +333,8 @@ void ABomb::Bomb_ExPlode()
 		if (TileDataDown->SpriteIndex != 2 && DownCount + 1 > 0)
 		{
 			USpriteRenderer* Explode_Down = CreateDefaultSubObject<USpriteRenderer>();
-			Explode_Down->SetSprite("01_Bomb_04_Down");
-			Explode_Down->CreateAnimation("Bomb_Down", "01_Bomb_04_Down", 0, 19, 0.15f, false);
+			Explode_Down->SetSprite("ExplodeDown.png");
+			Explode_Down->CreateAnimation("Bomb_Down", "ExplodeDown.png", 0, 19, FrameSpeed, false);
 			Explode_Down->ChangeAnimation("Bomb_Down");
 			Explode_Down->SetComponentScale({ 32, 32 });
 			Explode_Down->SetOrder((Pos + FVector2D{ 0, 32 }).Y);

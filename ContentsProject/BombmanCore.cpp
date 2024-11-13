@@ -92,7 +92,7 @@ void BombmanCore::BeginPlay()
 	}
 
 
-	// 플레이 레벨 리소스 로드
+	// 플레이어 리소스 로드
 	{
 		UEngineDirectory Play_Player_Dir;
 		Play_Player_Dir.MoveParentToDirectory("Resources//Imgs");
@@ -129,59 +129,48 @@ void BombmanCore::BeginPlay()
 		Play_Bomb00_Dir.Append("02_PLAY//02_Objects//01_Bomb//01_Bomb_00_Idle");
 		UImageManager::GetInst().LoadFolder(Play_Bomb00_Dir.GetPathToString());
 	}
+	// 폭탄 폭발 스프라이트 시트 로드 및 커팅
 	{
-		UEngineDirectory Play_Bomb01_Dir;
-		Play_Bomb01_Dir.MoveParentToDirectory("Resources//Imgs");
-		Play_Bomb01_Dir.Append("02_PLAY//02_Objects//01_Bomb//01_Bomb_01_Center");
-		UImageManager::GetInst().LoadFolder(Play_Bomb01_Dir.GetPathToString());
+		UEngineDirectory Play_BombExplode_Dir;
+		Play_BombExplode_Dir.MoveParentToDirectory("Resources//Imgs");
+		Play_BombExplode_Dir.Append("02_PLAY//02_Objects//01_Bomb//01_Bomb_01_Explode");
+		UImageManager::GetInst().LoadFolder(Play_BombExplode_Dir.GetPathToString());
 	}
 	{
-		UEngineDirectory Play_Bomb02_Dir;
-		Play_Bomb02_Dir.MoveParentToDirectory("Resources//Imgs");
-		Play_Bomb02_Dir.Append("02_PLAY//02_Objects//01_Bomb//01_Bomb_02_Up");
-		UImageManager::GetInst().LoadFolder(Play_Bomb02_Dir.GetPathToString());
+		UImageManager& imgManager = UImageManager::GetInst();
+		imgManager.CuttingSprite("ExplodeCenter.png", { 32, 32 });
 	}
 	{
-		UEngineDirectory Play_Bomb03_Dir;
-		Play_Bomb03_Dir.MoveParentToDirectory("Resources//Imgs");
-		Play_Bomb03_Dir.Append("02_PLAY//02_Objects//01_Bomb//01_Bomb_03_UpMid");
-		UImageManager::GetInst().LoadFolder(Play_Bomb03_Dir.GetPathToString());
+		UImageManager& imgManager = UImageManager::GetInst();
+		imgManager.CuttingSprite("ExplodeDown.png", { 32, 32 });
 	}
 	{
-		UEngineDirectory Play_Bomb04_Dir;
-		Play_Bomb04_Dir.MoveParentToDirectory("Resources//Imgs");
-		Play_Bomb04_Dir.Append("02_PLAY//02_Objects//01_Bomb//01_Bomb_04_Down");
-		UImageManager::GetInst().LoadFolder(Play_Bomb04_Dir.GetPathToString());
+		UImageManager& imgManager = UImageManager::GetInst();
+		imgManager.CuttingSprite("ExplodeDownMid.png", { 32, 32 });
 	}
 	{
-		UEngineDirectory Play_Bomb05_Dir;
-		Play_Bomb05_Dir.MoveParentToDirectory("Resources//Imgs");
-		Play_Bomb05_Dir.Append("02_PLAY//02_Objects//01_Bomb//01_Bomb_05_DownMid");
-		UImageManager::GetInst().LoadFolder(Play_Bomb05_Dir.GetPathToString());
+		UImageManager& imgManager = UImageManager::GetInst();
+		imgManager.CuttingSprite("ExplodeLeft.png", { 32, 32 });
 	}
 	{
-		UEngineDirectory Play_Bomb06_Dir;
-		Play_Bomb06_Dir.MoveParentToDirectory("Resources//Imgs");
-		Play_Bomb06_Dir.Append("02_PLAY//02_Objects//01_Bomb//01_Bomb_06_Left");
-		UImageManager::GetInst().LoadFolder(Play_Bomb06_Dir.GetPathToString());
+		UImageManager& imgManager = UImageManager::GetInst();
+		imgManager.CuttingSprite("ExplodeLeftMid.png", { 32, 32 });
 	}
 	{
-		UEngineDirectory Play_Bomb07_Dir;
-		Play_Bomb07_Dir.MoveParentToDirectory("Resources//Imgs");
-		Play_Bomb07_Dir.Append("02_PLAY//02_Objects//01_Bomb//01_Bomb_07_LeftMid");
-		UImageManager::GetInst().LoadFolder(Play_Bomb07_Dir.GetPathToString());
+		UImageManager& imgManager = UImageManager::GetInst();
+		imgManager.CuttingSprite("ExplodeRight.png", { 32, 32 });
 	}
 	{
-		UEngineDirectory Play_Bomb08_Dir;
-		Play_Bomb08_Dir.MoveParentToDirectory("Resources//Imgs");
-		Play_Bomb08_Dir.Append("02_PLAY//02_Objects//01_Bomb//01_Bomb_08_Right");
-		UImageManager::GetInst().LoadFolder(Play_Bomb08_Dir.GetPathToString());
+		UImageManager& imgManager = UImageManager::GetInst();
+		imgManager.CuttingSprite("ExplodeRightMid.png", { 32, 32 });
 	}
 	{
-		UEngineDirectory Play_Bomb09_Dir;
-		Play_Bomb09_Dir.MoveParentToDirectory("Resources//Imgs");
-		Play_Bomb09_Dir.Append("02_PLAY//02_Objects//01_Bomb//01_Bomb_09_RightMid");
-		UImageManager::GetInst().LoadFolder(Play_Bomb09_Dir.GetPathToString());
+		UImageManager& imgManager = UImageManager::GetInst();
+		imgManager.CuttingSprite("ExplodeUp.png", { 32, 32 });
+	}
+	{
+		UImageManager& imgManager = UImageManager::GetInst();
+		imgManager.CuttingSprite("ExplodeUpMid.png", { 32, 32 });
 	}
 	{
 		UEngineDirectory Play_Mushroom_Idle_Dir;

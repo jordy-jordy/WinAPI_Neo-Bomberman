@@ -32,11 +32,12 @@ protected:
 	void Bomb_ExPlode();
 	void Bomb_Destroy();
 
-private:
-	class ATileMap* WallTileMap = nullptr;
-	FIntPoint BombTileIndex;
 
+private:
+	class USpriteRenderer* Explode_Center = nullptr;
+	class ATileMap* WallTileMap = nullptr;
 	class ATile_Destroy* Object = nullptr;
+	FIntPoint BombTileIndex;
 
 	void ClearBombTile(); // ÆøÅº Á¦°Å ÀüÈÄ Å¸ÀÏ¸Ê ¾÷µ¥ÀÌÆ®
 
@@ -44,7 +45,8 @@ private:
 
 	float Bomb_Explode_Time = 2.0f;
 
-	class USpriteRenderer* Explode_Center = nullptr;
+	float FrameSpeed = 0.12f;
+
 
 };
 
