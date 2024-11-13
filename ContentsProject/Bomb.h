@@ -36,21 +36,15 @@ private:
 	class ATileMap* WallTileMap = nullptr;
 	FIntPoint BombTileIndex;
 
+	class ATile_Destroy* Object = nullptr;
+
 	void ClearBombTile(); // ÆøÅº Á¦°Å ÀüÈÄ Å¸ÀÏ¸Ê ¾÷µ¥ÀÌÆ®
 
 	int CurBombPower = 0; // ÇöÀç ÆøÅºÀÇ ÆÄ¿ö
 
 	float Bomb_Explode_Time = 2.0f;
-	float Bomb_Explode_Timer = 0.0f;
-
 
 	class USpriteRenderer* Explode_Center = nullptr;
-
-	class FIntPoint Explosion_Index_Up = { BombTileIndex.X, BombTileIndex.Y - 1 };
-	class FIntPoint Explosion_Index_Left = { BombTileIndex.X - 1, BombTileIndex.Y };
-	class FIntPoint Explosion_Index_Down = { BombTileIndex.X, BombTileIndex.Y + 1 };
-	class FIntPoint Explosion_Index_Right = { BombTileIndex.X + 1, BombTileIndex.Y };
-
 
 };
 

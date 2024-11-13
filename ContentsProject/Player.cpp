@@ -162,7 +162,6 @@ void APlayer::PlaceBomb(float _DeltaTime)
 	Bomb->SetActorLocation(Pos);
 
 	Bomb->SetPower(5);
-	//Bomb->Bomb_ExPlode();
 
 	ChangeState(PlayerState::Idle);
 

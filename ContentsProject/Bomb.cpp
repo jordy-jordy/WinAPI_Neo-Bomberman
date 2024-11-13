@@ -5,6 +5,7 @@
 #include <EnginePlatform/EngineInput.h>
 
 #include "ATileMap.h"
+#include "Tile_Destroy.h"
 
 
 ABomb::ABomb()
@@ -18,7 +19,7 @@ ABomb::ABomb()
 
 	SpriteRenderer->SetOrder(ERenderOrder::BOMB);
 
-	TimeEventer.PushEvent(2.0f, std::bind(&ABomb::Bomb_ExPlode, this), false, false);
+	TimeEventer.PushEvent(Bomb_Explode_Time, std::bind(&ABomb::Bomb_ExPlode, this), false, false);
 }
 
 ABomb::~ABomb()
@@ -104,6 +105,14 @@ void ABomb::Bomb_ExPlode()
 			FVector2D BombPos_Location = GetActorLocation() - WallTileMap->GetActorLocation();
 			FVector2D TargetPos = BombPos_Location + TilePos_Location;
 			WallTileMap->RemoveTile(TargetPos);
+
+			FIntPoint TargetIndex = WallTileMap->LocationToIndex(TargetPos);
+			// 스폰 액터를 통해 삭제 애니메이션 재생
+			ATile_Destroy* Object = GetWorld()->SpawnActor<ATile_Destroy>();
+			WallTileMap->SetDestroyObject(TargetIndex, Object);
+			// 위치에 삭제 애니메이션 설치
+			Object->SetWallTileMap(WallTileMap, TargetIndex); // 타일맵 정보 설정
+			Object->SetActorLocation(GetActorLocation()+ TilePos_Location);
 			break;
 		}
 
@@ -112,7 +121,7 @@ void ABomb::Bomb_ExPlode()
 	Tile* TileDataLeft = WallTileMap->GetTileRef(Pos_Minus_TileHalfSize + FVector2D{ -32, 0 } *(static_cast<float>(LeftCount + 1)));
 	if (TileDataLeft != nullptr)
 	{
-		if (TileDataLeft->SpriteIndex != 2)
+		if (TileDataLeft->SpriteIndex != 2 && LeftCount >= 1)
 		{
 			USpriteRenderer* Explode_Left = CreateDefaultSubObject<USpriteRenderer>();
 			Explode_Left->SetSprite("01_Bomb_06_Left");
@@ -154,6 +163,14 @@ void ABomb::Bomb_ExPlode()
 			FVector2D BombPos_Location = GetActorLocation() - WallTileMap->GetActorLocation();
 			FVector2D TargetPos = BombPos_Location + TilePos_Location;
 			WallTileMap->RemoveTile(TargetPos);
+
+			FIntPoint TargetIndex = WallTileMap->LocationToIndex(TargetPos);
+			// 스폰 액터를 통해 삭제 애니메이션 재생
+			ATile_Destroy* Object = GetWorld()->SpawnActor<ATile_Destroy>();
+			WallTileMap->SetDestroyObject(TargetIndex, Object);
+			// 위치에 삭제 애니메이션 설치
+			Object->SetWallTileMap(WallTileMap, TargetIndex); // 타일맵 정보 설정
+			Object->SetActorLocation(GetActorLocation() + TilePos_Location);
 			break;
 		}
 		UpCount = i;
@@ -161,7 +178,7 @@ void ABomb::Bomb_ExPlode()
 	Tile* TileDataUp = WallTileMap->GetTileRef(Pos_Minus_TileHalfSize + FVector2D{ 0, -32 } *(static_cast<float>(UpCount + 1)));
 	if (TileDataUp != nullptr)
 	{
-		if (TileDataUp->SpriteIndex != 2)
+		if (TileDataUp->SpriteIndex != 2 && UpCount >= 1)
 		{
 			USpriteRenderer* Explode_Up = CreateDefaultSubObject<USpriteRenderer>();
 			Explode_Up->SetSprite("01_Bomb_02_Up");
@@ -203,6 +220,14 @@ void ABomb::Bomb_ExPlode()
 			FVector2D BombPos_Location = GetActorLocation() - WallTileMap->GetActorLocation();
 			FVector2D TargetPos = BombPos_Location + TilePos_Location;
 			WallTileMap->RemoveTile(TargetPos);
+
+			FIntPoint TargetIndex = WallTileMap->LocationToIndex(TargetPos);
+			// 스폰 액터를 통해 삭제 애니메이션 재생
+			ATile_Destroy* Object = GetWorld()->SpawnActor<ATile_Destroy>();
+			WallTileMap->SetDestroyObject(TargetIndex, Object);
+			// 위치에 삭제 애니메이션 설치
+			Object->SetWallTileMap(WallTileMap, TargetIndex); // 타일맵 정보 설정
+			Object->SetActorLocation(GetActorLocation() + TilePos_Location);
 			break;
 		}
 		RightCount = i;
@@ -210,7 +235,7 @@ void ABomb::Bomb_ExPlode()
 	Tile* TileDataRight = WallTileMap->GetTileRef(Pos_Minus_TileHalfSize + FVector2D{ 32, 0 } *(static_cast<float>(RightCount + 1)));
 	if (TileDataRight != nullptr)
 	{
-		if (TileDataRight->SpriteIndex != 2)
+		if (TileDataRight->SpriteIndex != 2 && RightCount >= 1)
 		{
 			USpriteRenderer* Explode_Right = CreateDefaultSubObject<USpriteRenderer>();
 			Explode_Right->SetSprite("01_Bomb_08_Right");
@@ -252,6 +277,14 @@ void ABomb::Bomb_ExPlode()
 			FVector2D BombPos_Location = GetActorLocation() - WallTileMap->GetActorLocation();
 			FVector2D TargetPos = BombPos_Location + TilePos_Location;
 			WallTileMap->RemoveTile(TargetPos);
+
+			FIntPoint TargetIndex = WallTileMap->LocationToIndex(TargetPos);
+			// 스폰 액터를 통해 삭제 애니메이션 재생
+			ATile_Destroy* Object = GetWorld()->SpawnActor<ATile_Destroy>();
+			WallTileMap->SetDestroyObject(TargetIndex, Object);
+			// 위치에 삭제 애니메이션 설치
+			Object->SetWallTileMap(WallTileMap, TargetIndex); // 타일맵 정보 설정
+			Object->SetActorLocation(GetActorLocation() + TilePos_Location);
 			break;
 		}
 		DownCount = i;
@@ -259,7 +292,7 @@ void ABomb::Bomb_ExPlode()
 	Tile* TileDataDown = WallTileMap->GetTileRef(Pos_Minus_TileHalfSize + FVector2D{ 0, 32 } *(static_cast<float>(DownCount + 1)));
 	if (TileDataDown != nullptr)
 	{
-		if (TileDataDown->SpriteIndex != 2)
+		if (TileDataDown->SpriteIndex != 2 && DownCount >= 1)
 		{
 			USpriteRenderer* Explode_Down = CreateDefaultSubObject<USpriteRenderer>();
 			Explode_Down->SetSprite("01_Bomb_04_Down");

@@ -9,7 +9,7 @@
 class Tile : public ISerializObject
 {
 public:
-	USpriteRenderer* SpriteRenderer;
+	class USpriteRenderer* SpriteRenderer;
 
 	bool IsMove = true;
 	int TileType = -1;
@@ -19,6 +19,9 @@ public:
 
 	// 폭탄
 	class ABomb* Bomb = nullptr;
+
+	// 삭제 오브젝트
+	class ATile_Destroy* Object = nullptr;
 
 	void Serialize(UEngineSerializer& _Ser)
 	{
@@ -100,8 +103,14 @@ public:
 	// 폭탄 관련 함수
 	bool IsBomb(FIntPoint _Index); // 해당 위치에 폭탄이 있는지 체크하는 함수
 	void SetBomb(FIntPoint _Index, class ABomb* _Bomb); // 해당 위치에 폭탄을 세팅하는 함수
-
+	
+	// 타일 제거 함수
 	void RemoveTile(FVector2D _Pos);
+
+	// 제거되는 오브젝트 애니메이션 스폰용
+	void SetDestroyObject(FIntPoint _Index, class ATile_Destroy* _Object);
+
+
 
 protected:
 

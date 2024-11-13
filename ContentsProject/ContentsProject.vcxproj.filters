@@ -46,6 +46,9 @@
     <ClCompile Include="TestMap.cpp">
       <Filter>TileMap</Filter>
     </ClCompile>
+    <ClCompile Include="Tile_Destroy.cpp">
+      <Filter>ContentsObject\Play</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayGameMode.h">
@@ -95,6 +98,9 @@
     </ClInclude>
     <ClInclude Include="TestMap.h">
       <Filter>TileMap</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile_Destroy.h">
+      <Filter>ContentsObject\Play</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

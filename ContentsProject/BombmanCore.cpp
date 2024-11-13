@@ -104,6 +104,13 @@ void BombmanCore::BeginPlay()
 		UImageManager& imgManager = UImageManager::GetInst();
 		imgManager.CuttingSprite("MainCharater_White.png", { 64, 64 });
 	}
+	// 오브젝트 파괴 애니메이션
+	{
+		UEngineDirectory Play_Object_Destroy_Anim_Dir;
+		Play_Object_Destroy_Anim_Dir.MoveParentToDirectory("Resources//Imgs");
+		Play_Object_Destroy_Anim_Dir.Append("02_PLAY//02_Objects//02_Object//Destroy_Anim");
+		UImageManager::GetInst().LoadFolder(Play_Object_Destroy_Anim_Dir.GetPathToString());
+	}
 	{
 		UEngineDirectory Play_TILE_Dir;
 		Play_TILE_Dir.MoveParentToDirectory("Resources//Imgs");

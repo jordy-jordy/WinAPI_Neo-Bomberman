@@ -1,6 +1,9 @@
 #include "PreCompile.h"
 #include "ATileMap.h"
 
+#include <EngineCore/SpriteRenderer.h>
+
+
 ATileMap::ATileMap()
 {
 }
@@ -44,6 +47,17 @@ void ATileMap::SetBomb(FIntPoint _Index, class ABomb* _Bomb)
 	}
 
 	AllTiles[_Index.Y][_Index.X].Bomb = _Bomb;
+}
+
+// 해당 위치에 제거되는 오브젝트를 세팅하는 함수
+void ATileMap::SetDestroyObject(FIntPoint _Index, class ATile_Destroy* _Object)
+{
+	if (true == IsIndexOver(_Index))
+	{
+		return;
+	}
+
+	AllTiles[_Index.Y][_Index.X].Object = _Object;
 }
 
 FVector2D ATileMap::IndexToTileLocation(FIntPoint _Index)
@@ -214,5 +228,7 @@ void ATileMap::RemoveTile(FVector2D _Pos)
 		AllTiles[TargetIndex.Y][TargetIndex.X].Scale = FVector2D::ZERO;
 		AllTiles[TargetIndex.Y][TargetIndex.X].SpriteIndex = -1;
 	}
+
+
 
 }
