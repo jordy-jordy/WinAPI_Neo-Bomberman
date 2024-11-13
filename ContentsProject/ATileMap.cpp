@@ -203,3 +203,16 @@ std::vector<FIntPoint> ATileMap::FindSpriteIndex(int _TileType)
 	return positions;
 }
 
+void ATileMap::RemoveTile(FVector2D _Pos)
+{
+	FIntPoint TargetIndex = LocationToIndex(_Pos);
+	if (AllTiles[TargetIndex.Y][TargetIndex.X].SpriteIndex == 1)
+	{
+		AllTiles[TargetIndex.Y][TargetIndex.X].SpriteRenderer->Destroy();
+		AllTiles[TargetIndex.Y][TargetIndex.X].SpriteRenderer = nullptr;
+		AllTiles[TargetIndex.Y][TargetIndex.X].Pivot = FVector2D::ZERO;
+		AllTiles[TargetIndex.Y][TargetIndex.X].Scale = FVector2D::ZERO;
+		AllTiles[TargetIndex.Y][TargetIndex.X].SpriteIndex = -1;
+	}
+
+}

@@ -101,6 +101,8 @@ public:
 	bool IsBomb(FIntPoint _Index); // 해당 위치에 폭탄이 있는지 체크하는 함수
 	void SetBomb(FIntPoint _Index, class ABomb* _Bomb); // 해당 위치에 폭탄을 세팅하는 함수
 
+	void RemoveTile(FVector2D _Pos);
+
 protected:
 
 private:
