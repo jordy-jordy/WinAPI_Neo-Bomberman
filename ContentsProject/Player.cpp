@@ -11,7 +11,6 @@
 
 void APlayer::RunSoundPlay()
 {
-	// UEngineDebug::OutPutString("SoundPlay");
 }
 
 APlayer::APlayer()
@@ -22,6 +21,7 @@ APlayer::APlayer()
 		SpriteRendererHead->SetComponentLocation({ 0, 0 });
 		SpriteRendererHead->SetComponentScale({ 64, 64 });
 		SpriteRendererHead->SetPivotType(PivotType::Bot);
+
 
 		SpriteRendererHead->CreateAnimation("Idle_Up_Head", "MainCharater_White.png", 17, 17, 0.1f);
 		SpriteRendererHead->CreateAnimation("Run_Up_Head", "MainCharater_White.png", 18, 22 , 0.1f);
@@ -277,8 +277,8 @@ void APlayer::Move(float _DeltaTime)
 	{
 	case 1: PlusPos *= 16.0f; break;
 	case 2: PlusPos *= 16.0f; break;
-	case 3: PlusPos *= 6.0f; break;
-	case 4: PlusPos *= 26.0f; break;
+	case 3: PlusPos *= 8.0f; break;
+	case 4: PlusPos *= 24.0f; break;
 	default: break;
 	}
 
