@@ -139,7 +139,7 @@ public:
 		return Result;
 	}
 
-	FVector2D operator+(FVector2D _Other) const
+	FVector2D operator+(const FVector2D& _Other) const
 	{
 		FVector2D Result;
 		Result.X = X + _Other.X;
@@ -147,7 +147,7 @@ public:
 		return Result;
 	}
 
-	FVector2D& operator-=(FVector2D _Other)
+	FVector2D& operator-=(const FVector2D& _Other)
 	{
 		X -= _Other.X;
 		Y -= _Other.Y;
@@ -155,7 +155,7 @@ public:
 	}
 
 
-	FVector2D operator-(FVector2D _Other) const
+	FVector2D operator-(const FVector2D& _Other) const
 	{
 		FVector2D Result;
 		Result.X = X - _Other.X;
@@ -187,17 +187,8 @@ public:
 		return Result;
 	}
 
-	// 추가
-	FVector2D& operator*=(float _val)
-	{
-		X *= _val;
-		Y *= _val;
-		return *this;
-	}
-
-
 	// ture가 나오는 
-	bool operator==(FVector2D _Other) const
+	bool operator==(const FVector2D& _Other) const
 	{
 		return X == _Other.X && Y == _Other.Y;
 	}
@@ -216,12 +207,27 @@ public:
 	//	return X == _Other.X && Y == _Other.Y;
 	//}
 
-	FVector2D& operator+=(FVector2D _Other)
+	FVector2D& operator+=(const FVector2D& _Other)
 	{
 		X += _Other.X;
 		Y += _Other.Y;
 		return *this;
 	}
+
+	FVector2D& operator*=(const FVector2D& _Other)
+	{
+		X *= _Other.X;
+		Y *= _Other.Y;
+		return *this;
+	}
+
+	FVector2D& operator*=(float _Other)
+	{
+		X *= _Other;
+		Y *= _Other;
+		return *this;
+	}
+
 
 	std::string ToString()
 	{
@@ -260,11 +266,15 @@ public:
 	static bool Collision(ECollisionType _LeftType, const FTransform& _Left, ECollisionType _RightType, const FTransform& _Right);
 
 	// 완전히 같은 형의 함수죠?
+	static bool PointToCirCle(const FTransform& _Left, const FTransform& _Right);
+	static bool PointToRect(const FTransform& _Left, const FTransform& _Right);
+
 	static bool RectToRect(const FTransform& _Left, const FTransform& _Right);
-	// static bool RectToCirCle(const FTransform& _Left, const FTransform& _Right);
+	static bool RectToCirCle(const FTransform& _Left, const FTransform& _Right);
 
 	static bool CirCleToCirCle(const FTransform& _Left, const FTransform& _Right);
-	// static bool CirCleToRect(const FTransform& _Left, const FTransform& _Right);
+	static bool CirCleToRect(const FTransform& _Left, const FTransform& _Right);
+
 
 	FVector2D Scale;
 	FVector2D Location;
@@ -275,6 +285,14 @@ public:
 		return Location - Scale.Half();
 	}
 
+	FVector2D CenterLeftBottom() const
+	{
+		FVector2D Location;
+		Location.X = Location.X - Scale.hX();
+		Location.Y = Location.Y + Scale.hY();
+		return Location;
+	}
+
 	float CenterLeft() const
 	{
 		return Location.X - Scale.hX();
@@ -283,6 +301,14 @@ public:
 	float CenterTop() const
 	{
 		return Location.Y - Scale.hY();
+	}
+
+	FVector2D CenterRightTop() const
+	{
+		FVector2D Location;
+		Location.X = Location.X + Scale.hX();
+		Location.Y = Location.Y - Scale.hY();
+		return Location;
 	}
 
 	FVector2D CenterRightBottom() const

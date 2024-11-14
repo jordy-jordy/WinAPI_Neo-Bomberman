@@ -27,22 +27,10 @@ void ATileMapGameMode::BeginPlay()
 		ATestMap* NewActor = GetWorld()->SpawnActor<ATestMap>();
 	}
 
-	//{
-	//	GroundTileMap = GetWorld()->SpawnActor<ATileMap>();
-	//}
-
 	{
 		WallTileMap = GetWorld()->SpawnActor<ATileMap>();
 		WallTileMap->Create("00_Tiles", { 13, 11 }, { 32, 32 });
 		WallTileMap->SetActorLocation({ 96, 64 });
-
-		//for (int y = 0; y < 13; y++)
-		//{
-		//	for (int x = 0; x < 11; x++)
-		//	{
-		//		WallTileMap->SetTileIndex({ y,x }, { 0, 0 }, { 32, 32 }, 0);
-		//	}
-		//}
 	}
 }
 
@@ -52,11 +40,6 @@ void ATileMapGameMode::Tick(float _DeltaTime)
 
 	if (true == UEngineInput::GetInst().IsPress(VK_LBUTTON))
 	{
-		// 예전 방식
-		//FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
-		//int CurTileType = static_cast<int>(CurrentTileType);
-		//WallTileMap->SetTileLocation(MousePos, static_cast<int>(CurrentTileType));
-
 		FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
 
 		FVector2D TileMapLocation = WallTileMap->GetActorLocation();
@@ -91,8 +74,11 @@ void ATileMapGameMode::Tick(float _DeltaTime)
 		Tile* Tile = WallTileMap->GetTileRef(LocalMousePos);
 		if (nullptr != Tile->SpriteRenderer)
 		{
-			Tile->SpriteRenderer->Destroy(0.0f);
+			Tile->SpriteRenderer->Destroy();
 			Tile->SpriteRenderer = nullptr;
+			Tile->Pivot = FVector2D::ZERO;
+			Tile->Scale = FVector2D::ZERO;
+			Tile->SpriteIndex = -1;
 		}
 	}
 

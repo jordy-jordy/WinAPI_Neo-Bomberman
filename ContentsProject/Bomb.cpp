@@ -68,7 +68,7 @@ void ABomb::Bomb_ExPlode()
 	SpriteRenderer->ChangeAnimation("Bomb_Gone");
 	Explode_Center = CreateDefaultSubObject<USpriteRenderer>();
 	//Explode_Center->SetSprite("ExplodeCenter.png");
-	Explode_Center->CreateAnimation("Bomb_Center", "ExplodeCenter.png", 0, 19, ExplodeFrameSpeed - 0.05f, false);
+	Explode_Center->CreateAnimation("Bomb_Center", "ExplodeCenter.png", 0, 19, ExplodeFrameSpeed, false);
 	Explode_Center->ChangeAnimation("Bomb_Center");
 	Explode_Center->SetComponentScale({ 32, 32 });
 	Explode_Center->SetComponentLocation({ 0, 0 });

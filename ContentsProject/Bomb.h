@@ -45,8 +45,8 @@ private:
 
 	float Bomb_Explode_Time = 2.0f;
 
-	float IdleFrameSpeed = 0.1f;
-	float ExplodeFrameSpeed = 0.1f;
+	float IdleFrameSpeed = 0.15f;
+	float ExplodeFrameSpeed = 0.05f;
 
 
 };
