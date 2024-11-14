@@ -22,9 +22,6 @@
     <ClCompile Include="Bomb.cpp">
       <Filter>ContentsObject\Play</Filter>
     </ClCompile>
-    <ClCompile Include="Monster.cpp">
-      <Filter>ContentsObject\Play</Filter>
-    </ClCompile>
     <ClCompile Include="PlayMap.cpp">
       <Filter>ContentsObject\Play</Filter>
     </ClCompile>
@@ -49,6 +46,12 @@
     <ClCompile Include="Tile_Destroy.cpp">
       <Filter>ContentsObject\Play</Filter>
     </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>ContentsObject\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Mushroom.cpp">
+      <Filter>ContentsObject\Play</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayGameMode.h">
@@ -70,9 +73,6 @@
       <Filter>ContentsObject\Global</Filter>
     </ClInclude>
     <ClInclude Include="Bomb.h">
-      <Filter>ContentsObject\Play</Filter>
-    </ClInclude>
-    <ClInclude Include="Monster.h">
       <Filter>ContentsObject\Play</Filter>
     </ClInclude>
     <ClInclude Include="PlayMap.h">
@@ -100,6 +100,12 @@
       <Filter>TileMap</Filter>
     </ClInclude>
     <ClInclude Include="Tile_Destroy.h">
+      <Filter>ContentsObject\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>ContentsObject\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Mushroom.h">
       <Filter>ContentsObject\Play</Filter>
     </ClInclude>
   </ItemGroup>
