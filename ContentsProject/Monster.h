@@ -1,5 +1,5 @@
 #pragma once
-#include <Enginecore/Actor.h>
+#include <EngineCore/Actor.h>
 
 // Ό³Έν :
 class AMonster : public AActor
@@ -14,6 +14,9 @@ public:
 	AMonster(AMonster&& _Other) noexcept = delete;
 	AMonster& operator=(const AMonster& _Other) = delete;
 	AMonster& operator=(AMonster&& _Other) noexcept = delete;
+
+	virtual void SetWallTileMap(class ATileMap* _TileMap) = 0;
+
 
 protected:
 

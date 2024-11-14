@@ -13,22 +13,37 @@
 #include "ATileMap.h"
 #include "Player.h"
 #include "Bomb.h"
+#include "Monster.h"
+#include "Mushroom.h"
 
 APlayGameMode::APlayGameMode()
 {
-
 }
 
 APlayGameMode::~APlayGameMode()
 {
 }
 
-void APlayGameMode::BeginPlay()
+void APlayGameMode::PlayerInit()
 {
-	Super::BeginPlay();
+	// 플레이어 세팅
+	std::vector<FIntPoint> PlayerStartposS = WallTileMap->FindSpriteIndex(ATiles::Player_Spawn);
 
-	APlayMap* BG = GetWorld()->SpawnActor<APlayMap>();
+	UEngineRandom StartRandom;
+	FIntPoint Point = PlayerStartposS[StartRandom.RandomInt(0, static_cast<int>(PlayerStartposS.size()) - 1)];
 
+	FVector2D TileLocation = WallTileMap->IndexToTileLocation(Point) + WallTileMap->GetActorLocation();
+	FVector2D HalfTiles = WallTileMap->GetTileHalfSize();
+	FVector2D LocalLocation = TileLocation + HalfTiles;
+	GetWorld()->GetPawn()->SetActorLocation(LocalLocation);
+
+	APlayer* Player = GetWorld()->GetPawn<APlayer>();
+	Player->SetWallTileMap(WallTileMap);
+}
+
+void APlayGameMode::PlayTileMapInit()
+{
+	// 맵 세팅
 	WallTileMap = GetWorld()->SpawnActor<ATileMap>();
 	WallTileMap->SetActorLocation(WallTileMapLocation);
 
@@ -49,22 +64,29 @@ void APlayGameMode::BeginPlay()
 	UEngineSerializer Ser;
 	NewFile.Read(Ser);
 
-
 	WallTileMap->DeSerialize(Ser);
 
+}
 
-	std::vector<FIntPoint> PlayerStartposS = WallTileMap->FindSpriteIndex(ATiles::Player_Spawn);
+void APlayGameMode::BeginPlay()
+{
+	Super::BeginPlay();
 
-	UEngineRandom StartRandom;
-	FIntPoint Point = PlayerStartposS[StartRandom.RandomInt(0, static_cast<int>(PlayerStartposS.size())-1)];
+	APlayMap* BG = GetWorld()->SpawnActor<APlayMap>();
 
-	FVector2D TileLocation = WallTileMap->IndexToTileLocation(Point) + WallTileMap->GetActorLocation();
-	FVector2D HalfTiles = WallTileMap->GetTileHalfSize();
-	FVector2D LocalLocation = TileLocation + HalfTiles;
-	GetWorld()->GetPawn()->SetActorLocation(LocalLocation);
+	PlayTileMapInit();
+	PlayerInit();
 
-	APlayer* Player = GetWorld()->GetPawn<APlayer>();
-	Player->SetWallTileMap(WallTileMap);
+	// 몬스터 세팅
+	AMonster* Mushroom = GetWorld()->SpawnActor<AMushroom>();
+	Mushroom->SetWallTileMap(WallTileMap);
+	FVector2D TileMapLoc = WallTileMap->GetActorLocation();
+	FVector2D TileHalfSize = WallTileMap->GetTileHalfSize();
+	FIntPoint Index = { 6, 10 };
+	FVector2D Mush_Location = WallTileMap->IndexToTileLocation(Index);
+	FVector2D LocalLoc = Mush_Location + TileMapLoc + TileHalfSize;
+
+	Mushroom->SetActorLocation(LocalLoc);
 
 
 	

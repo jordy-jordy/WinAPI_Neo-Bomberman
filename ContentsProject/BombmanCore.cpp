@@ -224,7 +224,6 @@ void BombmanCore::BeginPlay()
 
 	UEngineAPICore::GetCore()->CreateLevel<ATitleGameMode, AActor>("Title");
 	UEngineAPICore::GetCore()->CreateLevel<APlayGameMode, APlayer>("Play");
-
 	UEngineAPICore::GetCore()->CreateLevel<ATileMapGameMode, AActor>("Tile");
 
 

@@ -1,8 +1,8 @@
 #pragma once
-#include <EngineCore/Actor.h>
+#include "Monster.h"
 
 // Ό³Έν :
-class AMushroom : public AActor
+class AMushroom : public AMonster
 {
 public:
 	// constrcuter destructer
@@ -15,10 +15,19 @@ public:
 	AMushroom& operator=(const AMushroom& _Other) = delete;
 	AMushroom& operator=(AMushroom&& _Other) noexcept = delete;
 
+	void BeginPlay() override;
+	void Tick(float _DeltaTime) override;
+
+	void SetWallTileMap(class ATileMap* _TileMap) override
+	{
+		WallTileMap = _TileMap;
+	}
+
 protected:
 	class USpriteRenderer* SpriteRenderer = nullptr;
 
 
 private:
+	class ATileMap* WallTileMap = nullptr;
 
 };

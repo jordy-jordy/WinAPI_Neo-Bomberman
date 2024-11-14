@@ -21,6 +21,8 @@ public:
 
 protected:
 	void Tick(float _DeltaTime) override;
+	void PlayerInit();
+	void PlayTileMapInit();
 
 private:
 	class ATileMap* WallTileMap = nullptr;

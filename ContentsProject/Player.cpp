@@ -76,9 +76,6 @@ APlayer::~APlayer()
 void APlayer::BeginPlay()
 {
 	Super::BeginPlay();
-
-	// 현재 쓰지 않아서 주석 처리
-	//ChangeState(PlayerState::Idle);
 }
 
 void APlayer::Tick(float _DeltaTime)

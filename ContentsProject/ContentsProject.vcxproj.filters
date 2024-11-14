@@ -19,12 +19,6 @@
     <ClCompile Include="Player.cpp">
       <Filter>ContentsObject\Global</Filter>
     </ClCompile>
-    <ClCompile Include="Bomb.cpp">
-      <Filter>ContentsObject\Play</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayMap.cpp">
-      <Filter>ContentsObject\Play</Filter>
-    </ClCompile>
     <ClCompile Include="TitleLogo.cpp">
       <Filter>ContentsObject\Title</Filter>
     </ClCompile>
@@ -43,14 +37,20 @@
     <ClCompile Include="TestMap.cpp">
       <Filter>TileMap</Filter>
     </ClCompile>
-    <ClCompile Include="Tile_Destroy.cpp">
-      <Filter>ContentsObject\Play</Filter>
-    </ClCompile>
     <ClCompile Include="Monster.cpp">
-      <Filter>ContentsObject\Play</Filter>
+      <Filter>ContentsObject\Play\Monster\Parent</Filter>
+    </ClCompile>
+    <ClCompile Include="Bomb.cpp">
+      <Filter>ContentsObject\Play\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile_Destroy.cpp">
+      <Filter>ContentsObject\Play\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayMap.cpp">
+      <Filter>ContentsObject\Play\BG</Filter>
     </ClCompile>
     <ClCompile Include="Mushroom.cpp">
-      <Filter>ContentsObject\Play</Filter>
+      <Filter>ContentsObject\Play\Monster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -71,12 +71,6 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>ContentsObject\Global</Filter>
-    </ClInclude>
-    <ClInclude Include="Bomb.h">
-      <Filter>ContentsObject\Play</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayMap.h">
-      <Filter>ContentsObject\Play</Filter>
     </ClInclude>
     <ClInclude Include="ContentsEnum.h">
       <Filter>Global</Filter>
@@ -99,14 +93,20 @@
     <ClInclude Include="TestMap.h">
       <Filter>TileMap</Filter>
     </ClInclude>
-    <ClInclude Include="Tile_Destroy.h">
-      <Filter>ContentsObject\Play</Filter>
-    </ClInclude>
     <ClInclude Include="Monster.h">
-      <Filter>ContentsObject\Play</Filter>
+      <Filter>ContentsObject\Play\Monster\Parent</Filter>
+    </ClInclude>
+    <ClInclude Include="Bomb.h">
+      <Filter>ContentsObject\Play\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile_Destroy.h">
+      <Filter>ContentsObject\Play\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayMap.h">
+      <Filter>ContentsObject\Play\BG</Filter>
     </ClInclude>
     <ClInclude Include="Mushroom.h">
-      <Filter>ContentsObject\Play</Filter>
+      <Filter>ContentsObject\Play\Monster</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -136,6 +136,18 @@
     </Filter>
     <Filter Include="TileMap">
       <UniqueIdentifier>{97059f21-d2fb-46a6-82eb-822464da6c1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContentsObject\Play\Objects">
+      <UniqueIdentifier>{acfefd0f-d0da-49d6-acde-34f8c31d8b66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContentsObject\Play\BG">
+      <UniqueIdentifier>{6bcb5aa5-d1cc-4c4b-a56b-2169f147caea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContentsObject\Play\Monster">
+      <UniqueIdentifier>{5d9a3347-840e-43cc-bc75-e992b71fd46c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContentsObject\Play\Monster\Parent">
+      <UniqueIdentifier>{aac8f3b9-2d31-4355-ab51-f95a61d51e6b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
