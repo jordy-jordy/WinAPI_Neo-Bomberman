@@ -20,7 +20,6 @@ AMushroom::AMushroom()
 
 	SpriteRenderer->ChangeAnimation("Mushroom_Idle");
 
-
 };
 
 AMushroom::~AMushroom()
@@ -35,4 +34,6 @@ void AMushroom::BeginPlay()
 void AMushroom::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
+
+	SpriteRenderer->SetOrder(GetActorLocation().Y - WallTileMap->GetActorLocation().Y);
 }
