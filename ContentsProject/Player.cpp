@@ -298,8 +298,8 @@ void APlayer::Move(float _DeltaTime)
 		return;
 	}
 	if (TileData->SpriteIndex != 2 && 
-		TileData->SpriteIndex != 1 /*&& 
-		true != BombCheck*/)
+		TileData->SpriteIndex != 1 && 
+		true != BombCheck)
 	{
 		AddActorLocation(Vector * _DeltaTime * Speed);
 	}
