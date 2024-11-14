@@ -9,6 +9,7 @@
 #include <Windows.h>
 #include <EnginePlatform/EngineWindow.h>
 #include <EngineBase/EngineTimer.h>
+#include <EngineBase/EngineString.h>
 
 #pragma comment (lib, "EngineBase.lib")
 #pragma comment (lib, "EnginePlatform.lib")
@@ -61,19 +62,72 @@ public:
 	template<typename GameModeType, typename MainPawnType>
 	ULevel* CreateLevel(std::string_view _LevelName)
 	{
+		std::string UpperName = UEngineString::ToUpper(_LevelName);
+
+		if (false != Levels.contains(UpperName))
+		{
+			MSGASSERT("존재하는 이름의 레벨을 또 만들수 없습니다" + UpperName);
+			return nullptr;
+		}
+
+
 		ULevel* NewLevel = new ULevel();
 
-		// 게임모드가 Level의 특성을 설정하는 중요객체이기 때문이다.
+		// 게임 모드가 레벨의 특성을 설정하는 중요한 객체
 		NewLevel->CreateGameMode<GameModeType, MainPawnType>();
+		NewLevel->SetName(UpperName);
 
-		// 관리란 뭐냐?
-		// 삭제되는 객체를 만들고.
-		// 그 객체안에 자료구조 넣은다음
-		// 그 자료구조안에 새롭게 만들어지는 객체들을 보관하는것.ㄴ
-		Levels.insert({ _LevelName.data() , NewLevel });
+
+		// 레벨을 string으로 저장하고 string으로 호출한다.
+		Levels.insert({ UpperName, NewLevel });
 
 		return NewLevel;
 	}
+
+
+	template<typename GameModeType, typename MainPawnType>
+	void ResetLevel(std::string_view _LevelName)
+	{
+		// DestroyLevelName = _LevelName;
+		std::string UpperName = UEngineString::ToUpper(_LevelName);
+
+		// 지금 당장 이녀석을 지우면 안된다.
+		if (CurLevel->GetName() != UpperName)
+		{
+			DestroyLevel(_LevelName);
+			CreateLevel<GameModeType, MainPawnType>(UpperName);
+			return;
+		}
+
+		// CurLevel은 삭제되어야 한다.
+		// 나의 포인터는 살아있다. CurLevel
+		std::map<std::string, class ULevel*>::iterator FindIter = Levels.find(UpperName);
+		Levels.erase(FindIter);
+		NextLevel = CreateLevel<GameModeType, MainPawnType>(UpperName);
+		IsCurLevelReset = true;
+	}
+
+	void DestroyLevel(std::string_view _LevelName)
+	{
+		std::string UpperName = UEngineString::ToUpper(_LevelName);
+
+		if (false == Levels.contains(UpperName))
+		{
+			// MSGASSERT("존재하지 않는 레벨을 리셋할수 없습니다." + UpperName);
+			return;
+		}
+
+		std::map<std::string, class ULevel*>::iterator FindIter = Levels.find(UpperName);
+
+		if (nullptr != FindIter->second)
+		{
+			delete FindIter->second;
+			FindIter->second = nullptr;
+		}
+
+		Levels.erase(FindIter);
+	}
+
 
 	void OpenLevel(std::string_view _LevelName);
 
@@ -100,6 +154,7 @@ private:
 	// 포인터 체인지 방식
 	class ULevel* CurLevel = nullptr;
 	class ULevel* NextLevel = nullptr;
+	bool IsCurLevelReset = false;
 
 	void Tick();
 

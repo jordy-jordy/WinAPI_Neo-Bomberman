@@ -18,6 +18,8 @@ USpriteRenderer::~USpriteRenderer()
 // StaticMeshRenderer : public URenderer
 void USpriteRenderer::Render(float _DeltaTime)
 {
+	// 업데이트
+
 	if (nullptr == Sprite)
 	{
 		MSGASSERT("스프라이트가 세팅되지 않은 액터를 랜더링을 할수 없습니다.");
@@ -67,6 +69,7 @@ void USpriteRenderer::ComponentTick(float _DeltaTime)
 {
 	Super::ComponentTick(_DeltaTime);
 
+	// 애니메이션 진행시키는 코드를 ComponentTick으로 옮겼다. 
 	if (nullptr != CurAnimation)
 	{
 		CurAnimation->IsEnd = false;
@@ -150,6 +153,9 @@ void USpriteRenderer::SetOrder(int _Order)
 
 	Order = _Order;
 
+	// PushRenderer 에서 나는 랜더 구조에 편입된다.
+	// 그런데 2번들어가는 버그가 보였다.
+	// 그래서 이걸 해서 일단ㅌ 막았다. 
 	if (PrevOrder == Order)
 	{
 		return;
@@ -185,12 +191,6 @@ FVector2D USpriteRenderer::SetSpriteScale(float _Ratio /*= 1.0f*/, int _CurIndex
 
 void USpriteRenderer::CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, int _Start, int _End, float Time /*= 0.1f*/, bool _Loop /*= true*/)
 {
-	if (_Start > _End)
-	{
-		MSGASSERT("애니메이션에서 Start가 End보다 클수는 없습니다. " + std::string(_AnimationName));
-		return;
-	}
-
 	int Inter = 0;
 
 	std::vector<int> Indexs;
