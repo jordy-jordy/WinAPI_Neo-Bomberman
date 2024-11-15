@@ -47,16 +47,10 @@ private:
 	int TILE_INDEX_MIN_Y = 0;
 	int TILE_INDEX_MAX_Y = 11;
 
-	FVector2D Pos;
-	FIntPoint Index;
-
 	FVector2D ZERO = { 0 , 0 };
-	FVector2D UP = { 0, -16 };
-	FVector2D DOWN = { 0, 16 };
-	FVector2D LEFT = { -16, 0 };
-	FVector2D RIGHT = { 16, 0 };
-
-
-
+	FVector2D UP = { 0, -17 };
+	FVector2D DOWN = { 0, 17 };
+	FVector2D LEFT = { -17, 0 };
+	FVector2D RIGHT = { 17, 0 };
 
 };

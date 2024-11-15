@@ -86,13 +86,13 @@ bool AMushroom::ISMOVE(FVector2D _NEXTPOS, Tile* _NEXTTILE)
 		_NEXTPOS.Y > TILE_INDEX_MIN_Y &&
 		_NEXTPOS.Y < TILE_INDEX_MAX_Y &&
 		_NEXTTILE->SpriteIndex != 1 &&
-		_NEXTTILE->SpriteIndex != 2)
+		_NEXTTILE->SpriteIndex != 2 &&
+		_NEXTTILE->SpriteIndex != 3)
 	{
 		return true;
 	}
 	return false;
 }
-
 
 void AMushroom::Mush_Move(float _DeltaTime)
 {
@@ -119,96 +119,86 @@ void AMushroom::Mush_Move(float _DeltaTime)
 	UEngineDebug::CoreOutPutString("Location_Target : " + Location_Target.ToString());
 	UEngineDebug::CoreOutPutString("Index_Target : " + Index_Target.ToString());
 
-	if (Index_Target.X > TILE_INDEX_MIN_X &&
-		Index_Target.X < TILE_INDEX_MAX_X &&
-		Index_Target.Y > TILE_INDEX_MIN_Y &&
-		Index_Target.Y < TILE_INDEX_MAX_Y &&
-		GetTileNext->SpriteIndex != 1 &&
-		GetTileNext->SpriteIndex != 2)
+	if (true == ISMOVE(Index_Target, GetTileNext))
 	{
 		AddActorLocation(MoveTO * _DeltaTime * Speed);
 		return;
 	}
-	else
+
+	if (MoveTO == FVector2D::LEFT)
 	{
-		if (MoveTO == FVector2D::LEFT)
+		if (true == ISMOVE(LOC_UP, GET_TILE_UP))
 		{
-			if (true == ISMOVE(LOC_UP, GET_TILE_UP))
-			{
-				MoveTO = FVector2D::UP;
-				return;
-			}
-			if (true == ISMOVE(LOC_DOWN, GET_TILE_DOWN))
-			{
-				MoveTO = FVector2D::DOWN;
-				return;
-			}
-			if (true == ISMOVE(LOC_RIGHT, GET_TILE_RIGHT))
-			{
-				MoveTO = FVector2D::RIGHT;
-				return;
-			}
+			MoveTO = FVector2D::UP;
+			return;
 		}
-
-		if (MoveTO == FVector2D::RIGHT)
+		if (true == ISMOVE(LOC_DOWN, GET_TILE_DOWN))
 		{
-			if (true == ISMOVE(LOC_UP, GET_TILE_UP))
-			{
-				MoveTO = FVector2D::UP;
-				return;
-			}
-			if (true == ISMOVE(LOC_DOWN, GET_TILE_DOWN))
-			{
-				MoveTO = FVector2D::DOWN;
-				return;
-			}
-			if (true == ISMOVE(LOC_LEFT, GET_TILE_LEFT))
-			{
-				MoveTO = FVector2D::LEFT;
-				return;
-			}
+			MoveTO = FVector2D::DOWN;
+			return;
 		}
-
-		if (MoveTO == FVector2D::UP)
+		if (true == ISMOVE(LOC_RIGHT, GET_TILE_RIGHT))
 		{
-			if (true == ISMOVE(LOC_DOWN, GET_TILE_DOWN))
-			{
-				MoveTO = FVector2D::DOWN;
-				return;
-			}
-			if (true == ISMOVE(LOC_LEFT, GET_TILE_LEFT))
-			{
-				MoveTO = FVector2D::LEFT;
-				return;
-			}
-			if (true == ISMOVE(LOC_RIGHT, GET_TILE_RIGHT))
-			{
-				MoveTO = FVector2D::RIGHT;
-				return;
-			}
-
+			MoveTO = FVector2D::RIGHT;
+			return;
 		}
-
-		if (MoveTO == FVector2D::DOWN)
-		{
-			if (true == ISMOVE(LOC_LEFT, GET_TILE_LEFT))
-			{
-				MoveTO = FVector2D::LEFT;
-				return;
-			}
-			if (true == ISMOVE(LOC_RIGHT, GET_TILE_RIGHT))
-			{
-				MoveTO = FVector2D::RIGHT;
-				return;
-			}
-			if (true == ISMOVE(LOC_UP, GET_TILE_UP))
-			{
-				MoveTO = FVector2D::UP;
-				return;
-			}
-		}
-
 	}
+	else if (MoveTO == FVector2D::RIGHT)
+	{
+		if (true == ISMOVE(LOC_UP, GET_TILE_UP))
+		{
+			MoveTO = FVector2D::UP;
+			return;
+		}
+		if (true == ISMOVE(LOC_DOWN, GET_TILE_DOWN))
+		{
+			MoveTO = FVector2D::DOWN;
+			return;
+		}
+		if (true == ISMOVE(LOC_LEFT, GET_TILE_LEFT))
+		{
+			MoveTO = FVector2D::LEFT;
+			return;
+		}
+	}
+	else if (MoveTO == FVector2D::UP)
+	{
+		if (true == ISMOVE(LOC_RIGHT, GET_TILE_RIGHT))
+		{
+			MoveTO = FVector2D::RIGHT;
+			return;
+		}
+		if (true == ISMOVE(LOC_DOWN, GET_TILE_DOWN))
+		{
+			MoveTO = FVector2D::DOWN;
+			return;
+		}
+		if (true == ISMOVE(LOC_LEFT, GET_TILE_LEFT))
+		{
+			MoveTO = FVector2D::LEFT;
+			return;
+		}
+	}
+	else if (MoveTO == FVector2D::DOWN)
+	{
+		if (true == ISMOVE(LOC_LEFT, GET_TILE_LEFT))
+		{
+			MoveTO = FVector2D::LEFT;
+			return;
+		}
+		if (true == ISMOVE(LOC_RIGHT, GET_TILE_RIGHT))
+		{
+			MoveTO = FVector2D::RIGHT;
+			return;
+		}
+		if (true == ISMOVE(LOC_UP, GET_TILE_UP))
+		{
+			MoveTO = FVector2D::UP;
+			return;
+		}
+	}
+
+
 
 
 
