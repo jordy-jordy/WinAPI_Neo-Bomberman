@@ -8,6 +8,7 @@ namespace UEngineDebug
 		Circle,
 	};
 
+	// MainWindow가 있다.
 
 	void SetIsDebug(bool _IsDebug);
 
@@ -19,6 +20,7 @@ namespace UEngineDebug
 
 	void CoreDebugRender(FTransform _Trans, EDebugPosType _Type);
 
+	// 분리해야 하겠네요
 
 	void PrintEngineDebugRender();
 }

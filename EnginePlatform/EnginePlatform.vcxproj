@@ -23,6 +23,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="EngineSound.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="EngineWinDebug.h" />
     <ClInclude Include="EngineWindow.h" />
     <ClInclude Include="EngineWinImage.h">
@@ -41,6 +45,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineInput.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="EngineSound.cpp">
       <SubType>
       </SubType>
     </ClCompile>

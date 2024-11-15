@@ -16,6 +16,9 @@
     <ClCompile Include="EngineWinImage.cpp">
       <Filter>Resources</Filter>
     </ClCompile>
+    <ClCompile Include="EngineSound.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EngineInput.h">
@@ -55,6 +58,9 @@
       <Filter>Debug</Filter>
     </ClInclude>
     <ClInclude Include="EngineWinImage.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineSound.h">
       <Filter>Resources</Filter>
     </ClInclude>
   </ItemGroup>

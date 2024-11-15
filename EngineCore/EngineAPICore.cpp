@@ -3,6 +3,7 @@
 #include <EnginePlatform/EngineInput.h>
 
 #include <EnginePlatform/EngineWindow.h>
+#include <EnginePlatform/EngineSound.h>
 #include <EngineBase/EngineDelegate.h>
 #include <EngineBase/EngineDebug.h>
 
@@ -42,6 +43,8 @@ UEngineAPICore::~UEngineAPICore()
 	}
 
 	Levels.clear();
+
+	UEngineSound::Release();
 }
 
 
@@ -125,6 +128,9 @@ void UEngineAPICore::Tick()
 	// 시간을 잴겁니다. 현재시간 
 	DeltaTimer.TimeCheck();
 	float DeltaTime = DeltaTimer.GetDeltaTime();
+
+	// 꼭해줘야 한다.
+	UEngineSound::Update();
 
 	// 키체크
 	UEngineInput::GetInst().KeyCheck(DeltaTime);
