@@ -55,27 +55,27 @@ FVector2D AMushroom::InvertLOC(FVector2D _Loc)
 {
 	if (_Loc == FVector2D::ZERO)
 	{
-		return ZERO;
+		return {0, 0};
 	}
 
 	if (_Loc == FVector2D::LEFT)
 	{
-		return LEFT;
+		return {-17, 0};
 	}
 
 	if (_Loc == FVector2D::RIGHT)
 	{
-		return RIGHT;
+		return {17, 0};
 	}
 
 	if (_Loc == FVector2D::UP)
 	{
-		return UP;
+		return {0, -17};
 	}
 
 	if (_Loc == FVector2D::DOWN)
 	{
-		return DOWN;
+		return {0, 17};
 	}
 }
 
@@ -94,6 +94,7 @@ bool AMushroom::ISMOVE(FVector2D _NEXTPOS, Tile* _NEXTTILE)
 	return false;
 }
 
+
 void AMushroom::Mush_Move(float _DeltaTime)
 {
 	FVector2D Location = GetActorLocation();
@@ -101,109 +102,145 @@ void AMushroom::Mush_Move(float _DeltaTime)
 	FVector2D LocalLocation = Location - WallTileMapLocation;
 
 	FVector2D TileSize = WallTileMap->GetTileSize();
-	FVector2D TileHalfSize = WallTileMap->GetTileHalfSize();
-
 	FVector2D Location_Target = LocalLocation + InvertLOC(MoveTO);
 	FVector2D Index_Target = Location_Target / TileSize;
 
-	FVector2D LOC_UP = (LocalLocation + UP) / TileSize;
-	FVector2D LOC_DOWN = (LocalLocation + DOWN) / TileSize;
-	FVector2D LOC_LEFT = (LocalLocation + LEFT) / TileSize;
-	FVector2D LOC_RIGHT = (LocalLocation + RIGHT) / TileSize;
-
 	Tile* GetTileNext = WallTileMap->GetTileRef(Location_Target);
-	Tile* GET_TILE_UP = WallTileMap->GetTileRef(LOC_UP);
-	Tile* GET_TILE_DOWN = WallTileMap->GetTileRef(LOC_DOWN);
-	Tile* GET_TILE_LEFT = WallTileMap->GetTileRef(LOC_LEFT);
-	Tile* GET_TILE_RIGHT = WallTileMap->GetTileRef(LOC_RIGHT);
-	UEngineDebug::CoreOutPutString("Location_Target : " + Location_Target.ToString());
-	UEngineDebug::CoreOutPutString("Index_Target : " + Index_Target.ToString());
 
-	if (true == ISMOVE(Index_Target, GetTileNext))
+	// 현재 방향으로 이동 가능한 경우
+	if (ISMOVE(Index_Target, GetTileNext))
 	{
 		AddActorLocation(MoveTO * _DeltaTime * Speed);
 		return;
 	}
 
-	if (MoveTO == FVector2D::LEFT)
+	// 이동 불가능한 경우, 랜덤하게 새로운 방향 선택
+	FVector2D PossibleDirections[4] = { FVector2D::LEFT, FVector2D::RIGHT, FVector2D::UP, FVector2D::DOWN };
+	UEngineRandom Random;
+	int RandomIndex = Random.RandomInt(0, 3);
+
+	// 이동 가능한 방향을 찾을 때까지 반복
+	for (int i = 0; i < 4; i++)
 	{
-		if (true == ISMOVE(LOC_UP, GET_TILE_UP))
+		MoveTO = PossibleDirections[RandomIndex];
+		FVector2D NewTarget = LocalLocation + InvertLOC(MoveTO);
+		FVector2D NewIndex = NewTarget / TileSize;
+		Tile* NewTile = WallTileMap->GetTileRef(NewTarget);
+
+		if (ISMOVE(NewIndex, NewTile))
 		{
-			MoveTO = FVector2D::UP;
 			return;
 		}
-		if (true == ISMOVE(LOC_DOWN, GET_TILE_DOWN))
-		{
-			MoveTO = FVector2D::DOWN;
-			return;
-		}
-		if (true == ISMOVE(LOC_RIGHT, GET_TILE_RIGHT))
-		{
-			MoveTO = FVector2D::RIGHT;
-			return;
-		}
+
+		// 다음 랜덤 방향으로 전환
+		RandomIndex = (RandomIndex + 1) % 4;
 	}
-	else if (MoveTO == FVector2D::RIGHT)
-	{
-		if (true == ISMOVE(LOC_UP, GET_TILE_UP))
-		{
-			MoveTO = FVector2D::UP;
-			return;
-		}
-		if (true == ISMOVE(LOC_DOWN, GET_TILE_DOWN))
-		{
-			MoveTO = FVector2D::DOWN;
-			return;
-		}
-		if (true == ISMOVE(LOC_LEFT, GET_TILE_LEFT))
-		{
-			MoveTO = FVector2D::LEFT;
-			return;
-		}
-	}
-	else if (MoveTO == FVector2D::UP)
-	{
-		if (true == ISMOVE(LOC_RIGHT, GET_TILE_RIGHT))
-		{
-			MoveTO = FVector2D::RIGHT;
-			return;
-		}
-		if (true == ISMOVE(LOC_DOWN, GET_TILE_DOWN))
-		{
-			MoveTO = FVector2D::DOWN;
-			return;
-		}
-		if (true == ISMOVE(LOC_LEFT, GET_TILE_LEFT))
-		{
-			MoveTO = FVector2D::LEFT;
-			return;
-		}
-	}
-	else if (MoveTO == FVector2D::DOWN)
-	{
-		if (true == ISMOVE(LOC_LEFT, GET_TILE_LEFT))
-		{
-			MoveTO = FVector2D::LEFT;
-			return;
-		}
-		if (true == ISMOVE(LOC_RIGHT, GET_TILE_RIGHT))
-		{
-			MoveTO = FVector2D::RIGHT;
-			return;
-		}
-		if (true == ISMOVE(LOC_UP, GET_TILE_UP))
-		{
-			MoveTO = FVector2D::UP;
-			return;
-		}
-	}
-
-
-
-
-
-
-
-
-
 }
+
+
+
+//void AMushroom::Mush_Move(float _DeltaTime)
+//{
+//	FVector2D Location = GetActorLocation();
+//	FVector2D WallTileMapLocation = WallTileMap->GetActorLocation();
+//	FVector2D LocalLocation = Location - WallTileMapLocation;
+//
+//	FVector2D TileSize = WallTileMap->GetTileSize();
+//	FVector2D TileHalfSize = WallTileMap->GetTileHalfSize();
+//
+//	FVector2D Location_Target = LocalLocation + InvertLOC(MoveTO);
+//	FVector2D Index_Target = Location_Target / TileSize;
+//
+//	FVector2D LOC_UP = (LocalLocation + UP) / TileSize;
+//	FVector2D LOC_DOWN = (LocalLocation + DOWN) / TileSize;
+//	FVector2D LOC_LEFT = (LocalLocation + LEFT) / TileSize;
+//	FVector2D LOC_RIGHT = (LocalLocation + RIGHT) / TileSize;
+//
+//	Tile* GetTileNext = WallTileMap->GetTileRef(Location_Target);
+//	Tile* GET_TILE_UP = WallTileMap->GetTileRef(LOC_UP);
+//	Tile* GET_TILE_DOWN = WallTileMap->GetTileRef(LOC_DOWN);
+//	Tile* GET_TILE_LEFT = WallTileMap->GetTileRef(LOC_LEFT);
+//	Tile* GET_TILE_RIGHT = WallTileMap->GetTileRef(LOC_RIGHT);
+//	UEngineDebug::CoreOutPutString("Location_Target : " + Location_Target.ToString());
+//	UEngineDebug::CoreOutPutString("Index_Target : " + Index_Target.ToString());
+//
+//	if (true == ISMOVE(Index_Target, GetTileNext))
+//	{
+//		AddActorLocation(MoveTO * _DeltaTime * Speed);
+//		return;
+//	}
+//
+//	if (MoveTO == FVector2D::LEFT)
+//	{
+//		if (true == ISMOVE(LOC_UP, GET_TILE_UP))
+//		{
+//			MoveTO = FVector2D::UP;
+//			return;
+//		}
+//		if (true == ISMOVE(LOC_DOWN, GET_TILE_DOWN))
+//		{
+//			MoveTO = FVector2D::DOWN;
+//			return;
+//		}
+//		if (true == ISMOVE(LOC_RIGHT, GET_TILE_RIGHT))
+//		{
+//			MoveTO = FVector2D::RIGHT;
+//			return;
+//		}
+//	}
+//	else if (MoveTO == FVector2D::RIGHT)
+//	{
+//		if (true == ISMOVE(LOC_UP, GET_TILE_UP))
+//		{
+//			MoveTO = FVector2D::UP;
+//			return;
+//		}
+//		if (true == ISMOVE(LOC_DOWN, GET_TILE_DOWN))
+//		{
+//			MoveTO = FVector2D::DOWN;
+//			return;
+//		}
+//		if (true == ISMOVE(LOC_LEFT, GET_TILE_LEFT))
+//		{
+//			MoveTO = FVector2D::LEFT;
+//			return;
+//		}
+//	}
+//	else if (MoveTO == FVector2D::UP)
+//	{
+//		if (true == ISMOVE(LOC_RIGHT, GET_TILE_RIGHT))
+//		{
+//			MoveTO = FVector2D::RIGHT;
+//			return;
+//		}
+//		if (true == ISMOVE(LOC_DOWN, GET_TILE_DOWN))
+//		{
+//			MoveTO = FVector2D::DOWN;
+//			return;
+//		}
+//		if (true == ISMOVE(LOC_LEFT, GET_TILE_LEFT))
+//		{
+//			MoveTO = FVector2D::LEFT;
+//			return;
+//		}
+//	}
+//	else if (MoveTO == FVector2D::DOWN)
+//	{
+//		if (true == ISMOVE(LOC_LEFT, GET_TILE_LEFT))
+//		{
+//			MoveTO = FVector2D::LEFT;
+//			return;
+//		}
+//		if (true == ISMOVE(LOC_RIGHT, GET_TILE_RIGHT))
+//		{
+//			MoveTO = FVector2D::RIGHT;
+//			return;
+//		}
+//		if (true == ISMOVE(LOC_UP, GET_TILE_UP))
+//		{
+//			MoveTO = FVector2D::UP;
+//			return;
+//		}
+//	}
+//
+//}
