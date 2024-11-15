@@ -49,114 +49,170 @@ void AMushroom::Mush_Order()
 	SpriteRenderer->SetOrder(GetActorLocation().Y - WallTileMap->GetActorLocation().Y);
 }
 
-bool AMushroom::CheckCantMove(FVector2D _Pos)
+
+
+FVector2D AMushroom::InvertLOC(FVector2D _Loc)
 {
-	if (true == WallTileMap->IsIndexOverFVector(_Pos))
+	if (_Loc == FVector2D::ZERO)
+	{
+		return ZERO;
+	}
+
+	if (_Loc == FVector2D::LEFT)
+	{
+		return LEFT;
+	}
+
+	if (_Loc == FVector2D::RIGHT)
+	{
+		return RIGHT;
+	}
+
+	if (_Loc == FVector2D::UP)
+	{
+		return UP;
+	}
+
+	if (_Loc == FVector2D::DOWN)
+	{
+		return DOWN;
+	}
+}
+
+bool AMushroom::ISMOVE(FVector2D _NEXTPOS, Tile* _NEXTTILE)
+{
+	if (_NEXTPOS.X > TILE_INDEX_MIN_X &&
+		_NEXTPOS.X < TILE_INDEX_MAX_X &&
+		_NEXTPOS.Y > TILE_INDEX_MIN_Y &&
+		_NEXTPOS.Y < TILE_INDEX_MAX_Y &&
+		_NEXTTILE->SpriteIndex != 1 &&
+		_NEXTTILE->SpriteIndex != 2)
 	{
 		return true;
 	}
-
 	return false;
 }
 
-int AMushroom::CheckNextPos(FVector2D _CurPos)
-{
-	FVector2D NextPos_UP = _CurPos + UP;
-	FVector2D NextPos_DOWN = _CurPos + DOWN;
-	FVector2D NextPos_LEFT = _CurPos + LEFT;
-	FVector2D NextPos_RIGHT = _CurPos + RIGHT;
-
-	Tile* GetTile_UP = WallTileMap->GetTileRef(NextPos_UP);
-	Tile* GetTile_DOWN = WallTileMap->GetTileRef(NextPos_DOWN);
-	Tile* GetTile_LEFT = WallTileMap->GetTileRef(NextPos_LEFT);
-	Tile* GetTile_RIGHT = WallTileMap->GetTileRef(NextPos_RIGHT);
-
-	if (true != CheckCantMove(NextPos_UP))
-	{
-		if (GetTile_UP->SpriteIndex != 1 && GetTile_UP->SpriteIndex != 2)
-		{
-			MoveDir.push_back(FVector2D::UP);
-		}
-	}
-
-	if (true != CheckCantMove(NextPos_DOWN))
-	{
-		if (GetTile_DOWN->SpriteIndex != 1 && GetTile_DOWN->SpriteIndex != 2)
-		{
-			MoveDir.push_back(FVector2D::DOWN);
-		}
-	}
-
-	if (true != CheckCantMove(NextPos_LEFT))
-	{
-		if (GetTile_LEFT->SpriteIndex != 1 && GetTile_LEFT->SpriteIndex != 2)
-		{
-			MoveDir.push_back(FVector2D::LEFT);
-		}
-	}
-
-	if (true != CheckCantMove(NextPos_RIGHT))
-	{
-		if (GetTile_RIGHT->SpriteIndex != 1 && GetTile_RIGHT->SpriteIndex != 2)
-		{
-			MoveDir.push_back(FVector2D::RIGHT);
-		}
-	}
-
-	return MoveDir.size();
-}
 
 void AMushroom::Mush_Move(float _DeltaTime)
 {
 	FVector2D Location = GetActorLocation();
 	FVector2D WallTileMapLocation = WallTileMap->GetActorLocation();
+	FVector2D LocalLocation = Location - WallTileMapLocation;
+
 	FVector2D TileSize = WallTileMap->GetTileSize();
 	FVector2D TileHalfSize = WallTileMap->GetTileHalfSize();
 
-	//FVector2D LocalLocation = Location - WallTileMapLocation;
-	FVector2D LocalLocation = Location - WallTileMapLocation - TileHalfSize;
-
-	FVector2D Location_Target = LocalLocation + MoveTO;
+	FVector2D Location_Target = LocalLocation + InvertLOC(MoveTO);
 	FVector2D Index_Target = Location_Target / TileSize;
 
+	FVector2D LOC_UP = (LocalLocation + UP) / TileSize;
+	FVector2D LOC_DOWN = (LocalLocation + DOWN) / TileSize;
+	FVector2D LOC_LEFT = (LocalLocation + LEFT) / TileSize;
+	FVector2D LOC_RIGHT = (LocalLocation + RIGHT) / TileSize;
+
+	Tile* GetTileNext = WallTileMap->GetTileRef(Location_Target);
+	Tile* GET_TILE_UP = WallTileMap->GetTileRef(LOC_UP);
+	Tile* GET_TILE_DOWN = WallTileMap->GetTileRef(LOC_DOWN);
+	Tile* GET_TILE_LEFT = WallTileMap->GetTileRef(LOC_LEFT);
+	Tile* GET_TILE_RIGHT = WallTileMap->GetTileRef(LOC_RIGHT);
 	UEngineDebug::CoreOutPutString("Location_Target : " + Location_Target.ToString());
 	UEngineDebug::CoreOutPutString("Index_Target : " + Index_Target.ToString());
 
-	Tile* GetTileNext = WallTileMap->GetTileRef(Location_Target);
-
-
-
-	int a = 0;
-
-	if (true != CheckCantMove(Location_Target) && GetTileNext->SpriteIndex != 1 && GetTileNext->SpriteIndex != 2)
+	if (Index_Target.X > TILE_INDEX_MIN_X &&
+		Index_Target.X < TILE_INDEX_MAX_X &&
+		Index_Target.Y > TILE_INDEX_MIN_Y &&
+		Index_Target.Y < TILE_INDEX_MAX_Y &&
+		GetTileNext->SpriteIndex != 1 &&
+		GetTileNext->SpriteIndex != 2)
 	{
 		AddActorLocation(MoveTO * _DeltaTime * Speed);
 		return;
 	}
-	else if (true == CheckCantMove(Location_Target) || GetTileNext->SpriteIndex == 1 || GetTileNext->SpriteIndex == 2)
+	else
 	{
-		CheckNextPos(LocalLocation);
-		UEngineRandom StartRandom;
-		FVector2D Pos = MoveDir[StartRandom.RandomInt(0, static_cast<int>(MoveDir.size()) - 1)];
-		MoveTO = Pos;
-		return;
+		if (MoveTO == FVector2D::LEFT)
+		{
+			if (true == ISMOVE(LOC_UP, GET_TILE_UP))
+			{
+				MoveTO = FVector2D::UP;
+				return;
+			}
+			if (true == ISMOVE(LOC_DOWN, GET_TILE_DOWN))
+			{
+				MoveTO = FVector2D::DOWN;
+				return;
+			}
+			if (true == ISMOVE(LOC_RIGHT, GET_TILE_RIGHT))
+			{
+				MoveTO = FVector2D::RIGHT;
+				return;
+			}
+		}
+
+		if (MoveTO == FVector2D::RIGHT)
+		{
+			if (true == ISMOVE(LOC_UP, GET_TILE_UP))
+			{
+				MoveTO = FVector2D::UP;
+				return;
+			}
+			if (true == ISMOVE(LOC_DOWN, GET_TILE_DOWN))
+			{
+				MoveTO = FVector2D::DOWN;
+				return;
+			}
+			if (true == ISMOVE(LOC_LEFT, GET_TILE_LEFT))
+			{
+				MoveTO = FVector2D::LEFT;
+				return;
+			}
+		}
+
+		if (MoveTO == FVector2D::UP)
+		{
+			if (true == ISMOVE(LOC_DOWN, GET_TILE_DOWN))
+			{
+				MoveTO = FVector2D::DOWN;
+				return;
+			}
+			if (true == ISMOVE(LOC_LEFT, GET_TILE_LEFT))
+			{
+				MoveTO = FVector2D::LEFT;
+				return;
+			}
+			if (true == ISMOVE(LOC_RIGHT, GET_TILE_RIGHT))
+			{
+				MoveTO = FVector2D::RIGHT;
+				return;
+			}
+
+		}
+
+		if (MoveTO == FVector2D::DOWN)
+		{
+			if (true == ISMOVE(LOC_LEFT, GET_TILE_LEFT))
+			{
+				MoveTO = FVector2D::LEFT;
+				return;
+			}
+			if (true == ISMOVE(LOC_RIGHT, GET_TILE_RIGHT))
+			{
+				MoveTO = FVector2D::RIGHT;
+				return;
+			}
+			if (true == ISMOVE(LOC_UP, GET_TILE_UP))
+			{
+				MoveTO = FVector2D::UP;
+				return;
+			}
+		}
+
 	}
 
 
-	//if (GetTileNext->SpriteIndex != 1 && GetTileNext->SpriteIndex != 2)
-	//{
-	//	AddActorLocation(MoveTO * _DeltaTime * Speed);
-	//	return;
-	//}
-	//else if (GetTileNext->SpriteIndex == 1 || GetTileNext->SpriteIndex == 2)
-	//{
-	//	CheckNextPos(LocalLocation);
-	//	UEngineRandom StartRandom;
-	//	FVector2D Pos = MoveDir[StartRandom.RandomInt(0, static_cast<int>(MoveDir.size()) - 1)];
-	//	MoveTO = Pos;
-	//	AddActorLocation(MoveTO * _DeltaTime * Speed);
-	//	return;
-	//}
+
+
 
 
 

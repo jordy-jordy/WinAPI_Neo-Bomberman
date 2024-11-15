@@ -49,6 +49,11 @@ void ATileMapGameMode::Tick(float _DeltaTime)
 
 		FVector2D Pivot = FVector2D::ZERO;
 		FVector2D SpriteScale = FVector2D(32, 32); 
+		
+		if (CurrentTileType == ATiles::Background)
+		{
+			
+		}
 
 		if (CurrentTileType == ATiles::Object_Unbroken)
 		{
