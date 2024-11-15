@@ -15,7 +15,6 @@ void U2DCollision::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// 스프라이트 랜더러가 
 
 	AActor* Actor = GetActor();
 	ULevel* Level = Actor->GetWorld();
@@ -64,8 +63,6 @@ void U2DCollision::ComponentTick(float _DeltaTime)
 
 bool U2DCollision::Collision(int _OtherCollisionGroup, std::vector<AActor*>& _Result, FVector2D _NextPos, unsigned int  _Limite)
 {
-	// 내가 xxxx 그룹이랑 충돌하는거죠.
-	// 모든 충돌체를 한곳에 모아놓는게 Level
 	U2DCollision* ThisCollision = this;
 
 	if (false == ThisCollision->IsActive())
@@ -73,7 +70,6 @@ bool U2DCollision::Collision(int _OtherCollisionGroup, std::vector<AActor*>& _Re
 		return false;
 	}
 
-	// 호출한 충돌체
 
 
 	std::list<class U2DCollision*>& OtherCollisions = GetActor()->GetWorld()->Collisions[_OtherCollisionGroup];
@@ -86,11 +82,15 @@ bool U2DCollision::Collision(int _OtherCollisionGroup, std::vector<AActor*>& _Re
 	{
 		U2DCollision* DestCollision = *StartIter;
 
+		if (ThisCollision == DestCollision)
+		{
+			continue;
+		}
+
 		if (false == DestCollision->IsActive())
 		{
 			continue;
 		}
-		// 
 		FTransform ThisTrans = ThisCollision->GetActorTransform();
 		FTransform DestTrans = DestCollision->GetActorTransform();
 
@@ -101,7 +101,6 @@ bool U2DCollision::Collision(int _OtherCollisionGroup, std::vector<AActor*>& _Re
 
 		bool Result = FTransform::Collision(ThisType, ThisTrans, DestType, DestTrans);
 
-		// 충돌 true
 		if (true == Result)
 		{
 			_Result.push_back(DestCollision->GetActor());
@@ -119,7 +118,6 @@ bool U2DCollision::Collision(int _OtherCollisionGroup, std::vector<AActor*>& _Re
 
 
 
-// 이벤트 방식
 void U2DCollision::SetCollisionEnter(std::function<void(AActor*)> _Function)
 {
 	Enter = _Function;
@@ -158,16 +156,10 @@ void U2DCollision::SetCollisionEnd(std::function<void(AActor*)> _Function)
 
 }
 
-// 엔진 이벤트코드니까 이상한 곳에서 할필요가 없다.
-// 컨텐츠에서는 존재하는지도 몰라야 한다.
 void U2DCollision::CollisionEventCheck(class U2DCollision* _Other)
 {
-	// 최초 충돌
-	// 중돌중
-	// 충돌 끝
 	U2DCollision* ThisCollision = this;
 	U2DCollision* DestCollision = _Other;
-	// 
 	FTransform ThisTrans = ThisCollision->GetActorTransform();
 	FTransform DestTrans = DestCollision->GetActorTransform();
 
@@ -176,7 +168,6 @@ void U2DCollision::CollisionEventCheck(class U2DCollision* _Other)
 
 	bool Result = FTransform::Collision(ThisType, ThisTrans, DestType, DestTrans);
 
-	// 충돌 true
 	if (true == Result)
 	{
 		if (false == CollisionCheckSet.contains(DestCollision))
@@ -198,8 +189,6 @@ void U2DCollision::CollisionEventCheck(class U2DCollision* _Other)
 	}
 	else
 	{
-		// 충돌 안했다.
-		// 충돌은 안했는데 예전에 충돌한 기록은 가지고 있어ㅏ.
 		if (true == CollisionCheckSet.contains(DestCollision))
 		{
 			if (nullptr != End)

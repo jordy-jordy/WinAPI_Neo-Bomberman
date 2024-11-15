@@ -124,6 +124,16 @@ public:
 		Alpha = _Value;
 	}
 
+	void SetAnimationSpeed(float _Speed)
+	{
+		CurAnimationSpeed = _Speed;
+	}
+
+	void ResetAnimationSpeed()
+	{
+		CurAnimationSpeed = 1.0f;
+	}
+
 	void SetAlphafloat(float _Value)
 	{
 		_Value = UEngineMath::Clamp(_Value, 0.0f, 1.0f);
@@ -141,6 +151,7 @@ private:
 	int CurIndex = 0;
 	bool IsCameraEffect = true;
 	float CameraEffectScale = 1.0f;
+	float CurAnimationSpeed = 1.0f;
 
 	// 다이렉트는 모든 색상을 0~1.0f로 표현한다.
 	unsigned char Alpha = 255;
