@@ -115,22 +115,22 @@ bool ATileMap::IsIndexOver(FIntPoint _Index)
 
 bool ATileMap::IsIndexOverFVector(FVector2D _Pos)
 {
-	if (0 > _Pos.X / TileSize.X)
+	if (static_cast<float>(0) > floorf( _Pos.X / 32))
 	{
 		return true;
 	}
 
-	if (0 > _Pos.Y / TileSize.Y)
+	if (static_cast<float>(0) > floorf(_Pos.Y / 32))
 	{
 		return true;
 	}
 
-	if (TileCount.X - 1 < _Pos.X / TileSize.X)
+	if (static_cast<float>(TileCount.X - 1) < _Pos.X / 32)
 	{
 		return true;
 	}
 
-	if (TileCount.Y - 1 < _Pos.Y / TileSize.Y)
+	if (static_cast<float>(TileCount.Y - 1) < _Pos.Y / 32)
 	{
 		return true;
 	}

@@ -94,19 +94,17 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ThirdParty\FMOD\bin\Debug\fmodL.dll">
+    <CopyFileToFolders Include="ThirdParty\FMOD\bin\Debug\fmodL.dll">
       <Filter>ThirdParty\FMOD\bin\Debug</Filter>
-    </None>
-    <None Include="ThirdParty\FMOD\bin\Release\fmod.dll">
-      <Filter>ThirdParty\FMOD\bin\Release</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="ThirdParty\FMOD\bin\Debug\fmodL_vc.lib">
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\FMOD\bin\Debug\fmodL_vc.lib">
       <Filter>ThirdParty\FMOD\bin\Debug</Filter>
-    </Library>
-    <Library Include="ThirdParty\FMOD\bin\Release\fmod_vc.lib">
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\FMOD\bin\Release\fmod.dll">
       <Filter>ThirdParty\FMOD\bin\Release</Filter>
-    </Library>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\FMOD\bin\Release\fmod_vc.lib">
+      <Filter>ThirdParty\FMOD\bin\Release</Filter>
+    </CopyFileToFolders>
   </ItemGroup>
 </Project>

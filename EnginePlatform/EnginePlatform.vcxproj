@@ -56,12 +56,20 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ThirdParty\FMOD\bin\Debug\fmodL.dll" />
-    <None Include="ThirdParty\FMOD\bin\Release\fmod.dll" />
+    <CopyFileToFolders Include="ThirdParty\FMOD\bin\Debug\fmodL.dll">
+      <FileType>Document</FileType>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\FMOD\bin\Release\fmod.dll">
+      <FileType>Document</FileType>
+    </CopyFileToFolders>
   </ItemGroup>
   <ItemGroup>
-    <Library Include="ThirdParty\FMOD\bin\Debug\fmodL_vc.lib" />
-    <Library Include="ThirdParty\FMOD\bin\Release\fmod_vc.lib" />
+    <CopyFileToFolders Include="ThirdParty\FMOD\bin\Debug\fmodL_vc.lib">
+      <FileType>Document</FileType>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\FMOD\bin\Release\fmod_vc.lib">
+      <FileType>Document</FileType>
+    </CopyFileToFolders>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

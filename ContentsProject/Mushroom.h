@@ -45,15 +45,15 @@ protected:
 
 private:
 	class ATileMap* WallTileMap = nullptr;
-	float Speed = 100.0f;
+	float Speed = 500.0f;
 
 	FVector2D MoveTO = FVector2D::LEFT;
 
 	std::vector<FVector2D> MoveDir;
 	FVector2D UP = { 0, -1 };
 	FVector2D DOWN = { 0, 1 };
-	FVector2D LEFT = { 1, 0 };
-	FVector2D RIGHT = { -1, 0 };
+	FVector2D LEFT = { -1, 0 };
+	FVector2D RIGHT = { 1, 0 };
 
 
 };

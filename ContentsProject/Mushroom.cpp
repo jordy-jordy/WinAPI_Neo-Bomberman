@@ -51,42 +51,51 @@ void AMushroom::Mush_Order()
 
 bool AMushroom::CheckCantMove(FVector2D _Pos)
 {
-	bool Check = WallTileMap->IsIndexOverFVector(_Pos);
-	return Check;
+	if (true == WallTileMap->IsIndexOverFVector(_Pos))
+	{
+		return true;
+	}
+
+	return false;
 }
 
 int AMushroom::CheckNextPos(FVector2D _CurPos)
 {
-	Tile* GetTile_UP = WallTileMap->GetTileRef(_CurPos + UP);
-	Tile* GetTile_DOWN = WallTileMap->GetTileRef(_CurPos + DOWN);
-	Tile* GetTile_LEFT = WallTileMap->GetTileRef(_CurPos + LEFT);
-	Tile* GetTile_RIGHT = WallTileMap->GetTileRef(_CurPos + RIGHT);
+	FVector2D NextPos_UP = _CurPos + UP;
+	FVector2D NextPos_DOWN = _CurPos + DOWN;
+	FVector2D NextPos_LEFT = _CurPos + LEFT;
+	FVector2D NextPos_RIGHT = _CurPos + RIGHT;
 
-	if (true != CheckCantMove(GetTile_UP))
+	Tile* GetTile_UP = WallTileMap->GetTileRef(NextPos_UP);
+	Tile* GetTile_DOWN = WallTileMap->GetTileRef(NextPos_DOWN);
+	Tile* GetTile_LEFT = WallTileMap->GetTileRef(NextPos_LEFT);
+	Tile* GetTile_RIGHT = WallTileMap->GetTileRef(NextPos_RIGHT);
+
+	if (true != CheckCantMove(NextPos_UP))
 	{
-		if (GetTile_UP != nullptr)
+		if (GetTile_UP->SpriteIndex != 1 && GetTile_UP->SpriteIndex != 2)
 		{
-			if (GetTile_UP->SpriteIndex != 1 && GetTile_UP->SpriteIndex != 2)
-			{
-				MoveDir.push_back(FVector2D::UP);
-			}
+			MoveDir.push_back(FVector2D::UP);
 		}
 	}
-	if (GetTile_DOWN != nullptr)
+
+	if (true != CheckCantMove(NextPos_DOWN))
 	{
 		if (GetTile_DOWN->SpriteIndex != 1 && GetTile_DOWN->SpriteIndex != 2)
 		{
 			MoveDir.push_back(FVector2D::DOWN);
 		}
 	}
-	if (GetTile_LEFT != nullptr)
+
+	if (true != CheckCantMove(NextPos_LEFT))
 	{
 		if (GetTile_LEFT->SpriteIndex != 1 && GetTile_LEFT->SpriteIndex != 2)
 		{
 			MoveDir.push_back(FVector2D::LEFT);
 		}
 	}
-	if (GetTile_RIGHT != nullptr)
+
+	if (true != CheckCantMove(NextPos_RIGHT))
 	{
 		if (GetTile_RIGHT->SpriteIndex != 1 && GetTile_RIGHT->SpriteIndex != 2)
 		{
@@ -94,7 +103,7 @@ int AMushroom::CheckNextPos(FVector2D _CurPos)
 		}
 	}
 
-	return static_cast<int>(MoveDir.size());
+	return MoveDir.size();
 }
 
 void AMushroom::Mush_Move(float _DeltaTime)
@@ -110,43 +119,44 @@ void AMushroom::Mush_Move(float _DeltaTime)
 	FVector2D Location_Target = LocalLocation + MoveTO;
 	FVector2D Index_Target = Location_Target / TileSize;
 
-
 	UEngineDebug::CoreOutPutString("Location_Target : " + Location_Target.ToString());
 	UEngineDebug::CoreOutPutString("Index_Target : " + Index_Target.ToString());
 
 	Tile* GetTileNext = WallTileMap->GetTileRef(Location_Target);
 
-	AddActorLocation(MoveTO * _DeltaTime * Speed);
 
-	CheckNextPos(Location_Target);
 
-	UEngineRandom StartRandom;
-	FVector2D Pos = MoveDir[StartRandom.RandomInt(0, static_cast<int>(MoveDir.size()) - 1)];
 	int a = 0;
 
-	if (true == CheckCantMove(Location_Target))
+	if (true != CheckCantMove(Location_Target) && GetTileNext->SpriteIndex != 1 && GetTileNext->SpriteIndex != 2)
 	{
-		if (true == CheckCantMove(Location_Target) || GetTileNext == nullptr || GetTileNext->SpriteIndex == 1 || GetTileNext->SpriteIndex == 2)
-		{
-			MoveTO = Pos;
-			AddActorLocation(MoveTO * _DeltaTime * Speed);
-		}
+		AddActorLocation(MoveTO * _DeltaTime * Speed);
 		return;
-
-		//if (MoveTO == FVector2D{ -1, 0 })
-		//{
-		//	MoveTO = FVector2D::RIGHT;
-		//	AddActorLocation(MoveTO * _DeltaTime * Speed);
-		//	return;
-		//}
-		//if (MoveTO == FVector2D{ 1, 0 })
-		//{
-		//	MoveTO = FVector2D::LEFT;
-		//	AddActorLocation(MoveTO * _DeltaTime * Speed);
-		//	return;
-		//}
+	}
+	else if (true == CheckCantMove(Location_Target) || GetTileNext->SpriteIndex == 1 || GetTileNext->SpriteIndex == 2)
+	{
+		CheckNextPos(LocalLocation);
+		UEngineRandom StartRandom;
+		FVector2D Pos = MoveDir[StartRandom.RandomInt(0, static_cast<int>(MoveDir.size()) - 1)];
+		MoveTO = Pos;
+		return;
 	}
 
+
+	//if (GetTileNext->SpriteIndex != 1 && GetTileNext->SpriteIndex != 2)
+	//{
+	//	AddActorLocation(MoveTO * _DeltaTime * Speed);
+	//	return;
+	//}
+	//else if (GetTileNext->SpriteIndex == 1 || GetTileNext->SpriteIndex == 2)
+	//{
+	//	CheckNextPos(LocalLocation);
+	//	UEngineRandom StartRandom;
+	//	FVector2D Pos = MoveDir[StartRandom.RandomInt(0, static_cast<int>(MoveDir.size()) - 1)];
+	//	MoveTO = Pos;
+	//	AddActorLocation(MoveTO * _DeltaTime * Speed);
+	//	return;
+	//}
 
 
 
