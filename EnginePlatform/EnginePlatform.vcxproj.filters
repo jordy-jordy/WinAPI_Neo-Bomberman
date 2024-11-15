@@ -10,8 +10,12 @@
     <ClCompile Include="EngineWindow.cpp">
       <Filter>Window</Filter>
     </ClCompile>
-    <ClCompile Include="EngineWinImage.cpp" />
-    <ClCompile Include="EngineWinDebug.cpp" />
+    <ClCompile Include="EngineWinDebug.cpp">
+      <Filter>Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineWinImage.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EngineInput.h">
@@ -23,8 +27,6 @@
     <ClInclude Include="EngineWindow.h">
       <Filter>Window</Filter>
     </ClInclude>
-    <ClInclude Include="EngineWinImage.h" />
-    <ClInclude Include="EngineWinDebug.h" />
     <ClInclude Include="ThirdParty\FMOD\inc\fmod.h">
       <Filter>ThirdParty\FMOD\inc</Filter>
     </ClInclude>
@@ -48,6 +50,12 @@
     </ClInclude>
     <ClInclude Include="ThirdParty\FMOD\inc\fmod_output.h">
       <Filter>ThirdParty\FMOD\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineWinDebug.h">
+      <Filter>Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineWinImage.h">
+      <Filter>Resources</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -77,6 +85,12 @@
     </Filter>
     <Filter Include="ThirdParty\FMOD\bin\Release">
       <UniqueIdentifier>{461d9839-edc3-4dea-84e1-870f6ef4e2a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Debug">
+      <UniqueIdentifier>{2f5480ff-c461-4d80-97d1-c1475e0bb524}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{0ae7b6a9-d042-42f2-b844-34f4a7ab6a8a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
