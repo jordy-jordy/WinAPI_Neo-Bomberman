@@ -12,7 +12,6 @@ AMushroom::AMushroom()
 {
 	SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 	SpriteRenderer->SetComponentScale({ 38, 42 });
-	FVector2D Scale = SpriteRenderer->GetComponentScale();
 	SpriteRenderer->SetPivot({ 0, -8 });
 
 	SpriteRenderer->CreateAnimation("Mushroom_Idle", "01_Mushroom_00_Idle", 0, 1, 0.2f, true);
@@ -37,6 +36,7 @@ void AMushroom::BeginPlay()
 	Super::BeginPlay();
 
 }
+
 void AMushroom::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
@@ -84,7 +84,6 @@ void AMushroom::UNIQ_SKILL()
 	UniqueRenderer->CreateAnimation("Mushroom_Uniq", "Mushroom.png", 44, 54, 0.2f, false);
 	UniqueRenderer->ChangeAnimation("Mushroom_Uniq");
 	UniqueRenderer->SetOrder(GetActorLocation().Y - WallTileMap->GetActorLocation().Y);;
-
 }
 
 float AMushroom::GET_RANDOM_TIME()
@@ -155,9 +154,6 @@ void AMushroom::DIR_ANIM(FVector2D _Dir)
 	}
 }
 
-
-
-
 bool AMushroom::ISMOVE(FVector2D _NEXTPOS, Tile* _NEXTTILE)
 {
 	if (_NEXTPOS.X > TILE_INDEX_MIN_X &&
@@ -194,7 +190,6 @@ void AMushroom::Mush_Move(float _DeltaTime)
 
 	Tile* GetTileNext = WallTileMap->GetTileRef(Location_Target);
 
-
 	// 현재 방향으로 이동 가능한 경우
 	if (ISMOVE(Index_Target, GetTileNext))
 	{
@@ -214,7 +209,6 @@ void AMushroom::Mush_Move(float _DeltaTime)
 		FVector2D NewTarget = LocalLocation + InvertLOC(MoveTO);
 		FVector2D NewIndex = NewTarget / TileSize;
 		Tile* NewTile = WallTileMap->GetTileRef(NewTarget);
-
 
 		if (ISMOVE(NewIndex, NewTile))
 		{
