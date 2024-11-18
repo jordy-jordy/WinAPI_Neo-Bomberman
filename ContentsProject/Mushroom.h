@@ -40,9 +40,9 @@ public:
 	float GET_RANDOM_TIME();
 	FVector2D GET_RANDOM_DIR();
 
-
 	bool BOMBBOMB(FVector2D _NEXTPOS);
 
+	void RemoveMushroom();
 
 	std::string NAME_CHECK();
 

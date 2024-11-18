@@ -62,6 +62,8 @@ void AMushroom::Tick(float _DeltaTime)
 	Mush_Order();
 	DIR_ANIM(MoveTO);
 	Mush_Move(_DeltaTime);
+
+
 }
 
 void AMushroom::Mush_Order()
@@ -220,5 +222,8 @@ void AMushroom::Mush_Move(float _DeltaTime)
 	}
 }
 
-
+void AMushroom::RemoveMushroom()
+{
+	this->Destroy();
+}
 
