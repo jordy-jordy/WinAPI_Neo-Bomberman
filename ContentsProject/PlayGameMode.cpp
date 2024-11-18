@@ -78,15 +78,36 @@ void APlayGameMode::BeginPlay()
 	PlayerInit();
 
 	// 몬스터 세팅
-	AMonster* Mushroom = GetWorld()->SpawnActor<AMushroom>();
-	Mushroom->SetWallTileMap(WallTileMap);
-	FVector2D TileMapLoc = WallTileMap->GetActorLocation();
-	FVector2D TileHalfSize = WallTileMap->GetTileHalfSize();
-	FIntPoint Index = { 6, 10 };
-	FVector2D Mush_Location = WallTileMap->IndexToTileLocation(Index);
-	FVector2D LocalLoc = Mush_Location + TileMapLoc + TileHalfSize;
-
-	Mushroom->SetActorLocation(LocalLoc);
+	{
+		AMonster* Mushroom = GetWorld()->SpawnActor<AMushroom>();
+		Mushroom->SetWallTileMap(WallTileMap);
+		FVector2D TileMapLoc = WallTileMap->GetActorLocation();
+		FVector2D TileHalfSize = WallTileMap->GetTileHalfSize();
+		FIntPoint Index = { 0, 10 };
+		FVector2D Mush_Location = WallTileMap->IndexToTileLocation(Index);
+		FVector2D LocalLoc = Mush_Location + TileMapLoc + TileHalfSize;
+		Mushroom->SetActorLocation(LocalLoc);
+	}
+	{
+		AMonster* Mushroom = GetWorld()->SpawnActor<AMushroom>();
+		Mushroom->SetWallTileMap(WallTileMap);
+		FVector2D TileMapLoc = WallTileMap->GetActorLocation();
+		FVector2D TileHalfSize = WallTileMap->GetTileHalfSize();
+		FIntPoint Index = { 6, 10 };
+		FVector2D Mush_Location = WallTileMap->IndexToTileLocation(Index);
+		FVector2D LocalLoc = Mush_Location + TileMapLoc + TileHalfSize;
+		Mushroom->SetActorLocation(LocalLoc);
+	}
+	{
+		AMonster* Mushroom = GetWorld()->SpawnActor<AMushroom>();
+		Mushroom->SetWallTileMap(WallTileMap);
+		FVector2D TileMapLoc = WallTileMap->GetActorLocation();
+		FVector2D TileHalfSize = WallTileMap->GetTileHalfSize();
+		FIntPoint Index = { 0, 0 };
+		FVector2D Mush_Location = WallTileMap->IndexToTileLocation(Index);
+		FVector2D LocalLoc = Mush_Location + TileMapLoc + TileHalfSize;
+		Mushroom->SetActorLocation(LocalLoc);
+	}
 
 
 	

@@ -49,5 +49,6 @@ private:
 	float ExplodeFrameSpeed = 0.05f;
 
 
+
 };
 

@@ -6,6 +6,7 @@
 
 #include "ATileMap.h"
 #include "Tile_Destroy.h"
+#include "Mushroom.h"
 
 
 ABomb::ABomb()
@@ -80,6 +81,11 @@ void ABomb::Bomb_ExPlode()
 
 	FVector2D Pos_Minus_TileHalfSize = Pos - WallTileMap->GetTileHalfSize(); // X, Y에 TILE HALF SIZE (16)을 뺀 값
 	// 정확한 값을 얻기 위해 사용
+
+
+	std::list <AMonster*> AllMushrooms;
+	AllMushrooms = GetWorld()->GetActorsFromClass<AMonster>();
+
 
 
 	// 왼쪽 확산 처리
