@@ -172,6 +172,25 @@ void BombmanCore::BeginPlay()
 		UImageManager& imgManager = UImageManager::GetInst();
 		imgManager.CuttingSprite("ExplodeUpMid.png", { 32, 32 });
 	}
+	
+	// 몬스터 로드
+	// None == 투명 이미지
+	{
+		UEngineDirectory Play_Monster_None_Dir;
+		Play_Monster_None_Dir.MoveParentToDirectory("Resources//Imgs");
+		Play_Monster_None_Dir.Append("02_PLAY//03_Monster");
+		UImageManager::GetInst().LoadFolder(Play_Monster_None_Dir.GetPathToString());
+	}
+	{
+		UEngineDirectory Play_Mushroom;
+		Play_Mushroom.MoveParentToDirectory("Resources//Imgs");
+		Play_Mushroom.Append("02_PLAY//03_Monster//01_Mushroom");
+		UImageManager::GetInst().LoadFolder(Play_Mushroom.GetPathToString());
+	}
+	{
+		UImageManager& imgManager = UImageManager::GetInst();
+		imgManager.CuttingSprite("Mushroom.png", { 64, 64 });
+	}
 	{
 		UEngineDirectory Play_Mushroom_Idle_Dir;
 		Play_Mushroom_Idle_Dir.MoveParentToDirectory("Resources//Imgs");
