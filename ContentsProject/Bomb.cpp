@@ -83,8 +83,20 @@ void ABomb::Bomb_ExPlode()
 	// 정확한 값을 얻기 위해 사용
 
 
-	std::list <AMonster*> AllMushrooms;
-	AllMushrooms = GetWorld()->GetActorsFromClass<AMonster>();
+	std::list <AMonster*> AllMonsters;
+	AllMonsters = GetWorld()->GetActorsFromClass<AMonster>();
+	
+	std::vector <FVector2D&> AllMonstersPOS;
+
+	std::list<AMonster*>::iterator StartIter = AllMonsters.begin();
+	std::list<AMonster*>::iterator EndIter = AllMonsters.end();
+
+	for (; StartIter != EndIter; ++StartIter)
+	{
+		
+	}
+
+
 
 
 
