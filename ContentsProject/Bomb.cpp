@@ -169,6 +169,8 @@ void ABomb::Bomb_ExPlode()
 
 			if (TileDataLeft->SpriteIndex == 1)
 			{
+				WallTileMap->RemoveTile(TargetPos);
+				
 				FIntPoint TargetIndex = WallTileMap->LocationToIndex(TargetPos);
 				// 스폰 액터를 통해 삭제 애니메이션 재생
 				ATile_Destroy* Object = GetWorld()->SpawnActor<ATile_Destroy>();
@@ -178,7 +180,6 @@ void ABomb::Bomb_ExPlode()
 				Object->SetActorLocation(GetActorLocation() + TilePos_Location);
 			}
 
-			WallTileMap->RemoveTile(TargetPos);
 		}
 	}
 
@@ -238,6 +239,8 @@ void ABomb::Bomb_ExPlode()
 
 			if (TileDataUp->SpriteIndex == 1)
 			{
+				WallTileMap->RemoveTile(TargetPos);
+
 				FIntPoint TargetIndex = WallTileMap->LocationToIndex(TargetPos);
 				// 스폰 액터를 통해 삭제 애니메이션 재생
 				ATile_Destroy* Object = GetWorld()->SpawnActor<ATile_Destroy>();
@@ -247,7 +250,6 @@ void ABomb::Bomb_ExPlode()
 				Object->SetActorLocation(GetActorLocation() + TilePos_Location);
 			}
 			
-			WallTileMap->RemoveTile(TargetPos);
 		}
 	}
 
@@ -307,6 +309,8 @@ void ABomb::Bomb_ExPlode()
 
 			if (TileDataRight->SpriteIndex == 1)
 			{
+				WallTileMap->RemoveTile(TargetPos);
+				
 				FIntPoint TargetIndex = WallTileMap->LocationToIndex(TargetPos);
 				// 스폰 액터를 통해 삭제 애니메이션 재생
 				ATile_Destroy* Object = GetWorld()->SpawnActor<ATile_Destroy>();
@@ -316,7 +320,6 @@ void ABomb::Bomb_ExPlode()
 				Object->SetActorLocation(GetActorLocation() + TilePos_Location);
 			}
 			
-			WallTileMap->RemoveTile(TargetPos);
 		}
 	}
 
@@ -376,6 +379,8 @@ void ABomb::Bomb_ExPlode()
 
 			if (TileDataDown->SpriteIndex == 1)
 			{
+				WallTileMap->RemoveTile(TargetPos);
+				
 				FIntPoint TargetIndex = WallTileMap->LocationToIndex(TargetPos);
 				// 스폰 액터를 통해 삭제 애니메이션 재생
 				ATile_Destroy* Object = GetWorld()->SpawnActor<ATile_Destroy>();
@@ -385,7 +390,6 @@ void ABomb::Bomb_ExPlode()
 				Object->SetActorLocation(GetActorLocation() + TilePos_Location);
 			}
 
-			WallTileMap->RemoveTile(TargetPos);
 		}
 	}
 

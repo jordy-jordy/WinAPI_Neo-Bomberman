@@ -20,8 +20,16 @@ AMushroom::AMushroom()
 	SpriteRenderer->CreateAnimation("Mushroom_Up", "01_Mushroom_03_Up", 0, 5, 0.2f, true);
 	SpriteRenderer->CreateAnimation("Mushroom_Down", "01_Mushroom_04_Down", 0, 5, 0.2f, true);
 	SpriteRenderer->CreateAnimation("None", "None.png", 0, 0, 0.2f, true);
-
 	SpriteRenderer->ChangeAnimation("Mushroom_Idle");
+
+	UniqueRenderer = CreateDefaultSubObject<USpriteRenderer>();
+	UniqueRenderer->SetSprite("Mushroom.png");
+	UniqueRenderer->SetComponentScale({ 64, 64 });
+	UniqueRenderer->SetPivot({ 0, -8 });
+	UniqueRenderer->CreateAnimation("Mushroom_Idle", "01_Mushroom_00_Idle", 0, 1, 0.2f, true);
+	UniqueRenderer->CreateAnimation("Mushroom_Uniq", "Mushroom.png", 44, 54, 0.2f, false);
+	UniqueRenderer->SetOrder(GetActorLocation().Y - WallTileMap->GetActorLocation().Y);;
+	UniqueRenderer->SetActive(false);
 
 	TimeEventer.PushEvent(GET_RANDOM_TIME(), std::bind(&AMushroom::UNIQ_SKILL, this), false, true);
 };
@@ -43,16 +51,17 @@ void AMushroom::Tick(float _DeltaTime)
 
 	if (UNIQUE_ON == true)
 	{
-		SpriteRenderer->ChangeAnimation("None");
+		SpriteRenderer->SetActive(false);
 
 		MoveTO = FVector2D::ZERO;
 		if (UniqueRenderer->IsCurAnimationEnd() == true)
 		{
 			UNIQUE_ON = false;
-			UniqueRenderer->Destroy();
-			UniqueRenderer = nullptr;
-
-			SpriteRenderer->ChangeAnimation("Mushroom_Idle");
+			//UniqueRenderer->Destroy();
+			//UniqueRenderer = nullptr;
+			UniqueRenderer->SetActive(false);
+			SpriteRenderer->SetActive(true);
+			UniqueRenderer->ChangeAnimation("Mushroom_Idle");
 
 			GET_RANDOM_DIR();
 			MoveTO = RANDOM_DIR;
@@ -62,8 +71,6 @@ void AMushroom::Tick(float _DeltaTime)
 	Mush_Order();
 	DIR_ANIM(MoveTO);
 	Mush_Move(_DeltaTime);
-
-
 }
 
 void AMushroom::Mush_Order()
@@ -79,13 +86,8 @@ std::string AMushroom::NAME_CHECK()
 void AMushroom::UNIQ_SKILL()
 {
 	UNIQUE_ON = true;
-	UniqueRenderer = CreateDefaultSubObject<USpriteRenderer>();
-	UniqueRenderer->SetSprite("Mushroom.png");
-	UniqueRenderer->SetComponentScale({ 64, 64 });
-	UniqueRenderer->SetPivot({ 0, -8 });
-	UniqueRenderer->CreateAnimation("Mushroom_Uniq", "Mushroom.png", 44, 54, 0.2f, false);
+	UniqueRenderer->SetActive(true);
 	UniqueRenderer->ChangeAnimation("Mushroom_Uniq");
-	UniqueRenderer->SetOrder(GetActorLocation().Y - WallTileMap->GetActorLocation().Y);;
 }
 
 float AMushroom::GET_RANDOM_TIME()
