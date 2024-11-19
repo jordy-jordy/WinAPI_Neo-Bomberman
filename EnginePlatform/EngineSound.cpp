@@ -83,6 +83,11 @@ UEngineSound::UEngineSound()
 
 UEngineSound::~UEngineSound()
 {
+	if (nullptr != SoundHandle)
+	{
+		SoundHandle->release();
+		SoundHandle = nullptr;
+	}
 }
 
 void UEngineSound::Load(std::string_view _Path)

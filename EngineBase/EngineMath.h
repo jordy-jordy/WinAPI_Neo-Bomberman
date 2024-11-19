@@ -287,10 +287,10 @@ public:
 
 	FVector2D CenterLeftBottom() const
 	{
-		FVector2D Location;
-		Location.X = Location.X - Scale.hX();
-		Location.Y = Location.Y + Scale.hY();
-		return Location;
+		FVector2D Result;
+		Result.X = Location.X - Scale.hX();
+		Result.Y = Location.Y + Scale.hY();
+		return Result;
 	}
 
 	float CenterLeft() const
@@ -305,10 +305,10 @@ public:
 
 	FVector2D CenterRightTop() const
 	{
-		FVector2D Location;
-		Location.X = Location.X + Scale.hX();
-		Location.Y = Location.Y - Scale.hY();
-		return Location;
+		FVector2D Result;
+		Result.X = Location.X + Scale.hX();
+		Result.Y = Location.Y - Scale.hY();
+		return Result;
 	}
 
 	FVector2D CenterRightBottom() const
