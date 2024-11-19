@@ -83,18 +83,30 @@ void ABomb::Bomb_ExPlode()
 	// 정확한 값을 얻기 위해 사용
 
 
-	std::list <AMonster*> AllMonsters;
-	AllMonsters = GetWorld()->GetActorsFromClass<AMonster>();
-	
-	std::vector <FVector2D&> AllMonstersPOS;
 
+	// 모든 몬스터의 위치를 벡터에 넣는다?
+	std::vector <FVector2D> AllMonstersPOS; // 위치를 담을 벡터
+	
+	std::list <AMonster*> AllMonsters; // 현재 스폰되어 있는 모든 몬스터를 가져옴
+	AllMonsters = GetWorld()->GetActorsFromClass<AMonster>();
+
+	// iterator로 순회 돌림
 	std::list<AMonster*>::iterator StartIter = AllMonsters.begin();
 	std::list<AMonster*>::iterator EndIter = AllMonsters.end();
 
 	for (; StartIter != EndIter; ++StartIter)
 	{
-		
+		AMonster* CurMonster = *StartIter;
+
+		if (nullptr == CurMonster)
+		{
+			continue;
+		}
+
+		// 현재 모스터의 위치를 AllMonstersPOS 에 담음
+		AllMonstersPOS.push_back(CurMonster->GetActorLocation());
 	}
+		int a = 0;
 
 
 
