@@ -1,6 +1,15 @@
 #pragma once
 #include <EngineCore/Actor.h>
 
+enum class MonsterDir
+{
+	ZERO,
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT
+};
+
 // Ό³Έν :
 class AMonster : public AActor
 {
@@ -17,9 +26,31 @@ public:
 
 	virtual void SetWallTileMap(class ATileMap* _TileMap) = 0;
 
+	FIntPoint GetMonsterPos_INDEX (FVector2D _CurPos);
+
+	FIntPoint GetNextIndex(FIntPoint _CurIndex, MonsterDir _TagetDir);
+
+	FVector2D GetNextVector(FVector2D _CurPos, MonsterDir _TagetDir);
 
 protected:
 
 private:
+	UEngineSprite* SpriteRenderer;
+	ATileMap* WallTileMap;
+
+	FIntPoint INDEX_ZERO = { 0, 0 };
+	FIntPoint INDEX_UP     = { 0, -1 };
+	FIntPoint INDEX_DOWN   = { 0, 1 };
+	FIntPoint INDEX_LEFT   = { -1 , 0 };
+	FIntPoint INDEX_RIGHT  = { 1, 0 };
+
+	FVector2D VECTOR_ZERO = { 0, 0 };
+	FVector2D VECTOR_UP    = { 0, -32 };
+	FVector2D VECTOR_DOWN  = { 0, 32 };
+	FVector2D VECTOR_LEFT  = { -32, 0 };
+	FVector2D VECTOR_RIGHT = { 32, 0 };
+
+	
+
 
 };

@@ -28,7 +28,6 @@ AMushroom::AMushroom()
 	UniqueRenderer->SetPivot({ 0, -8 });
 	UniqueRenderer->CreateAnimation("Mushroom_Idle", "01_Mushroom_00_Idle", 0, 1, 0.2f, true);
 	UniqueRenderer->CreateAnimation("Mushroom_Uniq", "Mushroom.png", 44, 54, 0.2f, false);
-	UniqueRenderer->SetOrder(GetActorLocation().Y - WallTileMap->GetActorLocation().Y);;
 	UniqueRenderer->SetActive(false);
 
 	TimeEventer.PushEvent(GET_RANDOM_TIME(), std::bind(&AMushroom::UNIQ_SKILL, this), false, true);
@@ -87,6 +86,7 @@ void AMushroom::UNIQ_SKILL()
 {
 	UNIQUE_ON = true;
 	UniqueRenderer->SetActive(true);
+	UniqueRenderer->SetOrder(GetActorLocation().Y - WallTileMap->GetActorLocation().Y);;
 	UniqueRenderer->ChangeAnimation("Mushroom_Uniq");
 }
 
