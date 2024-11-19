@@ -1,5 +1,7 @@
 #pragma once
+
 #include <EngineCore/GameMode.h>
+
 
 // Ό³Έν :
 class APlayGameMode : public AGameMode
@@ -19,6 +21,10 @@ public:
 
 	FVector2D WallTileMapLocation = { 96, 64 };
 
+	bool IsMonsterAllDead();
+
+	void PortalON();
+
 protected:
 	void Tick(float _DeltaTime) override;
 	void PlayerInit();
@@ -26,6 +32,7 @@ protected:
 
 private:
 	class ATileMap* WallTileMap = nullptr;
+	class APortal* Portal = nullptr;
 
 };
 

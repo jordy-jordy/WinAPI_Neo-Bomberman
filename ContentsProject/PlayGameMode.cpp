@@ -15,6 +15,7 @@
 #include "Bomb.h"
 #include "Monster.h"
 #include "Mushroom.h"
+#include "Portal.h"
 
 APlayGameMode::APlayGameMode()
 {
@@ -88,34 +89,16 @@ void APlayGameMode::BeginPlay()
 		FVector2D LocalLoc = Mush_Location + TileMapLoc + TileHalfSize;
 		Mushroom->SetActorLocation(LocalLoc);
 	}
-	{
-		AMonster* Mushroom = GetWorld()->SpawnActor<AMushroom>();
-		Mushroom->SetWallTileMap(WallTileMap);
-		FVector2D TileMapLoc = WallTileMap->GetActorLocation();
-		FVector2D TileHalfSize = WallTileMap->GetTileHalfSize();
-		FIntPoint Index = { 6, 10 };
-		FVector2D Mush_Location = WallTileMap->IndexToTileLocation(Index);
-		FVector2D LocalLoc = Mush_Location + TileMapLoc + TileHalfSize;
-		Mushroom->SetActorLocation(LocalLoc);
-	}
-	{
-		AMonster* Mushroom = GetWorld()->SpawnActor<AMushroom>();
-		Mushroom->SetWallTileMap(WallTileMap);
-		FVector2D TileMapLoc = WallTileMap->GetActorLocation();
-		FVector2D TileHalfSize = WallTileMap->GetTileHalfSize();
-		FIntPoint Index = { 0, 0 };
-		FVector2D Mush_Location = WallTileMap->IndexToTileLocation(Index);
-		FVector2D LocalLoc = Mush_Location + TileMapLoc + TileHalfSize;
-		Mushroom->SetActorLocation(LocalLoc);
-	}
 
+	//AActor* Portal = GetWorld()->SpawnActor<APortal>();
 
-	
 }
 
 void APlayGameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
+
+	IsMonsterAllDead();
 
 	if (true == UEngineInput::GetInst().IsDown('L'))
 	{
@@ -123,3 +106,26 @@ void APlayGameMode::Tick(float _DeltaTime)
 	}
 
 }
+
+bool APlayGameMode::IsMonsterAllDead()
+{
+	std::list<AMonster*> AllMonsters;
+	AllMonsters = GetWorld()->GetActorsFromClass<AMonster>();
+	int AAA = AllMonsters.size();
+
+	if (AllMonsters.size() <= 0)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+void APlayGameMode::PortalON()
+{
+	IsMonsterAllDead();
+	if (IsMonsterAllDead() == true)
+	{
+	}
+}
+

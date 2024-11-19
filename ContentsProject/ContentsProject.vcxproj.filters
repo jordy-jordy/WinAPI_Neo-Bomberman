@@ -52,6 +52,9 @@
     <ClCompile Include="Mushroom.cpp">
       <Filter>ContentsObject\Play\Monster</Filter>
     </ClCompile>
+    <ClCompile Include="Portal.cpp">
+      <Filter>ContentsObject\Play\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayGameMode.h">
@@ -107,6 +110,9 @@
     </ClInclude>
     <ClInclude Include="Mushroom.h">
       <Filter>ContentsObject\Play\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Portal.h">
+      <Filter>ContentsObject\Play\Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

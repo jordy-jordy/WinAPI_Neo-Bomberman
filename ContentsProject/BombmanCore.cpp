@@ -228,6 +228,16 @@ void BombmanCore::BeginPlay()
 		UImageManager::GetInst().LoadFolder(Play_Mushroom_Uniq_Dir.GetPathToString());
 	}
 
+	// 포탈 이미지
+	{
+		UEngineDirectory Play_Portal_Dir;
+		Play_Portal_Dir.MoveParentToDirectory("Resources//Imgs");
+		Play_Portal_Dir.Append("02_PLAY//02_Objects//03_Portal");
+		UImageManager::GetInst().LoadFolder(Play_Portal_Dir.GetPathToString());
+	}
+
+
+
 	// 타일 맵 제작용 BG
 	{
 		UEngineDirectory Play_TestBG_Dir;
