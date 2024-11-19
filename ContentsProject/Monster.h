@@ -25,11 +25,12 @@ public:
 	AMonster& operator=(AMonster&& _Other) noexcept = delete;
 
 	virtual void SetWallTileMap(class ATileMap* _TileMap) = 0;
+	virtual ATileMap* GetWallTileMap() = 0;
 
-	FIntPoint GetMonsterPos_INDEX (FVector2D _CurPos);
+	FIntPoint GetMonsterPos_INDEX (FVector2D _CurPos, ATileMap* _Map);
+	FVector2D GetMonsterPos_VECTOR(FVector2D _CurPos, ATileMap* _Map);
 
 	FIntPoint GetNextIndex(FIntPoint _CurIndex, MonsterDir _TagetDir);
-
 	FVector2D GetNextVector(FVector2D _CurPos, MonsterDir _TagetDir);
 
 protected:

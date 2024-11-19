@@ -10,7 +10,7 @@ ATile_Destroy::ATile_Destroy()
 	SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 	SpriteRenderer->SetSprite("Destroy_Anim");
 	SpriteRenderer->SetComponentScale({ 32, 32 });
-	SpriteRenderer->CreateAnimation("Destroy_Wall", "Destroy_Anim", 0, 10, 0.1f, false);
+	SpriteRenderer->CreateAnimation("Destroy_Wall", "Destroy_Anim", 0, 10, 0.05f, false);
 	SpriteRenderer->ChangeAnimation("Destroy_Wall");
 
 	SpriteRenderer->SetOrder(10000);

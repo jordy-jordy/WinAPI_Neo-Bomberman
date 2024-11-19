@@ -28,6 +28,12 @@ public:
 		WallTileMap = _TileMap;
 	}
 
+	ATileMap* GetWallTileMap() override
+	{
+		return WallTileMap;
+	}
+
+
 	void Mush_Move(float _DeltaTime);
 
 	FVector2D InvertLOC(FVector2D _Loc);

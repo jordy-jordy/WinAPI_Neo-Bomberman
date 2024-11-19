@@ -1,6 +1,13 @@
 #pragma once
 #include <EngineCore/Actor.h>
 
+enum class EDirection
+{
+	Left,
+	Right,
+	Up,
+	Down
+};
 
 class ABomb : public AActor
 {
@@ -19,6 +26,8 @@ public:
 
 	void SetWallTileMap(class ATileMap* _TileMap, FIntPoint _Index);
 
+	void HandleExplosion(EDirection Direction, int Power);
+	void HandleTileDestruction(const FVector2D& TargetPosition);
 
 protected:
 	friend class APlayer;
@@ -47,8 +56,5 @@ private:
 
 	float IdleFrameSpeed = 0.15f;
 	float ExplodeFrameSpeed = 0.05f;
-
-
-
 };
 
