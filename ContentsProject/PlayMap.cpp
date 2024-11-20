@@ -7,7 +7,7 @@
 
 APlayMap::APlayMap()
 {
-	USpriteRenderer* SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
+	SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 	SpriteRenderer->SetOrder(ERenderOrder::BACKGROUND1);
 	SpriteRenderer->SetSprite("01_Background");
 

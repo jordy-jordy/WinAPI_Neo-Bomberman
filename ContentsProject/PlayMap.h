@@ -1,6 +1,7 @@
 #pragma once
 #include <EngineCore/Actor.h>
 
+
 class APlayMap : public AActor
 {
 public:
@@ -11,6 +12,8 @@ public:
 	APlayMap(APlayMap&& _Other) noexcept = delete;
 	APlayMap& operator=(const APlayMap& _Other) = delete;
 	APlayMap& operator=(APlayMap&& _Other) noexcept = delete;
+
+	USpriteRenderer* SpriteRenderer = nullptr;
 
 protected:
 

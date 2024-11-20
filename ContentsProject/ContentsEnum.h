@@ -27,6 +27,7 @@ enum class ABossTiles
 {
 	NONE = 0,
 	Wall = 1,
+	Player_Spawn = 2,
 	Max,
 };
 

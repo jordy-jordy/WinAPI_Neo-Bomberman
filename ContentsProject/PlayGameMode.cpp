@@ -17,6 +17,7 @@
 #include "Mushroom.h"
 #include "Portal.h"
 
+
 APlayGameMode::APlayGameMode()
 {
 }
@@ -98,7 +99,9 @@ void APlayGameMode::BeginPlay()
 	Super::BeginPlay();
 
 	// 백그라운드 세팅
-	APlayMap* BG = GetWorld()->SpawnActor<APlayMap>();
+	APlayMap* STAGE1_BG = GetWorld()->SpawnActor<APlayMap>();
+	SpriteRendererSTAGE = STAGE1_BG->SpriteRenderer;
+	SpriteRendererSTAGE->ChangeAnimation("Stage1_BG");
 
 	// 타일맵 세팅
 	PlayTileMapInit();

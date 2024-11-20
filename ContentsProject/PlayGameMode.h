@@ -35,5 +35,8 @@ private:
 	class ATileMap* WallTileMap = nullptr;
 	class APortal* Portal = nullptr;
 
+	USpriteRenderer* SpriteRendererSTAGE = nullptr;
+
+
 };
 
