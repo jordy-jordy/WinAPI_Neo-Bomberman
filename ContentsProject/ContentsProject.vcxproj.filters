@@ -1,20 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="PlayGameMode.cpp">
-      <Filter>ContentsObject\GameMode</Filter>
-    </ClCompile>
     <ClCompile Include="PreCompile.cpp">
       <Filter>PreCompile</Filter>
     </ClCompile>
     <ClCompile Include="BombmanCore.cpp">
       <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="EndGameMode.cpp">
-      <Filter>ContentsObject\GameMode</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleGameMode.cpp">
-      <Filter>ContentsObject\GameMode</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>ContentsObject\Global</Filter>
@@ -24,9 +15,6 @@
     </ClCompile>
     <ClCompile Include="ATileMap.cpp">
       <Filter>TileMap</Filter>
-    </ClCompile>
-    <ClCompile Include="TileMapGameMode.cpp">
-      <Filter>ContentsObject\GameMode</Filter>
     </ClCompile>
     <ClCompile Include="ChooseStage.cpp">
       <Filter>ContentsObject\Title</Filter>
@@ -55,22 +43,31 @@
     <ClCompile Include="Portal.cpp">
       <Filter>ContentsObject\Play\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="TitleGameMode.cpp">
+      <Filter>ContentsObject\GameMode\TITLE</Filter>
+    </ClCompile>
+    <ClCompile Include="BossGameMode.cpp">
+      <Filter>ContentsObject\GameMode\PLAY</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayGameMode.cpp">
+      <Filter>ContentsObject\GameMode\PLAY</Filter>
+    </ClCompile>
+    <ClCompile Include="EndGameMode.cpp">
+      <Filter>ContentsObject\GameMode\END</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMapGameMode.cpp">
+      <Filter>ContentsObject\GameMode\TILEMAPEDIT</Filter>
+    </ClCompile>
+    <ClCompile Include="BossMapGameMode.cpp">
+      <Filter>ContentsObject\GameMode\TILEMAPEDIT</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="PlayGameMode.h">
-      <Filter>ContentsObject\GameMode</Filter>
-    </ClInclude>
     <ClInclude Include="PreCompile.h">
       <Filter>PreCompile</Filter>
     </ClInclude>
     <ClInclude Include="BombmanCore.h">
       <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="EndGameMode.h">
-      <Filter>ContentsObject\GameMode</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleGameMode.h">
-      <Filter>ContentsObject\GameMode</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>ContentsObject\Global</Filter>
@@ -83,9 +80,6 @@
     </ClInclude>
     <ClInclude Include="ATileMap.h">
       <Filter>TileMap</Filter>
-    </ClInclude>
-    <ClInclude Include="TileMapGameMode.h">
-      <Filter>ContentsObject\GameMode</Filter>
     </ClInclude>
     <ClInclude Include="ChooseStage.h">
       <Filter>ContentsObject\Title</Filter>
@@ -113,6 +107,24 @@
     </ClInclude>
     <ClInclude Include="Monster.h">
       <Filter>ContentsObject\Play\Monster\Parent</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleGameMode.h">
+      <Filter>ContentsObject\GameMode\TITLE</Filter>
+    </ClInclude>
+    <ClInclude Include="BossGameMode.h">
+      <Filter>ContentsObject\GameMode\PLAY</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayGameMode.h">
+      <Filter>ContentsObject\GameMode\PLAY</Filter>
+    </ClInclude>
+    <ClInclude Include="EndGameMode.h">
+      <Filter>ContentsObject\GameMode\END</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMapGameMode.h">
+      <Filter>ContentsObject\GameMode\TILEMAPEDIT</Filter>
+    </ClInclude>
+    <ClInclude Include="BossMapGameMode.h">
+      <Filter>ContentsObject\GameMode\TILEMAPEDIT</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +166,18 @@
     </Filter>
     <Filter Include="ContentsObject\Play\Monster\Parent">
       <UniqueIdentifier>{aac8f3b9-2d31-4355-ab51-f95a61d51e6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContentsObject\GameMode\TITLE">
+      <UniqueIdentifier>{95b016de-f886-4059-a373-fd5d953b9e20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContentsObject\GameMode\PLAY">
+      <UniqueIdentifier>{9bbfe8f9-3485-4514-82cf-641831d507b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContentsObject\GameMode\END">
+      <UniqueIdentifier>{f3724881-774e-4d88-9cd8-9179e9f01502}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContentsObject\GameMode\TILEMAPEDIT">
+      <UniqueIdentifier>{8ff7f439-d6d5-4ec9-b320-c9b2cfd3dbc8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

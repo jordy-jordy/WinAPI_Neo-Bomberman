@@ -27,8 +27,7 @@ APlayGameMode::~APlayGameMode()
 
 void APlayGameMode::PlayerInit()
 {
-	// 플레이어 세팅
-	std::vector<FIntPoint> PlayerStartPOS = WallTileMap->FindSpriteIndex(ATiles::Player_Spawn);
+	std::vector<FIntPoint> PlayerStartPOS = WallTileMap->FindSpriteIndex(AStageTiles::Player_Spawn);
 
 	UEngineRandom StartRandom;
 	FIntPoint Point = PlayerStartPOS[StartRandom.RandomInt(0, static_cast<int>(PlayerStartPOS.size()) - 1)];
@@ -44,7 +43,6 @@ void APlayGameMode::PlayerInit()
 
 void APlayGameMode::PlayTileMapInit()
 {
-	// 맵 세팅
 	WallTileMap = GetWorld()->SpawnActor<ATileMap>();
 	WallTileMap->SetActorLocation(WallTileMapLocation);
 
@@ -69,40 +67,50 @@ void APlayGameMode::PlayTileMapInit()
 
 }
 
-void APlayGameMode::BeginPlay()
+void APlayGameMode::MonsterInit()
 {
-	Super::BeginPlay();
+	AMonster* Mushroom = GetWorld()->SpawnActor<AMushroom>();
+	Mushroom->SetWallTileMap(WallTileMap);
+	FVector2D TileMapLoc = WallTileMap->GetActorLocation();
+	FVector2D TileHalfSize = WallTileMap->GetTileHalfSize();
+	FIntPoint Index = { 0, 0 };
+	FVector2D Mush_Location = WallTileMap->IndexToTileLocation(Index);
+	FVector2D LocalLoc = Mush_Location + TileMapLoc + TileHalfSize;
+	Mushroom->SetActorLocation(LocalLoc);
 
-	APlayMap* BG = GetWorld()->SpawnActor<APlayMap>();
+}
 
-	PlayTileMapInit();
-	PlayerInit();
-
-	// 몬스터 세팅
-	{
-		AMonster* Mushroom = GetWorld()->SpawnActor<AMushroom>();
-		Mushroom->SetWallTileMap(WallTileMap);
-		FVector2D TileMapLoc = WallTileMap->GetActorLocation();
-		FVector2D TileHalfSize = WallTileMap->GetTileHalfSize();
-		FIntPoint Index = { 0, 0 };
-		FVector2D Mush_Location = WallTileMap->IndexToTileLocation(Index);
-		FVector2D LocalLoc = Mush_Location + TileMapLoc + TileHalfSize;
-		Mushroom->SetActorLocation(LocalLoc);
-	}
-
-	// 포탈 세팅
+void APlayGameMode::PortalInit()
+{
 	Portal = GetWorld()->SpawnActor<APortal>();
-	std::vector<FIntPoint> PortalPOS = WallTileMap->FindSpriteIndex(ATiles::Object_Portal);
+	std::vector<FIntPoint> PortalPOS = WallTileMap->FindSpriteIndex(AStageTiles::Object_Portal);
 	FVector2D Location = WallTileMap->IndexToTileLocation(PortalPOS[0]);
 	FVector2D TileLocation = Location + WallTileMap->GetActorLocation();
 	FVector2D HalfTiles = WallTileMap->GetTileHalfSize();
 	FVector2D LocalLocation = TileLocation + HalfTiles;
 	Portal->SetActorLocation(LocalLocation);
 	Portal->SetWallTileMap(WallTileMap);
+}
 
-	int a = 0;
 
+void APlayGameMode::BeginPlay()
+{
+	Super::BeginPlay();
 
+	// 백그라운드 세팅
+	APlayMap* BG = GetWorld()->SpawnActor<APlayMap>();
+
+	// 타일맵 세팅
+	PlayTileMapInit();
+
+	// 플레이어 세팅
+	PlayerInit();
+
+	// 몬스터 세팅
+	MonsterInit();
+
+	// 포탈 세팅
+	PortalInit();
 }
 
 void APlayGameMode::Tick(float _DeltaTime)
@@ -114,7 +122,12 @@ void APlayGameMode::Tick(float _DeltaTime)
 
 	if (true == UEngineInput::GetInst().IsDown('L'))
 	{
-		UEngineAPICore::GetCore()->OpenLevel("Tile");
+		UEngineAPICore::GetCore()->OpenLevel("MAPEDIT");
+	}
+
+	if (Portal->GET_ISCANMOVE() == true)
+	{
+		UEngineAPICore::GetCore()->OpenLevel("BOSS");
 	}
 
 }
@@ -123,7 +136,6 @@ bool APlayGameMode::IsMonsterAllDead()
 {
 	std::list<AMonster*> AllMonsters;
 	AllMonsters = GetWorld()->GetActorsFromClass<AMonster>();
-	int AAA = AllMonsters.size();
 
 	if (AllMonsters.size() <= 0)
 	{

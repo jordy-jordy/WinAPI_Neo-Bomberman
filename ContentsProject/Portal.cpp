@@ -88,6 +88,10 @@ void APortal::PORTAL_ON_0()
 void APortal::PORTAL_ON_1()
 {
 	SpriteRenderer->ChangeAnimation("Portal_ON_1");
-	ISCANMOVE = true;
+
+	if (SpriteRenderer->IsCurAnimationEnd() == true)
+	{
+		ISCANMOVE = true;
+	}
 }
 

@@ -10,7 +10,9 @@
 
 #include "TitleGameMode.h"
 #include "PlayGameMode.h"
+#include "BossGameMode.h"
 #include "TileMapGameMode.h"
+#include "BossMapGameMode.h"
 #include "Player.h"
 
 
@@ -112,10 +114,16 @@ void BombmanCore::BeginPlay()
 		UImageManager::GetInst().LoadFolder(Play_Object_Destroy_Anim_Dir.GetPathToString());
 	}
 	{
-		UEngineDirectory Play_TILE_Dir;
-		Play_TILE_Dir.MoveParentToDirectory("Resources//Imgs");
-		Play_TILE_Dir.Append("02_PLAY//00_Tiles");
-		UImageManager::GetInst().LoadFolder(Play_TILE_Dir.GetPathToString());
+		UEngineDirectory Play_TILE_STAGE1_Dir;
+		Play_TILE_STAGE1_Dir.MoveParentToDirectory("Resources//Imgs");
+		Play_TILE_STAGE1_Dir.Append("02_PLAY//00_Tiles//00_Tiles_00_STAGE");
+		UImageManager::GetInst().LoadFolder(Play_TILE_STAGE1_Dir.GetPathToString());
+	}
+	{
+		UEngineDirectory Play_TILE_BOSS_Dir;
+		Play_TILE_BOSS_Dir.MoveParentToDirectory("Resources//Imgs");
+		Play_TILE_BOSS_Dir.Append("02_PLAY//00_Tiles//00_Tiles_01_BOSS");
+		UImageManager::GetInst().LoadFolder(Play_TILE_BOSS_Dir.GetPathToString());
 	}
 	{
 		UEngineDirectory Play_BG_Dir;
@@ -248,8 +256,6 @@ void BombmanCore::BeginPlay()
 		UImageManager::GetInst().LoadFolder(Play_PortalON1_Dir.GetPathToString());
 	}
 
-
-
 	// 타일 맵 제작용 BG
 	{
 		UEngineDirectory Play_TestBG_Dir;
@@ -258,17 +264,18 @@ void BombmanCore::BeginPlay()
 		UImageManager::GetInst().LoadFolder(Play_TestBG_Dir.GetPathToString());
 	}
 
-
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle(":: LHJ :: Neo-Bomberman ::");
 
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale({ 200,200 }, { 608, 448 });
 
-	UEngineAPICore::GetCore()->CreateLevel<ATitleGameMode, AActor>("Title");
-	UEngineAPICore::GetCore()->CreateLevel<APlayGameMode, APlayer>("Play");
-	UEngineAPICore::GetCore()->CreateLevel<ATileMapGameMode, AActor>("Tile");
+	UEngineAPICore::GetCore()->CreateLevel<ATileMapGameMode, AActor>("MAPEDIT");
+	UEngineAPICore::GetCore()->CreateLevel<ABossMapGameMode, AActor>("BOSSMAPEDIT");
 
+	UEngineAPICore::GetCore()->CreateLevel<ATitleGameMode, AActor>("TITLE");
+	UEngineAPICore::GetCore()->CreateLevel<APlayGameMode, APlayer>("STAGE01");
+	UEngineAPICore::GetCore()->CreateLevel<ABossGameMode, APlayer>("BOSS");
 
-	UEngineAPICore::GetCore()->OpenLevel("Play");
+	UEngineAPICore::GetCore()->OpenLevel("BOSSMAPEDIT");
 }
 
 void BombmanCore::Tick()

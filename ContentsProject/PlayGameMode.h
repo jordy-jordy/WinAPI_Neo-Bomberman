@@ -23,12 +23,13 @@ public:
 
 	bool IsMonsterAllDead();
 
-	void PortalON();
-
 protected:
 	void Tick(float _DeltaTime) override;
 	void PlayerInit();
 	void PlayTileMapInit();
+	void MonsterInit();
+	void PortalInit();
+	void PortalON();
 
 private:
 	class ATileMap* WallTileMap = nullptr;

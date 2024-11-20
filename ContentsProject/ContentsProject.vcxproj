@@ -163,6 +163,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="BossGameMode.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="BossMapGameMode.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="ChooseStage.h">
       <SubType>
       </SubType>
@@ -229,6 +237,14 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="BombmanCore.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="BossGameMode.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="BossMapGameMode.cpp">
       <SubType>
       </SubType>
     </ClCompile>

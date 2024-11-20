@@ -1,5 +1,5 @@
 #include "PreCompile.h"
-#include "TileMapGameMode.h"
+#include "BossMapGameMode.h"
 
 #include <EngineCore/Level.h>
 #include <EnginePlatform/EngineInput.h>
@@ -11,31 +11,34 @@
 #include "TestMap.h"
 
 
-ATileMapGameMode::ATileMapGameMode()
+ABossMapGameMode::ABossMapGameMode()
 {
-}
 
-ATileMapGameMode::~ATileMapGameMode()
+};
+
+ABossMapGameMode::~ABossMapGameMode()
 {
-}
 
-void ATileMapGameMode::BeginPlay()
+};
+
+void ABossMapGameMode::BeginPlay()
 {
 	Super::BeginPlay();
 	{
 		ATestMap* NewActor = GetWorld()->SpawnActor<ATestMap>();
-		SpriteRendererSTAGE = NewActor->SpriteRenderer;
-		SpriteRendererSTAGE->ChangeAnimation("Stage1_EX_BG");
+		SpriteRendererBOSS = NewActor->SpriteRenderer;
+		SpriteRendererBOSS->ChangeAnimation("Boss_EX_BG");
+
 	}
 
 	{
 		WallTileMap = GetWorld()->SpawnActor<ATileMap>();
-		WallTileMap->Create("00_Tiles_00_STAGE", { 13, 11 }, { 32, 32 });
+		WallTileMap->Create("00_Tiles_01_BOSS", { 13, 11 }, { 32, 32 });
 		WallTileMap->SetActorLocation({ 96, 64 });
 	}
 }
 
-void ATileMapGameMode::Tick(float _DeltaTime)
+void ABossMapGameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
@@ -49,13 +52,7 @@ void ATileMapGameMode::Tick(float _DeltaTime)
 		FIntPoint TileIndex = WallTileMap->LocationToIndex(LocalMousePos);
 
 		FVector2D Pivot = FVector2D::ZERO;
-		FVector2D SpriteScale = FVector2D(32, 32); 
-
-		if (CurrentTileType == AStageTiles::Object_Unbroken)
-		{
-			Pivot = FVector2D(0, -6);
-			SpriteScale = FVector2D(32, 44);
-		}
+		FVector2D SpriteScale = FVector2D(32, 32);
 
 		int SpriteIndex = static_cast<int>(CurrentTileType);
 
@@ -89,20 +86,18 @@ void ATileMapGameMode::Tick(float _DeltaTime)
 		int nextTileType = static_cast<int>(CurrentTileType) + 1;
 
 		// Max를 초과하지 않고 NONE도 피하도록 순환
-		if (nextTileType >= static_cast<int>(AStageTiles::Max) -1)
+		if (nextTileType >= static_cast<int>(ABossTiles::Max) - 1)
 		{
-			nextTileType = static_cast<int>(AStageTiles::Object_Broken); // 순환 시작 지점
+			nextTileType = static_cast<int>(ABossTiles::Wall); // 순환 시작 지점
 		}
 
-		CurrentTileType = static_cast<AStageTiles>(nextTileType);
+		CurrentTileType = static_cast<ABossTiles>(nextTileType);
 	}
 
 	if (true == UEngineInput::GetInst().IsDown('L'))
 	{
 		UEngineAPICore::GetCore()->OpenLevel("Play");
 	}
-
-
 
 	if (true == UEngineInput::GetInst().IsDown('R'))
 	{
@@ -118,7 +113,7 @@ void ATileMapGameMode::Tick(float _DeltaTime)
 
 		Dir.Append("Data");
 
-		std::string SaveFilePath = Dir.GetPathToString() + "\\MapData.Data";
+		std::string SaveFilePath = Dir.GetPathToString() + "\\BossMapData.Data";
 		UEngineFile NewFile = SaveFilePath;
 		NewFile.FileOpen("wb");
 		NewFile.Write(_Ser);
@@ -136,7 +131,7 @@ void ATileMapGameMode::Tick(float _DeltaTime)
 
 		Dir.Append("Data");
 
-		std::string SaveFilePath = Dir.GetPathToString() + "\\MapData.Data";
+		std::string SaveFilePath = Dir.GetPathToString() + "\\BossMapData.Data";
 		UEngineFile NewFile = SaveFilePath;
 		NewFile.FileOpen("rb");
 

@@ -16,6 +16,8 @@ public:
 	ATestMap& operator=(const ATestMap& _Other) = delete;
 	ATestMap& operator=(ATestMap&& _Other) noexcept = delete;
 
+	USpriteRenderer* SpriteRenderer = nullptr;
+
 protected:
 
 private:

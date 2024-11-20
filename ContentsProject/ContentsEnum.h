@@ -11,7 +11,7 @@ enum class ERenderOrder
 	UI = 10000,
 };
 
-enum class ATiles
+enum class AStageTiles
 {
 	NONE = 0,
 	Object_Broken = 1,
@@ -21,6 +21,13 @@ enum class ATiles
 	Background = 5,
 	Max,
 	Object_Bomb = 7
+};
+
+enum class ABossTiles
+{
+	NONE = 0,
+	Wall = 1,
+	Max,
 };
 
 enum class ECollisionGroup
