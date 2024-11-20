@@ -13,6 +13,12 @@ AMonster::~AMonster()
 
 };
 
+void AMonster::Tick(float _DeltaTime)
+{
+
+}
+
+
 FIntPoint AMonster::GetMonsterPos_INDEX(FVector2D _CurPos, ATileMap* _Map)
 {
 	FVector2D POS_MONSTER = _CurPos - _Map->GetActorLocation();

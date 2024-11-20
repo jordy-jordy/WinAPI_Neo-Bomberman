@@ -13,7 +13,6 @@ ATile_Destroy::ATile_Destroy()
 	SpriteRenderer->CreateAnimation("Destroy_Wall", "Destroy_Anim", 0, 10, 0.05f, false);
 	SpriteRenderer->ChangeAnimation("Destroy_Wall");
 
-	SpriteRenderer->SetOrder(10000);
 };
 
 ATile_Destroy::~ATile_Destroy()
@@ -30,6 +29,7 @@ void ATile_Destroy::SetWallTileMap(ATileMap* _TileMap, FIntPoint _Index)
 void ATile_Destroy::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
+	SpriteRenderer->SetOrder(GetActorLocation().Y - WallTileMap->GetActorLocation().Y);
 	Object_Destroy();
 }
 

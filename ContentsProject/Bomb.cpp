@@ -20,7 +20,6 @@ ABomb::ABomb()
 
 	SpriteRenderer->CreateAnimation("Bomb_Gone", "01_Bomb_00_Idle", 4, 4, IdleFrameSpeed, false);
 
-	SpriteRenderer->SetOrder(ERenderOrder::BOMB);
 	TimeEventer.PushEvent(Bomb_Explode_Time, std::bind(&ABomb::Bomb_ExPlode, this), false, false);
 }
 
@@ -33,6 +32,7 @@ void ABomb::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 	Bomb_Destroy();
+	SpriteRenderer->SetOrder(GetActorLocation().Y - WallTileMap->GetActorLocation().Y);
 }
 
 void ABomb::SetWallTileMap(ATileMap* _TileMap, FIntPoint _Index)
@@ -209,6 +209,7 @@ void ABomb::Bomb_ExPlode()
 	Explode_Center->ChangeAnimation("Bomb_Center");
 	Explode_Center->SetComponentScale({ 32, 32 });
 	Explode_Center->SetComponentLocation({ 0, 0 });
+	Explode_Center->SetOrder(GetActorLocation().Y - WallTileMap->GetActorLocation().Y);
 
 	// 规氢喊肺 气惯 贸府
 	HandleExplosion(EDirection::Left, CurBombPower);

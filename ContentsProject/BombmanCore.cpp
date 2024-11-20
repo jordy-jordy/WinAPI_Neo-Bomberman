@@ -230,10 +230,22 @@ void BombmanCore::BeginPlay()
 
 	// Æ÷Å» ÀÌ¹ÌÁö
 	{
-		UEngineDirectory Play_Portal_Dir;
-		Play_Portal_Dir.MoveParentToDirectory("Resources//Imgs");
-		Play_Portal_Dir.Append("02_PLAY//02_Objects//03_Portal");
-		UImageManager::GetInst().LoadFolder(Play_Portal_Dir.GetPathToString());
+		UEngineDirectory Play_PortalOFF_Dir;
+		Play_PortalOFF_Dir.MoveParentToDirectory("Resources//Imgs");
+		Play_PortalOFF_Dir.Append("02_PLAY//02_Objects//03_Portal//OFF");
+		UImageManager::GetInst().LoadFolder(Play_PortalOFF_Dir.GetPathToString());
+	}
+	{
+		UEngineDirectory Play_PortalON0_Dir;
+		Play_PortalON0_Dir.MoveParentToDirectory("Resources//Imgs");
+		Play_PortalON0_Dir.Append("02_PLAY//02_Objects//03_Portal//ON_00");
+		UImageManager::GetInst().LoadFolder(Play_PortalON0_Dir.GetPathToString());
+	}
+	{
+		UEngineDirectory Play_PortalON1_Dir;
+		Play_PortalON1_Dir.MoveParentToDirectory("Resources//Imgs");
+		Play_PortalON1_Dir.Append("02_PLAY//02_Objects//03_Portal//ON_01");
+		UImageManager::GetInst().LoadFolder(Play_PortalON1_Dir.GetPathToString());
 	}
 
 

@@ -13,13 +13,14 @@ enum class ERenderOrder
 
 enum class ATiles
 {
-	Background = 0,
+	NONE = 0,
 	Object_Broken = 1,
 	Object_Unbroken = 2,
 	Object_Portal = 3,
 	Player_Spawn = 4,
+	Background = 5,
 	Max,
-	Object_Bomb = 6
+	Object_Bomb = 7
 };
 
 enum class ECollisionGroup

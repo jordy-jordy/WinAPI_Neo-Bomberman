@@ -75,6 +75,7 @@ void AMushroom::Tick(float _DeltaTime)
 void AMushroom::Mush_Order()
 {
 	SpriteRenderer->SetOrder(GetActorLocation().Y - WallTileMap->GetActorLocation().Y);
+	UniqueRenderer->SetOrder(GetActorLocation().Y - WallTileMap->GetActorLocation().Y);
 }
 
 std::string AMushroom::NAME_CHECK()
@@ -86,7 +87,6 @@ void AMushroom::UNIQ_SKILL()
 {
 	UNIQUE_ON = true;
 	UniqueRenderer->SetActive(true);
-	UniqueRenderer->SetOrder(GetActorLocation().Y - WallTileMap->GetActorLocation().Y);;
 	UniqueRenderer->ChangeAnimation("Mushroom_Uniq");
 }
 

@@ -28,10 +28,10 @@ APlayGameMode::~APlayGameMode()
 void APlayGameMode::PlayerInit()
 {
 	// 플레이어 세팅
-	std::vector<FIntPoint> PlayerStartposS = WallTileMap->FindSpriteIndex(ATiles::Player_Spawn);
+	std::vector<FIntPoint> PlayerStartPOS = WallTileMap->FindSpriteIndex(ATiles::Player_Spawn);
 
 	UEngineRandom StartRandom;
-	FIntPoint Point = PlayerStartposS[StartRandom.RandomInt(0, static_cast<int>(PlayerStartposS.size()) - 1)];
+	FIntPoint Point = PlayerStartPOS[StartRandom.RandomInt(0, static_cast<int>(PlayerStartPOS.size()) - 1)];
 
 	FVector2D TileLocation = WallTileMap->IndexToTileLocation(Point) + WallTileMap->GetActorLocation();
 	FVector2D HalfTiles = WallTileMap->GetTileHalfSize();
@@ -84,13 +84,24 @@ void APlayGameMode::BeginPlay()
 		Mushroom->SetWallTileMap(WallTileMap);
 		FVector2D TileMapLoc = WallTileMap->GetActorLocation();
 		FVector2D TileHalfSize = WallTileMap->GetTileHalfSize();
-		FIntPoint Index = { 0, 10 };
+		FIntPoint Index = { 0, 0 };
 		FVector2D Mush_Location = WallTileMap->IndexToTileLocation(Index);
 		FVector2D LocalLoc = Mush_Location + TileMapLoc + TileHalfSize;
 		Mushroom->SetActorLocation(LocalLoc);
 	}
 
-	//AActor* Portal = GetWorld()->SpawnActor<APortal>();
+	// 포탈 세팅
+	Portal = GetWorld()->SpawnActor<APortal>();
+	std::vector<FIntPoint> PortalPOS = WallTileMap->FindSpriteIndex(ATiles::Object_Portal);
+	FVector2D Location = WallTileMap->IndexToTileLocation(PortalPOS[0]);
+	FVector2D TileLocation = Location + WallTileMap->GetActorLocation();
+	FVector2D HalfTiles = WallTileMap->GetTileHalfSize();
+	FVector2D LocalLocation = TileLocation + HalfTiles;
+	Portal->SetActorLocation(LocalLocation);
+	Portal->SetWallTileMap(WallTileMap);
+
+	int a = 0;
+
 
 }
 
@@ -99,6 +110,7 @@ void APlayGameMode::Tick(float _DeltaTime)
 	Super::Tick(_DeltaTime);
 
 	IsMonsterAllDead();
+	PortalON();
 
 	if (true == UEngineInput::GetInst().IsDown('L'))
 	{
@@ -126,6 +138,7 @@ void APlayGameMode::PortalON()
 	IsMonsterAllDead();
 	if (IsMonsterAllDead() == true)
 	{
+		Portal->PORTAL_SWITCH(true);
 	}
 }
 

@@ -49,11 +49,6 @@ void ATileMapGameMode::Tick(float _DeltaTime)
 
 		FVector2D Pivot = FVector2D::ZERO;
 		FVector2D SpriteScale = FVector2D(32, 32); 
-		
-		if (CurrentTileType == ATiles::Background)
-		{
-			
-		}
 
 		if (CurrentTileType == ATiles::Object_Unbroken)
 		{
@@ -83,14 +78,22 @@ void ATileMapGameMode::Tick(float _DeltaTime)
 			Tile->SpriteRenderer = nullptr;
 			Tile->Pivot = FVector2D::ZERO;
 			Tile->Scale = FVector2D::ZERO;
-			Tile->SpriteIndex = -1;
+			Tile->SpriteIndex = 0;
 		}
 	}
 
 	if (UEngineInput::GetInst().IsDown('Q'))
 	{
-		// ATiles enum을 순환하며 업데이트
-		CurrentTileType = static_cast<ATiles>((static_cast<int>(CurrentTileType) + 1) % static_cast<int>(ATiles::Max));
+		// 현재 타입을 정수로 변환하고 +1 증가
+		int nextTileType = static_cast<int>(CurrentTileType) + 1;
+
+		// Max를 초과하지 않고 NONE도 피하도록 순환
+		if (nextTileType >= static_cast<int>(ATiles::Max) -1)
+		{
+			nextTileType = static_cast<int>(ATiles::Object_Broken); // 순환 시작 지점
+		}
+
+		CurrentTileType = static_cast<ATiles>(nextTileType);
 	}
 
 	if (true == UEngineInput::GetInst().IsDown('L'))

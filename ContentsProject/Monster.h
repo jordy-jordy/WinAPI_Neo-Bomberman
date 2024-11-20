@@ -34,6 +34,8 @@ public:
 	FVector2D GetNextVector(FVector2D _CurPos, MonsterDir _TagetDir);
 
 protected:
+	void Tick(float _DeltaTime) override;
+
 
 private:
 	UEngineSprite* SpriteRenderer;

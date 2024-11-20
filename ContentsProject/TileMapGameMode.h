@@ -19,7 +19,7 @@ public:
 	ATileMapGameMode& operator=(const ATileMapGameMode& _Other) = delete;
 	ATileMapGameMode& operator=(ATileMapGameMode&& _Other) noexcept = delete;
 
-	ATiles CurrentTileType = ATiles::Background;
+	ATiles CurrentTileType = ATiles::Object_Broken;
 
 protected:
 	void BeginPlay() override;

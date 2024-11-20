@@ -96,9 +96,6 @@
     <ClInclude Include="TestMap.h">
       <Filter>TileMap</Filter>
     </ClInclude>
-    <ClInclude Include="Monster.h">
-      <Filter>ContentsObject\Play\Monster\Parent</Filter>
-    </ClInclude>
     <ClInclude Include="Bomb.h">
       <Filter>ContentsObject\Play\Objects</Filter>
     </ClInclude>
@@ -113,6 +110,9 @@
     </ClInclude>
     <ClInclude Include="Portal.h">
       <Filter>ContentsObject\Play\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>ContentsObject\Play\Monster\Parent</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
