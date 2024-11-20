@@ -89,7 +89,7 @@ void ATileMapGameMode::Tick(float _DeltaTime)
 		int nextTileType = static_cast<int>(CurrentTileType) + 1;
 
 		// Max를 초과하지 않고 NONE도 피하도록 순환
-		if (nextTileType >= static_cast<int>(AStageTiles::Max) -1)
+		if (nextTileType >= static_cast<int>(AStageTiles::Max))
 		{
 			nextTileType = static_cast<int>(AStageTiles::Object_Broken); // 순환 시작 지점
 		}

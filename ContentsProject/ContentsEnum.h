@@ -13,21 +13,23 @@ enum class ERenderOrder
 
 enum class AStageTiles
 {
-	NONE = 0,
+	NONE0 = 0,
 	Object_Broken = 1,
 	Object_Unbroken = 2,
 	Object_Portal = 3,
 	Player_Spawn = 4,
-	Background = 5,
 	Max,
+	Background = 6,
 	Object_Bomb = 7
 };
 
 enum class ABossTiles
 {
-	NONE = 0,
-	Wall = 1,
-	Player_Spawn = 2,
+	NONE0 = 0,
+	NONE1 = 1,
+	Wall = 2,
+	NONE2 = 3,
+	Player_Spawn = 4,
 	Max,
 };
 

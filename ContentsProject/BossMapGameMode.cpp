@@ -85,14 +85,22 @@ void ABossMapGameMode::Tick(float _DeltaTime)
 		// 현재 타입을 정수로 변환하고 +1 증가
 		int nextTileType = static_cast<int>(CurrentTileType) + 1;
 
-		// Max를 초과하지 않고 NONE도 피하도록 순환
+		// NONE 타입을 피하고 Max를 초과하지 않도록 순환
+		while (nextTileType < static_cast<int>(ABossTiles::Max) &&
+			  (nextTileType == static_cast<int>(ABossTiles::NONE0) ||
+			   nextTileType == static_cast<int>(ABossTiles::NONE1) ||
+			   nextTileType == static_cast<int>(ABossTiles::NONE2)))
+		{
+			++nextTileType;
+		}
+
+		// Max를 초과하면 순환 시작 지점으로 설정
 		if (nextTileType >= static_cast<int>(ABossTiles::Max))
 		{
 			nextTileType = static_cast<int>(ABossTiles::Wall); // 순환 시작 지점
 		}
 
 		CurrentTileType = static_cast<ABossTiles>(nextTileType);
-
 	}
 
 	if (true == UEngineInput::GetInst().IsDown('L'))
