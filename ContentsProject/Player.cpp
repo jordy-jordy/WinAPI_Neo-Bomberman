@@ -287,15 +287,21 @@ void APlayer::Move(float _DeltaTime)
 	}
 
 	FVector2D LocalLocation = GetActorLocation() - WallTileMap->GetActorLocation(); // 타일맵 기준으로 변경
-	FVector2D NextLocalLocation = LocalLocation + PlusPos + (Vector * _DeltaTime * Speed); // 플레이어 피봇에 더해지는 크기
+	FVector2D NextLocalLocation = LocalLocation + (PlusPos + Vector * _DeltaTime * Speed); // 플레이어 피봇에 더해지는 크기
 
 	// 타일 사이즈를 나눠서 타일 플레이어 위치의 타일 인덱스 도출
 	FVector2D TileSize = WallTileMap->GetTileSize(); // 32
-	FVector2D LocationAtIndex = LocalLocation / TileSize; // 플레이어 위치를 타일맵 인덱스로 보기 위함
+	//FVector2D LocationAtIndex = LocalLocation / TileSize; // 플레이어 위치를 타일맵 인덱스로 보기 위함
+	FIntPoint LocationAtIndex = WallTileMap->LocationToIndex(LocalLocation); // 플레이어 위치를 타일맵 인덱스로 보기 위함
+
 	FVector2D NextLocationAtIndex = NextLocalLocation / TileSize; // 플레이어가 이동하는 방향의 타일맵 인덱스
+	//FIntPoint NextLocationAtIndex = WallTileMap->LocationToIndex(NextLocalLocation);
+	FVector2D TTT = { static_cast<float>(NextLocationAtIndex.X), static_cast<float>(NextLocationAtIndex.Y) };
+	UEngineDebug::CoreOutPutString("TTT : " + TTT.ToString());
 
 	Tile* TileData = WallTileMap->GetTileRef(NextLocalLocation);
 	bool BombCheck = WallTileMap->IsBomb({ static_cast<int>(NextLocationAtIndex.X), static_cast<int>(NextLocationAtIndex.Y) });
+
 
 	if (NextLocationAtIndex.X < 0 || NextLocationAtIndex.Y < 0 || NextLocationAtIndex.X > 13 || NextLocationAtIndex.Y > 11)
 	{

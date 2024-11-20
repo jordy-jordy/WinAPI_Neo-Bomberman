@@ -42,6 +42,7 @@ public:
 
 	FVector2D PosToTileIndex(FVector2D _Pos);
 
+	FVector2D InvertLOC(FVector2D _Dir);
 
 protected:
 
@@ -70,6 +71,18 @@ private:
 	class ATileMap* WallTileMap = nullptr;
 
 	class ABomb* Bomb = nullptr;
+
+	FVector2D CUSTOM_VECTOR_ZERO  = { 0, 0 };
+	FVector2D CUSTOM_VECTOR_UP    = { 0, -32 };
+	FVector2D CUSTOM_VECTOR_DOWN  = { 0, 32 };
+	FVector2D CUSTOM_VECTOR_LEFT  = { -32, 0 };
+	FVector2D CUSTOM_VECTOR_RIGHT = { 32, 0 };
+
+	FIntPoint CUSTOM_INDEX_ZERO  = { 0, 0 };
+	FIntPoint CUSTOM_INDEX_UP    = { 0, -1 };
+	FIntPoint CUSTOM_INDEX_DOWN  = { 0, 1 };
+	FIntPoint CUSTOM_INDEX_LEFT  = { -1, 0 };
+	FIntPoint CUSTOM_INDEX_RIGHT = { 1, 0 };
 
 };
 
