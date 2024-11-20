@@ -122,16 +122,16 @@ void APlayGameMode::Tick(float _DeltaTime)
 
 	IsMonsterAllDead();
 	PortalON();
+	if (Portal->GET_ISCANMOVE() == true)
+	{
+		MOVETO_BOSS();
+	}
 
 	if (true == UEngineInput::GetInst().IsDown('L'))
 	{
 		UEngineAPICore::GetCore()->OpenLevel("MAPEDIT");
 	}
 
-	if (Portal->GET_ISCANMOVE() == true)
-	{
-		UEngineAPICore::GetCore()->OpenLevel("BOSS");
-	}
 
 }
 
@@ -155,5 +155,21 @@ void APlayGameMode::PortalON()
 	{
 		Portal->PORTAL_SWITCH(true);
 	}
+}
+
+void APlayGameMode::MOVETO_BOSS()
+{
+	FVector2D PLAYER_POS = GetWorld()->GetPawn()->GetActorLocation() - WallTileMapLocation;
+	FVector2D PORTAL_POS = Portal->GetActorLocation() - WallTileMapLocation;
+
+	FIntPoint PLAYER_INDEX = WallTileMap->LocationToIndex(PLAYER_POS);
+	FIntPoint PORTAL_INDEX = WallTileMap->LocationToIndex(PORTAL_POS);
+
+
+	if (PLAYER_INDEX == PORTAL_INDEX)
+	{
+		UEngineAPICore::GetCore()->OpenLevel("BOSS");
+	}
+
 }
 

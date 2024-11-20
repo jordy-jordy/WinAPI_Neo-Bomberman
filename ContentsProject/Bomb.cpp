@@ -115,6 +115,7 @@ void ABomb::HandleExplosion(EDirection Direction, int Power)
 		Explode_Mid->ChangeAnimation("Bomb_Mid");
 		Explode_Mid->SetComponentScale({ 32, 32 });
 		Explode_Mid->SetComponentLocation(TilePos_Location);
+		Explode_Mid->SetOrder(ERenderOrder::BOMB);
 		FVector2D ExplodePos = BombPos_Location + Explode_Mid->GetComponentLocation();
 		FIntPoint TilePos_INDEX = WallTileMap->LocationToIndex(ExplodePos);
 		FIntPoint bbb = WallTileMap->LocationToIndex(ExplodePos);
@@ -159,6 +160,7 @@ void ABomb::HandleExplosion(EDirection Direction, int Power)
 		Explode_End->ChangeAnimation("Bomb_End");
 		Explode_End->SetComponentScale({ 32, 32 });
 		Explode_End->SetComponentLocation(TilePos_Location);
+		Explode_End->SetOrder(ERenderOrder::BOMB);
 		FVector2D ExplodePos = BombPos_Location + Explode_End->GetComponentLocation();
 		FIntPoint TilePos_INDEX = WallTileMap->LocationToIndex(ExplodePos);
 

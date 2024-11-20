@@ -73,7 +73,7 @@
       <Filter>ContentsObject\Global</Filter>
     </ClInclude>
     <ClInclude Include="ContentsEnum.h">
-      <Filter>Global</Filter>
+      <Filter>Enums</Filter>
     </ClInclude>
     <ClInclude Include="TitleLogo.h">
       <Filter>ContentsObject\Title</Filter>
@@ -146,9 +146,6 @@
     <Filter Include="ContentsObject\Play">
       <UniqueIdentifier>{c4fac68f-60cc-4b9b-b7a2-3d2db87be598}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Global">
-      <UniqueIdentifier>{e9fe401b-b121-409f-8edf-3cca141edcef}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ContentsObject\Title">
       <UniqueIdentifier>{77b34b9b-e690-42cc-b141-c3742844be4b}</UniqueIdentifier>
     </Filter>
@@ -178,6 +175,9 @@
     </Filter>
     <Filter Include="ContentsObject\GameMode\TILEMAPEDIT">
       <UniqueIdentifier>{8ff7f439-d6d5-4ec9-b320-c9b2cfd3dbc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Enums">
+      <UniqueIdentifier>{e9fe401b-b121-409f-8edf-3cca141edcef}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

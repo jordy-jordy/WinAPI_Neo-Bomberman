@@ -30,6 +30,7 @@ protected:
 	void MonsterInit();
 	void PortalInit();
 	void PortalON();
+	void MOVETO_BOSS();
 
 private:
 	class ATileMap* WallTileMap = nullptr;

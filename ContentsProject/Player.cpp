@@ -64,7 +64,8 @@ APlayer::APlayer()
 	SpriteRendererBody->ChangeAnimation("Idle_Down_Body");
 	SpriteRendererHead->ChangeAnimation("Idle_Down_Head");
 
-
+	SpriteRendererBody->SetOrder(ERenderOrder::PLAYER);
+	SpriteRendererHead->SetOrder(ERenderOrder::PLAYER);
 }
 
 APlayer::~APlayer()

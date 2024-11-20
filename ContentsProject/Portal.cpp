@@ -14,6 +14,9 @@ APortal::APortal()
 	SpriteRenderer->CreateAnimation("Portal_ON_0", "ON_00", 0, 5, 0.2f, false);
 	SpriteRenderer->CreateAnimation("Portal_ON_1", "ON_01", 0, 2, 0.2f, true);
 
+	SpriteRenderer->SetOrder(ERenderOrder::PORTAL);
+
+
 };
 
 APortal::~APortal()
@@ -24,7 +27,7 @@ APortal::~APortal()
 void APortal::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
-	SpriteRenderer->SetOrder(GetActorLocation().Y - WallTileMap->GetActorLocation().Y);
+	//SpriteRenderer->SetOrder(GetActorLocation().Y - WallTileMap->GetActorLocation().Y);
 
 	switch (CurPortalState)
 	{
