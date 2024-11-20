@@ -230,3 +230,9 @@ void ATileMap::RemoveTile(FVector2D _Pos)
 		AllTiles[TargetIndex.Y][TargetIndex.X].SpriteIndex = -1;
 	}
 }
+
+FIntPoint ATileMap::LocationToMatrixIdx(const FVector2D& _loc)
+{
+	FIntPoint idx = LocationToIndex(_loc - GetActorLocation());
+	return idx;
+}

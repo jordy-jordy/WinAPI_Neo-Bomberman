@@ -70,11 +70,11 @@ private:
 	int TILE_INDEX_MIN_Y = 0;
 	int TILE_INDEX_MAX_Y = 11;
 
-	FVector2D TEMP_ZERO = { 0 , 0 };
-	FVector2D TEMP_UP = { 0, -17 };
-	FVector2D TEMP_DOWN = { 0, 17 };
-	FVector2D TEMP_LEFT = { -17, 0 };
-	FVector2D TEMP_RIGHT = { 17, 0 };
+	FVector2D CUSTOM_VECTOR_ZERO = { 0 , 0 };
+	FVector2D CUSTOM_VECTOR_UP = { 0, -17 };
+	FVector2D CUSTOM_VECTOR_DOWN = { 0, 17 };
+	FVector2D CUSTOM_VECTOR_LEFT = { -17, 0 };
+	FVector2D CUSTOM_VECTOR_RIGHT = { 17, 0 };
 
 	std::string ANIMNAME;
 

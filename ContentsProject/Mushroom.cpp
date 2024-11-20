@@ -110,27 +110,27 @@ FVector2D AMushroom::InvertLOC(FVector2D _Loc)
 {
 	if (_Loc == FVector2D::ZERO)
 	{
-		return TEMP_ZERO;
+		return CUSTOM_VECTOR_ZERO;
 	}
 
 	if (_Loc == FVector2D::LEFT)
 	{
-		return TEMP_LEFT;
+		return CUSTOM_VECTOR_LEFT;
 	}
 
 	if (_Loc == FVector2D::RIGHT)
 	{
-		return TEMP_RIGHT;
+		return CUSTOM_VECTOR_RIGHT;
 	}
 
 	if (_Loc == FVector2D::UP)
 	{
-		return TEMP_UP;
+		return CUSTOM_VECTOR_UP;
 	}
 
 	if (_Loc == FVector2D::DOWN)
 	{
-		return TEMP_DOWN;
+		return CUSTOM_VECTOR_DOWN;
 	}
 }
 

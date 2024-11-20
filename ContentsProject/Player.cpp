@@ -108,7 +108,7 @@ void APlayer::Tick(float _DeltaTime)
 
 		if (false == WallTileMap->IsBomb(CurTileIndex))
 		{
-			PlaceBomb(_DeltaTime);
+			PlaceBomb();
 		}
 	}
 
@@ -161,7 +161,7 @@ FVector2D APlayer::InvertLOC(FVector2D _Dir)
 
 
 // 폭탄 설치
-void APlayer::PlaceBomb(float _DeltaTime)
+void APlayer::PlaceBomb()
 {
 	FVector2D TileSize = WallTileMap->GetTileSize(); // 32
 	FVector2D TileHalfSize = WallTileMap->GetTileHalfSize(); // 16
@@ -171,10 +171,11 @@ void APlayer::PlaceBomb(float _DeltaTime)
 	FVector2D TileMapPLUSHalftile = WallTileMap->GetActorLocation(); // 96, 64 // 윈도우의 LEFT TOP을 기준으로 책정
 	FVector2D LocalLocation = PlayerLocation - TileMapLocation; // 타일맵의 LEFT TOP을 기준으로 책정되도록 계산
 
-	FVector2D TagetPos = { floorf(LocalLocation.X), floorf(LocalLocation.Y) }; // 타일맵 기준 위치
 	FIntPoint BOMB_SET_Index = WallTileMap->LocationToIndex(LocalLocation); // 타일맵 기준 인덱스
 
-	FVector2D BOMB_SET_Pos = { (TileMapLocation.X + TileHalfSize.X) + (BOMB_SET_Index.X * TileSize.X), (TileMapLocation.Y + TileHalfSize.Y) + (BOMB_SET_Index.Y * TileSize.Y) };
+	FIntPoint TEST1 = WallTileMap->LocationToIndex(PlayerLocation);
+	FVector2D TEST2 = WallTileMap->IndexToTileLocation(TEST1) + FVector2D(TileHalfSize.X, TileHalfSize.Y);
+
 
 
 	// 폭탄 설치 가능 여부 재확인
@@ -189,7 +190,7 @@ void APlayer::PlaceBomb(float _DeltaTime)
 	WallTileMap->SetBomb(BOMB_SET_Index, Bomb);
 	// 위치에 폭탄 설치
 	Bomb->SetWallTileMap(WallTileMap, BOMB_SET_Index); // 타일맵 정보 설정
-	Bomb->SetActorLocation(BOMB_SET_Pos);
+	Bomb->SetActorLocation(TEST2);
 
 	Bomb->SetPower(BOMBPOWER);
 
@@ -264,35 +265,35 @@ void APlayer::Idle(float _DeltaTime)
 void APlayer::Move(float _DeltaTime)
 {
 	FVector2D Vector = FVector2D::ZERO;
-	int Temp = 0;
+	int DIR = 0;
 
 	if (true == UEngineInput::GetInst().IsPress('D'))
 	{
 		Vector = FVector2D::RIGHT;
 		SpriteRendererBody->ChangeAnimation("Run_Right_Body");
 		SpriteRendererHead->ChangeAnimation("Run_Right_Head");
-		Temp = 1;
+		DIR = 1;
 	}
 	else if (true == UEngineInput::GetInst().IsPress('A'))
 	{
 		Vector = FVector2D::LEFT;
 		SpriteRendererBody->ChangeAnimation("Run_Left_Body");
 		SpriteRendererHead->ChangeAnimation("Run_Left_Head");
-		Temp = 2;
+		DIR = 2;
 	}
 	else if (true == UEngineInput::GetInst().IsPress('S'))
 	{
 		Vector = FVector2D::DOWN;
 		SpriteRendererBody->ChangeAnimation("Run_Down_Body");
 		SpriteRendererHead->ChangeAnimation("Run_Down_Head");
-		Temp = 3;
+		DIR = 3;
 	}
 	else if (true == UEngineInput::GetInst().IsPress('W'))
 	{
 		Vector = FVector2D::UP;
 		SpriteRendererBody->ChangeAnimation("Run_Up_Body");
 		SpriteRendererHead->ChangeAnimation("Run_Up_Head");
-		Temp = 4;
+		DIR = 4;
 	}
 
 	if (false == UEngineInput::GetInst().IsPress('A') &&
@@ -306,41 +307,45 @@ void APlayer::Move(float _DeltaTime)
 	}
 
 	FVector2D PlusPos = Vector;
-	switch (Temp)
+	switch (DIR)
 	{
-	case 1: PlusPos *= 16.0f; break;
-	case 2: PlusPos *= 16.0f; break;
-	case 3: PlusPos *= 8.0f; break;
-	case 4: PlusPos *= 24.0f; break;
+	case 1: PlusPos *= 16.0f; break; // RIGHT
+	case 2: PlusPos *= 16.0f; break; // LEFT
+	case 3: PlusPos *= 16.0f; break; // DOWN
+	case 4: PlusPos *= 16.0f; break; // UP
 	default: break;
 	}
 
-	FVector2D LocalLocation = GetActorLocation() - WallTileMap->GetActorLocation(); // 타일맵 기준으로 변경
-	FVector2D NextLocalLocation = LocalLocation + (PlusPos + Vector * _DeltaTime * Speed); // 플레이어 피봇에 더해지는 크기
+	const int POS_X_MIN = 96;
+	const int POS_X_MAX = 512;
+	const int POS_Y_MIN = 64;
+	const int POS_Y_MAX = 416;
 
-	// 타일 사이즈를 나눠서 타일 플레이어 위치의 타일 인덱스 도출
-	FVector2D TileSize = WallTileMap->GetTileSize(); // 32
-	//FVector2D LocationAtIndex = LocalLocation / TileSize; // 플레이어 위치를 타일맵 인덱스로 보기 위함
-	FIntPoint LocationAtIndex = WallTileMap->LocationToIndex(LocalLocation); // 플레이어 위치를 타일맵 인덱스로 보기 위함
+	
+	FVector2D PLAYER_POS_NEXT = GetActorLocation() + (InvertLOC(Vector) * _DeltaTime * Speed) + PlusPos; // 윈도우 LEFT TOP 기준
+	//UEngineDebug::CoreOutPutString("PLAYER_POS_NEXT : " + PLAYER_POS_NEXT.ToString());
 
-	FVector2D NextLocationAtIndex = NextLocalLocation / TileSize; // 플레이어가 이동하는 방향의 타일맵 인덱스
-	//FIntPoint NextLocationAtIndex = WallTileMap->LocationToIndex(NextLocalLocation);
-	FVector2D TTT = { static_cast<float>(NextLocationAtIndex.X), static_cast<float>(NextLocationAtIndex.Y) };
-	UEngineDebug::CoreOutPutString("TTT : " + TTT.ToString());
+	FVector2D PLAYER_LOCAL_LOC = GetActorLocation() - WallTileMap->GetActorLocation(); // 타일맵 LEFT TOP 기준
+	FVector2D PLAYER_LOCAL_LOC_NEXT = PLAYER_LOCAL_LOC + (InvertLOC(Vector) * _DeltaTime * Speed) + PlusPos;
 
-	Tile* TileData = WallTileMap->GetTileRef(NextLocalLocation);
-	bool BombCheck = WallTileMap->IsBomb({ static_cast<int>(NextLocationAtIndex.X), static_cast<int>(NextLocationAtIndex.Y) });
+	FIntPoint PLAYER_LOCAL_IDX_NEXT = WallTileMap->LocationToIndex(PLAYER_LOCAL_LOC_NEXT);
 
+	Tile* TileData = WallTileMap->GetTileRef(PLAYER_LOCAL_LOC_NEXT);
+	bool BombCheck = WallTileMap->IsBomb(PLAYER_LOCAL_IDX_NEXT);
 
-	if (NextLocationAtIndex.X < 0 || NextLocationAtIndex.Y < 0 || NextLocationAtIndex.X > 13 || NextLocationAtIndex.Y > 11)
+	if (PLAYER_POS_NEXT.X < POS_X_MIN || PLAYER_POS_NEXT.X > POS_X_MAX || PLAYER_POS_NEXT.Y < POS_Y_MIN || PLAYER_POS_NEXT.Y > POS_Y_MAX)
 	{
 		return;
 	}
-	if (TileData->SpriteIndex != 2 && 
-		TileData->SpriteIndex != 1 && 
-		true != BombCheck)
+
+	if (TileData != nullptr)
 	{
-		AddActorLocation(Vector * _DeltaTime * Speed);
+		if (TileData->SpriteIndex != 2 &&
+			TileData->SpriteIndex != 1 /*&&
+			true != BombCheck*/)
+		{
+			AddActorLocation(Vector * _DeltaTime * Speed);
+		}
 	}
 }
 

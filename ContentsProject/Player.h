@@ -66,23 +66,22 @@ private:
 	void Idle(float _DeltaTime);
 	void MoveStart();
 	void Move(float _DeltaTime);
-	void PlaceBomb(float _DeltaTime);
+	void PlaceBomb();
 
 	class ATileMap* WallTileMap = nullptr;
 
 	class ABomb* Bomb = nullptr;
 
-	FVector2D CUSTOM_VECTOR_ZERO  = { 0, 0 };
-	FVector2D CUSTOM_VECTOR_UP    = { 0, -17 };
-	FVector2D CUSTOM_VECTOR_DOWN  = { 0, 17 };
-	FVector2D CUSTOM_VECTOR_LEFT  = { -17, 0 };
-	FVector2D CUSTOM_VECTOR_RIGHT = { 17, 0 };
+	int TILE_INDEX_MIN_X = 0;
+	int TILE_INDEX_MAX_X = 13;
+	int TILE_INDEX_MIN_Y = 0;
+	int TILE_INDEX_MAX_Y = 11;
 
-	FIntPoint CUSTOM_INDEX_ZERO  = { 0, 0 };
-	FIntPoint CUSTOM_INDEX_UP    = { 0, -1 };
-	FIntPoint CUSTOM_INDEX_DOWN  = { 0, 1 };
-	FIntPoint CUSTOM_INDEX_LEFT  = { -1, 0 };
-	FIntPoint CUSTOM_INDEX_RIGHT = { 1, 0 };
+	FVector2D CUSTOM_VECTOR_ZERO  = { 0, 0 };
+	FVector2D CUSTOM_VECTOR_UP    = { 0, -1 };
+	FVector2D CUSTOM_VECTOR_DOWN  = { 0, 1 };
+	FVector2D CUSTOM_VECTOR_LEFT  = { -1, 0 };
+	FVector2D CUSTOM_VECTOR_RIGHT = { 1, 0 };
 
 };
 

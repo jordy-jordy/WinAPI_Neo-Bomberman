@@ -110,6 +110,7 @@ public:
 	// 제거되는 오브젝트 애니메이션 스폰용
 	void SetDestroyObject(FIntPoint _Index, class ATile_Destroy* _Object);
 
+	FIntPoint LocationToMatrixIdx(const FVector2D& _loc);
 
 
 protected:
