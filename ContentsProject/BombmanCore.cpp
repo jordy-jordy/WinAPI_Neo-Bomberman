@@ -275,7 +275,7 @@ void BombmanCore::BeginPlay()
 	UEngineAPICore::GetCore()->CreateLevel<APlayGameMode, APlayer>("STAGE01");
 	UEngineAPICore::GetCore()->CreateLevel<ABossGameMode, APlayer>("BOSS");
 
-	UEngineAPICore::GetCore()->OpenLevel("BOSS");
+	UEngineAPICore::GetCore()->OpenLevel("STAGE01");
 }
 
 void BombmanCore::Tick()

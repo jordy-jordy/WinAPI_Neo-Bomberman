@@ -64,8 +64,6 @@ APlayer::APlayer()
 	SpriteRendererBody->ChangeAnimation("Idle_Down_Body");
 	SpriteRendererHead->ChangeAnimation("Idle_Down_Head");
 
-	SpriteRendererHead->SetOrder(ERenderOrder::PLAYER);
-	SpriteRendererBody->SetOrder(ERenderOrder::PLAYER);
 
 }
 
@@ -136,16 +134,22 @@ FVector2D APlayer::PosToTileIndex(FVector2D _Pos)
 // 폭탄 설치
 void APlayer::PlaceBomb(float _DeltaTime)
 {
-	FVector2D Location = GetActorLocation() - WallTileMap->GetActorLocation();
-	FVector2D WallTileMapLocation = WallTileMap->GetActorLocation();
-	FVector2D TileIndex = PosToTileIndex(Location);
-	FVector2D HalfTiles = WallTileMap->GetTileHalfSize();
+	FVector2D TileSize = WallTileMap->GetTileSize(); // 32
+	FVector2D TileHalfSize = WallTileMap->GetTileHalfSize(); // 16
 
-	FIntPoint Index = {static_cast<int>(floorf(TileIndex.X)), static_cast<int>(floorf(TileIndex.Y))};
-	FVector2D Pos = {(( WallTileMapLocation.X + HalfTiles.X ) + Index.X * WallTileMap->GetTileSize().X),(( WallTileMapLocation.Y+ HalfTiles.Y ) + Index.Y * WallTileMap->GetTileSize().Y)};
+	FVector2D PlayerLocation = GetActorLocation(); // 112, 80 (+ 16이 더해져 있음) // 윈도우의 LEFT TOP을 기준으로 책정
+	FVector2D TileMapLocation = WallTileMap->GetActorLocation(); // 96, 64 // 윈도우의 LEFT TOP을 기준으로 책정
+	FVector2D TileMapPLUSHalftile = WallTileMap->GetActorLocation(); // 96, 64 // 윈도우의 LEFT TOP을 기준으로 책정
+	FVector2D LocalLocation = PlayerLocation - TileMapLocation; // 타일맵의 LEFT TOP을 기준으로 책정되도록 계산
+
+	FVector2D TagetPos = { floorf(LocalLocation.X), floorf(LocalLocation.Y) }; // 타일맵 기준 위치
+	FIntPoint BOMB_SET_Index = WallTileMap->LocationToIndex(LocalLocation); // 타일맵 기준 인덱스
+
+	FVector2D BOMB_SET_Pos = { (TileMapLocation.X + TileHalfSize.X) + (BOMB_SET_Index.X * TileSize.X), (TileMapLocation.Y + TileHalfSize.Y) + (BOMB_SET_Index.Y * TileSize.Y) };
+
 
 	// 폭탄 설치 가능 여부 재확인
-	if (WallTileMap->IsBomb(Index))
+	if (WallTileMap->IsBomb(BOMB_SET_Index))
 	{
 		return; // 이미 폭탄이 설치된 경우
 	}
@@ -153,10 +157,10 @@ void APlayer::PlaceBomb(float _DeltaTime)
 	ABomb* Bomb = GetWorld()->SpawnActor<ABomb>();
 
 	// 타일맵에 폭탄 세팅 (연결)
-	WallTileMap->SetBomb(Index, Bomb);
+	WallTileMap->SetBomb(BOMB_SET_Index, Bomb);
 	// 위치에 폭탄 설치
-	Bomb->SetWallTileMap(WallTileMap, Index); // 타일맵 정보 설정
-	Bomb->SetActorLocation(Pos);
+	Bomb->SetWallTileMap(WallTileMap, BOMB_SET_Index); // 타일맵 정보 설정
+	Bomb->SetActorLocation(BOMB_SET_Pos);
 
 	Bomb->SetPower(BOMBPOWER);
 
