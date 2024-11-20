@@ -38,6 +38,10 @@ private:
 
 	USpriteRenderer* SpriteRendererSTAGE = nullptr;
 
+	USpriteRenderer* SpriteRendererSPAWN = nullptr;
+	USpriteRenderer* SpriteRendererPORTAL = nullptr;
+
+
 
 };
 

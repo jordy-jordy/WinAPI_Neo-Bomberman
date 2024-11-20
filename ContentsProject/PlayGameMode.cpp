@@ -66,6 +66,24 @@ void APlayGameMode::PlayTileMapInit()
 
 	WallTileMap->DeSerialize(Ser);
 
+	std::vector<FIntPoint> IDXs_SPAWN = WallTileMap->FindSpriteIndex(4);
+	std::vector<FIntPoint> IDXs_PORTAL = WallTileMap->FindSpriteIndex(3);
+
+	Tile* TILEs_SPAWN = nullptr;
+	Tile* TILEs_PORTAL = nullptr;
+
+	for (float i = 0; i < IDXs_SPAWN.size(); i++)
+	{
+		TILEs_SPAWN = WallTileMap->GetTileRef(IDXs_SPAWN[i]);
+		TILEs_SPAWN->SpriteRenderer->SetActive(false);
+	}
+
+	for (float i = 0; i < IDXs_PORTAL.size(); i++)
+	{
+		TILEs_PORTAL = WallTileMap->GetTileRef(IDXs_PORTAL[i]);
+		TILEs_PORTAL->SpriteRenderer->SetActive(false);
+	}
+
 }
 
 void APlayGameMode::MonsterInit()

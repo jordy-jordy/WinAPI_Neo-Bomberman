@@ -6,6 +6,7 @@
 
 ATileMap::ATileMap()
 {
+	
 }
 
 ATileMap::~ATileMap()
