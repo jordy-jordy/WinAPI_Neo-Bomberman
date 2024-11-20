@@ -130,6 +130,35 @@ FVector2D APlayer::PosToTileIndex(FVector2D _Pos)
 	return InvertResult;
 }
 
+FVector2D APlayer::InvertLOC(FVector2D _Dir)
+{
+	if (_Dir == FVector2D::ZERO)
+	{
+		return CUSTOM_VECTOR_ZERO;
+	}
+
+	if (_Dir == FVector2D::LEFT)
+	{
+		return CUSTOM_VECTOR_LEFT;
+	}
+
+	if (_Dir == FVector2D::RIGHT)
+	{
+		return CUSTOM_VECTOR_RIGHT;
+	}
+
+	if (_Dir == FVector2D::UP)
+	{
+		return CUSTOM_VECTOR_UP;
+	}
+
+	if (_Dir == FVector2D::DOWN)
+	{
+		return CUSTOM_VECTOR_DOWN;
+	}
+
+}
+
 
 // ÆøÅº ¼³Ä¡
 void APlayer::PlaceBomb(float _DeltaTime)

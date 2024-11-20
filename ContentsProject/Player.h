@@ -73,10 +73,10 @@ private:
 	class ABomb* Bomb = nullptr;
 
 	FVector2D CUSTOM_VECTOR_ZERO  = { 0, 0 };
-	FVector2D CUSTOM_VECTOR_UP    = { 0, -32 };
-	FVector2D CUSTOM_VECTOR_DOWN  = { 0, 32 };
-	FVector2D CUSTOM_VECTOR_LEFT  = { -32, 0 };
-	FVector2D CUSTOM_VECTOR_RIGHT = { 32, 0 };
+	FVector2D CUSTOM_VECTOR_UP    = { 0, -17 };
+	FVector2D CUSTOM_VECTOR_DOWN  = { 0, 17 };
+	FVector2D CUSTOM_VECTOR_LEFT  = { -17, 0 };
+	FVector2D CUSTOM_VECTOR_RIGHT = { 17, 0 };
 
 	FIntPoint CUSTOM_INDEX_ZERO  = { 0, 0 };
 	FIntPoint CUSTOM_INDEX_UP    = { 0, -1 };
