@@ -1,6 +1,5 @@
 #pragma once
 #include <EngineCore/Actor.h>
-#include <EngineBase/EngineTimer.h>
 
 // Ό³Έν :
 class AUI_Timer : public AActor
@@ -24,12 +23,5 @@ protected:
 
 private:
 	class USpriteRenderer* TOPBAR = nullptr;
-	class USpriteRenderer* TIME_MINUTE[1] = { nullptr };
-	class USpriteRenderer* TIME_SECOND[2] = { nullptr, nullptr };
-
-	class USpriteRenderer* PLAYMODE_SCORE_ALL = nullptr;
-	class USpriteRenderer* PLAYMODE_SCORE_MONSTER = nullptr;
-
-	UEngineTimer Timer; 
 
 };

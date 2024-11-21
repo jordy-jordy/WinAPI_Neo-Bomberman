@@ -1,8 +1,14 @@
 #include "PreCompile.h"
 #include "Score.h"
 
+#include <EngineCore/SpriteRenderer.h>
+#include <EngineBase/EngineTimer.h>
+
+#include "ContentsEnum.h"
+
 AScore::AScore()
 {
+
 	for (size_t i = 0; i < 10; i++)
 	{
 		// 카메라가 움직여도 이녀석은 움직이지 않는다.
@@ -29,11 +35,14 @@ void AScore::SetTextSpriteName(const std::string _Text)
 
 void AScore::BeginPlay()
 {
+	Super::BeginPlay();
+
+
 }
 
 void AScore::Tick(float _DeltaTime)
 {
-
+	Super::Tick(_DeltaTime);
 }
 
 void AScore::SetOrder(int _Order)
@@ -49,18 +58,12 @@ void AScore::SetValue(int _Score)
 {
 	std::string Number = std::to_string(_Score);
 
-	// 2000;
-	// 0000002000
 	if (Renders.size() <= Number.size())
 	{
 		MSGASSERT("자리수를 넘겼습니다.");
 		return;
 	}
 
-	// 0000000000
-	// 2000
-
-	// 
 
 	FVector2D Pos = FVector2D::ZERO;
 

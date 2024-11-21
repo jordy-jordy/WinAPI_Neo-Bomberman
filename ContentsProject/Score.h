@@ -36,6 +36,7 @@ public:
 
 	void SetValue(int _Score);
 
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
@@ -44,5 +45,6 @@ private:
 	std::string TextSpriteName;
 	FVector2D TextScale;
 	std::vector<class USpriteRenderer*> Renders;
+
 };
 

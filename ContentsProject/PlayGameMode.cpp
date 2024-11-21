@@ -16,6 +16,7 @@
 #include "Monster.h"
 #include "Mushroom.h"
 #include "Portal.h"
+#include "Score.h"
 #include "UI_Timer.h"
 
 
@@ -124,7 +125,19 @@ void APlayGameMode::BeginPlay()
 
 	// UI 세팅
 	AUI_Timer* UI_TOP = GetWorld()->SpawnActor<AUI_Timer>();
-	//UI_TOP->SetActorLocation({ WindowSize.hX(), 0.0f });
+
+	// 스코어 세팅
+	Minute = GetWorld()->SpawnActor<AScore>();
+	Minute->SetTextSpriteName("TimeCount.png");
+	Minute->SetActorLocation({ 280, 24 });
+	Minute->SetTextScale({ 12, 12 });
+	Minute->SetOrder(ERenderOrder::TEXT_UI);
+
+	Second = GetWorld()->SpawnActor<AScore>();
+	Second->SetTextSpriteName("TimeCount.png");
+	Second->SetActorLocation({ 312, 24 });
+	Second->SetTextScale({ 12, 12 });
+	Second->SetOrder(ERenderOrder::TEXT_UI);
 
 	// 타일맵 세팅
 	PlayTileMapInit();
@@ -139,11 +152,29 @@ void APlayGameMode::BeginPlay()
 	PortalInit();
 
 
+
+
 }
 
 void APlayGameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
+
+
+	Time -= _DeltaTime;
+
+	int M = static_cast<int>(Time) / 60;
+	int S = static_cast<int>(Time) % 60;
+
+	if (S < 0)
+	{
+		return;
+	}
+
+	
+
+	Minute->SetValue(M);
+	Second->SetValue(S);
 
 	IsMonsterAllDead();
 	PortalON();
@@ -197,4 +228,17 @@ void APlayGameMode::MOVETO_BOSS()
 	}
 
 }
+
+//void APlayGameMode::CountDown(float _DeltaTime)
+//{
+//	int Time = Minute->GetTime();
+//	Time -= _DeltaTime;
+//
+//	int M = static_cast<int>(Time) / 60;
+//	int S = static_cast<int>(Time) % 60;
+//
+//	Minute->SetValue(M);
+//	Second->SetValue(S);
+//
+//}
 

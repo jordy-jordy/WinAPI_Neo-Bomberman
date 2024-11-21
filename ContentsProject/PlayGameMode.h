@@ -24,6 +24,7 @@ public:
 
 	bool IsMonsterAllDead();
 
+
 protected:
 	void Tick(float _DeltaTime) override;
 	void PlayerInit();
@@ -41,8 +42,10 @@ private:
 
 	USpriteRenderer* SpriteRendererSPAWN = nullptr;
 	USpriteRenderer* SpriteRendererPORTAL = nullptr;
+	
+	class AScore* Minute = nullptr;
+	class AScore* Second = nullptr;
 
-
-
+	float Time = 10.0f;
 };
 
