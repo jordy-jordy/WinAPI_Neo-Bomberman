@@ -129,15 +129,25 @@ void APlayGameMode::BeginPlay()
 	// 스코어 세팅
 	Minute = GetWorld()->SpawnActor<AScore>();
 	Minute->SetTextSpriteName("TimeCount.png");
-	Minute->SetActorLocation({ 280, 24 });
-	Minute->SetTextScale({ 12, 12 });
+	Minute->SetActorLocation({ 282, 24 });
+	Minute->SetTextScale({ 16, 12 });
 	Minute->SetOrder(ERenderOrder::TEXT_UI);
 
 	Second = GetWorld()->SpawnActor<AScore>();
 	Second->SetTextSpriteName("TimeCount.png");
-	Second->SetActorLocation({ 312, 24 });
-	Second->SetTextScale({ 12, 12 });
+	Second->SetActorLocation({ 314, 24 });
+	Second->SetTextScale({ 16, 12 });
 	Second->SetOrder(ERenderOrder::TEXT_UI);
+
+	Zero = GetWorld()->SpawnActor<AScore>();
+	Zero->SetTextSpriteName("TimeCount.png");
+	Zero->SetActorLocation({ 314, 24 });
+	Zero->SetTextScale({ 16, 12 });
+	Zero->SetOrder(ERenderOrder::TEXT_UI);
+	Zero->SetValue(0);
+	Zero->SetActive(false);
+
+
 
 	// 타일맵 세팅
 	PlayTileMapInit();
@@ -166,15 +176,27 @@ void APlayGameMode::Tick(float _DeltaTime)
 	int M = static_cast<int>(Time) / 60;
 	int S = static_cast<int>(Time) % 60;
 
+	int a = 0;
+
 	if (S < 0)
 	{
 		return;
 	}
 
-	
-
 	Minute->SetValue(M);
-	Second->SetValue(S);
+
+	if (S >= 10)
+	{
+		Zero->SetActive(false);
+		Second->SetActorLocation({ 314, 24 });
+		Second->SetValue(S);
+	}
+	else if (S < 10)
+	{
+		Zero->SetActive(true);
+		Second->SetActorLocation({ 330, 24 });
+		Second->SetValue(S);
+	}
 
 	IsMonsterAllDead();
 	PortalON();

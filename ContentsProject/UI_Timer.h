@@ -23,5 +23,6 @@ protected:
 
 private:
 	class USpriteRenderer* TOPBAR = nullptr;
+	class USpriteRenderer* COLON = nullptr;
 
 };

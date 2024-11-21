@@ -16,6 +16,14 @@ AUI_Timer::AUI_Timer()
 	TOPBAR->SetComponentLocation({ 304, 0 });
 	TOPBAR->SetPivotType(PivotType::Top);
 	TOPBAR->SetOrder(ERenderOrder::UI);
+
+	COLON = CreateDefaultSubObject<USpriteRenderer>();
+	COLON->SetSprite("TimeCount.png", 10);
+	COLON->SetComponentScale({ 16, 12 });
+	COLON->SetComponentLocation({ 298, 18 });
+	COLON->SetPivotType(PivotType::Top);
+	COLON->SetOrder(ERenderOrder::UI);
+
 };
 
 AUI_Timer::~AUI_Timer()
