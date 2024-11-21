@@ -94,25 +94,27 @@ void BombmanCore::BeginPlay()
 	}
 
 
-	// 플레이어 리소스 로드
+	// 플레이어 관련 스프라이트
 	{
 		UEngineDirectory Play_Player_Dir;
 		Play_Player_Dir.MoveParentToDirectory("Resources//Imgs");
 		Play_Player_Dir.Append("02_PLAY//04_Player");
 		UImageManager::GetInst().LoadFolder(Play_Player_Dir.GetPathToString());
 	}
-	// 플레이어 스프라이트 시트 커팅
 	{
 		UImageManager& imgManager = UImageManager::GetInst();
 		imgManager.CuttingSprite("MainCharater_White.png", { 64, 64 });
 	}
-	// 오브젝트 파괴 애니메이션
+
+	// 파괴되는 오브젝트 관련 스프라이트
 	{
 		UEngineDirectory Play_Object_Destroy_Anim_Dir;
 		Play_Object_Destroy_Anim_Dir.MoveParentToDirectory("Resources//Imgs");
 		Play_Object_Destroy_Anim_Dir.Append("02_PLAY//02_Objects//02_Object//Destroy_Anim");
 		UImageManager::GetInst().LoadFolder(Play_Object_Destroy_Anim_Dir.GetPathToString());
 	}
+
+	// 타일 관련 스프라이트
 	{
 		UEngineDirectory Play_TILE_STAGE1_Dir;
 		Play_TILE_STAGE1_Dir.MoveParentToDirectory("Resources//Imgs");
@@ -137,7 +139,8 @@ void BombmanCore::BeginPlay()
 		Play_Bomb00_Dir.Append("02_PLAY//02_Objects//01_Bomb//01_Bomb_00_Idle");
 		UImageManager::GetInst().LoadFolder(Play_Bomb00_Dir.GetPathToString());
 	}
-	// 폭탄 폭발 스프라이트 시트 로드 및 커팅
+
+	// 폭탄 폭발 관련 스프라이트
 	{
 		UEngineDirectory Play_BombExplode_Dir;
 		Play_BombExplode_Dir.MoveParentToDirectory("Resources//Imgs");
@@ -181,7 +184,7 @@ void BombmanCore::BeginPlay()
 		imgManager.CuttingSprite("ExplodeUpMid.png", { 32, 32 });
 	}
 	
-	// 몬스터 로드
+	// 몬스터 관련 스프라이트
 	// None == 투명 이미지
 	{
 		UEngineDirectory Play_Monster_None_Dir;
@@ -236,7 +239,7 @@ void BombmanCore::BeginPlay()
 		UImageManager::GetInst().LoadFolder(Play_Mushroom_Uniq_Dir.GetPathToString());
 	}
 
-	// 포탈 이미지
+	// 포탈 관련 스프라이트
 	{
 		UEngineDirectory Play_PortalOFF_Dir;
 		Play_PortalOFF_Dir.MoveParentToDirectory("Resources//Imgs");
@@ -254,6 +257,26 @@ void BombmanCore::BeginPlay()
 		Play_PortalON1_Dir.MoveParentToDirectory("Resources//Imgs");
 		Play_PortalON1_Dir.Append("02_PLAY//02_Objects//03_Portal//ON_01");
 		UImageManager::GetInst().LoadFolder(Play_PortalON1_Dir.GetPathToString());
+	}
+
+	// UI 관련 스프라이트
+	{
+		UEngineDirectory Play_UI_TOP;
+		Play_UI_TOP.MoveParentToDirectory("Resources//Imgs");
+		Play_UI_TOP.Append("04_UI//Score");
+		UImageManager::GetInst().LoadFolder(Play_UI_TOP.GetPathToString());
+	}
+	{
+		UEngineDirectory Global_UI_SelectCount;
+		Global_UI_SelectCount.MoveParentToDirectory("Resources//Imgs");
+		Global_UI_SelectCount.Append("04_UI//SelectCount");
+		UImageManager::GetInst().LoadFolder(Global_UI_SelectCount.GetPathToString());
+	}
+	{
+		UEngineDirectory Title_UI;
+		Title_UI.MoveParentToDirectory("Resources//Imgs");
+		Title_UI.Append("04_UI//Title");
+		UImageManager::GetInst().LoadFolder(Title_UI.GetPathToString());
 	}
 
 	// 타일 맵 제작용 BG

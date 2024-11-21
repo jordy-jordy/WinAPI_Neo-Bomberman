@@ -16,6 +16,7 @@
 #include "Monster.h"
 #include "Mushroom.h"
 #include "Portal.h"
+#include "UI_Timer.h"
 
 
 APlayGameMode::APlayGameMode()
@@ -72,13 +73,13 @@ void APlayGameMode::PlayTileMapInit()
 	Tile* TILEs_SPAWN = nullptr;
 	Tile* TILEs_PORTAL = nullptr;
 
-	for (float i = 0; i < IDXs_SPAWN.size(); i++)
+	for (unsigned __int64 i = 0; i < IDXs_SPAWN.size(); i++)
 	{
 		TILEs_SPAWN = WallTileMap->GetTileRef(IDXs_SPAWN[i]);
 		TILEs_SPAWN->SpriteRenderer->SetActive(false);
 	}
 
-	for (float i = 0; i < IDXs_PORTAL.size(); i++)
+	for (unsigned __int64 i = 0; i < IDXs_PORTAL.size(); i++)
 	{
 		TILEs_PORTAL = WallTileMap->GetTileRef(IDXs_PORTAL[i]);
 		TILEs_PORTAL->SpriteRenderer->SetActive(false);
@@ -121,6 +122,10 @@ void APlayGameMode::BeginPlay()
 	SpriteRendererSTAGE = STAGE1_BG->SpriteRenderer;
 	SpriteRendererSTAGE->ChangeAnimation("Stage1_BG");
 
+	// UI 세팅
+	AUI_Timer* UI_TOP = GetWorld()->SpawnActor<AUI_Timer>();
+	UI_TOP->SetActorLocation({ WindowSize.hX(), 0.0f });
+
 	// 타일맵 세팅
 	PlayTileMapInit();
 
@@ -132,6 +137,8 @@ void APlayGameMode::BeginPlay()
 
 	// 포탈 세팅
 	PortalInit();
+
+
 }
 
 void APlayGameMode::Tick(float _DeltaTime)

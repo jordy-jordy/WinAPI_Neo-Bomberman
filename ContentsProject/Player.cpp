@@ -20,7 +20,7 @@ APlayer::APlayer()
 		SpriteRendererHead->SetSprite("MainCharater_White.png");
 		SpriteRendererHead->SetComponentLocation({ 0, 0 });
 		SpriteRendererHead->SetComponentScale({ 64, 64 });
-		SpriteRendererHead->SetPivotType(PivotType::Bot);
+		SpriteRendererHead->SetPivot({0.0f, -28.0f});
 
 
 		SpriteRendererHead->CreateAnimation("Idle_Up_Head", "MainCharater_White.png", 17, 17, 0.1f);
@@ -44,7 +44,7 @@ APlayer::APlayer()
 		SpriteRendererBody->SetSprite("MainCharater_White.png");
 		SpriteRendererBody->SetComponentLocation({ 0, static_cast<int>(64 * 0.5f) });
 		SpriteRendererBody->SetComponentScale({ 64, 64 });
-		SpriteRendererBody->SetPivotType(PivotType::Bot);
+		SpriteRendererBody->SetPivot({ 0.0f, -28.0f });
 
 		SpriteRendererBody->CreateAnimation("Idle_Up_Body", "MainCharater_White.png", 48, 48, 0.1f);
 		SpriteRendererBody->CreateAnimation("Run_Up_Body", "MainCharater_White.png", 50, 54 , 0.1f);

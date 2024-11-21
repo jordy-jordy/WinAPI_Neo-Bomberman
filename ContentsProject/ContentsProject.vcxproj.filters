@@ -8,7 +8,7 @@
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>ContentsObject\Global</Filter>
+      <Filter>ContentsObject\Actors_Global</Filter>
     </ClCompile>
     <ClCompile Include="TitleLogo.cpp">
       <Filter>ContentsObject\Title</Filter>
@@ -20,28 +20,28 @@
       <Filter>ContentsObject\Title</Filter>
     </ClCompile>
     <ClCompile Include="Score.cpp">
-      <Filter>ContentsObject\Global</Filter>
+      <Filter>ContentsObject\Actors_Global</Filter>
     </ClCompile>
     <ClCompile Include="TestMap.cpp">
       <Filter>TileMap</Filter>
     </ClCompile>
     <ClCompile Include="Monster.cpp">
-      <Filter>ContentsObject\Play\Monster\Parent</Filter>
+      <Filter>ContentsObject\Actors_Play\Monster\Parent</Filter>
     </ClCompile>
     <ClCompile Include="Bomb.cpp">
-      <Filter>ContentsObject\Play\Objects</Filter>
+      <Filter>ContentsObject\Actors_Play\Objects</Filter>
     </ClCompile>
     <ClCompile Include="Tile_Destroy.cpp">
-      <Filter>ContentsObject\Play\Objects</Filter>
+      <Filter>ContentsObject\Actors_Play\Objects</Filter>
     </ClCompile>
     <ClCompile Include="PlayMap.cpp">
-      <Filter>ContentsObject\Play\BG</Filter>
+      <Filter>ContentsObject\Actors_Play\BG</Filter>
     </ClCompile>
     <ClCompile Include="Mushroom.cpp">
-      <Filter>ContentsObject\Play\Monster</Filter>
+      <Filter>ContentsObject\Actors_Play\Monster</Filter>
     </ClCompile>
     <ClCompile Include="Portal.cpp">
-      <Filter>ContentsObject\Play\Objects</Filter>
+      <Filter>ContentsObject\Actors_Play\Objects</Filter>
     </ClCompile>
     <ClCompile Include="TitleGameMode.cpp">
       <Filter>ContentsObject\GameMode\TITLE</Filter>
@@ -61,6 +61,9 @@
     <ClCompile Include="BossMapGameMode.cpp">
       <Filter>ContentsObject\GameMode\TILEMAPEDIT</Filter>
     </ClCompile>
+    <ClCompile Include="UI_Timer.cpp">
+      <Filter>ContentsObject\Actors_Global</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -70,7 +73,7 @@
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>ContentsObject\Global</Filter>
+      <Filter>ContentsObject\Actors_Global</Filter>
     </ClInclude>
     <ClInclude Include="ContentsEnum.h">
       <Filter>Enums</Filter>
@@ -85,28 +88,28 @@
       <Filter>ContentsObject\Title</Filter>
     </ClInclude>
     <ClInclude Include="Score.h">
-      <Filter>ContentsObject\Global</Filter>
+      <Filter>ContentsObject\Actors_Global</Filter>
     </ClInclude>
     <ClInclude Include="TestMap.h">
       <Filter>TileMap</Filter>
     </ClInclude>
     <ClInclude Include="Bomb.h">
-      <Filter>ContentsObject\Play\Objects</Filter>
+      <Filter>ContentsObject\Actors_Play\Objects</Filter>
     </ClInclude>
     <ClInclude Include="Tile_Destroy.h">
-      <Filter>ContentsObject\Play\Objects</Filter>
+      <Filter>ContentsObject\Actors_Play\Objects</Filter>
     </ClInclude>
     <ClInclude Include="PlayMap.h">
-      <Filter>ContentsObject\Play\BG</Filter>
+      <Filter>ContentsObject\Actors_Play\BG</Filter>
     </ClInclude>
     <ClInclude Include="Mushroom.h">
-      <Filter>ContentsObject\Play\Monster</Filter>
+      <Filter>ContentsObject\Actors_Play\Monster</Filter>
     </ClInclude>
     <ClInclude Include="Portal.h">
-      <Filter>ContentsObject\Play\Objects</Filter>
+      <Filter>ContentsObject\Actors_Play\Objects</Filter>
     </ClInclude>
     <ClInclude Include="Monster.h">
-      <Filter>ContentsObject\Play\Monster\Parent</Filter>
+      <Filter>ContentsObject\Actors_Play\Monster\Parent</Filter>
     </ClInclude>
     <ClInclude Include="TitleGameMode.h">
       <Filter>ContentsObject\GameMode\TITLE</Filter>
@@ -126,6 +129,9 @@
     <ClInclude Include="BossMapGameMode.h">
       <Filter>ContentsObject\GameMode\TILEMAPEDIT</Filter>
     </ClInclude>
+    <ClInclude Include="UI_Timer.h">
+      <Filter>ContentsObject\Actors_Global</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
@@ -140,29 +146,11 @@
     <Filter Include="ContentsObject\GameMode">
       <UniqueIdentifier>{44a6d2fd-0227-4b77-a9f6-11dc56acf790}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ContentsObject\Global">
-      <UniqueIdentifier>{4bfaef8e-daa6-4977-b974-e5b909f290db}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ContentsObject\Play">
-      <UniqueIdentifier>{c4fac68f-60cc-4b9b-b7a2-3d2db87be598}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ContentsObject\Title">
       <UniqueIdentifier>{77b34b9b-e690-42cc-b141-c3742844be4b}</UniqueIdentifier>
     </Filter>
     <Filter Include="TileMap">
       <UniqueIdentifier>{97059f21-d2fb-46a6-82eb-822464da6c1b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ContentsObject\Play\Objects">
-      <UniqueIdentifier>{acfefd0f-d0da-49d6-acde-34f8c31d8b66}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ContentsObject\Play\BG">
-      <UniqueIdentifier>{6bcb5aa5-d1cc-4c4b-a56b-2169f147caea}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ContentsObject\Play\Monster">
-      <UniqueIdentifier>{5d9a3347-840e-43cc-bc75-e992b71fd46c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ContentsObject\Play\Monster\Parent">
-      <UniqueIdentifier>{aac8f3b9-2d31-4355-ab51-f95a61d51e6b}</UniqueIdentifier>
     </Filter>
     <Filter Include="ContentsObject\GameMode\TITLE">
       <UniqueIdentifier>{95b016de-f886-4059-a373-fd5d953b9e20}</UniqueIdentifier>
@@ -178,6 +166,24 @@
     </Filter>
     <Filter Include="Enums">
       <UniqueIdentifier>{e9fe401b-b121-409f-8edf-3cca141edcef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContentsObject\Actors_Global">
+      <UniqueIdentifier>{4bfaef8e-daa6-4977-b974-e5b909f290db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContentsObject\Actors_Play">
+      <UniqueIdentifier>{c4fac68f-60cc-4b9b-b7a2-3d2db87be598}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContentsObject\Actors_Play\Objects">
+      <UniqueIdentifier>{acfefd0f-d0da-49d6-acde-34f8c31d8b66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContentsObject\Actors_Play\BG">
+      <UniqueIdentifier>{6bcb5aa5-d1cc-4c4b-a56b-2169f147caea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContentsObject\Actors_Play\Monster">
+      <UniqueIdentifier>{5d9a3347-840e-43cc-bc75-e992b71fd46c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContentsObject\Actors_Play\Monster\Parent">
+      <UniqueIdentifier>{aac8f3b9-2d31-4355-ab51-f95a61d51e6b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
