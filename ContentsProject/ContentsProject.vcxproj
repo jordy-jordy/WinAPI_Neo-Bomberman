@@ -183,7 +183,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="UI_Timer.h">
+    <ClInclude Include="UIBar.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -260,7 +260,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="UI_Timer.cpp">
+    <ClCompile Include="UIBar.cpp">
       <SubType>
       </SubType>
     </ClCompile>

@@ -17,7 +17,7 @@
 #include "Mushroom.h"
 #include "Portal.h"
 #include "Score.h"
-#include "UI_Timer.h"
+#include "UIBar.h"
 
 
 APlayGameMode::APlayGameMode()
@@ -145,7 +145,7 @@ void APlayGameMode::BeginPlay()
 	SpriteRendererSTAGE->ChangeAnimation("Stage1_BG");
 
 	// UI 세팅
-	AUI_Timer* UI_TOP = GetWorld()->SpawnActor<AUI_Timer>();
+	AUIBar* UI_TOP = GetWorld()->SpawnActor<AUIBar>();
 
 	// 스코어 세팅
 	Minute = GetWorld()->SpawnActor<AScore>();

@@ -2,18 +2,18 @@
 #include <EngineCore/Actor.h>
 
 // Ό³Έν :
-class AUI_Timer : public AActor
+class AUIBar : public AActor
 {
 public:
 	// constrcuter destructer
-	AUI_Timer();
-	~AUI_Timer();
+	AUIBar();
+	~AUIBar();
 
 	// delete Function
-	AUI_Timer(const AUI_Timer& _Other) = delete;
-	AUI_Timer(AUI_Timer&& _Other) noexcept = delete;
-	AUI_Timer& operator=(const AUI_Timer& _Other) = delete;
-	AUI_Timer& operator=(AUI_Timer&& _Other) noexcept = delete;
+	AUIBar(const AUIBar& _Other) = delete;
+	AUIBar(AUIBar&& _Other) noexcept = delete;
+	AUIBar& operator=(const AUIBar& _Other) = delete;
+	AUIBar& operator=(AUIBar&& _Other) noexcept = delete;
 
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;

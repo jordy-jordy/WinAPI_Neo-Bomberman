@@ -1,5 +1,5 @@
 #include "PreCompile.h"
-#include "UI_Timer.h"
+#include "UIBar.h"
 
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineBase/EngineTimer.h>
@@ -8,7 +8,7 @@
 #include "Score.h"
 
 
-AUI_Timer::AUI_Timer()
+AUIBar::AUIBar()
 {
 	TOPBAR = CreateDefaultSubObject<USpriteRenderer>();
 	TOPBAR->SetSprite("ScoreBar_Adventure.png");
@@ -26,18 +26,18 @@ AUI_Timer::AUI_Timer()
 
 };
 
-AUI_Timer::~AUI_Timer()
+AUIBar::~AUIBar()
 {
 
 };
 
-void AUI_Timer::BeginPlay()
+void AUIBar::BeginPlay()
 {
 	Super::BeginPlay();
 
 }
 
-void AUI_Timer::Tick(float _DeltaTime)
+void AUIBar::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
