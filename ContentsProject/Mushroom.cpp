@@ -56,8 +56,6 @@ void AMushroom::Tick(float _DeltaTime)
 		if (UniqueRenderer->IsCurAnimationEnd() == true)
 		{
 			UNIQUE_ON = false;
-			//UniqueRenderer->Destroy();
-			//UniqueRenderer = nullptr;
 			UniqueRenderer->SetActive(false);
 			SpriteRenderer->SetActive(true);
 			UniqueRenderer->ChangeAnimation("Mushroom_Idle");
@@ -136,10 +134,6 @@ FVector2D AMushroom::InvertLOC(FVector2D _Loc)
 
 void AMushroom::DIR_ANIM(FVector2D _Dir)
 {
-	//if (MoveTO == FVector2D::ZERO)
-	//{
-	//	SpriteRenderer->ChangeAnimation("Mushroom_Uniq");
-	//}
 	if (MoveTO == FVector2D::UP)
 	{
 		SpriteRenderer->ChangeAnimation("Mushroom_Up");
