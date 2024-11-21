@@ -30,7 +30,7 @@ AMushroom::AMushroom()
 	UniqueRenderer->CreateAnimation("Mushroom_Uniq", "Mushroom.png", 44, 54, 0.2f, false);
 	UniqueRenderer->SetActive(false);
 
-	TimeEventer.PushEvent(GET_RANDOM_TIME(), std::bind(&AMushroom::UNIQ_SKILL, this), false, true);
+	//TimeEventer.PushEvent(GET_RANDOM_TIME(), std::bind(&AMushroom::UNIQ_SKILL, this), false, true);
 };
 
 AMushroom::~AMushroom()
@@ -47,6 +47,17 @@ void AMushroom::BeginPlay()
 void AMushroom::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
+
+	elapsedTime += _DeltaTime;
+	if (elapsedTime >= MAX_TIME)
+	{
+		UEngineRandom Random;
+		if (getRandomValue(MAXDELAY, Random) == 0)
+		{
+			UNIQ_SKILL();
+		}
+		elapsedTime = 0.0f;
+	}
 
 	if (UNIQUE_ON == true)
 	{
@@ -88,12 +99,6 @@ void AMushroom::UNIQ_SKILL()
 	UniqueRenderer->ChangeAnimation("Mushroom_Uniq");
 }
 
-float AMushroom::GET_RANDOM_TIME()
-{
-	UEngineRandom Random;
-	RandomTime = Random.Randomfloat(MIN_TIME, MAX_TIME);
-	return RandomTime;
-}
 
 FVector2D AMushroom::GET_RANDOM_DIR()
 {
@@ -223,3 +228,16 @@ void AMushroom::RemoveMushroom()
 	this->Destroy();
 }
 
+int AMushroom::getRandomValue(int _MaxDelay, UEngineRandom& _randomEngine)
+{
+	// Vector 생성
+	std::vector<int> values(_MaxDelay);
+	for (int i = 0; i < _MaxDelay; ++i)
+	{
+		values[i] = i; // 0 ~ (max_time - 1) 값으로 초기화
+	}
+
+	// 랜덤 인덱스 생성
+	int randomIndex = _randomEngine.RandomInt(0, _MaxDelay - 1);
+	return values[randomIndex]; // 해당 인덱스의 값 반환
+}

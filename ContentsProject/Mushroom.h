@@ -1,8 +1,9 @@
 #pragma once
 #include "Monster.h"
 
-#include "ATileMap.h"
 #include <EngineBase/EngineRandom.h>
+
+#include "ATileMap.h"
 
 
 // Ό³Έν :
@@ -43,7 +44,6 @@ public:
 
 	void UNIQ_SKILL();
 
-	float GET_RANDOM_TIME();
 	FVector2D GET_RANDOM_DIR();
 
 	bool BOMBBOMB(FVector2D _NEXTPOS);
@@ -51,6 +51,9 @@ public:
 	void RemoveMushroom();
 
 	std::string NAME_CHECK();
+
+	int getRandomValue(int _MaxDelay, UEngineRandom& _randomEngine);
+
 
 
 protected:
@@ -78,12 +81,14 @@ private:
 
 	std::string ANIMNAME;
 
-	float RandomTime = 0.0f;
-	float MIN_TIME = 5.0f;
-	float MAX_TIME = 10.0f;
+	float MAX_TIME = 2.0f;
+	int MAXDELAY = 2;
+
 
 	bool UNIQUE_ON = false;
 
 	bool BOMBCHECK;
+
+	float elapsedTime = 0.0f;
 
 };
