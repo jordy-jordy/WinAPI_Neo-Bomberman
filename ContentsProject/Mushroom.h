@@ -84,11 +84,12 @@ private:
 	float MAX_TIME = 2.0f;
 	int MAXDELAY = 4;
 
-
 	bool UNIQUE_ON = false;
 
 	bool BOMBCHECK;
 
 	float elapsedTime = 0.0f;
+
+	UEngineRandom RandomEngine; // 각 Mushroom의 고유 랜덤 엔진
 
 };

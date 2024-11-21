@@ -30,7 +30,8 @@ AMushroom::AMushroom()
 	UniqueRenderer->CreateAnimation("Mushroom_Uniq", "Mushroom.png", 44, 54, 0.2f, false);
 	UniqueRenderer->SetActive(false);
 
-	//TimeEventer.PushEvent(GET_RANDOM_TIME(), std::bind(&AMushroom::UNIQ_SKILL, this), false, true);
+	// 고유 랜덤 시드 설정
+	RandomEngine.SetSeed(static_cast<__int64>(time(nullptr)) + reinterpret_cast<__int64>(this));
 };
 
 AMushroom::~AMushroom()
@@ -51,8 +52,7 @@ void AMushroom::Tick(float _DeltaTime)
 	elapsedTime += _DeltaTime;
 	if (elapsedTime >= MAX_TIME)
 	{
-		UEngineRandom Random;
-		if (getRandomValue(MAXDELAY, Random) == 0)
+		if (getRandomValue(MAXDELAY, RandomEngine) == 0)
 		{
 			UNIQ_SKILL();
 		}
@@ -230,14 +230,6 @@ void AMushroom::RemoveMushroom()
 
 int AMushroom::getRandomValue(int _MaxDelay, UEngineRandom& _randomEngine)
 {
-	// Vector 생성
-	std::vector<int> values(_MaxDelay);
-	for (int i = 0; i < _MaxDelay; ++i)
-	{
-		values[i] = i; // 0 ~ (max_time - 1) 값으로 초기화
-	}
-
-	// 랜덤 인덱스 생성
-	int randomIndex = _randomEngine.RandomInt(0, _MaxDelay - 1);
-	return values[randomIndex]; // 해당 인덱스의 값 반환
+	// _randomEngine을 사용해 0부터 _MaxDelay - 1 사이의 값을 반환
+	return _randomEngine.RandomInt(0, _MaxDelay - 1);
 }
