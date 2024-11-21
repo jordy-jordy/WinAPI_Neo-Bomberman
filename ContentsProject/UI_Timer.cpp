@@ -7,11 +7,11 @@
 
 AUI_Timer::AUI_Timer()
 {
-	PLAYMODE_BAR = CreateDefaultSubObject<USpriteRenderer>();
-	PLAYMODE_BAR->SetSprite("ScoreBar_Adventure.png");
-	PLAYMODE_BAR->SetComponentScale({ 608, 44 });
-	PLAYMODE_BAR->SetPivotType(PivotType::Top);
-	PLAYMODE_BAR->SetOrder(ERenderOrder::UI);
+	TOPBAR = CreateDefaultSubObject<USpriteRenderer>();
+	TOPBAR->SetSprite("ScoreBar_Adventure.png");
+	TOPBAR->SetComponentScale({ 608, 44 });
+	TOPBAR->SetPivotType(PivotType::Top);
+	TOPBAR->SetOrder(ERenderOrder::UI);
 
 };
 

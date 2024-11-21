@@ -21,8 +21,10 @@ public:
 protected:
 
 private:
-	class USpriteRenderer* PLAYMODE_BAR = nullptr;
-	class USpriteRenderer* PLAYMODE_TIME = nullptr;
+	class USpriteRenderer* TOPBAR = nullptr;
+	class USpriteRenderer* TIME_MINUTE[2];
+	class USpriteRenderer* TIME_SECOND[2];
+
 	class USpriteRenderer* PLAYMODE_SCORE_ALL = nullptr;
 	class USpriteRenderer* PLAYMODE_SCORE_MONSTER = nullptr;
 
