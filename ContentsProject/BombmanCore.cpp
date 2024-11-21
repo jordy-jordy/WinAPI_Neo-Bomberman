@@ -221,7 +221,7 @@ void BombmanCore::BeginPlay()
 		UImageManager::GetInst().LoadFolder(Title_UI.GetPathToString());
 
 		UImageManager& imgManager = UImageManager::GetInst();
-		imgManager.CuttingSprite("TimeCount.png", { 20, 20 });
+		imgManager.CuttingSprite("TimeCount.png", { 12, 12 });
 	}
 
 	// 타일 맵 제작용 BG
