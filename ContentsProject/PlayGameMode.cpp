@@ -90,15 +90,36 @@ void APlayGameMode::PlayTileMapInit()
 
 void APlayGameMode::MonsterInit()
 {
-	AMonster* Mushroom = GetWorld()->SpawnActor<AMushroom>();
-	Mushroom->SetWallTileMap(WallTileMap);
-	FVector2D TileMapLoc = WallTileMap->GetActorLocation();
-	FVector2D TileHalfSize = WallTileMap->GetTileHalfSize();
-	FIntPoint Index = { 0, 0 };
-	FVector2D Mush_Location = WallTileMap->IndexToTileLocation(Index);
-	FVector2D LocalLoc = Mush_Location + TileMapLoc + TileHalfSize;
-	Mushroom->SetActorLocation(LocalLoc);
-
+	{
+		AMonster* Mushroom = GetWorld()->SpawnActor<AMushroom>();
+		Mushroom->SetWallTileMap(WallTileMap);
+		FVector2D TileMapLoc = WallTileMap->GetActorLocation();
+		FVector2D TileHalfSize = WallTileMap->GetTileHalfSize();
+		FIntPoint Index = { 0, 0 };
+		FVector2D Mush_Location = WallTileMap->IndexToTileLocation(Index);
+		FVector2D LocalLoc = Mush_Location + TileMapLoc + TileHalfSize;
+		Mushroom->SetActorLocation(LocalLoc);
+	}
+	{
+		AMonster* Mushroom = GetWorld()->SpawnActor<AMushroom>();
+		Mushroom->SetWallTileMap(WallTileMap);
+		FVector2D TileMapLoc = WallTileMap->GetActorLocation();
+		FVector2D TileHalfSize = WallTileMap->GetTileHalfSize();
+		FIntPoint Index = { 12, 0 };
+		FVector2D Mush_Location = WallTileMap->IndexToTileLocation(Index);
+		FVector2D LocalLoc = Mush_Location + TileMapLoc + TileHalfSize;
+		Mushroom->SetActorLocation(LocalLoc);
+	}
+	{
+		AMonster* Mushroom = GetWorld()->SpawnActor<AMushroom>();
+		Mushroom->SetWallTileMap(WallTileMap);
+		FVector2D TileMapLoc = WallTileMap->GetActorLocation();
+		FVector2D TileHalfSize = WallTileMap->GetTileHalfSize();
+		FIntPoint Index = { 0, 11 };
+		FVector2D Mush_Location = WallTileMap->IndexToTileLocation(Index);
+		FVector2D LocalLoc = Mush_Location + TileMapLoc + TileHalfSize;
+		Mushroom->SetActorLocation(LocalLoc);
+	}
 }
 
 void APlayGameMode::PortalInit()
@@ -147,8 +168,6 @@ void APlayGameMode::BeginPlay()
 	Zero->SetValue(0);
 	Zero->SetActive(false);
 
-
-
 	// Å¸ÀÏ¸Ê ¼¼ÆÃ
 	PlayTileMapInit();
 
@@ -160,10 +179,6 @@ void APlayGameMode::BeginPlay()
 
 	// Æ÷Å» ¼¼ÆÃ
 	PortalInit();
-
-
-
-
 }
 
 void APlayGameMode::Tick(float _DeltaTime)
@@ -251,16 +266,5 @@ void APlayGameMode::MOVETO_BOSS()
 
 }
 
-//void APlayGameMode::CountDown(float _DeltaTime)
-//{
-//	int Time = Minute->GetTime();
-//	Time -= _DeltaTime;
-//
-//	int M = static_cast<int>(Time) / 60;
-//	int S = static_cast<int>(Time) % 60;
-//
-//	Minute->SetValue(M);
-//	Second->SetValue(S);
-//
-//}
+
 

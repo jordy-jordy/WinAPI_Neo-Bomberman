@@ -82,7 +82,7 @@ private:
 	std::string ANIMNAME;
 
 	float MAX_TIME = 2.0f;
-	int MAXDELAY = 2;
+	int MAXDELAY = 4;
 
 
 	bool UNIQUE_ON = false;

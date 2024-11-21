@@ -38,7 +38,6 @@ void ABossGameMode::BeginPlay()
 
 	// UI 세팅
 	AUI_Timer* UI_TOP = GetWorld()->SpawnActor<AUI_Timer>();
-	UI_TOP->SetActorLocation({ WindowSize.hX(), 0.0f });
 
 	// 타일맵 세팅
 	PlayTileMapInit();
