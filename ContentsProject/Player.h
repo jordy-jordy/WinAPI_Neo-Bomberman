@@ -49,7 +49,7 @@ protected:
 private:
 	float Speed = 300.0f;
 	int MySpriteIndex = 0;
-	int BOMBPOWER = 7;
+	int BOMBPOWER = 3;
 
 	class USpriteRenderer* SpriteRendererHead = nullptr;
 	class USpriteRenderer* SpriteRendererBody = nullptr;

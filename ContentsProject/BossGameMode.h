@@ -19,6 +19,7 @@ public:
 
 	void BeginPlay();
 
+	FVector2D WindowSize = { 608, 448 };
 	FVector2D WallTileMapLocation = { 96, 64 };
 
 

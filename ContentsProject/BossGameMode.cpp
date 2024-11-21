@@ -14,6 +14,7 @@
 #include "Bomb.h"
 #include "Monster.h"
 #include "Portal.h"
+#include "UI_Timer.h"
 
 
 
@@ -34,6 +35,10 @@ void ABossGameMode::BeginPlay()
 	APlayMap* BOSS_BG = GetWorld()->SpawnActor<APlayMap>();
 	SpriteRendererBOSS = BOSS_BG->SpriteRenderer;
 	SpriteRendererBOSS->ChangeAnimation("Boss_BG");
+
+	// UI 세팅
+	AUI_Timer* UI_TOP = GetWorld()->SpawnActor<AUI_Timer>();
+	UI_TOP->SetActorLocation({ WindowSize.hX(), 0.0f });
 
 	// 타일맵 세팅
 	PlayTileMapInit();
