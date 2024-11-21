@@ -210,6 +210,11 @@ void BombmanCore::BeginPlay()
 		Play_UI_TOP.Append("04_UI//Score");
 		UImageManager::GetInst().LoadFolder(Play_UI_TOP.GetPathToString());
 
+		UEngineDirectory Play_PushStart_TOP;
+		Play_PushStart_TOP.MoveParentToDirectory("Resources//Imgs");
+		Play_PushStart_TOP.Append("04_UI//Score//PushStart_Anim");
+		UImageManager::GetInst().LoadFolder(Play_PushStart_TOP.GetPathToString());
+
 		UEngineDirectory Global_UI_SelectCount;
 		Global_UI_SelectCount.MoveParentToDirectory("Resources//Imgs");
 		Global_UI_SelectCount.Append("04_UI//SelectCount");

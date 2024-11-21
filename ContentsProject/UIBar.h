@@ -24,5 +24,7 @@ protected:
 private:
 	class USpriteRenderer* TOPBAR = nullptr;
 	class USpriteRenderer* COLON = nullptr;
+	class USpriteRenderer* PUSHSTART = nullptr;
+
 
 };
