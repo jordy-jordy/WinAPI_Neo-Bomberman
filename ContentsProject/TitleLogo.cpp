@@ -7,6 +7,7 @@
 
 #include "ContentsEnum.h"
 
+
 UTitleLogo::UTitleLogo()
 {
 	{
@@ -35,15 +36,21 @@ UTitleLogo::UTitleLogo()
 		MAINRENDERER->CreateAnimation("OP_Animation", "03_OP_ANIMATION", 0, 890, 0.018f, false);
 		MAINRENDERER->ChangeAnimation("Neo-Geo_Logo");
 
-		COIN_INSERT = CreateDefaultSubObject<USpriteRenderer>();
-		COIN_INSERT->SetSprite("TITLE_04_COIN_INSERT_000.png");
-		COIN_INSERT->SetOrder(ERenderOrder::BACKGROUND0);
-		COIN_INSERT->SetComponentScale({ 262, 28 });
-		COIN_INSERT->SetComponentLocation(MapScale.Half());
-		COIN_INSERT->CreateAnimation("COIN_INSERT", "04_COIN_INSERT", 0, 0, 1, false);
-		COIN_INSERT->ChangeAnimation("COIN_INSERT");
-		COIN_INSERT->SetActive(false);
+		LEVEL4 = CreateDefaultSubObject<USpriteRenderer>();
+		LEVEL4->SetSprite("Level-4_112x16.png");
+		LEVEL4->SetOrder(ERenderOrder::BACKGROUND1);
+		LEVEL4->SetSpriteScale(1.0f);
+		LEVEL4->SetPivotType(PivotType::Top);
+		LEVEL4->SetComponentLocation({ 312, 432 });
+		LEVEL4->SetActive(false);
 
+		CREDIT = CreateDefaultSubObject<USpriteRenderer>();
+		CREDIT->SetSprite("Credits_112x16.png");
+		CREDIT->SetOrder(ERenderOrder::BACKGROUND1);
+		CREDIT->SetSpriteScale(1.0f);
+		CREDIT->SetPivotType(PivotType::Top);
+		CREDIT->SetComponentLocation({ 488, 432 });
+		CREDIT->SetActive(false);
 	}
 }
 
@@ -62,20 +69,25 @@ void UTitleLogo::Tick(float _DeltaTime)
 
 	if (true == UEngineInput::GetInst().IsPress('F'))
 	{
-		BASE00->SetActive(true);
-		BASE01->SetActive(true);
-		COIN_INSERT->SetActive(true);
-		MAINRENDERER->ChangeAnimation("OP_Animation");
+		if (MAINRENDERER->GetCurSpriteName() == "00_NEO-GEO_LOGO")
+		{
+			BASE00->SetActive(true);
+			BASE01->SetActive(true);
+			LEVEL4->SetActive(true);
+			CREDIT->SetActive(true);
+			MAINRENDERER->ChangeAnimation("OP_Animation");
+		}
 	}
 
 	if (MAINRENDERER->GetCurSpriteName() == "00_NEO-GEO_LOGO" && CurAniEND() == true)
 	{
 		Delay += _DeltaTime;
-		if (Delay >= 3.0f)
+		if (Delay >= Wait)
 		{
 			BASE00->SetActive(true);
 			BASE01->SetActive(true);
-			COIN_INSERT->SetActive(true);
+			LEVEL4->SetActive(true);
+			CREDIT->SetActive(true);
 			MAINRENDERER->ChangeAnimation("OP_Animation");
 			Delay = 0.0f;
 		}

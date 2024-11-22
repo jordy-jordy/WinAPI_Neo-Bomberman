@@ -20,6 +20,8 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 private:
+	class UTitleLogo* TITLE = nullptr;
 
+	bool ISCHANGED = false;
 };
 
