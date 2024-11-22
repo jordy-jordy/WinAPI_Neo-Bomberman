@@ -29,7 +29,7 @@ AMushroom::AMushroom()
 	UniqueRenderer->SetPivot({ 0, -8 });
 	UniqueRenderer->CreateAnimation("Mushroom_Idle", "01_Mushroom_00_Idle", 0, 1, 0.2f, true);
 	UniqueRenderer->CreateAnimation("Mushroom_Uniq", "Mushroom.png", 44, 54, 0.2f, false);
-	UniqueRenderer->CreateAnimation("Mushroom_Dead", "Mushroom.png", 0, 7, 0.002f, true);
+	UniqueRenderer->CreateAnimation("Mushroom_Dead", "Mushroom.png", {0, 7}, {0.02f, 0.02f}, true);
 	UniqueRenderer->SetActive(false);
 
 	// 고유 랜덤 시드 설정
@@ -50,8 +50,31 @@ void AMushroom::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
+	Mush_Order();
+
+	if (ISDEAD == true)
+	{
+		DeadANiM += _DeltaTime;
+
+		SpriteRenderer->SetActive(false);
+		UniqueRenderer->SetActive(true);
+		UniqueRenderer->ChangeAnimation("Mushroom_Dead");
+
+		if (DeadANiM >= 3.0f)
+		{
+			Dead();
+
+			ISDEAD = false;
+			SpriteRenderer->SetActive(true);
+			UniqueRenderer->SetActive(false);
+			UniqueRenderer->ChangeAnimation("Mushroom_Idle");
+			return;
+		}
+		return;
+	}
+
 	elapsedTime += _DeltaTime;
-	if (elapsedTime >= MAX_TIME && ISDEAD == false)
+	if (elapsedTime >= MAX_TIME)
 	{
 		if (getRandomValue(MAXDELAY, RandomEngine) == 0)
 		{
@@ -60,28 +83,17 @@ void AMushroom::Tick(float _DeltaTime)
 		elapsedTime = 0.0f;
 	}
 
-	DeadANiM += _DeltaTime;
-	if (ISDEAD == true)
-	{
-		MoveTO = FVector2D::ZERO;
-		SpriteRenderer->ChangeAnimation("Mushroom_Dead");
-		if (DeadANiM >= 5.0f)
-		{
-			Dead();
-			DeadANiM = 0.0f;
-		}
-	}
-
-	if (UNIQUE_ON == true && ISDEAD == false)
+	if (UNIQUE_ON == true)
 	{
 		SpriteRenderer->SetActive(false);
+		UniqueRenderer->SetActive(true);
 
 		MoveTO = FVector2D::ZERO;
 		if (UniqueRenderer->IsCurAnimationEnd() == true)
 		{
 			UNIQUE_ON = false;
-			UniqueRenderer->SetActive(false);
 			SpriteRenderer->SetActive(true);
+			UniqueRenderer->SetActive(false);
 			UniqueRenderer->ChangeAnimation("Mushroom_Idle");
 
 			GET_RANDOM_DIR();
@@ -89,7 +101,6 @@ void AMushroom::Tick(float _DeltaTime)
 		}
 	}
 
-	Mush_Order();
 	DIR_ANIM(MoveTO);
 	Mush_Move(_DeltaTime);
 }
@@ -108,10 +119,8 @@ std::string AMushroom::NAME_CHECK()
 void AMushroom::UNIQ_SKILL()
 {
 	UNIQUE_ON = true;
-	UniqueRenderer->SetActive(true);
 	UniqueRenderer->ChangeAnimation("Mushroom_Uniq");
 }
-
 
 FVector2D AMushroom::GET_RANDOM_DIR()
 {
@@ -148,6 +157,8 @@ FVector2D AMushroom::InvertLOC(FVector2D _Loc)
 	{
 		return CUSTOM_VECTOR_DOWN;
 	}
+
+	return FVector2D::ZERO;
 }
 
 void AMushroom::DIR_ANIM(FVector2D _Dir)
@@ -167,11 +178,6 @@ void AMushroom::DIR_ANIM(FVector2D _Dir)
 	if (MoveTO == FVector2D::RIGHT)
 	{
 		SpriteRenderer->ChangeAnimation("Mushroom_Right");
-	}
-	if (ISDEAD == true)
-	{
-		SpriteRenderer->SetActive(false);
-		return;
 	}
 }
 
@@ -197,7 +203,6 @@ bool AMushroom::BOMBBOMB(FVector2D _NEXTPOS)
 	BOMBCHECK = WallTileMap->IsBomb(PosToIndex);
 	return BOMBCHECK;
 }
-
 
 void AMushroom::Mush_Move(float _DeltaTime)
 {
@@ -254,6 +259,6 @@ int AMushroom::getRandomValue(int _MaxDelay, UEngineRandom& _randomEngine)
 
 void AMushroom::Dead()
 {
-	Mode->PlusScore(200);
+	Mode->PlusScore(MushroomScore);
 	Destroy();
 }

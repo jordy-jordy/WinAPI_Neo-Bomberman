@@ -199,6 +199,19 @@ void APlayGameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
+	Score->SetValue(PlayerScore);
+
+	IsMonsterAllDead();
+	PortalON();
+	if (Portal->GET_ISCANMOVE() == true)
+	{
+		MOVETO_BOSS();
+	}
+
+	if (true == UEngineInput::GetInst().IsDown('L'))
+	{
+		UEngineAPICore::GetCore()->OpenLevel("MAPEDIT");
+	}
 
 	Time -= _DeltaTime;
 
@@ -224,21 +237,6 @@ void APlayGameMode::Tick(float _DeltaTime)
 		Second->SetActorLocation({ 330, 24 });
 		Second->SetValue(S);
 	}
-
-	Score->SetValue(PlayerScore);
-
-	IsMonsterAllDead();
-	PortalON();
-	if (Portal->GET_ISCANMOVE() == true)
-	{
-		MOVETO_BOSS();
-	}
-
-	if (true == UEngineInput::GetInst().IsDown('L'))
-	{
-		UEngineAPICore::GetCore()->OpenLevel("MAPEDIT");
-	}
-
 
 }
 
@@ -271,7 +269,6 @@ void APlayGameMode::MOVETO_BOSS()
 
 	FIntPoint PLAYER_INDEX = WallTileMap->LocationToIndex(PLAYER_POS);
 	FIntPoint PORTAL_INDEX = WallTileMap->LocationToIndex(PORTAL_POS);
-
 
 	if (PLAYER_INDEX == PORTAL_INDEX)
 	{

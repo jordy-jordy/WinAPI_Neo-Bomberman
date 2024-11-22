@@ -56,5 +56,8 @@ private:
 
 	float IdleFrameSpeed = 0.15f;
 	float ExplodeFrameSpeed = 0.05f;
+
+	bool ISEXPLODING = false;
+
 };
 

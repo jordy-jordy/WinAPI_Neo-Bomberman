@@ -107,4 +107,6 @@ private:
 
 	bool ISDEAD = false;
 
+	int MushroomScore = 200;
+
 };

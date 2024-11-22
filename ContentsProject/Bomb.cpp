@@ -118,8 +118,6 @@ void ABomb::HandleExplosion(EDirection Direction, int Power)
 		Explode_Mid->SetOrder(ERenderOrder::BOMB);
 		FVector2D ExplodePos = BombPos_Location + Explode_Mid->GetComponentLocation();
 		FIntPoint TilePos_INDEX = WallTileMap->LocationToIndex(ExplodePos);
-		FIntPoint bbb = WallTileMap->LocationToIndex(ExplodePos);
-
 
 		// iterator로 순회 돌림
 		std::list<AMonster*>::iterator StartIter = AllMonsters.begin();
@@ -137,6 +135,11 @@ void ABomb::HandleExplosion(EDirection Direction, int Power)
 			{
 				CurMonster->SWITCHDEAD(true);
 			}
+		}
+
+		if (TargetTile->Bomb != nullptr)
+		{
+			TargetTile->Bomb->Bomb_ExPlode(); 
 		}
 
 		if (TargetTile->SpriteIndex == 1) // 파괴 가능한 타일
@@ -181,6 +184,11 @@ void ABomb::HandleExplosion(EDirection Direction, int Power)
 			}
 		}
 
+		if (FinalTile->Bomb != nullptr)
+		{
+			FinalTile->Bomb->Bomb_ExPlode();
+		}
+
 		if (FinalTile->SpriteIndex == 1)
 		{
 			HandleTileDestruction(TargetPos);
@@ -202,6 +210,12 @@ void ABomb::HandleTileDestruction(const FVector2D& TargetPos)
 
 void ABomb::Bomb_ExPlode()
 {
+	if (ISEXPLODING == true)
+	{
+		return; // 이미 폭발한 경우 실행하지 않음
+	}
+	ISEXPLODING = true;
+
 	// 폭탄 중심 애니메이션 전환
 	SpriteRenderer->ChangeAnimation("Bomb_Gone");
 
