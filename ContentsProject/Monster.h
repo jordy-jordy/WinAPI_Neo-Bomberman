@@ -28,6 +28,8 @@ public:
 	virtual ATileMap* GetWallTileMap() = 0;
 	virtual void SetMode(class APlayGameMode* _Mode) = 0;
 	virtual void Dead() = 0;
+	virtual bool SWITCHDEAD(bool _true) = 0; 
+
 
 
 	FIntPoint GetMonsterPos_INDEX (FVector2D _CurPos, ATileMap* _Map);
@@ -42,8 +44,8 @@ protected:
 
 
 private:
-	UEngineSprite* SpriteRenderer;
-	ATileMap* WallTileMap;
+	UEngineSprite* SpriteRenderer = nullptr;
+	ATileMap* WallTileMap = nullptr;
 
 	FIntPoint INDEX_ZERO = { 0, 0 };
 	FIntPoint INDEX_UP     = { 0, -1 };

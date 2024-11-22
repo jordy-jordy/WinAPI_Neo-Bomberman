@@ -205,9 +205,7 @@ void APlayGameMode::Tick(float _DeltaTime)
 	int M = static_cast<int>(Time) / 60;
 	int S = static_cast<int>(Time) % 60;
 
-	int a = 0;
-
-	if (S < 0)
+	if (S < 0 || M < 0)
 	{
 		return;
 	}

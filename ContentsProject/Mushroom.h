@@ -57,9 +57,13 @@ public:
 		Mode = _Mode;
 	}
 
+	bool SWITCHDEAD(bool _true) override
+	{
+		ISDEAD = _true;
+		return ISDEAD;
+	}
+
 	void Dead() override;
-
-
 
 
 protected:
@@ -92,12 +96,15 @@ private:
 
 	bool UNIQUE_ON = false;
 
-	bool BOMBCHECK;
+	bool BOMBCHECK = false;
 
 	float elapsedTime = 0.0f;
+	float DeadANiM = 0.0f;
 
 	UEngineRandom RandomEngine; // 각 Mushroom의 고유 랜덤 엔진
 
 	class APlayGameMode* Mode = nullptr;
+
+	bool ISDEAD = false;
 
 };

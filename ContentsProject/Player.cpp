@@ -21,6 +21,7 @@ APlayer::APlayer()
 		SpriteRendererHead->SetComponentLocation({ 0, 0 });
 		SpriteRendererHead->SetComponentScale({ 64, 64 });
 		SpriteRendererHead->SetPivot({0.0f, -28.0f});
+		SpriteRendererHead->SetPivot({ 0.0f, -28.0f });
 
 
 		SpriteRendererHead->CreateAnimation("Idle_Up_Head", "MainCharater_White.png", 17, 17, 0.1f);
@@ -168,16 +169,12 @@ void APlayer::PlaceBomb()
 	FVector2D TileHalfSize = WallTileMap->GetTileHalfSize(); // 16
 
 	FVector2D PlayerLocation = GetActorLocation(); // 112, 80 (+ 16이 더해져 있음) // 윈도우의 LEFT TOP을 기준으로 책정
+	FIntPoint PLAYERINDEX = WallTileMap->LocationToIndex(PlayerLocation);
 	FVector2D TileMapLocation = WallTileMap->GetActorLocation(); // 96, 64 // 윈도우의 LEFT TOP을 기준으로 책정
-	FVector2D TileMapPLUSHalftile = WallTileMap->GetActorLocation(); // 96, 64 // 윈도우의 LEFT TOP을 기준으로 책정
 	FVector2D LocalLocation = PlayerLocation - TileMapLocation; // 타일맵의 LEFT TOP을 기준으로 책정되도록 계산
 
 	FIntPoint BOMB_SET_Index = WallTileMap->LocationToIndex(LocalLocation); // 타일맵 기준 인덱스
-
-	FIntPoint TEST1 = WallTileMap->LocationToIndex(PlayerLocation);
-	FVector2D TEST2 = WallTileMap->IndexToTileLocation(TEST1) + FVector2D(TileHalfSize.X, TileHalfSize.Y);
-
-
+	FVector2D BOMB_SET_LOCATION = WallTileMap->IndexToTileLocation(PLAYERINDEX) + FVector2D(TileHalfSize.X, TileHalfSize.Y);
 
 	// 폭탄 설치 가능 여부 재확인
 	if (WallTileMap->IsBomb(BOMB_SET_Index))
@@ -191,7 +188,7 @@ void APlayer::PlaceBomb()
 	WallTileMap->SetBomb(BOMB_SET_Index, Bomb);
 	// 위치에 폭탄 설치
 	Bomb->SetWallTileMap(WallTileMap, BOMB_SET_Index); // 타일맵 정보 설정
-	Bomb->SetActorLocation(TEST2);
+	Bomb->SetActorLocation(BOMB_SET_LOCATION);
 
 	Bomb->SetPower(BOMBPOWER);
 
@@ -317,17 +314,17 @@ void APlayer::Move(float _DeltaTime)
 	default: break;
 	}
 
+	// 타일맵 크기
 	const int POS_X_MIN = 96;
 	const int POS_X_MAX = 512;
 	const int POS_Y_MIN = 64;
 	const int POS_Y_MAX = 416;
-
 	
-	FVector2D PLAYER_POS_NEXT = GetActorLocation() + (InvertLOC(Vector) * _DeltaTime * Speed) + PlusPos; // 윈도우 LEFT TOP 기준
+	FVector2D PLAYER_POS_NEXT = GetActorLocation() + (Vector * _DeltaTime * Speed) + PlusPos; // 윈도우 LEFT TOP 기준
 	//UEngineDebug::CoreOutPutString("PLAYER_POS_NEXT : " + PLAYER_POS_NEXT.ToString());
 
 	FVector2D PLAYER_LOCAL_LOC = GetActorLocation() - WallTileMap->GetActorLocation(); // 타일맵 LEFT TOP 기준
-	FVector2D PLAYER_LOCAL_LOC_NEXT = PLAYER_LOCAL_LOC + (InvertLOC(Vector) * _DeltaTime * Speed) + PlusPos;
+	FVector2D PLAYER_LOCAL_LOC_NEXT = PLAYER_LOCAL_LOC + (Vector * _DeltaTime * Speed) + PlusPos;
 
 	FIntPoint PLAYER_LOCAL_IDX_NEXT = WallTileMap->LocationToIndex(PLAYER_LOCAL_LOC_NEXT);
 

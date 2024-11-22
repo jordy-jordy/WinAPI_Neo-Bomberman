@@ -58,7 +58,7 @@ private:
 	class AScore* Zero = nullptr;
 	class AScore* Score = nullptr;
 
-	float Time = 181.0f;
+	float Time = 6.0f;
 
 	int PlayerScore = 0;
 };
