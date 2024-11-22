@@ -9,6 +9,12 @@
 class AScore : public AActor
 {
 public:
+	enum class Alignment
+	{
+		Left,
+		Right
+	};
+
 	// constrcuter destructer
 	AScore();
 	~AScore();
@@ -33,8 +39,12 @@ public:
 	}
 
 	void SetOrder(int _Order);
-
 	void SetValue(int _Score);
+
+	void SetAlignment(Alignment _Alignment)
+	{
+		CurrentAlignment = _Alignment;
+	}
 
 
 protected:
@@ -45,6 +55,8 @@ private:
 	std::string TextSpriteName;
 	FVector2D TextScale;
 	std::vector<class USpriteRenderer*> Renders;
+
+	Alignment CurrentAlignment = Alignment::Left; // 기본값: 왼쪽 정렬
 
 };
 

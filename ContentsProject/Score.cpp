@@ -66,6 +66,13 @@ void AScore::SetValue(int _Score)
 
 
 	FVector2D Pos = FVector2D::ZERO;
+	float TotalWidth = Number.size() * TextScale.X;
+
+	// 정렬 방식에 따라 시작 위치 설정
+	if (CurrentAlignment == Alignment::Right)
+	{
+		Pos.X -= TotalWidth; // 오른쪽 정렬
+	}
 
 	for (size_t i = 0; i < Number.size(); i++)
 	{
@@ -81,5 +88,5 @@ void AScore::SetValue(int _Score)
 	{
 		Renders[i]->SetActive(false);
 	}
-
 }
+

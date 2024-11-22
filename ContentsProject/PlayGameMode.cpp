@@ -144,29 +144,41 @@ void APlayGameMode::BeginPlay()
 	SpriteRendererSTAGE = STAGE1_BG->SpriteRenderer;
 	SpriteRendererSTAGE->ChangeAnimation("Stage1_BG");
 
-	// UI 세팅
+	// UI바 세팅
 	AUIBar* UI_TOP = GetWorld()->SpawnActor<AUIBar>();
 
-	// 스코어 세팅
+	// 스코어(시간) 세팅
 	Minute = GetWorld()->SpawnActor<AScore>();
 	Minute->SetTextSpriteName("TimeCount.png");
 	Minute->SetActorLocation({ 282, 24 });
 	Minute->SetTextScale({ 16, 12 });
+	Minute->SetAlignment(AScore::Alignment::Left);
 	Minute->SetOrder(ERenderOrder::TEXT_UI);
 
 	Second = GetWorld()->SpawnActor<AScore>();
 	Second->SetTextSpriteName("TimeCount.png");
 	Second->SetActorLocation({ 314, 24 });
 	Second->SetTextScale({ 16, 12 });
+	Second->SetAlignment(AScore::Alignment::Left);
 	Second->SetOrder(ERenderOrder::TEXT_UI);
 
 	Zero = GetWorld()->SpawnActor<AScore>();
 	Zero->SetTextSpriteName("TimeCount.png");
 	Zero->SetActorLocation({ 314, 24 });
 	Zero->SetTextScale({ 16, 12 });
+	Zero->SetAlignment(AScore::Alignment::Left);
 	Zero->SetOrder(ERenderOrder::TEXT_UI);
 	Zero->SetValue(0);
 	Zero->SetActive(false);
+
+	// 스코어(점수) 세팅
+	Score = GetWorld()->SpawnActor<AScore>();
+	Score->SetTextSpriteName("BarScoreNumber.png");
+	Score->SetActorLocation({264, 23});
+	Score->SetTextScale({ 16, 14 });
+	Score->SetAlignment(AScore::Alignment::Right);
+	Score->SetValue(100);
+	Score->SetOrder(ERenderOrder::TEXT_UI);
 
 	// 타일맵 세팅
 	PlayTileMapInit();

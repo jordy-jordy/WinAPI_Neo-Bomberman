@@ -46,7 +46,8 @@ private:
 	class AScore* Minute = nullptr;
 	class AScore* Second = nullptr;
 	class AScore* Zero = nullptr;
+	class AScore* Score = nullptr;
 
-	float Time = 180.0f;
+	float Time = 181.0f;
 };
 

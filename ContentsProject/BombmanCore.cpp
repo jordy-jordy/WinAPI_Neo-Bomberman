@@ -225,8 +225,11 @@ void BombmanCore::BeginPlay()
 		Title_UI.Append("04_UI//Title");
 		UImageManager::GetInst().LoadFolder(Title_UI.GetPathToString());
 
-		UImageManager& imgManager = UImageManager::GetInst();
-		imgManager.CuttingSprite("TimeCount.png", { 16, 12 });
+		UImageManager& TIME = UImageManager::GetInst();
+		TIME.CuttingSprite("TimeCount.png", { 16, 12 });
+
+		UImageManager& SCORE = UImageManager::GetInst();
+		SCORE.CuttingSprite("BarScoreNumber.png", { 16, 14 });
 	}
 
 	// 타일 맵 제작용 BG
