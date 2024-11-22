@@ -11,13 +11,13 @@
       <Filter>ContentsObject\Actors_Global</Filter>
     </ClCompile>
     <ClCompile Include="TitleLogo.cpp">
-      <Filter>ContentsObject\Title</Filter>
+      <Filter>ContentsObject\Actors_Title</Filter>
     </ClCompile>
     <ClCompile Include="ATileMap.cpp">
       <Filter>TileMap</Filter>
     </ClCompile>
     <ClCompile Include="ChooseStage.cpp">
-      <Filter>ContentsObject\Title</Filter>
+      <Filter>ContentsObject\Actors_Title</Filter>
     </ClCompile>
     <ClCompile Include="Score.cpp">
       <Filter>ContentsObject\Actors_Global</Filter>
@@ -79,13 +79,13 @@
       <Filter>Enums</Filter>
     </ClInclude>
     <ClInclude Include="TitleLogo.h">
-      <Filter>ContentsObject\Title</Filter>
+      <Filter>ContentsObject\Actors_Title</Filter>
     </ClInclude>
     <ClInclude Include="ATileMap.h">
       <Filter>TileMap</Filter>
     </ClInclude>
     <ClInclude Include="ChooseStage.h">
-      <Filter>ContentsObject\Title</Filter>
+      <Filter>ContentsObject\Actors_Title</Filter>
     </ClInclude>
     <ClInclude Include="Score.h">
       <Filter>ContentsObject\Actors_Global</Filter>
@@ -146,9 +146,6 @@
     <Filter Include="ContentsObject\GameMode">
       <UniqueIdentifier>{44a6d2fd-0227-4b77-a9f6-11dc56acf790}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ContentsObject\Title">
-      <UniqueIdentifier>{77b34b9b-e690-42cc-b141-c3742844be4b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TileMap">
       <UniqueIdentifier>{97059f21-d2fb-46a6-82eb-822464da6c1b}</UniqueIdentifier>
     </Filter>
@@ -184,6 +181,9 @@
     </Filter>
     <Filter Include="ContentsObject\Actors_Play\Monster\Parent">
       <UniqueIdentifier>{aac8f3b9-2d31-4355-ab51-f95a61d51e6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContentsObject\Actors_Title">
+      <UniqueIdentifier>{77b34b9b-e690-42cc-b141-c3742844be4b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

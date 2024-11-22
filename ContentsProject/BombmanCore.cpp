@@ -55,11 +55,6 @@ void BombmanCore::BeginPlay()
 		Title_NeoGeo_Dir.Append("01_TITLE//00_Neo-Geo_LOGO");
 		UImageManager::GetInst().LoadFolder(Title_NeoGeo_Dir.GetPathToString());
 
-		UEngineDirectory Title_Warning_Dir;
-		Title_Warning_Dir.MoveParentToDirectory("Resources//Imgs");
-		Title_Warning_Dir.Append("01_TITLE//01_WARNING");
-		UImageManager::GetInst().LoadFolder(Title_Warning_Dir.GetPathToString());
-
 		UEngineDirectory Title_Hudson_Dir;
 		Title_Hudson_Dir.MoveParentToDirectory("Resources//Imgs");
 		Title_Hudson_Dir.Append("01_TITLE//02_HUDSON_LOGO");
@@ -251,7 +246,7 @@ void BombmanCore::BeginPlay()
 	UEngineAPICore::GetCore()->CreateLevel<APlayGameMode, APlayer>("STAGE01");
 	UEngineAPICore::GetCore()->CreateLevel<ABossGameMode, APlayer>("BOSS");
 
-	UEngineAPICore::GetCore()->OpenLevel("STAGE01");
+	UEngineAPICore::GetCore()->OpenLevel("TITLE");
 }
 
 void BombmanCore::Tick()

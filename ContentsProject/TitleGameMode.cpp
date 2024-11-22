@@ -1,8 +1,12 @@
 #include "PreCompile.h"
 #include "TitleGameMode.h"
 
+#include <EngineCore/Level.h>
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/EngineAPICore.h>
+#include <EngineBase/EngineFile.h>
+#include <EngineBase/EngineDirectory.h>
+#include <EngineBase/EngineRandom.h>
 
 #include "TitleLogo.h"
 #include "ChooseStage.h"
@@ -20,8 +24,7 @@ void ATitleGameMode::BeginPlay()
 {
 	Super::BeginPlay();
 
-	UTitleLogo* NewActor0 = GetWorld()->SpawnActor<UTitleLogo>();
-	UChooseStage* NewActor1 = GetWorld()->SpawnActor<UChooseStage>();
+	UTitleLogo* TITLE = GetWorld()->SpawnActor<UTitleLogo>();
 
 }
 
