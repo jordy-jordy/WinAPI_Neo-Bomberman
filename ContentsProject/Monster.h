@@ -26,12 +26,16 @@ public:
 
 	virtual void SetWallTileMap(class ATileMap* _TileMap) = 0;
 	virtual ATileMap* GetWallTileMap() = 0;
+	virtual void SetMode(class APlayGameMode* _Mode) = 0;
+	virtual void Dead() = 0;
+
 
 	FIntPoint GetMonsterPos_INDEX (FVector2D _CurPos, ATileMap* _Map);
 	FVector2D GetMonsterPos_VECTOR(FVector2D _CurPos, ATileMap* _Map);
 
 	FIntPoint GetNextIndex(FIntPoint _CurIndex, MonsterDir _TagetDir);
 	FVector2D GetNextVector(FVector2D _CurPos, MonsterDir _TagetDir);
+
 
 protected:
 	void Tick(float _DeltaTime) override;
@@ -52,8 +56,5 @@ private:
 	FVector2D VECTOR_DOWN  = { 0, 32 };
 	FVector2D VECTOR_LEFT  = { -32, 0 };
 	FVector2D VECTOR_RIGHT = { 32, 0 };
-
-	
-
 
 };

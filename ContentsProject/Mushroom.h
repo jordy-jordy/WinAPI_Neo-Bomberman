@@ -48,11 +48,17 @@ public:
 
 	bool BOMBBOMB(FVector2D _NEXTPOS);
 
-	void RemoveMushroom();
-
 	std::string NAME_CHECK();
 
 	int getRandomValue(int _MaxDelay, UEngineRandom& _randomEngine);
+
+	void SetMode(APlayGameMode* _Mode) override
+	{
+		Mode = _Mode;
+	}
+
+	void Dead() override;
+
 
 
 
@@ -91,5 +97,7 @@ private:
 	float elapsedTime = 0.0f;
 
 	UEngineRandom RandomEngine; // 각 Mushroom의 고유 랜덤 엔진
+
+	class APlayGameMode* Mode = nullptr;
 
 };

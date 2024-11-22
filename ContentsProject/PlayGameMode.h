@@ -24,6 +24,16 @@ public:
 
 	bool IsMonsterAllDead();
 
+	void PlusScore(int _Score)
+	{
+		PlayerScore += _Score;
+	}
+
+	int GetScore()
+	{
+		return PlayerScore;
+	}
+
 
 protected:
 	void Tick(float _DeltaTime) override;
@@ -49,5 +59,7 @@ private:
 	class AScore* Score = nullptr;
 
 	float Time = 181.0f;
+
+	int PlayerScore = 0;
 };
 

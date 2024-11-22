@@ -135,7 +135,7 @@ void ABomb::HandleExplosion(EDirection Direction, int Power)
 
 			if (MonsterINDEX == TilePos_INDEX)
 			{
-				CurMonster->Destroy();
+				CurMonster->Dead();
 			}
 		}
 
@@ -177,7 +177,7 @@ void ABomb::HandleExplosion(EDirection Direction, int Power)
 
 			if (MonsterINDEX == TilePos_INDEX)
 			{
-				CurMonster->Destroy();
+				CurMonster->Dead();
 			}
 		}
 

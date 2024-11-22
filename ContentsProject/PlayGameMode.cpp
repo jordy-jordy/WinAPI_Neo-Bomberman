@@ -99,6 +99,7 @@ void APlayGameMode::MonsterInit()
 		FVector2D Mush_Location = WallTileMap->IndexToTileLocation(Index);
 		FVector2D LocalLoc = Mush_Location + TileMapLoc + TileHalfSize;
 		Mushroom->SetActorLocation(LocalLoc);
+		Mushroom->SetMode(this);
 	}
 	{
 		AMonster* Mushroom = GetWorld()->SpawnActor<AMushroom>();
@@ -109,6 +110,7 @@ void APlayGameMode::MonsterInit()
 		FVector2D Mush_Location = WallTileMap->IndexToTileLocation(Index);
 		FVector2D LocalLoc = Mush_Location + TileMapLoc + TileHalfSize;
 		Mushroom->SetActorLocation(LocalLoc);
+		Mushroom->SetMode(this);
 	}
 	{
 		AMonster* Mushroom = GetWorld()->SpawnActor<AMushroom>();
@@ -119,6 +121,7 @@ void APlayGameMode::MonsterInit()
 		FVector2D Mush_Location = WallTileMap->IndexToTileLocation(Index);
 		FVector2D LocalLoc = Mush_Location + TileMapLoc + TileHalfSize;
 		Mushroom->SetActorLocation(LocalLoc);
+		Mushroom->SetMode(this);
 	}
 }
 
@@ -177,7 +180,6 @@ void APlayGameMode::BeginPlay()
 	Score->SetActorLocation({264, 23});
 	Score->SetTextScale({ 16, 14 });
 	Score->SetAlignment(AScore::Alignment::Right);
-	Score->SetValue(100);
 	Score->SetOrder(ERenderOrder::TEXT_UI);
 
 	// Å¸ÀÏ¸Ê ¼¼ÆÃ
@@ -224,6 +226,8 @@ void APlayGameMode::Tick(float _DeltaTime)
 		Second->SetActorLocation({ 330, 24 });
 		Second->SetValue(S);
 	}
+
+	Score->SetValue(PlayerScore);
 
 	IsMonsterAllDead();
 	PortalON();

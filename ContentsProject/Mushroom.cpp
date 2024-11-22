@@ -6,6 +6,7 @@
 #include <EngineBase/EngineRandom.h>
 
 #include "ATileMap.h"
+#include "PlayGameMode.h"
 
 
 AMushroom::AMushroom()
@@ -36,7 +37,6 @@ AMushroom::AMushroom()
 
 AMushroom::~AMushroom()
 {
-
 };
 
 void AMushroom::BeginPlay()
@@ -223,13 +223,15 @@ void AMushroom::Mush_Move(float _DeltaTime)
 	}
 }
 
-void AMushroom::RemoveMushroom()
-{
-	this->Destroy();
-}
-
 int AMushroom::getRandomValue(int _MaxDelay, UEngineRandom& _randomEngine)
 {
 	// _randomEngine을 사용해 0부터 _MaxDelay - 1 사이의 값을 반환
 	return _randomEngine.RandomInt(0, _MaxDelay - 1);
+}
+
+void AMushroom::Dead()
+{
+	Mode->PlusScore(200);
+	int a = 0;
+	Destroy();
 }
