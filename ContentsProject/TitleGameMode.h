@@ -28,6 +28,7 @@ private:
 	class UTitleLogo* TITLE = nullptr;
 	class AScore* COINs = nullptr;
 	class UCoinInsert* COININSERT = nullptr;
+	class UChooseStage* CHOOSE = nullptr;
 
 	int COIN_NUMBER = 0;
 

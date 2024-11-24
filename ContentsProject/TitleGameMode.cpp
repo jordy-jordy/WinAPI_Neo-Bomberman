@@ -16,6 +16,7 @@
 #include "ChooseStage.h"
 #include "Score.h"
 #include "ContentsEnum.h"
+#include "ChooseStage.h"
 
 
 ATitleGameMode::ATitleGameMode()
@@ -31,11 +32,16 @@ void ATitleGameMode::BeginPlay()
 {
 	Super::BeginPlay();
 
+	// 네오지오 로고 장면 세팅
 	TITLE = GetWorld()->SpawnActor<UTitleLogo>();
 
+	// 코인 충전 장면 세팅
 	COININSERT = GetWorld()->SpawnActor<UCoinInsert>();
 	COININSERT->SetActive(false);
 	COININSERT->SetScore_Coin(COINs);
+
+	// 스테이지 선택 장면 세팅
+	CHOOSE = GetWorld()->SpawnActor<UChooseStage>();
 
 	// 스코어(코인) 세팅
 	COINs = GetWorld()->SpawnActor<AScore>();

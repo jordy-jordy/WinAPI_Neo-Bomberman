@@ -1,5 +1,4 @@
 #pragma once
-
 #include <EngineCore/GameMode.h>
 
 
@@ -48,10 +47,9 @@ private:
 	class ATileMap* WallTileMap = nullptr;
 	class APortal* Portal = nullptr;
 
-	USpriteRenderer* SpriteRendererSTAGE = nullptr;
-
-	USpriteRenderer* SpriteRendererSPAWN = nullptr;
-	USpriteRenderer* SpriteRendererPORTAL = nullptr;
+	class USpriteRenderer* SpriteRendererSTAGE = nullptr;
+	class USpriteRenderer* SpriteRendererSPAWN = nullptr;
+	class USpriteRenderer* SpriteRendererPORTAL = nullptr;
 	
 	class AScore* Minute = nullptr;
 	class AScore* Second = nullptr;

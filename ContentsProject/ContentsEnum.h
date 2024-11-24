@@ -4,6 +4,8 @@ enum class ERenderOrder
 {
 	BACKGROUND0 = -2000,
 	BACKGROUND1 = -1000,
+	BACKGROUND3 = -900,
+	BACKGROUND2 = -800,
 	BOMB = -600,
 	OBJECTS = -500,
 	PORTAL = -400,

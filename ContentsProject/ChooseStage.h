@@ -19,5 +19,19 @@ public:
 protected:
 
 private:
+	class USpriteRenderer* Background = nullptr;
+	class USpriteRenderer* Basic_UI00 = nullptr;
+	class USpriteRenderer* Basic_UI01 = nullptr;
+
+	class USpriteRenderer* CHOOSE_00 = nullptr;
+	class USpriteRenderer* CHOOSE_01 = nullptr;
+
+	class USpriteRenderer* BLACKMAN = nullptr;
+	class USpriteRenderer* BOMB_MAN = nullptr;
+
+	FVector2D BG_SIZE = { 608, 448 };
+
+
+
 
 };

@@ -1,5 +1,4 @@
 #pragma once
-
 #include <EngineCore/GameMode.h>
 
 
@@ -30,7 +29,7 @@ protected:
 
 private:
 	class ATileMap* WallTileMap = nullptr;
-	USpriteRenderer* SpriteRendererBOSS = nullptr;
+	class USpriteRenderer* SpriteRendererBOSS = nullptr;
 
 
 
