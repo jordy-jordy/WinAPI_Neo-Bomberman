@@ -47,7 +47,6 @@ void ATitleGameMode::BeginPlay()
 	COINs->SetDigitCount(DIGITCOUNT);
 	COINs->SetValue(COIN_NUMBER);
 	COINs->SetActive(false);
-	TITLE->SetScore_Coin(COINs);
 }
 
 
@@ -61,43 +60,61 @@ void ATitleGameMode::Tick(float _DeltaTime)
 	}
 
 
-	if (true == UEngineInput::GetInst().IsDown('F'))
+
+	std::string SPRITENAME_COIN = COININSERT->MAINRENDERER->GetCurSpriteName();
+	if (TITLE == nullptr)
 	{
-		COIN_NUMBER += 1;
-		COINs->SetValue(COIN_NUMBER);
+		if (true == UEngineInput::GetInst().IsDown('F'))
+		{
+			COIN_NUMBER += 1;
+			COINs->SetValue(COIN_NUMBER);
+		}
 	}
 
 
 	if (TITLE != nullptr)
 	{
-		std::string SpriteNAME = TITLE->MAINRENDERER->GetCurSpriteName();
-		if (SpriteNAME == "03_OP_ANIMATION")
+		std::string SPRITENAME_TITLE = TITLE->MAINRENDERER->GetCurSpriteName();
+		if (SPRITENAME_TITLE == "00_NEO-GEO_LOGO")
 		{
+			if (true == UEngineInput::GetInst().IsDown('F'))
+			{
+				ISCHANGED = true;
+				COINs->SetActive(true);
+				COININSERT->SetActive(true);
+				TITLE->DestroyTitleLogo();
+				TITLE = nullptr;
+				return;
+			}
+		}
+
+		if (SPRITENAME_TITLE == "03_OP_ANIMATION")
+		{
+			COINs->SetActive(true);
+
 			if (TITLE->MAINRENDERER->IsCurAnimationEnd() == true)
 			{
 				CHANGEDELAY += _DeltaTime;
 				if (CHANGEDELAY >= 3.0f)
 				{
-					TITLE->DestroyTitleLogo();
-					TITLE = nullptr;
 					ISCHANGED = true;
 					COININSERT->SetActive(true);
+					TITLE->DestroyTitleLogo();
+					TITLE = nullptr;
 					CHANGEDELAY = 0.0f;
 					return;
 				}
 			}
 
-			if (true == UEngineInput::GetInst().IsDown(VK_SPACE))
+			if (true == UEngineInput::GetInst().IsDown(VK_SPACE) || true == UEngineInput::GetInst().IsDown('F'))
 			{
-				TITLE->DestroyTitleLogo();
-				TITLE = nullptr;
 				ISCHANGED = true;
 				COININSERT->SetActive(true);
+				TITLE->DestroyTitleLogo();
+				TITLE = nullptr;
 				return;
 			}
 		}
 	}
 
-	std::string name = GetWorld()->GetName();
-	int a = 0;
 }

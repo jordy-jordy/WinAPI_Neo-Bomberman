@@ -72,12 +72,11 @@ void UTitleLogo::Tick(float _DeltaTime)
 	{
 		if (MAINRENDERER->GetCurSpriteName() == "00_NEO-GEO_LOGO")
 		{
+			MAINRENDERER->ChangeAnimation("OP_Animation");
 			BASE00->SetActive(true);
 			BASE01->SetActive(true);
 			LEVEL4->SetActive(true);
 			CREDIT->SetActive(true);
-			COINs->SetActive(true);
-			MAINRENDERER->ChangeAnimation("OP_Animation");
 		}
 	}
 
@@ -86,12 +85,11 @@ void UTitleLogo::Tick(float _DeltaTime)
 		Delay += _DeltaTime;
 		if (Delay >= Wait)
 		{
+			MAINRENDERER->ChangeAnimation("OP_Animation");
 			BASE00->SetActive(true);
 			BASE01->SetActive(true);
 			LEVEL4->SetActive(true);
 			CREDIT->SetActive(true);
-			COINs->SetActive(true);
-			MAINRENDERER->ChangeAnimation("OP_Animation");
 			Delay = 0.0f;
 		}
 	}

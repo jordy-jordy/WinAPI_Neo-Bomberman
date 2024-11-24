@@ -20,17 +20,11 @@ public:
 
 	void DestroyTitleLogo();
 
-	void SetScore_Coin(class AScore* _data)
-	{
-		COINs = _data;
-	}
-
 	class USpriteRenderer* MAINRENDERER = nullptr;
 	class USpriteRenderer* BASE00 = nullptr;
 	class USpriteRenderer* BASE01 = nullptr;
 	class USpriteRenderer* LEVEL4 = nullptr;
 	class USpriteRenderer* CREDIT = nullptr;
-
 
 
 protected:

@@ -21,19 +21,19 @@ public:
 		COINs = _data;
 	}
 
-
-protected:
-	void BeginPlay();
-	void Tick(float _DeltaTime);
-
-private:
 	class USpriteRenderer* MAINRENDERER = nullptr;
 	class USpriteRenderer* COIN_INSERT = nullptr;
 	class USpriteRenderer* LEVEL4 = nullptr;
 	class USpriteRenderer* CREDIT = nullptr;
 	class USpriteRenderer* COMPANY = nullptr;
 	class USpriteRenderer* TM = nullptr;
-	
+
+
+protected:
+	void BeginPlay();
+	void Tick(float _DeltaTime);
+
+private:
 	class AScore* COINs = nullptr;
 
 	class ATitleGameMode* MODE = nullptr;
