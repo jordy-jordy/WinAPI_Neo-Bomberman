@@ -21,6 +21,7 @@ protected:
 
 private:
 	class UTitleLogo* TITLE = nullptr;
+	class AScore* COINs = nullptr;
 
 	bool ISCHANGED = false;
 

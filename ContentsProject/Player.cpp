@@ -101,7 +101,7 @@ void APlayer::Tick(float _DeltaTime)
 		break;
 	}
 
-	if (true == UEngineInput::GetInst().IsDown('F'))
+	if (true == UEngineInput::GetInst().IsDown(VK_SPACE))
 	{
 		IdleAnimTimer = 0.0f;
 

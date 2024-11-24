@@ -225,6 +225,9 @@ void BombmanCore::BeginPlay()
 
 		UImageManager& SCORE = UImageManager::GetInst();
 		SCORE.CuttingSprite("BarScoreNumber.png", { 16, 14 });
+
+		UImageManager& COINs = UImageManager::GetInst();
+		COINs.CuttingSprite("Title_countdown_24x24.png", { 16, 16 });
 	}
 
 	// 타일 맵 제작용 BG

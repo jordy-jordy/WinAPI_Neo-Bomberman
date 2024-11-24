@@ -33,6 +33,7 @@ void ATileMapGameMode::BeginPlay()
 		WallTileMap->Create("00_Tiles_00_STAGE", { 13, 11 }, { 32, 32 });
 		WallTileMap->SetActorLocation({ 96, 64 });
 	}
+
 }
 
 void ATileMapGameMode::Tick(float _DeltaTime)

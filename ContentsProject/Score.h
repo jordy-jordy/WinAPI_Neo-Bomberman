@@ -46,6 +46,7 @@ public:
 		CurrentAlignment = _Alignment;
 	}
 
+	void SetDigitCount(size_t _Digits); // 자리수 설정
 
 protected:
 	void BeginPlay() override;
@@ -57,6 +58,7 @@ private:
 	std::vector<class USpriteRenderer*> Renders;
 
 	Alignment CurrentAlignment = Alignment::Left; // 기본값: 왼쪽 정렬
+	size_t DigitCount = 1; // 기본 자리수: 1
 
 };
 

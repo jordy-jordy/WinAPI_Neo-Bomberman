@@ -1,8 +1,6 @@
 #pragma once
 #include <EngineCore/Actor.h>
 
-#include <string>
-
 
 // Ό³Έν :
 class UTitleLogo : public AActor
@@ -20,13 +18,19 @@ public:
 
 	bool CurAniEND();
 
+	void DestroyTitleLogo();
+
+	void SetScore_Coin(class AScore* _data)
+	{
+		COINs = _data;
+	}
+
 	class USpriteRenderer* MAINRENDERER = nullptr;
 	class USpriteRenderer* BASE00 = nullptr;
 	class USpriteRenderer* BASE01 = nullptr;
 	class USpriteRenderer* LEVEL4 = nullptr;
 	class USpriteRenderer* CREDIT = nullptr;
 
-	void DestroyTitleLogo();
 
 
 protected:
@@ -36,6 +40,8 @@ protected:
 private:
 	float Delay = 0.0f;
 	float Wait = 3.0f;
+
+	class AScore* COINs = nullptr;
 
 };
 

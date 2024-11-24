@@ -54,16 +54,36 @@ void AScore::SetOrder(int _Order)
 
 }
 
+void AScore::SetDigitCount(size_t _Digits)
+{
+	if (_Digits > Renders.size())
+	{
+		MSGASSERT("설정된 자리수가 렌더 개수를 초과합니다.");
+		return;
+	}
+	DigitCount = _Digits;
+}
+
 void AScore::SetValue(int _Score)
 {
 	std::string Number = std::to_string(_Score);
+	
+	// DigitCount가 Number보다 작은 경우, 자동으로 DigitCount를 Number의 자리수로 설정
+	if (Number.size() > DigitCount)
+	{
+		DigitCount = Number.size();
+	}
 
-	if (Renders.size() <= Number.size())
+	// 필요한 자릿수보다 작은 경우 앞에 '0' 추가
+	if (Number.size() < DigitCount)
+	{
+		Number.insert(Number.begin(), DigitCount - Number.size(), '0');
+	}
+	else if (Number.size() > DigitCount)
 	{
 		MSGASSERT("자리수를 넘겼습니다.");
 		return;
 	}
-
 
 	FVector2D Pos = FVector2D::ZERO;
 	float TotalWidth = Number.size() * TextScale.X;
@@ -89,4 +109,5 @@ void AScore::SetValue(int _Score)
 		Renders[i]->SetActive(false);
 	}
 }
+
 
