@@ -26,6 +26,8 @@ public:
 	class USpriteRenderer* LEVEL4 = nullptr;
 	class USpriteRenderer* CREDIT = nullptr;
 
+	void DestroyTitleLogo();
+
 
 protected:
 	void BeginPlay();

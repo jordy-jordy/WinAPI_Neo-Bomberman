@@ -23,5 +23,7 @@ private:
 	class UTitleLogo* TITLE = nullptr;
 
 	bool ISCHANGED = false;
+
+	float CHANGEDELAY = 0.0f;
 };
 

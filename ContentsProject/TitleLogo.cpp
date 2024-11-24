@@ -103,3 +103,7 @@ bool UTitleLogo::CurAniEND()
 	return false;
 }
 
+void UTitleLogo::DestroyTitleLogo()
+{
+	Destroy();
+}

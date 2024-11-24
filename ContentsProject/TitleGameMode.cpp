@@ -44,10 +44,27 @@ void ATitleGameMode::Tick(float _DeltaTime)
 	}
 
 	std::string SpriteNAME = TITLE->MAINRENDERER->GetCurSpriteName();
-	if (SpriteNAME == "03_OP_ANIMATION" && true == UEngineInput::GetInst().IsDown('F') || TITLE->MAINRENDERER->IsCurAnimationEnd() == true)
+	if (SpriteNAME == "03_OP_ANIMATION")
 	{
-		UCoinInsert* COININSERT = GetWorld()->SpawnActor<UCoinInsert>();
-		ISCHANGED = true;
+		if (TITLE->MAINRENDERER->IsCurAnimationEnd() == true)
+		{
+			CHANGEDELAY += _DeltaTime;
+			if (CHANGEDELAY >= 3.5f)
+			{
+				TITLE->DestroyTitleLogo();
+				UCoinInsert* COININSERT = GetWorld()->SpawnActor<UCoinInsert>();
+				ISCHANGED = true;
+				CHANGEDELAY = 0.0f;
+				return;
+			}
+		}
+
+		if (true == UEngineInput::GetInst().IsDown('F'))
+		{
+			TITLE->DestroyTitleLogo();
+			UCoinInsert* COININSERT = GetWorld()->SpawnActor<UCoinInsert>();
+			ISCHANGED = true;
+		}
 		//UEngineAPICore::GetCore()->OpenLevel("STAGE01");
 	}
 
