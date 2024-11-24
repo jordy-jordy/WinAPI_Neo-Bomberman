@@ -1,7 +1,10 @@
 #include "PreCompile.h"
 #include "ChooseStage.h"
+
 #include <EngineCore/EngineAPICore.h>
 #include <EngineCore/SpriteRenderer.h>
+#include <EnginePlatform/EngineInput.h>
+
 #include "ContentsEnum.h"
 
 
@@ -60,7 +63,6 @@ UChooseStage::UChooseStage()
 	BOMB_MAN->CreateAnimation("MOVE", "05_CHOOSE_STAGE_03_CHA_MOVE", 0, 3, 0.2f, true);
 	BOMB_MAN->CreateAnimation("DRAW", "05_CHOOSE_STAGE_02_CHA_DRAW", 0, 9, 0.1f, false);
 	BOMB_MAN->CreateAnimation("BACK", "05_CHOOSE_STAGE_03_CHA_MOVE", 4, 4, 0.1f, false);
-	BOMB_MAN->ChangeAnimation("MOVE");
 
 };
 
@@ -68,3 +70,50 @@ UChooseStage::~UChooseStage()
 {
 
 };
+
+void UChooseStage::BeginPlay()
+{
+
+}
+
+void UChooseStage::Tick(float _DeltaTime)
+{
+	// 키 입력 확인
+	if (true == UEngineInput::GetInst().IsDown('S'))
+	{
+		// 이동 속도 설정 (예: 초당 100 유닛)
+		const float Speed = 100.0f;
+
+		// 현재 위치 가져오기
+		FVector2D POS = BOMB_MAN->GetComponentLocation();
+
+		// 목표 Y 위치
+		const float TargetY = 354.0f;
+
+		// BOMB_MAN이 목표 위치보다 아래에 있을 경우
+		if (POS.Y < TargetY)
+		{
+			// 속도와 DeltaTime을 사용해 Y축 이동
+			float NewY = POS.Y + FVector2D::DOWN.Y * Speed * _DeltaTime;
+
+			// 목표 위치를 초과하지 않도록 제한
+			if (NewY > TargetY)
+			{
+				NewY = TargetY;
+			}
+
+			// 위치 갱신
+			BOMB_MAN->SetComponentLocation({ POS.X, NewY });
+
+			// 애니메이션 변경
+			BOMB_MAN->ChangeAnimation("MOVE");
+		}
+		else
+		{
+			// 목표 위치에 도달하면 정지 애니메이션 변경
+			BOMB_MAN->ChangeAnimation("DRAW");
+		}
+	}
+}
+
+

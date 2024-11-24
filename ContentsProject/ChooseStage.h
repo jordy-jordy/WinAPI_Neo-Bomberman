@@ -1,6 +1,6 @@
 #pragma once
 #include <EngineCore/Actor.h>
-
+#include <EngineBase/EngineMath.h>
 
 // Ό³Έν :
 class UChooseStage : public AActor
@@ -16,7 +16,15 @@ public:
 	UChooseStage& operator=(const UChooseStage& _Other) = delete;
 	UChooseStage& operator=(UChooseStage&& _Other) noexcept = delete;
 
+	void AddActorLocation(FVector2D _Direction)
+	{
+		Transform.Location += _Direction;
+	}
+
 protected:
+	void BeginPlay();
+	void Tick(float _DeltaTime);
+
 
 private:
 	class USpriteRenderer* Background = nullptr;
@@ -31,7 +39,6 @@ private:
 
 	FVector2D BG_SIZE = { 608, 448 };
 
-
-
+	class FTransform Transform;
 
 };

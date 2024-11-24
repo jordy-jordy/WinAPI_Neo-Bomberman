@@ -67,6 +67,14 @@ void ATitleGameMode::Tick(float _DeltaTime)
 		UEngineAPICore::GetCore()->OpenLevel("STAGE01");
 	}
 
+	if (InitCurState() == SCENES::CHOOSE_STAGE)
+	{
+
+	}
+
+
+
+
 
 	if (InitCurState() == SCENES::COIN_INSERT)
 	{
@@ -78,8 +86,8 @@ void ATitleGameMode::Tick(float _DeltaTime)
 
 		if (COIN_NUMBER > 0 && true == UEngineInput::GetInst().IsDown(VK_SPACE))
 		{
-			CHOOSE->SetActive(true);
 			ISPASS_COIN_INSERT = true;
+			CHOOSE->SetActive(true);
 			COININSERT->Destroy();
 			COININSERT = nullptr;
 			COINs->SetActive(false); // 스코어 (코인) 비활성화
