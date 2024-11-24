@@ -67,32 +67,6 @@ void UTitleLogo::BeginPlay()
 void UTitleLogo::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
-
-	if (true == UEngineInput::GetInst().IsDown(VK_SPACE))
-	{
-		if (MAINRENDERER->GetCurSpriteName() == "00_NEO-GEO_LOGO")
-		{
-			MAINRENDERER->ChangeAnimation("OP_Animation");
-			BASE00->SetActive(true);
-			BASE01->SetActive(true);
-			LEVEL4->SetActive(true);
-			CREDIT->SetActive(true);
-		}
-	}
-
-	if (MAINRENDERER->GetCurSpriteName() == "00_NEO-GEO_LOGO" && CurAniEND() == true)
-	{
-		Delay += _DeltaTime;
-		if (Delay >= Wait)
-		{
-			MAINRENDERER->ChangeAnimation("OP_Animation");
-			BASE00->SetActive(true);
-			BASE01->SetActive(true);
-			LEVEL4->SetActive(true);
-			CREDIT->SetActive(true);
-			Delay = 0.0f;
-		}
-	}
 }
 
 bool UTitleLogo::CurAniEND()

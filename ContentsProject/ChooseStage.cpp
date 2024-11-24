@@ -47,7 +47,7 @@ UChooseStage::UChooseStage()
 	BLACKMAN->SetPivotType(PivotType::Top);
 	BLACKMAN->SetComponentLocation({ 379, 16 });
 	BLACKMAN->SetOrder(ERenderOrder::OBJECTS);
-	BLACKMAN->CreateAnimation("BLKMAN", "05_CHOOSE_STAGE_01_CHA_BLK", 0, 5, 0.2f, true);
+	BLACKMAN->CreateAnimation("BLKMAN", "05_CHOOSE_STAGE_01_CHA_BLK", 0, 5, 0.15f, true);
 	BLACKMAN->ChangeAnimation("BLKMAN");
 
 	BOMB_MAN = CreateDefaultSubObject<USpriteRenderer>();
@@ -56,6 +56,11 @@ UChooseStage::UChooseStage()
 	BOMB_MAN->SetPivotType(PivotType::Top);
 	BOMB_MAN->SetComponentLocation({ 65, 194 });
 	BOMB_MAN->SetOrder(ERenderOrder::OBJECTS);
+
+	BOMB_MAN->CreateAnimation("MOVE", "05_CHOOSE_STAGE_03_CHA_MOVE", 0, 3, 0.2f, true);
+	BOMB_MAN->CreateAnimation("DRAW", "05_CHOOSE_STAGE_02_CHA_DRAW", 0, 9, 0.1f, false);
+	BOMB_MAN->CreateAnimation("BACK", "05_CHOOSE_STAGE_03_CHA_MOVE", 4, 4, 0.1f, false);
+	BOMB_MAN->ChangeAnimation("MOVE");
 
 };
 

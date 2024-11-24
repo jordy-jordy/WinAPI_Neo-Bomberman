@@ -42,6 +42,8 @@ void ATitleGameMode::BeginPlay()
 
 	// 스테이지 선택 장면 세팅
 	CHOOSE = GetWorld()->SpawnActor<UChooseStage>();
+	CHOOSE->SetActive(false);
+
 
 	// 스코어(코인) 세팅
 	COINs = GetWorld()->SpawnActor<AScore>();
@@ -66,61 +68,98 @@ void ATitleGameMode::Tick(float _DeltaTime)
 	}
 
 
-
-	std::string SPRITENAME_COIN = COININSERT->MAINRENDERER->GetCurSpriteName();
-	if (TITLE == nullptr)
+	if (InitCurState() == SCENES::COIN_INSERT)
 	{
 		if (true == UEngineInput::GetInst().IsDown('F'))
 		{
 			COIN_NUMBER += 1;
 			COINs->SetValue(COIN_NUMBER);
 		}
+
+		if (COIN_NUMBER > 0 && true == UEngineInput::GetInst().IsDown(VK_SPACE))
+		{
+			CHOOSE->SetActive(true);
+			ISPASS_COIN_INSERT = true;
+			COININSERT->Destroy();
+			COININSERT = nullptr;
+			COINs->SetActive(false); // 스코어 (코인) 비활성화
+			return;
+		}
 	}
 
-
-	if (TITLE != nullptr)
+	if (InitCurState() == SCENES::ANI_OP)
 	{
-		std::string SPRITENAME_TITLE = TITLE->MAINRENDERER->GetCurSpriteName();
-		if (SPRITENAME_TITLE == "00_NEO-GEO_LOGO")
+		COINs->SetActive(true); // 스코어 (코인) 활성화
+
+		// 오프닝 애니메이션이 끝났을 때
+		if (TITLE->MAINRENDERER->IsCurAnimationEnd() == true)
 		{
-			if (true == UEngineInput::GetInst().IsDown('F'))
+			CHANGEDELAY += _DeltaTime;
+			if (CHANGEDELAY >= 3.0f)
 			{
-				ISCHANGED = true;
-				COINs->SetActive(true);
-				COININSERT->SetActive(true);
-				TITLE->DestroyTitleLogo();
+				ISPASS_ANI_OP = true;
+				COININSERT->SetActive(true); // 코인 인서트 장면 활성화
+				TITLE->Destroy(); // 타이틀로고 액터 삭제
 				TITLE = nullptr;
+				CHANGEDELAY = 0.0f;
 				return;
 			}
 		}
 
-		if (SPRITENAME_TITLE == "03_OP_ANIMATION")
+		// 애니메이션 도중 키를 눌렀을 때 (인서트 코인 장면으로 전환)
+		if (true == UEngineInput::GetInst().IsDown(VK_SPACE) || true == UEngineInput::GetInst().IsDown('F'))
 		{
-			COINs->SetActive(true);
-
-			if (TITLE->MAINRENDERER->IsCurAnimationEnd() == true)
-			{
-				CHANGEDELAY += _DeltaTime;
-				if (CHANGEDELAY >= 3.0f)
-				{
-					ISCHANGED = true;
-					COININSERT->SetActive(true);
-					TITLE->DestroyTitleLogo();
-					TITLE = nullptr;
-					CHANGEDELAY = 0.0f;
-					return;
-				}
-			}
-
-			if (true == UEngineInput::GetInst().IsDown(VK_SPACE) || true == UEngineInput::GetInst().IsDown('F'))
-			{
-				ISCHANGED = true;
-				COININSERT->SetActive(true);
-				TITLE->DestroyTitleLogo();
-				TITLE = nullptr;
-				return;
-			}
+			ISPASS_ANI_OP = true;
+			COININSERT->SetActive(true); // 코인 인서트 장면 활성화
+			TITLE->Destroy(); // 타이틀로고 액터 삭제
+			TITLE = nullptr;
+			return;
 		}
 	}
+
+	if (InitCurState() == SCENES::TITLELOGO)
+	{
+		// 타이틀 로고를 끝까지 봤을때
+		if (TITLE->MAINRENDERER->IsCurAnimationEnd() == true)
+		{
+			CHANGEDELAY += _DeltaTime;
+			if (CHANGEDELAY >= 3.0f)
+			{
+				ISPASS_TITLELOGO = true;
+				TITLE->MAINRENDERER->ChangeAnimation("OP_Animation");
+				TITLE->BASE00->SetActive(true);
+				TITLE->BASE01->SetActive(true);
+				TITLE->LEVEL4->SetActive(true);
+				TITLE->CREDIT->SetActive(true);
+				return;
+			}
+		}
+
+		// 오프닝 애니메이션으로 넘어갈 때
+		if (true == UEngineInput::GetInst().IsDown(VK_SPACE))
+		{
+			ISPASS_TITLELOGO = true;
+			TITLE->MAINRENDERER->ChangeAnimation("OP_Animation");
+			TITLE->BASE00->SetActive(true);
+			TITLE->BASE01->SetActive(true);
+			TITLE->LEVEL4->SetActive(true);
+			TITLE->CREDIT->SetActive(true);
+			return;
+		}
+
+		// 바로 인서트 코인 장면으로 넘어갈 때
+		if (true == UEngineInput::GetInst().IsDown('F'))
+		{
+			ISPASS_TITLELOGO = true;
+			ISPASS_ANI_OP = true;
+			COINs->SetActive(true); // 스코어 (코인) 활성화
+			COININSERT->SetActive(true); // 코인 인서트 장면 활성화
+			TITLE->Destroy(); // 타이틀로고 액터 삭제
+			TITLE = nullptr;
+			return;
+		}
+	}
+
+
 
 }

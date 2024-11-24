@@ -1,6 +1,17 @@
 #pragma once
 #include <EngineCore/GameMode.h>
 
+
+enum class SCENES
+{
+	TITLELOGO = 0,
+	ANI_OP = 1,
+	COIN_INSERT = 2,
+	CHOOSE_STAGE = 3,
+	ANI_TRANSIT = 4,
+	NONE = 5
+};
+
 // Ό³Έν :
 class ATitleGameMode : public AGameMode
 {
@@ -20,6 +31,53 @@ public:
 		return COIN_NUMBER;
 	}
 
+	SCENES InitCurState()
+	{
+		if (ISPASS_TITLELOGO    == false &&
+			ISPASS_ANI_OP       == false &&
+			ISPASS_COIN_INSERT  == false &&
+			ISPASS_CHOOSE_STAGE == false &&
+			ISPASS_ANI_TRANSIT  == false)
+		{
+			return SCENES::TITLELOGO;
+		}
+		if (ISPASS_TITLELOGO    == true &&
+			ISPASS_ANI_OP       == false &&
+			ISPASS_COIN_INSERT  == false &&
+			ISPASS_CHOOSE_STAGE == false &&
+			ISPASS_ANI_TRANSIT  == false)
+		{
+			return SCENES::ANI_OP;
+		}
+		if (ISPASS_TITLELOGO    == true &&
+			ISPASS_ANI_OP       == true &&
+			ISPASS_COIN_INSERT  == false &&
+			ISPASS_CHOOSE_STAGE == false &&
+			ISPASS_ANI_TRANSIT  == false)
+		{
+			return SCENES::COIN_INSERT;
+		}
+		if (ISPASS_TITLELOGO    == true &&
+			ISPASS_ANI_OP       == true &&
+			ISPASS_COIN_INSERT  == true &&
+			ISPASS_CHOOSE_STAGE == false &&
+			ISPASS_ANI_TRANSIT  == false)
+		{
+			return SCENES::CHOOSE_STAGE;
+		}
+		if (ISPASS_TITLELOGO    == true &&
+			ISPASS_ANI_OP       == true &&
+			ISPASS_COIN_INSERT  == true &&
+			ISPASS_CHOOSE_STAGE == true &&
+			ISPASS_ANI_TRANSIT  == false)
+		{
+			return SCENES::ANI_TRANSIT;
+		}
+
+		return SCENES::NONE;
+	}
+
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
@@ -34,7 +92,12 @@ private:
 
 	int DIGITCOUNT = 2;
 
-	bool ISCHANGED = false;
+	bool ISPASS_TITLELOGO = false;
+	bool ISPASS_ANI_OP = false;
+	bool ISPASS_COIN_INSERT = false;
+	bool ISPASS_CHOOSE_STAGE = false;
+	bool ISPASS_ANI_TRANSIT = false;
+
 	float CHANGEDELAY = 0.0f;
 };
 

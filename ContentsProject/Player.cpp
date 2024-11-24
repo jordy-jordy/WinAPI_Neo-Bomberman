@@ -159,6 +159,7 @@ FVector2D APlayer::InvertLOC(FVector2D _Dir)
 		return CUSTOM_VECTOR_DOWN;
 	}
 
+	return {0, 0};
 }
 
 
