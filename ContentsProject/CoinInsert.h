@@ -16,6 +16,12 @@ public:
 	UCoinInsert& operator=(const UCoinInsert& _Other) = delete;
 	UCoinInsert& operator=(UCoinInsert&& _Other) noexcept = delete;
 
+	void SetScore_Coin(class AScore* _data)
+	{
+		COINs = _data;
+	}
+
+
 protected:
 	void BeginPlay();
 	void Tick(float _DeltaTime);
@@ -27,6 +33,11 @@ private:
 	class USpriteRenderer* CREDIT = nullptr;
 	class USpriteRenderer* COMPANY = nullptr;
 	class USpriteRenderer* TM = nullptr;
+	
+	class AScore* COINs = nullptr;
 
+	class ATitleGameMode* MODE = nullptr;
+
+	int COIN_NUMBER = 0;
 
 };

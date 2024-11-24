@@ -15,6 +15,11 @@ public:
 	ATitleGameMode& operator=(const ATitleGameMode& _Other) = delete;
 	ATitleGameMode& operator=(ATitleGameMode&& _Other) noexcept = delete;
 
+	int GetCOIN_NUMBER()
+	{
+		return COIN_NUMBER;
+	}
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
@@ -22,9 +27,13 @@ protected:
 private:
 	class UTitleLogo* TITLE = nullptr;
 	class AScore* COINs = nullptr;
+	class UCoinInsert* COININSERT = nullptr;
+
+	int COIN_NUMBER = 0;
+
+	int DIGITCOUNT = 2;
 
 	bool ISCHANGED = false;
-
 	float CHANGEDELAY = 0.0f;
 };
 

@@ -4,6 +4,7 @@
 #include <EngineCore/SpriteRenderer.h>
 
 #include "ContentsEnum.h"
+#include "TitleGameMode.h"
 
 UCoinInsert::UCoinInsert()
 {
@@ -53,6 +54,7 @@ UCoinInsert::UCoinInsert()
 	TM->SetPivotType(PivotType::Top);
 	TM->SetComponentLocation({ 512, 96 });
 	TM->SetActive(true);
+	
 };
 
 UCoinInsert::~UCoinInsert()
@@ -68,5 +70,16 @@ void UCoinInsert::BeginPlay()
 void UCoinInsert::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
+
+	if (MODE == nullptr)
+	{
+		MODE = GetWorld()->GetGameMode<ATitleGameMode>();
+	}
+
+	int CURCOIN = MODE->GetCOIN_NUMBER();
+	if (CURCOIN > 0)
+	{
+		COIN_INSERT->SetActive(false);
+	}
 }
 

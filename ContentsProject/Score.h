@@ -48,6 +48,7 @@ public:
 
 	void SetDigitCount(size_t _Digits); // 자리수 설정
 
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
