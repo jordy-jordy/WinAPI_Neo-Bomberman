@@ -70,12 +70,16 @@ void ATitleGameMode::BeginPlay()
 	Actor_Fade = GetWorld()->SpawnActor<AFade>();
 	Actor_Fade->SetFadeSpeed(1.5f);
 	Actor_Fade->SetActive(false);
-	FadeRenderer = Actor_Fade->GetRenderer();
 }
 
 void ATitleGameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
+
+	if (InitCurState() == SCENES::NONE)
+	{
+		return;
+	}
 
 	if (InitCurState() == SCENES::CHOOSE_STAGE)
 	{
@@ -95,6 +99,9 @@ void ATitleGameMode::Tick(float _DeltaTime)
 		{
 			TimeEventer.PushEvent(1.5f, std::bind(&AFade::FadeIn, Actor_Fade), false, false);
 			TimeEventer.PushEvent(3.0f, std::bind(&ATitleGameMode::OpenPlayLevel, this), false, false);
+			CHOOSE->Destroy();
+			CHOOSE = nullptr;
+			return;
 		}
 	}
 

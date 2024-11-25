@@ -26,25 +26,6 @@ void AFade::FadeChange()
 	float DeltaTime = UEngineAPICore::GetCore()->GetDeltaTime();
 	FadeValue += DeltaTime * FadeSpeed * FadeDir;
 	BackSpriteRenderer->SetAlphafloat(FadeValue);
-
-	//if (FadeValue > 1.0f)
-	//{
-	//	FadeValue = 1.0f;
-	//}
-	//else if (FadeValue < 0.0f)
-	//{
-	//	FadeValue = 0.0f;
-	//}
-
-	//// Fade 완료 상태 확인
-	//if (FadeDir > 0.0f && FadeValue >= 1.0f)
-	//{
-	//	IsFadeCompleted = true;
-	//}
-	//else if (FadeDir < 0.0f && FadeValue <= 0.0f)
-	//{
-	//	IsFadeCompleted = true;
-	//}
 }
 
 
@@ -65,7 +46,6 @@ void AFade::FadeOut()
 	IsFadeIn = false;
 	TimeEventer.PushEvent(2.0f, std::bind(&AFade::FadeChange, this), true, false);
 }
-
 
 void AFade::LevelChangeStart()
 {

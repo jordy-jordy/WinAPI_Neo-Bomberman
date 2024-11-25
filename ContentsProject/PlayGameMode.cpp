@@ -18,6 +18,7 @@
 #include "Portal.h"
 #include "Score.h"
 #include "UIBar.h"
+#include "Fade.h"
 
 
 APlayGameMode::APlayGameMode()
@@ -193,11 +194,19 @@ void APlayGameMode::BeginPlay()
 
 	// Æ÷Å» ¼¼ÆÃ
 	PortalInit();
+
+	Actor_Fade = GetWorld()->SpawnActor<AFade>();
+	Actor_Fade->SetFadeSpeed(1.5f);
+	Actor_Fade->SetActive(false);
+
 }
 
 void APlayGameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
+
+	Actor_Fade->SetActive(true);
+	Actor_Fade->FadeOut();
 
 	Score->SetValue(PlayerScore);
 

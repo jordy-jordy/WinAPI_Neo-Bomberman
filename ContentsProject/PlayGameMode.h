@@ -56,6 +56,8 @@ private:
 	class AScore* Zero = nullptr;
 	class AScore* Score = nullptr;
 
+	class AFade* Actor_Fade = nullptr;
+
 	float Time = 6.0f;
 
 	int PlayerScore = 0;
