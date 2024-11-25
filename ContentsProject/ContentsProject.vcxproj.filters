@@ -70,6 +70,9 @@
     <ClCompile Include="Fade.cpp">
       <Filter>ContentsObject\Actors_Global</Filter>
     </ClCompile>
+    <ClCompile Include="Transit_Ani.cpp">
+      <Filter>ContentsObject\Actors_Title</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -143,6 +146,9 @@
     </ClInclude>
     <ClInclude Include="Fade.h">
       <Filter>ContentsObject\Actors_Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Transit_Ani.h">
+      <Filter>ContentsObject\Actors_Title</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

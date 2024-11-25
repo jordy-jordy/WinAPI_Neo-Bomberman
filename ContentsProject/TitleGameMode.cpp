@@ -104,9 +104,9 @@ void ATitleGameMode::Tick(float _DeltaTime)
 		{
 			TimeEventer.PushEvent(1.5f, std::bind(&AFade::FadeIn, Actor_Fade), false, false);
 			TimeEventer.PushEvent(3.0f, std::bind(&ATitleGameMode::OpenPlayLevel, this), false, false);
-			ISPASS_CHOOSE_STAGE = true;
-			CHOOSE->Destroy();
-			CHOOSE = nullptr;
+			//ISPASS_CHOOSE_STAGE = true;
+			//CHOOSE->Destroy();
+			//CHOOSE = nullptr;
 			return;
 		}
 	}
