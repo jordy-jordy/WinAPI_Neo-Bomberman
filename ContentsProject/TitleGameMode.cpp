@@ -81,6 +81,11 @@ void ATitleGameMode::Tick(float _DeltaTime)
 		return;
 	}
 
+	if (InitCurState() == SCENES::ANI_TRANSIT)
+	{
+		return;
+	}
+
 	if (InitCurState() == SCENES::CHOOSE_STAGE)
 	{
 		if (Actor_Fade->IsFadeOut == false && Actor_Fade->IsFadeIn == false)
@@ -99,6 +104,7 @@ void ATitleGameMode::Tick(float _DeltaTime)
 		{
 			TimeEventer.PushEvent(1.5f, std::bind(&AFade::FadeIn, Actor_Fade), false, false);
 			TimeEventer.PushEvent(3.0f, std::bind(&ATitleGameMode::OpenPlayLevel, this), false, false);
+			ISPASS_CHOOSE_STAGE = true;
 			CHOOSE->Destroy();
 			CHOOSE = nullptr;
 			return;
