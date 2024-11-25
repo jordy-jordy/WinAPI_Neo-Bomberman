@@ -86,7 +86,10 @@ void ATitleGameMode::Tick(float _DeltaTime)
 
 	if (InitCurState() == SCENES::ANI_TRANSIT)
 	{
+		TimeEventer.PushEvent(1.0f, std::bind(&AFade::FadeOut, Actor_Fade), false, false);
+
 		TRANSIT->SetActive(true);
+
 	}
 
 	if (InitCurState() == SCENES::CHOOSE_STAGE)
@@ -106,10 +109,11 @@ void ATitleGameMode::Tick(float _DeltaTime)
 		if (CHOOSE->GetIsStageONE() == true && UEngineInput::GetInst().IsDown(VK_SPACE))
 		{
 			TimeEventer.PushEvent(1.5f, std::bind(&AFade::FadeIn, Actor_Fade), false, false);
+			TimeEventer.PushEvent(3.0f, std::bind(&UChooseStage::DestroyChoose, CHOOSE), false, false);
 			//TimeEventer.PushEvent(3.0f, std::bind(&ATitleGameMode::OpenPlayLevel, this), false, false);
 			ISPASS_CHOOSE_STAGE = true;
-			CHOOSE->Destroy();
-			CHOOSE = nullptr;
+			//CHOOSE->Destroy();
+			//CHOOSE = nullptr;
 			return;
 		}
 	}

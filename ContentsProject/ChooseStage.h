@@ -40,6 +40,11 @@ public:
 		return IsStageTWO;
 	}
 
+	void DestroyChoose()
+	{
+		Destroy();
+	}
+
 
 protected:
 	void BeginPlay();

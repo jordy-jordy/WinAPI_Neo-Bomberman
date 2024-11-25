@@ -96,6 +96,7 @@ private:
 
 	int COIN_NUMBER = 0;
 	float StageChooseTime_NUMBER = 31.0f;
+	float TIME_DELAY = 0.0f;
 
 	int DIGITCOUNT_Coins = 2;
 	int DIGITCOUNT_StageChooseTime = 2;
