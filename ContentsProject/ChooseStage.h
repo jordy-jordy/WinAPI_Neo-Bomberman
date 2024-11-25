@@ -30,6 +30,16 @@ public:
 	class USpriteRenderer* CREDIT = nullptr;
 	class USpriteRenderer* LEVEL4 = nullptr;
 
+	bool GetIsStageONE()
+	{
+		return IsStageONE;
+	}
+
+	bool GetIsStageTWO()
+	{
+		return IsStageTWO;
+	}
+
 
 protected:
 	void BeginPlay();

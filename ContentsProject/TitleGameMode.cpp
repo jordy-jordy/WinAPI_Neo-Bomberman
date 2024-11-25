@@ -52,9 +52,19 @@ void ATitleGameMode::BeginPlay()
 	COINs->SetTextScale({ 16, 16 });
 	COINs->SetAlignment(AScore::Alignment::Right);
 	COINs->SetOrder(ERenderOrder::TEXT_UI);
-	COINs->SetDigitCount(DIGITCOUNT);
+	COINs->SetDigitCount(DIGITCOUNT_Coins);
 	COINs->SetValue(COIN_NUMBER);
 	COINs->SetActive(false);
+
+	// 스코어(남은 시간) 세팅 < 스테이지 선택 장면 >
+	TIMEs_StageChoose = GetWorld()->SpawnActor<AScore>();
+	TIMEs_StageChoose->SetTextSpriteName("BlueCount.png");
+	TIMEs_StageChoose->SetActorLocation({ 502, 104 });
+	TIMEs_StageChoose->SetTextScale({ 32, 32 });
+	TIMEs_StageChoose->SetAlignment(AScore::Alignment::Left);
+	TIMEs_StageChoose->SetOrder(ERenderOrder::TEXT_UI);
+	TIMEs_StageChoose->SetDigitCount(DIGITCOUNT_StageChooseTime);
+	TIMEs_StageChoose->SetActive(false);
 }
 
 
@@ -70,9 +80,23 @@ void ATitleGameMode::Tick(float _DeltaTime)
 	if (InitCurState() == SCENES::CHOOSE_STAGE)
 	{
 		CHOOSE->SetActive(true);
+		TIMEs_StageChoose->SetActive(true);
+
+		StageChooseTime_NUMBER -= _DeltaTime;
+		int CurRemainTime = static_cast<int>(StageChooseTime_NUMBER) % 60;
+
+		if (StageChooseTime_NUMBER < 0 )
+		{
+			return;
+		}
+		
+		TIMEs_StageChoose->SetValue(CurRemainTime);
+
+		if (CHOOSE->GetIsStageONE() == true && UEngineInput::GetInst().IsDown(VK_SPACE) == true)
+		{
+			UEngineAPICore::GetCore()->OpenLevel("STAGE01");
+		}
 	}
-
-
 
 
 

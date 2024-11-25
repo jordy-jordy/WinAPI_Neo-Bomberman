@@ -94,6 +94,15 @@ void BombmanCore::BeginPlay()
 		Title_ChooseStage_CIRCLE_Dir.MoveParentToDirectory("Resources//Imgs");
 		Title_ChooseStage_CIRCLE_Dir.Append("01_TITLE//05_CHOOSE_STAGE//05_CHOOSE_STAGE_03_CIRCLE");
 		UImageManager::GetInst().LoadFolder(Title_ChooseStage_CIRCLE_Dir.GetPathToString());
+
+		UImageManager& BlueCount = UImageManager::GetInst();
+		BlueCount.CuttingSprite("BlueCount.png", { 34, 32 });
+
+		UImageManager& PinkCount = UImageManager::GetInst();
+		PinkCount.CuttingSprite("PinkCount.png", { 34, 32 });
+
+		UImageManager& YellowCount = UImageManager::GetInst();
+		YellowCount.CuttingSprite("YellowCount.png", { 34, 32 });
 	}
 
 

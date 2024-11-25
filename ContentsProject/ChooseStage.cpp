@@ -103,6 +103,13 @@ void UChooseStage::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
+	if (UEngineInput::GetInst().IsDown(VK_SPACE) == true)
+	{
+		BOMB_MAN->ChangeAnimation("DRAW");
+		CIRCLE->SetActive(true);
+		CIRCLE->ChangeAnimation("CIRCLE");
+	}
+
 	// S 키를 눌렀을 때: 아래로 이동 시작
 	if (UEngineInput::GetInst().IsDown('S') == true)
 	{
@@ -115,13 +122,6 @@ void UChooseStage::Tick(float _DeltaTime)
 	{
 		IsUpMoving = true;
 		IsDownMoving = false; // 아래 이동 중지
-	}
-
-	if (UEngineInput::GetInst().IsDown(VK_SPACE) == true)
-	{
-		BOMB_MAN->ChangeAnimation("DRAW");
-		CIRCLE->SetActive(true);
-		CIRCLE->ChangeAnimation("CIRCLE");
 	}
 
 	// 아래 이동 로직
@@ -175,11 +175,15 @@ void UChooseStage::Tick(float _DeltaTime)
 	float Cur_Y = BOMB_MAN->GetComponentLocation().Y;
 	if (Cur_Y >= 290.0f)
 	{
+		IsStageONE = false;
+		IsStageTWO = true;
 		CHOOSE_00->SetActive(false);
 		CHOOSE_01->SetActive(true);
 	}
 	else
 	{
+		IsStageONE = true;
+		IsStageTWO = false;
 		CHOOSE_00->SetActive(true);
 		CHOOSE_01->SetActive(false);
 	}

@@ -84,13 +84,16 @@ protected:
 
 private:
 	class UTitleLogo* TITLE = nullptr;
-	class AScore* COINs = nullptr;
 	class UCoinInsert* COININSERT = nullptr;
 	class UChooseStage* CHOOSE = nullptr;
+	class AScore* COINs = nullptr;
+	class AScore* TIMEs_StageChoose = nullptr;
 
 	int COIN_NUMBER = 0;
+	float StageChooseTime_NUMBER = 31.0f;
 
-	int DIGITCOUNT = 2;
+	int DIGITCOUNT_Coins = 2;
+	int DIGITCOUNT_StageChooseTime = 2;
 
 	bool ISPASS_TITLELOGO = false;
 	bool ISPASS_ANI_OP = false;
