@@ -89,6 +89,11 @@ void BombmanCore::BeginPlay()
 		Title_ChooseStage_DRAW_Dir.MoveParentToDirectory("Resources//Imgs");
 		Title_ChooseStage_DRAW_Dir.Append("01_TITLE//05_CHOOSE_STAGE//05_CHOOSE_STAGE_02_CHA_DRAW");
 		UImageManager::GetInst().LoadFolder(Title_ChooseStage_DRAW_Dir.GetPathToString());
+
+		UEngineDirectory Title_ChooseStage_CIRCLE_Dir;
+		Title_ChooseStage_CIRCLE_Dir.MoveParentToDirectory("Resources//Imgs");
+		Title_ChooseStage_CIRCLE_Dir.Append("01_TITLE//05_CHOOSE_STAGE//05_CHOOSE_STAGE_03_CIRCLE");
+		UImageManager::GetInst().LoadFolder(Title_ChooseStage_CIRCLE_Dir.GetPathToString());
 	}
 
 

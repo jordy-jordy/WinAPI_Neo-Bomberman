@@ -48,7 +48,7 @@ void ATitleGameMode::BeginPlay()
 	// 스코어(코인) 세팅
 	COINs = GetWorld()->SpawnActor<AScore>();
 	COINs->SetTextSpriteName("Title_countdown_24x24.png");
-	COINs->SetActorLocation({ 586, 440 });
+	COINs->SetActorLocation({ 600, 440 });
 	COINs->SetTextScale({ 16, 16 });
 	COINs->SetAlignment(AScore::Alignment::Right);
 	COINs->SetOrder(ERenderOrder::TEXT_UI);
@@ -69,7 +69,7 @@ void ATitleGameMode::Tick(float _DeltaTime)
 
 	if (InitCurState() == SCENES::CHOOSE_STAGE)
 	{
-
+		CHOOSE->SetActive(true);
 	}
 
 
@@ -78,19 +78,20 @@ void ATitleGameMode::Tick(float _DeltaTime)
 
 	if (InitCurState() == SCENES::COIN_INSERT)
 	{
+		COININSERT->SetActive(true); // 코인 인서트 장면 활성화
+
 		if (true == UEngineInput::GetInst().IsDown('F'))
 		{
 			COIN_NUMBER += 1;
 			COINs->SetValue(COIN_NUMBER);
 		}
 
+		// 코인을 넣고 스테이지 선택 화면으로 전환
 		if (COIN_NUMBER > 0 && true == UEngineInput::GetInst().IsDown(VK_SPACE))
 		{
 			ISPASS_COIN_INSERT = true;
-			CHOOSE->SetActive(true);
 			COININSERT->Destroy();
 			COININSERT = nullptr;
-			COINs->SetActive(false); // 스코어 (코인) 비활성화
 			return;
 		}
 	}
@@ -106,7 +107,6 @@ void ATitleGameMode::Tick(float _DeltaTime)
 			if (CHANGEDELAY >= 3.0f)
 			{
 				ISPASS_ANI_OP = true;
-				COININSERT->SetActive(true); // 코인 인서트 장면 활성화
 				TITLE->Destroy(); // 타이틀로고 액터 삭제
 				TITLE = nullptr;
 				CHANGEDELAY = 0.0f;
@@ -118,7 +118,6 @@ void ATitleGameMode::Tick(float _DeltaTime)
 		if (true == UEngineInput::GetInst().IsDown(VK_SPACE) || true == UEngineInput::GetInst().IsDown('F'))
 		{
 			ISPASS_ANI_OP = true;
-			COININSERT->SetActive(true); // 코인 인서트 장면 활성화
 			TITLE->Destroy(); // 타이틀로고 액터 삭제
 			TITLE = nullptr;
 			return;
@@ -161,7 +160,6 @@ void ATitleGameMode::Tick(float _DeltaTime)
 			ISPASS_TITLELOGO = true;
 			ISPASS_ANI_OP = true;
 			COINs->SetActive(true); // 스코어 (코인) 활성화
-			COININSERT->SetActive(true); // 코인 인서트 장면 활성화
 			TITLE->Destroy(); // 타이틀로고 액터 삭제
 			TITLE = nullptr;
 			return;

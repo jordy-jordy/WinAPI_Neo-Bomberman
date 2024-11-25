@@ -129,7 +129,6 @@ void ABomb::HandleExplosion(EDirection Direction, int Power)
 
 			FIntPoint MonsterINDEX = CurMonster->GetMonsterPos_INDEX(CurMonster->GetActorLocation(), WallTileMap);
 			FIntPoint TilePos_INDEX = WallTileMap->LocationToIndex(TargetPos);
-			int a = 0;
 
 			if (MonsterINDEX == TilePos_INDEX)
 			{

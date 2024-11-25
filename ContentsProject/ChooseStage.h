@@ -1,6 +1,5 @@
 #pragma once
 #include <EngineCore/Actor.h>
-#include <EngineBase/EngineMath.h>
 
 // 설명 :
 class UChooseStage : public AActor
@@ -16,17 +15,6 @@ public:
 	UChooseStage& operator=(const UChooseStage& _Other) = delete;
 	UChooseStage& operator=(UChooseStage&& _Other) noexcept = delete;
 
-	void AddActorLocation(FVector2D _Direction)
-	{
-		Transform.Location += _Direction;
-	}
-
-protected:
-	void BeginPlay();
-	void Tick(float _DeltaTime);
-
-
-private:
 	class USpriteRenderer* Background = nullptr;
 	class USpriteRenderer* Basic_UI00 = nullptr;
 	class USpriteRenderer* Basic_UI01 = nullptr;
@@ -37,8 +25,27 @@ private:
 	class USpriteRenderer* BLACKMAN = nullptr;
 	class USpriteRenderer* BOMB_MAN = nullptr;
 
+	class USpriteRenderer* CIRCLE = nullptr;
+
+	class USpriteRenderer* CREDIT = nullptr;
+	class USpriteRenderer* LEVEL4 = nullptr;
+
+
+protected:
+	void BeginPlay();
+	void Tick(float _DeltaTime);
+
+
+private:
 	FVector2D BG_SIZE = { 608, 448 };
 
-	class FTransform Transform;
+	bool IsDownMoving = false; // 아래 움직임 여부 플래그
+	bool IsUpMoving = false; // 위 움직임 여부 플래그
+	float MoveSpeed = 250.0f; // 이동 속도
+	float StageOnePos = 193.0f; // 아케이드 모드 위치
+	float StageTwoPos = 354.0f; // 멀티 모드 위치
+
+	bool IsStageONE = false;
+	bool IsStageTWO = false;
 
 };
