@@ -88,6 +88,8 @@ private:
 	class UTitleLogo* TITLE = nullptr;
 	class UCoinInsert* COININSERT = nullptr;
 	class UChooseStage* CHOOSE = nullptr;
+	class ATransit_Ani* TRANSIT = nullptr;
+
 	class AScore* COINs = nullptr;
 	class AScore* TIMEs_StageChoose = nullptr;
 	class AFade* Actor_Fade = nullptr;

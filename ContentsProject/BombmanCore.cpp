@@ -103,6 +103,11 @@ void BombmanCore::BeginPlay()
 
 		UImageManager& YellowCount = UImageManager::GetInst();
 		YellowCount.CuttingSprite("YellowCount.png", { 34, 32 });
+
+		UEngineDirectory Title_Transit_Animation_Dir;
+		Title_Transit_Animation_Dir.MoveParentToDirectory("Resources//Imgs");
+		Title_Transit_Animation_Dir.Append("01_TITLE//06_TRASIT_ANIMATION");
+		UImageManager::GetInst().LoadFolder(Title_Transit_Animation_Dir.GetPathToString());
 	}
 
 

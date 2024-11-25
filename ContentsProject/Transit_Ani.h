@@ -21,5 +21,6 @@ protected:
 
 
 private:
+	class USpriteRenderer* MAINRENDERER = nullptr;
 
 };

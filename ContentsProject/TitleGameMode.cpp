@@ -17,6 +17,7 @@
 #include "Score.h"
 #include "ContentsEnum.h"
 #include "ChooseStage.h"
+#include "Transit_Ani.h"
 #include "Fade.h"
 
 
@@ -45,6 +46,8 @@ void ATitleGameMode::BeginPlay()
 	CHOOSE = GetWorld()->SpawnActor<UChooseStage>();
 	CHOOSE->SetActive(false);
 
+	TRANSIT = GetWorld()->SpawnActor<ATransit_Ani>();
+	TRANSIT->SetActive(false);
 
 	// 스코어(코인) 세팅
 	COINs = GetWorld()->SpawnActor<AScore>();
@@ -83,7 +86,7 @@ void ATitleGameMode::Tick(float _DeltaTime)
 
 	if (InitCurState() == SCENES::ANI_TRANSIT)
 	{
-		return;
+		TRANSIT->SetActive(true);
 	}
 
 	if (InitCurState() == SCENES::CHOOSE_STAGE)
@@ -103,10 +106,10 @@ void ATitleGameMode::Tick(float _DeltaTime)
 		if (CHOOSE->GetIsStageONE() == true && UEngineInput::GetInst().IsDown(VK_SPACE))
 		{
 			TimeEventer.PushEvent(1.5f, std::bind(&AFade::FadeIn, Actor_Fade), false, false);
-			TimeEventer.PushEvent(3.0f, std::bind(&ATitleGameMode::OpenPlayLevel, this), false, false);
-			//ISPASS_CHOOSE_STAGE = true;
-			//CHOOSE->Destroy();
-			//CHOOSE = nullptr;
+			//TimeEventer.PushEvent(3.0f, std::bind(&ATitleGameMode::OpenPlayLevel, this), false, false);
+			ISPASS_CHOOSE_STAGE = true;
+			CHOOSE->Destroy();
+			CHOOSE = nullptr;
 			return;
 		}
 	}
