@@ -11,7 +11,8 @@ enum class ERenderOrder
 	PORTAL = -400,
 	PLAYER = 0,
 	UI = 10000,
-	TEXT_UI = 12000
+	TEXT_UI = 12000,
+	FADE = 20000
 };
 
 enum class AStageTiles

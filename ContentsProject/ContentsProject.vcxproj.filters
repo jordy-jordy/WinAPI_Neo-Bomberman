@@ -67,6 +67,9 @@
     <ClCompile Include="CoinInsert.cpp">
       <Filter>ContentsObject\Actors_Title</Filter>
     </ClCompile>
+    <ClCompile Include="Fade.cpp">
+      <Filter>ContentsObject\Actors_Global</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -137,6 +140,9 @@
     </ClInclude>
     <ClInclude Include="CoinInsert.h">
       <Filter>ContentsObject\Actors_Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Fade.h">
+      <Filter>ContentsObject\Actors_Global</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

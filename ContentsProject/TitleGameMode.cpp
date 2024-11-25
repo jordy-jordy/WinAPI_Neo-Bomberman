@@ -17,6 +17,7 @@
 #include "Score.h"
 #include "ContentsEnum.h"
 #include "ChooseStage.h"
+#include "Fade.h"
 
 
 ATitleGameMode::ATitleGameMode()
@@ -64,41 +65,38 @@ void ATitleGameMode::BeginPlay()
 	TIMEs_StageChoose->SetAlignment(AScore::Alignment::Left);
 	TIMEs_StageChoose->SetOrder(ERenderOrder::TEXT_UI);
 	TIMEs_StageChoose->SetDigitCount(DIGITCOUNT_StageChooseTime);
-	TIMEs_StageChoose->SetActive(false);
-}
+	TIMEs_StageChoose->SetActive(true);
 
+	Actor_Fade = GetWorld()->SpawnActor<AFade>();
+	Actor_Fade->SetFadeSpeed(1.5f);
+	Actor_Fade->SetActive(false);
+	FadeRenderer = Actor_Fade->GetRenderer();
+}
 
 void ATitleGameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
-	if (true == UEngineInput::GetInst().IsDown('P'))
-	{
-		UEngineAPICore::GetCore()->OpenLevel("STAGE01");
-	}
-
 	if (InitCurState() == SCENES::CHOOSE_STAGE)
 	{
+		if (Actor_Fade->IsFadeOut == false && Actor_Fade->IsFadeIn == false)
+		{
+			Actor_Fade->SetActive(true);
+			Actor_Fade->FadeOut();
+		}
+
 		CHOOSE->SetActive(true);
 		TIMEs_StageChoose->SetActive(true);
+		TIMEs_StageChoose->SetValue(static_cast<int>(StageChooseTime_NUMBER));
 
 		StageChooseTime_NUMBER -= _DeltaTime;
-		int CurRemainTime = static_cast<int>(StageChooseTime_NUMBER) % 60;
 
-		if (StageChooseTime_NUMBER < 0 )
+		if (CHOOSE->GetIsStageONE() == true && UEngineInput::GetInst().IsDown(VK_SPACE))
 		{
-			return;
-		}
-		
-		TIMEs_StageChoose->SetValue(CurRemainTime);
-
-		if (CHOOSE->GetIsStageONE() == true && UEngineInput::GetInst().IsDown(VK_SPACE) == true)
-		{
-			UEngineAPICore::GetCore()->OpenLevel("STAGE01");
+			TimeEventer.PushEvent(1.5f, std::bind(&AFade::FadeIn, Actor_Fade), false, false);
+			TimeEventer.PushEvent(3.0f, std::bind(&ATitleGameMode::OpenPlayLevel, this), false, false);
 		}
 	}
-
-
 
 	if (InitCurState() == SCENES::COIN_INSERT)
 	{
@@ -128,7 +126,7 @@ void ATitleGameMode::Tick(float _DeltaTime)
 		if (TITLE->MAINRENDERER->IsCurAnimationEnd() == true)
 		{
 			CHANGEDELAY += _DeltaTime;
-			if (CHANGEDELAY >= 3.0f)
+			if (CHANGEDELAY >= 4.0f)
 			{
 				ISPASS_ANI_OP = true;
 				TITLE->Destroy(); // 타이틀로고 액터 삭제
@@ -190,6 +188,9 @@ void ATitleGameMode::Tick(float _DeltaTime)
 		}
 	}
 
+}
 
-
+void ATitleGameMode::OpenPlayLevel()
+{
+	UEngineAPICore::GetCore()->OpenLevel("STAGE01");
 }

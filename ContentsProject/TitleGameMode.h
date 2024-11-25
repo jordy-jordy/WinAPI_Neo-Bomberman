@@ -77,6 +77,8 @@ public:
 		return SCENES::NONE;
 	}
 
+	void OpenPlayLevel();
+
 
 protected:
 	void BeginPlay() override;
@@ -88,6 +90,8 @@ private:
 	class UChooseStage* CHOOSE = nullptr;
 	class AScore* COINs = nullptr;
 	class AScore* TIMEs_StageChoose = nullptr;
+	class AFade* Actor_Fade = nullptr;
+	class USpriteRenderer* FadeRenderer = nullptr;
 
 	int COIN_NUMBER = 0;
 	float StageChooseTime_NUMBER = 31.0f;
@@ -102,5 +106,6 @@ private:
 	bool ISPASS_ANI_TRANSIT = false;
 
 	float CHANGEDELAY = 0.0f;
+
 };
 

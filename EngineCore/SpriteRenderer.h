@@ -145,6 +145,11 @@ public:
 		Alpha = static_cast<unsigned char>(_Value * 255.0f);
 	}
 
+	float GetAlphafloat()
+	{
+		return Alpha;
+	}
+
 protected:
 
 private:

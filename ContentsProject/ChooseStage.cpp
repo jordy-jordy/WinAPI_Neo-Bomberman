@@ -103,7 +103,7 @@ void UChooseStage::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
-	if (UEngineInput::GetInst().IsDown(VK_SPACE) == true)
+	if (IsStageONE == true && UEngineInput::GetInst().IsDown(VK_SPACE) == true)
 	{
 		BOMB_MAN->ChangeAnimation("DRAW");
 		CIRCLE->SetActive(true);
