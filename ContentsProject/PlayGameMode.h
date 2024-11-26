@@ -33,6 +33,21 @@ public:
 		return PlayerScore;
 	}
 
+	void StartTIme()
+	{
+		IsStopTime = false;
+	}
+
+	void StopTIme()
+	{
+		IsStopTime = true;
+	}
+
+	float GetRemainTime()
+	{
+		return Time;
+	}
+
 
 protected:
 	void Tick(float _DeltaTime) override;
@@ -58,8 +73,10 @@ private:
 
 	class AFade* Actor_Fade = nullptr;
 
-	float Time = 6.0f;
+	float Time = 121.0f;
 
 	int PlayerScore = 0;
+
+	bool IsStopTime = false;
 };
 

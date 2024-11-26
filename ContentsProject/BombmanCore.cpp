@@ -302,7 +302,7 @@ void BombmanCore::BeginPlay()
 	UEngineAPICore::GetCore()->CreateLevel<ABossGameMode, APlayer>("BOSS");
 	UEngineAPICore::GetCore()->CreateLevel<AEndGameMode, AActor>("END");
 
-	UEngineAPICore::GetCore()->OpenLevel("END");
+	UEngineAPICore::GetCore()->OpenLevel("TITLE");
 }
 
 void BombmanCore::Tick()

@@ -79,6 +79,16 @@ public:
 
 	void OpenPlayLevel();
 
+	void StartTIme()
+	{
+		IsStopTime = false;
+	}
+
+	void StopTIme()
+	{
+		IsStopTime = true;
+	}
+
 
 protected:
 	void BeginPlay() override;
@@ -120,6 +130,8 @@ private:
 	bool ISFADING_ANI_TRANSIT = false;
 
 	float CHANGEDELAY = 0.0f;
+
+	bool IsStopTime = false;
 
 };
 

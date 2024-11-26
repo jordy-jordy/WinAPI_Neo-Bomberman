@@ -223,31 +223,33 @@ void APlayGameMode::Tick(float _DeltaTime)
 		UEngineAPICore::GetCore()->OpenLevel("MAPEDIT");
 	}
 
-	Time -= _DeltaTime;
-
-	int M = static_cast<int>(Time) / 60;
-	int S = static_cast<int>(Time) % 60;
-
-	if (S < 0 || M < 0)
+	if (IsStopTime == false)
 	{
-		return;
-	}
+		Time -= _DeltaTime;
 
-	Minute->SetValue(M);
+		int M = static_cast<int>(Time) / 60;
+		int S = static_cast<int>(Time) % 60;
 
-	if (S >= 10)
-	{
-		Zero->SetActive(false);
-		Second->SetActorLocation({ 314, 24 });
-		Second->SetValue(S);
-	}
-	else if (S < 10)
-	{
-		Zero->SetActive(true);
-		Second->SetActorLocation({ 330, 24 });
-		Second->SetValue(S);
-	}
+		if (S < 0 || M < 0)
+		{
+			return;
+		}
 
+		Minute->SetValue(M);
+
+		if (S >= 10)
+		{
+			Zero->SetActive(false);
+			Second->SetActorLocation({ 314, 24 });
+			Second->SetValue(S);
+		}
+		else if (S < 10)
+		{
+			Zero->SetActive(true);
+			Second->SetActorLocation({ 330, 24 });
+			Second->SetValue(S);
+		}
+	}
 }
 
 bool APlayGameMode::IsMonsterAllDead()
@@ -282,6 +284,7 @@ void APlayGameMode::MOVETO_BOSS()
 
 	if (PLAYER_INDEX == PORTAL_INDEX)
 	{
+		StopTIme();
 		UEngineAPICore::GetCore()->OpenLevel("BOSS");
 	}
 

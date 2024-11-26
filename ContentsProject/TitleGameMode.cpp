@@ -152,9 +152,12 @@ void ATitleGameMode::Tick(float _DeltaTime)
 
 	if (InitCurState() == SCENES::CHOOSE_STAGE)
 	{
-		TIMEs_StageChoose->SetActive(true);
-		StageChooseTime_NUMBER -= _DeltaTime;
-		TIMEs_StageChoose->SetValue(static_cast<int>(StageChooseTime_NUMBER));
+		if (IsStopTime == false)
+		{
+			TIMEs_StageChoose->SetActive(true);
+			StageChooseTime_NUMBER -= _DeltaTime;
+			TIMEs_StageChoose->SetValue(static_cast<int>(StageChooseTime_NUMBER));
+		}
 
 		if (StageChooseTime_NUMBER < 0)
 		{
@@ -176,6 +179,8 @@ void ATitleGameMode::Tick(float _DeltaTime)
 
 			if (CHOOSE->GetIsStageONE() == true && UEngineInput::GetInst().IsDown(VK_SPACE))
 			{
+				StopTIme();
+
 				// 1.5초 뒤에 페이드 인 실행
 				TimeEventer.PushEvent(1.5f, std::bind(&AFade::FadeIn, Actor_Fade), false, false);
 
