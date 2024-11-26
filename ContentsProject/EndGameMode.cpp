@@ -4,6 +4,7 @@
 #include "Result.h"
 #include "Score.h"
 #include "ContentsEnum.h"
+#include "PlayGameMode.h"
 
 AEndGameMode::AEndGameMode()
 {
@@ -14,6 +15,10 @@ AEndGameMode::~AEndGameMode()
 {
 };
 
+void AEndGameMode::SetPlayMode(APlayGameMode* _data)
+{
+	PlayMode = _data;
+}
 
 void AEndGameMode::BeginPlay()
 {
@@ -60,6 +65,7 @@ void AEndGameMode::BeginPlay()
 	SCORE_Total->SetOrder(ERenderOrder::TEXT_UI);
 	SCORE_Total->SetValue(100);
 	SCORE_Total->SetActive(true);
+
 }
 
 

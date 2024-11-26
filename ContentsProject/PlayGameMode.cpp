@@ -19,6 +19,7 @@
 #include "Score.h"
 #include "UIBar.h"
 #include "Fade.h"
+#include "EndGameMode.h"
 
 
 APlayGameMode::APlayGameMode()
