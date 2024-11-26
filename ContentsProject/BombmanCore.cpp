@@ -283,7 +283,7 @@ void BombmanCore::BeginPlay()
 	UEngineAPICore::GetCore()->CreateLevel<APlayGameMode, APlayer>("STAGE01");
 	UEngineAPICore::GetCore()->CreateLevel<ABossGameMode, APlayer>("BOSS");
 
-	UEngineAPICore::GetCore()->OpenLevel("STAGE01");
+	UEngineAPICore::GetCore()->OpenLevel("TITLE");
 }
 
 void BombmanCore::Tick()

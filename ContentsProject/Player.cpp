@@ -23,7 +23,6 @@ APlayer::APlayer()
 		SpriteRendererHead->SetPivot({0.0f, -28.0f});
 		SpriteRendererHead->SetPivot({ 0.0f, -28.0f });
 
-
 		SpriteRendererHead->CreateAnimation("Idle_Up_Head", "MainCharater_White.png", 17, 17, 0.1f);
 		SpriteRendererHead->CreateAnimation("Run_Up_Head", "MainCharater_White.png", 18, 22 , 0.1f);
 
@@ -37,7 +36,6 @@ APlayer::APlayer()
 		SpriteRendererHead->CreateAnimation("Run_Right_Head", "MainCharater_White.png", 25, 30, 0.1f);
 
 		SpriteRendererHead->CreateAnimation("Idle_Anim_Head", "MainCharater_White.png", { 580, 581 }, { 1.5f, 0.2f }, true);
-
 	}
 
 	{
@@ -69,22 +67,21 @@ APlayer::APlayer()
 	SpriteRendererHead->SetOrder(ERenderOrder::PLAYER);
 }
 
+
 APlayer::~APlayer()
 {
 }
+
 
 void APlayer::BeginPlay()
 {
 	Super::BeginPlay();
 }
 
+
 void APlayer::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
-
-	//FVector2D LocalLocation = GetActorLocation() - WallTileMap->GetActorLocation();
-	//UEngineDebug::CoreOutPutString("GetActorLocation() : " + GetActorLocation().ToString());
-	//UEngineDebug::CoreOutPutString("LocalLocation : " + LocalLocation.ToString());
 
 	switch (CurPlayerState)
 	{
@@ -122,8 +119,6 @@ void APlayer::Tick(float _DeltaTime)
 		MSGASSERT("타일 맵이 세팅되지 않았습니다.")
 	}
 }
-
-
 
 
 FVector2D APlayer::InvertLOC(FVector2D _Dir)
@@ -191,6 +186,7 @@ void APlayer::PlaceBomb()
 
 }
 
+
 void APlayer::ChangeState(PlayerState _CurPlayerState)
 {
 	switch (_CurPlayerState)
@@ -207,13 +203,16 @@ void APlayer::ChangeState(PlayerState _CurPlayerState)
 	CurPlayerState = _CurPlayerState;
 }
 
+
 void APlayer::IdleStart()
 {
 }
 
+
 void APlayer::MoveStart()
 {
 }
+
 
 void APlayer::Idle_Anim(float _DeltaTime)
 {
@@ -254,6 +253,7 @@ void APlayer::Idle(float _DeltaTime)
 		return;
 	}
 }
+
 
 void APlayer::Move(float _DeltaTime)
 {
@@ -345,6 +345,7 @@ void APlayer::Move(float _DeltaTime)
 	}
 }
 
+
 void APlayer::LevelChangeStart()
 {
 	Super::LevelChangeStart();
@@ -354,6 +355,7 @@ void APlayer::LevelChangeEnd()
 {
 	Super::LevelChangeEnd();
 }
+
 
 bool APlayer::CanMove(FVector2D _NextPOS_Win, FVector2D _NextPOS_Local)
 {
@@ -378,6 +380,7 @@ bool APlayer::CanMove(FVector2D _NextPOS_Win, FVector2D _NextPOS_Local)
 	const int POS_Y_MIN = 64;
 	const int POS_Y_MAX = 416;
 
+	// 타일 바깥으로 나가는지 체크
 	if (_NextPOS_Win.X < POS_X_MIN || _NextPOS_Win.X > POS_X_MAX || _NextPOS_Win.Y < POS_Y_MIN || _NextPOS_Win.Y > POS_Y_MAX)
 	{
 		ThereIsOutOfMap = true;
@@ -387,6 +390,8 @@ bool APlayer::CanMove(FVector2D _NextPOS_Win, FVector2D _NextPOS_Local)
 		ThereIsOutOfMap = false;
 	}
 
+
+	// 타일 밖으로 나가지 않으면서 진행 방향에 장애물이 있는지 체크
 	if (ThereIsOutOfMap == false && ThereIsTILE == false)
 	{
 		return true;
