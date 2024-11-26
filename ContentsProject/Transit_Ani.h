@@ -14,6 +14,14 @@ public:
 	ATransit_Ani(ATransit_Ani&& _Other) noexcept = delete;
 	ATransit_Ani& operator=(const ATransit_Ani& _Other) = delete;
 	ATransit_Ani& operator=(ATransit_Ani&& _Other) noexcept = delete;
+	
+	class USpriteRenderer* MAINRENDERER = nullptr;
+
+	void DestroyChoose()
+	{
+		Destroy();
+	}
+
 
 protected:
 	void BeginPlay();
@@ -21,6 +29,5 @@ protected:
 
 
 private:
-	class USpriteRenderer* MAINRENDERER = nullptr;
 
 };

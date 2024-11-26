@@ -46,6 +46,7 @@ void ATitleGameMode::BeginPlay()
 	CHOOSE = GetWorld()->SpawnActor<UChooseStage>();
 	CHOOSE->SetActive(false);
 
+	// 전환 애니메이션 장면 세팅
 	TRANSIT = GetWorld()->SpawnActor<ATransit_Ani>();
 	TRANSIT->SetActive(false);
 
@@ -105,9 +106,48 @@ void ATitleGameMode::Tick(float _DeltaTime)
 
 	if (InitCurState() == SCENES::ANI_TRANSIT)
 	{
-		Actor_Fade->SetActive(false);
+		if (ISFIRSTFADE_ANI_TRANSIT == false)
+		{
+			Actor_Fade->SetActive(false);
+			ISFIRSTFADE_ANI_TRANSIT = true;
+		}
 
-		TRANSIT->SetActive(true);
+		if (TRANSIT != nullptr)
+		{
+			TRANSIT->SetActive(true);
+
+			if (TRANSIT->MAINRENDERER->IsCurAnimationEnd() == true)
+			{
+				Actor_Fade->SetActive(true);
+				if (ISFADING_ANI_TRANSIT == false)
+				{
+					Actor_Fade->FadeIn();
+					ISFADING_ANI_TRANSIT = true;
+				}
+
+				TimeEventer.PushEvent(2.0f, std::bind(&ATitleGameMode::OpenPlayLevel, this), false, false);
+				TimeEventer.PushEvent(2.0f, std::bind(&ATransit_Ani::DestroyChoose, TRANSIT), false, false);
+			}
+
+			if (true == UEngineInput::GetInst().IsDown(VK_SPACE))
+			{
+				Actor_Fade->SetActive(true);
+				if (ISFADING_ANI_TRANSIT == false)
+				{
+					Actor_Fade->FadeIn();
+					ISFADING_ANI_TRANSIT = true;
+				}
+
+				TimeEventer.PushEvent(2.0f, std::bind(&ATitleGameMode::OpenPlayLevel, this), false, false);
+				TimeEventer.PushEvent(2.0f, std::bind(&ATransit_Ani::DestroyChoose, TRANSIT), false, false);
+			}
+		}
+
+		if (TRANSIT->IsDestroy() == true)
+		{
+			TRANSIT = nullptr;
+		}
+
 	}
 
 	if (InitCurState() == SCENES::CHOOSE_STAGE)
@@ -116,11 +156,17 @@ void ATitleGameMode::Tick(float _DeltaTime)
 		StageChooseTime_NUMBER -= _DeltaTime;
 		TIMEs_StageChoose->SetValue(static_cast<int>(StageChooseTime_NUMBER));
 
-		if (Actor_Fade->IsFadeOut == false && Actor_Fade->IsFadeIn == false)
+		if (StageChooseTime_NUMBER < 0)
+		{
+			StageChooseTime_NUMBER = 0.0f;
+		}
+
+		if (ISFIRSTFADE_CHOOSE_STAGE == false)
 		{
 			// 페이드 아웃 효과 실행
 			Actor_Fade->SetActive(true);
 			Actor_Fade->FadeOut();
+			ISFIRSTFADE_CHOOSE_STAGE = true;
 		}
 
 		if (CHOOSE != nullptr)
@@ -135,7 +181,6 @@ void ATitleGameMode::Tick(float _DeltaTime)
 
 				// 3초 뒤에 스테이지 선택 삭제
 				TimeEventer.PushEvent(3.0f, std::bind(&UChooseStage::DestroyChoose, CHOOSE), false, false);
-				//TimeEventer.PushEvent(3.0f, std::bind(&ATitleGameMode::OpenPlayLevel, this), false, false);
 
 				return;
 			}
@@ -252,6 +297,8 @@ void ATitleGameMode::Tick(float _DeltaTime)
 			COINs->SetActive(true); // 스코어 (코인) 활성화
 			TITLE->Destroy(); // 타이틀로고 액터 삭제
 			TITLE = nullptr;
+			LEVEL4->SetActive(true);
+			CREDIT->SetActive(true);
 			return;
 		}
 	}

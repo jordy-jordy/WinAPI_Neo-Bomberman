@@ -98,7 +98,7 @@ private:
 	class AFade* Actor_Fade = nullptr;
 
 	int COIN_NUMBER = 0;
-	float StageChooseTime_NUMBER = 31.0f;
+	float StageChooseTime_NUMBER = 21.0f;
 	float TIME_DELAY = 0.0f;
 
 	int DIGITCOUNT_Coins = 2;
@@ -109,6 +109,15 @@ private:
 	bool ISPASS_COIN_INSERT = false;
 	bool ISPASS_CHOOSE_STAGE = false;
 	bool ISPASS_ANI_TRANSIT = false;
+
+
+	bool ISFIRSTFADE_TITLELOGO = false;
+	bool ISFIRSTFADE_ANI_OP = false;
+	bool ISFIRSTFADE_COIN_INSERT = false;
+	bool ISFIRSTFADE_CHOOSE_STAGE = false;
+	bool ISFIRSTFADE_ANI_TRANSIT = false;
+
+	bool ISFADING_ANI_TRANSIT = false;
 
 	float CHANGEDELAY = 0.0f;
 
