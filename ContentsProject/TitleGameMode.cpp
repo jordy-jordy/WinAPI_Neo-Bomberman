@@ -70,9 +70,28 @@ void ATitleGameMode::BeginPlay()
 	TIMEs_StageChoose->SetDigitCount(DIGITCOUNT_StageChooseTime);
 	TIMEs_StageChoose->SetActive(true);
 
+	// 페이드 세팅
 	Actor_Fade = GetWorld()->SpawnActor<AFade>();
 	Actor_Fade->SetFadeSpeed(1.5f);
 	Actor_Fade->SetActive(false);
+
+	// 고정 이미지 (레벨4, 크레딧) 세팅
+	LEVEL4 = CreateDefaultSubObject<USpriteRenderer>();
+	LEVEL4->SetSprite("Level-4_112x16.png");
+	LEVEL4->SetOrder(ERenderOrder::BACKGROUND1);
+	LEVEL4->SetSpriteScale(1.0f);
+	LEVEL4->SetPivotType(PivotType::Top);
+	LEVEL4->SetComponentLocation({ 312, 432 });
+	LEVEL4->SetActive(false);
+
+	CREDIT = CreateDefaultSubObject<USpriteRenderer>();
+	CREDIT->SetSprite("Credits_112x16.png");
+	CREDIT->SetOrder(ERenderOrder::BACKGROUND1);
+	CREDIT->SetSpriteScale(1.0f);
+	CREDIT->SetPivotType(PivotType::Top);
+	CREDIT->SetComponentLocation({ 488, 432 });
+	CREDIT->SetActive(false);
+
 }
 
 void ATitleGameMode::Tick(float _DeltaTime)
@@ -86,83 +105,112 @@ void ATitleGameMode::Tick(float _DeltaTime)
 
 	if (InitCurState() == SCENES::ANI_TRANSIT)
 	{
-		TimeEventer.PushEvent(1.0f, std::bind(&AFade::FadeOut, Actor_Fade), false, false);
+		Actor_Fade->SetActive(false);
 
 		TRANSIT->SetActive(true);
-
 	}
 
 	if (InitCurState() == SCENES::CHOOSE_STAGE)
 	{
+		TIMEs_StageChoose->SetActive(true);
+		StageChooseTime_NUMBER -= _DeltaTime;
+		TIMEs_StageChoose->SetValue(static_cast<int>(StageChooseTime_NUMBER));
+
 		if (Actor_Fade->IsFadeOut == false && Actor_Fade->IsFadeIn == false)
 		{
+			// 페이드 아웃 효과 실행
 			Actor_Fade->SetActive(true);
 			Actor_Fade->FadeOut();
 		}
 
-		CHOOSE->SetActive(true);
-		TIMEs_StageChoose->SetActive(true);
-		TIMEs_StageChoose->SetValue(static_cast<int>(StageChooseTime_NUMBER));
-
-		StageChooseTime_NUMBER -= _DeltaTime;
-
-		if (CHOOSE->GetIsStageONE() == true && UEngineInput::GetInst().IsDown(VK_SPACE))
+		if (CHOOSE != nullptr)
 		{
-			TimeEventer.PushEvent(1.5f, std::bind(&AFade::FadeIn, Actor_Fade), false, false);
-			TimeEventer.PushEvent(3.0f, std::bind(&UChooseStage::DestroyChoose, CHOOSE), false, false);
-			//TimeEventer.PushEvent(3.0f, std::bind(&ATitleGameMode::OpenPlayLevel, this), false, false);
+			// 스테이지 선택 화면 활성화
+			CHOOSE->SetActive(true);
+
+			if (CHOOSE->GetIsStageONE() == true && UEngineInput::GetInst().IsDown(VK_SPACE))
+			{
+				// 1.5초 뒤에 페이드 인 실행
+				TimeEventer.PushEvent(1.5f, std::bind(&AFade::FadeIn, Actor_Fade), false, false);
+
+				// 3초 뒤에 스테이지 선택 삭제
+				TimeEventer.PushEvent(3.0f, std::bind(&UChooseStage::DestroyChoose, CHOOSE), false, false);
+				//TimeEventer.PushEvent(3.0f, std::bind(&ATitleGameMode::OpenPlayLevel, this), false, false);
+
+				return;
+			}
+		}
+
+		// CHOOSE 가 삭제 되었으면 포인터도 null 로 초기화
+		if (CHOOSE->IsDestroy() == true)
+		{
+			TIMEs_StageChoose->SetActive(false);
+			CHOOSE = nullptr;
 			ISPASS_CHOOSE_STAGE = true;
-			//CHOOSE->Destroy();
-			//CHOOSE = nullptr;
-			return;
 		}
 	}
 
 	if (InitCurState() == SCENES::COIN_INSERT)
 	{
-		COININSERT->SetActive(true); // 코인 인서트 장면 활성화
-
-		if (true == UEngineInput::GetInst().IsDown('F'))
+		if (COININSERT != nullptr)
 		{
-			COIN_NUMBER += 1;
-			COINs->SetValue(COIN_NUMBER);
+			COININSERT->SetActive(true); // 코인 인서트 장면 활성화
+			
+			if (true == UEngineInput::GetInst().IsDown('F'))
+			{
+				COIN_NUMBER += 1;
+				COINs->SetValue(COIN_NUMBER);
+			}
+
+			// 코인을 넣고 스테이지 선택 화면으로 전환
+			if (COIN_NUMBER > 0 && true == UEngineInput::GetInst().IsDown(VK_SPACE))
+			{
+				COININSERT->Destroy();
+				COININSERT = nullptr;
+				return;
+			}
 		}
 
-		// 코인을 넣고 스테이지 선택 화면으로 전환
-		if (COIN_NUMBER > 0 && true == UEngineInput::GetInst().IsDown(VK_SPACE))
+		if (COININSERT == nullptr)
 		{
 			ISPASS_COIN_INSERT = true;
-			COININSERT->Destroy();
-			COININSERT = nullptr;
-			return;
 		}
 	}
 
 	if (InitCurState() == SCENES::ANI_OP)
 	{
-		COINs->SetActive(true); // 스코어 (코인) 활성화
-
-		// 오프닝 애니메이션이 끝났을 때
-		if (TITLE->MAINRENDERER->IsCurAnimationEnd() == true)
+		if (COINs != nullptr)
 		{
-			CHANGEDELAY += _DeltaTime;
-			if (CHANGEDELAY >= 4.0f)
+			COINs->SetActive(true); // 스코어 (코인) 활성화
+		}
+
+		if (TITLE != nullptr)
+		{
+			// 오프닝 애니메이션이 끝났을 때
+			if (TITLE->MAINRENDERER->IsCurAnimationEnd() == true)
 			{
-				ISPASS_ANI_OP = true;
+				CHANGEDELAY += _DeltaTime;
+				if (CHANGEDELAY >= 3.5f)
+				{
+					TITLE->Destroy(); // 타이틀로고 액터 삭제
+					TITLE = nullptr;
+					CHANGEDELAY = 0.0f;
+					return;
+				}
+			}
+
+			// 애니메이션 도중 키를 눌렀을 때 (인서트 코인 장면으로 전환)
+			if (true == UEngineInput::GetInst().IsDown(VK_SPACE) || true == UEngineInput::GetInst().IsDown('F'))
+			{
 				TITLE->Destroy(); // 타이틀로고 액터 삭제
 				TITLE = nullptr;
-				CHANGEDELAY = 0.0f;
 				return;
 			}
 		}
 
-		// 애니메이션 도중 키를 눌렀을 때 (인서트 코인 장면으로 전환)
-		if (true == UEngineInput::GetInst().IsDown(VK_SPACE) || true == UEngineInput::GetInst().IsDown('F'))
+		if (TITLE == nullptr)
 		{
 			ISPASS_ANI_OP = true;
-			TITLE->Destroy(); // 타이틀로고 액터 삭제
-			TITLE = nullptr;
-			return;
 		}
 	}
 
@@ -178,8 +226,8 @@ void ATitleGameMode::Tick(float _DeltaTime)
 				TITLE->MAINRENDERER->ChangeAnimation("OP_Animation");
 				TITLE->BASE00->SetActive(true);
 				TITLE->BASE01->SetActive(true);
-				TITLE->LEVEL4->SetActive(true);
-				TITLE->CREDIT->SetActive(true);
+				LEVEL4->SetActive(true);
+				CREDIT->SetActive(true);
 				return;
 			}
 		}
@@ -191,8 +239,8 @@ void ATitleGameMode::Tick(float _DeltaTime)
 			TITLE->MAINRENDERER->ChangeAnimation("OP_Animation");
 			TITLE->BASE00->SetActive(true);
 			TITLE->BASE01->SetActive(true);
-			TITLE->LEVEL4->SetActive(true);
-			TITLE->CREDIT->SetActive(true);
+			LEVEL4->SetActive(true);
+			CREDIT->SetActive(true);
 			return;
 		}
 

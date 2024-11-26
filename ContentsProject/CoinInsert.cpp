@@ -22,22 +22,6 @@ UCoinInsert::UCoinInsert()
 	COIN_INSERT->CreateAnimation("COIN_INSERT", "04_COIN_INSERT", 0, 1, 0.3f, true);
 	COIN_INSERT->ChangeAnimation("COIN_INSERT");
 	COIN_INSERT->SetActive(true);
-
-	LEVEL4 = CreateDefaultSubObject<USpriteRenderer>();
-	LEVEL4->SetSprite("Level-4_112x16.png");
-	LEVEL4->SetOrder(ERenderOrder::BACKGROUND1);
-	LEVEL4->SetSpriteScale(1.0f);
-	LEVEL4->SetPivotType(PivotType::Top);
-	LEVEL4->SetComponentLocation({ 312, 432 });
-	LEVEL4->SetActive(true);
-
-	CREDIT = CreateDefaultSubObject<USpriteRenderer>();
-	CREDIT->SetSprite("Credits_112x16.png");
-	CREDIT->SetOrder(ERenderOrder::BACKGROUND1);
-	CREDIT->SetSpriteScale(1.0f);
-	CREDIT->SetPivotType(PivotType::Top);
-	CREDIT->SetComponentLocation({ 488, 432 });
-	CREDIT->SetActive(true);
 	
 	COMPANY = CreateDefaultSubObject<USpriteRenderer>();
 	COMPANY->SetSprite("Company_logo.png");

@@ -85,6 +85,9 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 private:
+	class USpriteRenderer* LEVEL4 = nullptr;
+	class USpriteRenderer* CREDIT = nullptr;
+
 	class UTitleLogo* TITLE = nullptr;
 	class UCoinInsert* COININSERT = nullptr;
 	class UChooseStage* CHOOSE = nullptr;

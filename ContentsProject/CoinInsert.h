@@ -23,8 +23,6 @@ public:
 
 	class USpriteRenderer* MAINRENDERER = nullptr;
 	class USpriteRenderer* COIN_INSERT = nullptr;
-	class USpriteRenderer* LEVEL4 = nullptr;
-	class USpriteRenderer* CREDIT = nullptr;
 	class USpriteRenderer* COMPANY = nullptr;
 	class USpriteRenderer* TM = nullptr;
 

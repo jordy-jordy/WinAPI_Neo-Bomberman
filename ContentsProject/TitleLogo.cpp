@@ -34,24 +34,8 @@ UTitleLogo::UTitleLogo()
 		FVector2D MapScale = MAINRENDERER->SetSpriteScale(1.0f);
 		MAINRENDERER->SetComponentLocation(MapScale.Half());
 		MAINRENDERER->CreateAnimation("Neo-Geo_Logo", "00_Neo-Geo_LOGO", 0, 275, 0.015f, false);
-		MAINRENDERER->CreateAnimation("OP_Animation", "03_OP_ANIMATION", 0, 890, 0.018f, false);
+		MAINRENDERER->CreateAnimation("OP_Animation", "03_OP_ANIMATION", 0, 890, 0.015f, false);
 		MAINRENDERER->ChangeAnimation("Neo-Geo_Logo");
-
-		LEVEL4 = CreateDefaultSubObject<USpriteRenderer>();
-		LEVEL4->SetSprite("Level-4_112x16.png");
-		LEVEL4->SetOrder(ERenderOrder::BACKGROUND1);
-		LEVEL4->SetSpriteScale(1.0f);
-		LEVEL4->SetPivotType(PivotType::Top);
-		LEVEL4->SetComponentLocation({ 312, 432 });
-		LEVEL4->SetActive(false);
-
-		CREDIT = CreateDefaultSubObject<USpriteRenderer>();
-		CREDIT->SetSprite("Credits_112x16.png");
-		CREDIT->SetOrder(ERenderOrder::BACKGROUND1);
-		CREDIT->SetSpriteScale(1.0f);
-		CREDIT->SetPivotType(PivotType::Top);
-		CREDIT->SetComponentLocation({ 488, 432 });
-		CREDIT->SetActive(false);
 	}
 }
 

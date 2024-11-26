@@ -28,22 +28,6 @@ UChooseStage::UChooseStage()
 	Basic_UI01->SetComponentLocation(BG_SIZE.Half());
 	Basic_UI01->SetOrder(ERenderOrder::BACKGROUND2);
 
-	LEVEL4 = CreateDefaultSubObject<USpriteRenderer>();
-	LEVEL4->SetSprite("Level-4_112x16.png");
-	LEVEL4->SetOrder(ERenderOrder::BACKGROUND3);
-	LEVEL4->SetSpriteScale(1.0f);
-	LEVEL4->SetPivotType(PivotType::Top);
-	LEVEL4->SetComponentLocation({ 312, 432 });
-	LEVEL4->SetActive(true);
-
-	CREDIT = CreateDefaultSubObject<USpriteRenderer>();
-	CREDIT->SetSprite("Credits_112x16.png");
-	CREDIT->SetOrder(ERenderOrder::BACKGROUND3);
-	CREDIT->SetSpriteScale(1.0f);
-	CREDIT->SetPivotType(PivotType::Top);
-	CREDIT->SetComponentLocation({ 488, 432 });
-	CREDIT->SetActive(true);
-
 	CHOOSE_00 = CreateDefaultSubObject<USpriteRenderer>();
 	CHOOSE_00->SetSprite("INFO_STAGE_01_02.png");
 	CHOOSE_00->SetSpriteScale(1.0f);
