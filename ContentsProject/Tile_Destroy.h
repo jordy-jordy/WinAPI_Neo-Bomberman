@@ -20,7 +20,6 @@ public:
 	void Object_Destroy();
 	void ClearObjectTile();
 
-	// 겟 스프라이트
 
 protected:
 	void Tick(float _DeltaTime) override;
@@ -30,7 +29,4 @@ private:
 	class USpriteRenderer* SpriteRenderer = nullptr;
 
 	FIntPoint ObjectTileIndex;
-
-
-
 };

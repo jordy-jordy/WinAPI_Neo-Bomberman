@@ -4,6 +4,7 @@
 #include <EngineBase/EngineSerializer.h>
 
 #include "ContentsEnum.h"
+#include "PlayGameMode.h"
 
 
 class Tile : public ISerializObject
@@ -112,6 +113,12 @@ public:
 
 	FIntPoint LocationToMatrixIdx(const FVector2D& _loc);
 
+	// 플레이모드 세팅 해주는 함수
+	void SetMode(APlayGameMode* _Mode)
+	{
+		Mode = _Mode;
+	}
+
 
 protected:
 
@@ -120,6 +127,10 @@ private:
 	std::string SpriteName;
 	FVector2D TileSize;
 	std::vector<std::vector<Tile>> AllTiles;
+
+	class APlayGameMode* Mode = nullptr;
+
+	int SpriteIndex_Score = 50;
 };
 
 

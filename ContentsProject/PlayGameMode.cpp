@@ -87,6 +87,7 @@ void APlayGameMode::PlayTileMapInit()
 		TILEs_PORTAL->SpriteRenderer->SetActive(false);
 	}
 
+	WallTileMap->SetMode(this);
 }
 
 void APlayGameMode::MonsterInit()

@@ -12,7 +12,8 @@ enum class ERenderOrder
 	PLAYER = 0,
 	UI = 10000,
 	TEXT_UI = 12000,
-	FADE = 20000
+	FADE = 20000,
+	UI_OVERFADE = 21000
 };
 
 enum class AStageTiles

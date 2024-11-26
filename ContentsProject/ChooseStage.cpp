@@ -69,7 +69,7 @@ UChooseStage::UChooseStage()
 	CIRCLE->SetPivotType(PivotType::Top);
 	CIRCLE->SetComponentLocation({ 378, 184 });
 	CIRCLE->SetOrder(ERenderOrder::OBJECTS);
-	CIRCLE->CreateAnimation("CIRCLE", "05_CHOOSE_STAGE_03_CIRCLE", 0, 6, 0.1f, false);
+	CIRCLE->CreateAnimation("CIRCLE", "05_CHOOSE_STAGE_03_CIRCLE", 0, 6, 0.05f, false);
 	CIRCLE->SetActive(false);
 };
 

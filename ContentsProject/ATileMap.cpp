@@ -3,6 +3,7 @@
 
 #include <EngineCore/SpriteRenderer.h>
 
+#include "PlayGameMode.h"
 
 ATileMap::ATileMap()
 {
@@ -229,6 +230,8 @@ void ATileMap::RemoveTile(FVector2D _Pos)
 		AllTiles[TargetIndex.Y][TargetIndex.X].Pivot = FVector2D::ZERO;
 		AllTiles[TargetIndex.Y][TargetIndex.X].Scale = FVector2D::ZERO;
 		AllTiles[TargetIndex.Y][TargetIndex.X].SpriteIndex = -1;
+
+		Mode->PlusScore(SpriteIndex_Score);
 	}
 }
 
