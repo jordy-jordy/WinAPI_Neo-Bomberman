@@ -40,9 +40,12 @@ public:
 		Bomb = _Bomb;
 	}
 
-	FVector2D PosToTileIndex(FVector2D _Pos);
-
 	FVector2D InvertLOC(FVector2D _Dir);
+
+	bool CanMove(FVector2D _NextPOS_Win, FVector2D _NextPOS_Local);
+
+	bool ThereIsTILE = false;
+	bool ThereIsOutOfMap = false;
 
 protected:
 
@@ -83,5 +86,9 @@ private:
 	FVector2D CUSTOM_VECTOR_LEFT  = { -1, 0 };
 	FVector2D CUSTOM_VECTOR_RIGHT = { 1, 0 };
 
+	FVector2D SIZE_LEFTTOP  = { -15, -15 };
+	FVector2D SIZE_LEFTBOT  = { -15,  15 };
+	FVector2D SIZE_RIGHTTOP = {  15, -15 };
+	FVector2D SIZE_RIGHTBOT = {  15,  15 };
 };
 

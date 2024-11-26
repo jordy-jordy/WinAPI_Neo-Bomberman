@@ -124,13 +124,7 @@ void APlayer::Tick(float _DeltaTime)
 }
 
 
-FVector2D APlayer::PosToTileIndex(FVector2D _Pos)
-{
-	FVector2D Location = _Pos;
-	FIntPoint Index = WallTileMap->LocationToIndex(Location);
-	FVector2D InvertResult = {Index.X, Index.Y};
-	return InvertResult;
-}
+
 
 FVector2D APlayer::InvertLOC(FVector2D _Dir)
 {
@@ -264,35 +258,30 @@ void APlayer::Idle(float _DeltaTime)
 void APlayer::Move(float _DeltaTime)
 {
 	FVector2D Vector = FVector2D::ZERO;
-	int DIR = 0;
 
 	if (true == UEngineInput::GetInst().IsPress('D'))
 	{
 		Vector = FVector2D::RIGHT;
 		SpriteRendererBody->ChangeAnimation("Run_Right_Body");
 		SpriteRendererHead->ChangeAnimation("Run_Right_Head");
-		DIR = 1;
 	}
 	else if (true == UEngineInput::GetInst().IsPress('A'))
 	{
 		Vector = FVector2D::LEFT;
 		SpriteRendererBody->ChangeAnimation("Run_Left_Body");
 		SpriteRendererHead->ChangeAnimation("Run_Left_Head");
-		DIR = 2;
 	}
 	else if (true == UEngineInput::GetInst().IsPress('S'))
 	{
 		Vector = FVector2D::DOWN;
 		SpriteRendererBody->ChangeAnimation("Run_Down_Body");
 		SpriteRendererHead->ChangeAnimation("Run_Down_Head");
-		DIR = 3;
 	}
 	else if (true == UEngineInput::GetInst().IsPress('W'))
 	{
 		Vector = FVector2D::UP;
 		SpriteRendererBody->ChangeAnimation("Run_Up_Body");
 		SpriteRendererHead->ChangeAnimation("Run_Up_Head");
-		DIR = 4;
 	}
 
 	if (false == UEngineInput::GetInst().IsPress('A') &&
@@ -305,45 +294,53 @@ void APlayer::Move(float _DeltaTime)
 		return;
 	}
 
-	FVector2D PlusPos = Vector;
-	switch (DIR)
-	{
-	case 1: PlusPos *= 16.0f; break; // RIGHT
-	case 2: PlusPos *= 16.0f; break; // LEFT
-	case 3: PlusPos *= 16.0f; break; // DOWN
-	case 4: PlusPos *= 16.0f; break; // UP
-	default: break;
-	}
-
-	// 타일맵 크기
-	const int POS_X_MIN = 96;
-	const int POS_X_MAX = 512;
-	const int POS_Y_MIN = 64;
-	const int POS_Y_MAX = 416;
-	
-	FVector2D PLAYER_POS_NEXT = GetActorLocation() + (Vector * _DeltaTime * Speed) + PlusPos; // 윈도우 LEFT TOP 기준
-	//UEngineDebug::CoreOutPutString("PLAYER_POS_NEXT : " + PLAYER_POS_NEXT.ToString());
-
 	FVector2D PLAYER_LOCAL_LOC = GetActorLocation() - WallTileMap->GetActorLocation(); // 타일맵 LEFT TOP 기준
-	FVector2D PLAYER_LOCAL_LOC_NEXT = PLAYER_LOCAL_LOC + (Vector * _DeltaTime * Speed) + PlusPos;
+	//bool BombCheck = WallTileMap->IsBomb(PLAYER_LOCAL_IDX_NEXT); // 폭탄 체크 함수
 
-	FIntPoint PLAYER_LOCAL_IDX_NEXT = WallTileMap->LocationToIndex(PLAYER_LOCAL_LOC_NEXT);
+	FVector2D POS_LEFTTOP_NEXT = GetActorLocation() + (Vector * _DeltaTime * Speed) + SIZE_LEFTTOP;
+	FVector2D POS_LEFTBOT_NEXT = GetActorLocation() + (Vector * _DeltaTime * Speed) + SIZE_LEFTBOT;
+	FVector2D POS_RIGHTTOP_NEXT = GetActorLocation() + (Vector * _DeltaTime * Speed) + SIZE_RIGHTTOP;
+	FVector2D POS_RIGHTBOT_NEXT = GetActorLocation() + (Vector * _DeltaTime * Speed) + SIZE_RIGHTBOT;
 
-	Tile* TileData = WallTileMap->GetTileRef(PLAYER_LOCAL_LOC_NEXT);
-	bool BombCheck = WallTileMap->IsBomb(PLAYER_LOCAL_IDX_NEXT);
+	FVector2D LOCAL_LEFTTOP_NEXT = PLAYER_LOCAL_LOC + (Vector * _DeltaTime * Speed) + SIZE_LEFTTOP;
+	FVector2D LOCAL_LEFTBOT_NEXT = PLAYER_LOCAL_LOC + (Vector * _DeltaTime * Speed) + SIZE_LEFTBOT;
+	FVector2D LOCAL_RIGHTTOP_NEXT = PLAYER_LOCAL_LOC + (Vector * _DeltaTime * Speed) + SIZE_RIGHTTOP;
+	FVector2D LOCAL_RIGHTBOT_NEXT = PLAYER_LOCAL_LOC + (Vector * _DeltaTime * Speed) + SIZE_RIGHTBOT;
 
-	if (PLAYER_POS_NEXT.X < POS_X_MIN || PLAYER_POS_NEXT.X > POS_X_MAX || PLAYER_POS_NEXT.Y < POS_Y_MIN || PLAYER_POS_NEXT.Y > POS_Y_MAX)
+	bool CanMove_LT_NEXT = CanMove(POS_LEFTTOP_NEXT, LOCAL_LEFTTOP_NEXT);
+	bool CanMove_LB_NEXT = CanMove(POS_LEFTBOT_NEXT, LOCAL_LEFTBOT_NEXT);
+	bool CanMove_RT_NEXT = CanMove(POS_RIGHTTOP_NEXT, LOCAL_RIGHTTOP_NEXT);
+	bool CanMove_RB_NEXT = CanMove(POS_RIGHTBOT_NEXT, LOCAL_RIGHTBOT_NEXT);
+
+	if (CanMove_LT_NEXT == true && CanMove_LB_NEXT == true && CanMove_RT_NEXT == true && CanMove_RB_NEXT == true)
 	{
-		return;
+		AddActorLocation(Vector * _DeltaTime * Speed);
 	}
 
-	if (TileData != nullptr)
+	if (Vector == FVector2D::UP || Vector == FVector2D::DOWN)
 	{
-		if (TileData->SpriteIndex != 2 &&
-			TileData->SpriteIndex != 1 /*&&
-			true != BombCheck*/)
+		if (CanMove_LT_NEXT && !CanMove_RT_NEXT || CanMove_LB_NEXT && !CanMove_RB_NEXT)
 		{
-			AddActorLocation(Vector * _DeltaTime * Speed);
+			AddActorLocation(FVector2D::LEFT * _DeltaTime * Speed);
+			return;
+		}
+		else if (!CanMove_LT_NEXT && CanMove_RT_NEXT || !CanMove_LB_NEXT && CanMove_RB_NEXT)
+		{
+			AddActorLocation(FVector2D::RIGHT * _DeltaTime * Speed);
+			return;
+		}
+	}
+	else
+	{
+		if (CanMove_RT_NEXT && !CanMove_RB_NEXT || CanMove_LT_NEXT && !CanMove_LB_NEXT)
+		{
+			AddActorLocation(FVector2D::UP * _DeltaTime * Speed);
+			return;
+		}
+		else if (!CanMove_RT_NEXT && CanMove_RB_NEXT || !CanMove_LT_NEXT && CanMove_LB_NEXT)
+		{
+			AddActorLocation(FVector2D::DOWN * _DeltaTime * Speed);
+			return;
 		}
 	}
 }
@@ -356,5 +353,49 @@ void APlayer::LevelChangeStart()
 void APlayer::LevelChangeEnd()
 {
 	Super::LevelChangeEnd();
+}
+
+bool APlayer::CanMove(FVector2D _NextPOS_Win, FVector2D _NextPOS_Local)
+{
+	// 다음 위치의 타일 정보 가져오기
+	Tile* TileData = WallTileMap->GetTileRef(_NextPOS_Local);
+	if (TileData != nullptr)
+	{
+		if (TileData->SpriteIndex == 2 ||
+			TileData->SpriteIndex == 1)
+		{
+			ThereIsTILE = true;
+		}
+		else
+		{
+			ThereIsTILE = false;
+		}
+	}
+
+	// 타일맵 크기
+	const int POS_X_MIN = 96;
+	const int POS_X_MAX = 512;
+	const int POS_Y_MIN = 64;
+	const int POS_Y_MAX = 416;
+
+	if (_NextPOS_Win.X < POS_X_MIN || _NextPOS_Win.X > POS_X_MAX || _NextPOS_Win.Y < POS_Y_MIN || _NextPOS_Win.Y > POS_Y_MAX)
+	{
+		ThereIsOutOfMap = true;
+	}
+	else
+	{
+		ThereIsOutOfMap = false;
+	}
+
+	if (ThereIsOutOfMap == false && ThereIsTILE == false)
+	{
+		return true;
+	}
+	else if (ThereIsOutOfMap == true || ThereIsTILE == true)
+	{
+		return false;
+	}
+
+	return false;
 }
 
