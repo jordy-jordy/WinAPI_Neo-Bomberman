@@ -13,7 +13,6 @@ public:
 	AEndGameMode& operator=(const AEndGameMode& _Other) = delete;
 	AEndGameMode& operator=(AEndGameMode&& _Other) noexcept = delete;
 
-	void SetPlayMode(APlayGameMode* _data);
 
 
 protected:

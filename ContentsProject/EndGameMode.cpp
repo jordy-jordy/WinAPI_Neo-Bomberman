@@ -15,10 +15,6 @@ AEndGameMode::~AEndGameMode()
 {
 };
 
-void AEndGameMode::SetPlayMode(APlayGameMode* _data)
-{
-	PlayMode = _data;
-}
 
 void AEndGameMode::BeginPlay()
 {
