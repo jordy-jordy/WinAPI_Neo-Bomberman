@@ -105,7 +105,7 @@ void ABomb::HandleExplosion(EDirection Direction, int Power)
 		FVector2D TargetPos = BombPos_Location + TilePos_Location;
 
 		Tile* TargetTile = WallTileMap->GetTileRef(TargetPos - WallTileMap->GetTileHalfSize());
-		if (TargetTile == nullptr || TargetTile->SpriteIndex == 2) // 장애물이나 끝
+		if (TargetTile == nullptr || TargetTile->SpriteIndex == 2 || TargetTile->SpriteIndex == 3) // 장애물이나 끝
 		{
 			break;
 		}
@@ -155,7 +155,7 @@ void ABomb::HandleExplosion(EDirection Direction, int Power)
 	FVector2D TargetPos = BombPos_Location + TilePos_Location;
 
 	Tile* FinalTile = WallTileMap->GetTileRef(TargetPos - WallTileMap->GetTileHalfSize());
-	if (FinalTile && FinalTile->SpriteIndex != 2)
+	if (FinalTile && FinalTile->SpriteIndex != 2 && FinalTile->SpriteIndex != 3)
 	{
 		USpriteRenderer* Explode_End = CreateDefaultSubObject<USpriteRenderer>();
 		Explode_End->CreateAnimation("Bomb_End", EndSpriteName.c_str(), 0, 19, ExplodeFrameSpeed, false);

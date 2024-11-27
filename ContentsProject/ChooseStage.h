@@ -67,4 +67,6 @@ private:
 
 	bool CircleDrawDone = false;
 
+	bool StopMove = false;
+
 };

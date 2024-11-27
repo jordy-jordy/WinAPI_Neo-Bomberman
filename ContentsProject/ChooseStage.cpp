@@ -92,6 +92,7 @@ void UChooseStage::Tick(float _DeltaTime)
 		UEngineInput::GetInst().IsDown(VK_SPACE) == true &&
 		IsDownMoving == false && IsUpMoving == false)
 	{
+		StopMove = true;
 		BOMB_MAN->ChangeAnimation("DRAW");
 		CIRCLE->SetActive(true);
 		CIRCLE->ChangeAnimation("CIRCLE");
@@ -105,83 +106,85 @@ void UChooseStage::Tick(float _DeltaTime)
 		}
 	}
 
-
-	// S 키를 눌렀을 때: 아래로 이동 시작
-	if (UEngineInput::GetInst().IsDown('S') == true)
+	if (StopMove != true)
 	{
-		IsDownMoving = true;
-		IsUpMoving = false; // 위 이동 중지
-	}
-
-	// W 키를 눌렀을 때: 위로 이동 시작
-	if (UEngineInput::GetInst().IsDown('W') == true)
-	{
-		IsUpMoving = true;
-		IsDownMoving = false; // 아래 이동 중지
-	}
-
-	// 아래 이동 로직
-	if (IsDownMoving == true)
-	{
-		float Cur_Y = BOMB_MAN->GetComponentLocation().Y;
-
-		if (Cur_Y < StageTwoPos)
+		// S 키를 눌렀을 때: 아래로 이동 시작
+		if (UEngineInput::GetInst().IsDown('S') == true)
 		{
-			float Move_Y = Cur_Y + MoveSpeed * _DeltaTime;
+			IsDownMoving = true;
+			IsUpMoving = false; // 위 이동 중지
+		}
 
-			if (Move_Y > StageTwoPos)
+		// W 키를 눌렀을 때: 위로 이동 시작
+		if (UEngineInput::GetInst().IsDown('W') == true)
+		{
+			IsUpMoving = true;
+			IsDownMoving = false; // 아래 이동 중지
+		}
+
+		// 아래 이동 로직
+		if (IsDownMoving == true)
+		{
+			float Cur_Y = BOMB_MAN->GetComponentLocation().Y;
+
+			if (Cur_Y < StageTwoPos)
 			{
-				Move_Y = StageTwoPos;
-			}
+				float Move_Y = Cur_Y + MoveSpeed * _DeltaTime;
 
-			BOMB_MAN->ChangeAnimation("MOVE");
-			BOMB_MAN->SetComponentLocation({ 65.0f, Move_Y });
+				if (Move_Y > StageTwoPos)
+				{
+					Move_Y = StageTwoPos;
+				}
+
+				BOMB_MAN->ChangeAnimation("MOVE");
+				BOMB_MAN->SetComponentLocation({ 65.0f, Move_Y });
+			}
+			else
+			{
+				BOMB_MAN->ChangeAnimation("BACK");
+				IsDownMoving = false; // 아래 이동 종료
+			}
+		}
+
+		// 위 이동 로직
+		if (IsUpMoving == true)
+		{
+			float Cur_Y = BOMB_MAN->GetComponentLocation().Y;
+
+			if (Cur_Y > StageOnePos)
+			{
+				float Move_Y = Cur_Y - MoveSpeed * _DeltaTime;
+
+				if (Move_Y < StageOnePos)
+				{
+					Move_Y = StageOnePos;
+				}
+
+				BOMB_MAN->ChangeAnimation("MOVE");
+				BOMB_MAN->SetComponentLocation({ 65.0f, Move_Y });
+			}
+			else
+			{
+				BOMB_MAN->ChangeAnimation("BACK");
+				IsUpMoving = false; // 위 이동 종료
+			}
+		}
+
+		float Cur_Y = BOMB_MAN->GetComponentLocation().Y;
+		if (Cur_Y >= 290.0f)
+		{
+			IsStageONE = false;
+			IsStageTWO = true;
+			CHOOSE_00->SetActive(false);
+			CHOOSE_01->SetActive(true);
 		}
 		else
 		{
-			BOMB_MAN->ChangeAnimation("BACK");
-			IsDownMoving = false; // 아래 이동 종료
+			IsStageONE = true;
+			IsStageTWO = false;
+			CHOOSE_00->SetActive(true);
+			CHOOSE_01->SetActive(false);
 		}
-	}
-
-	// 위 이동 로직
-	if (IsUpMoving == true)
-	{
-		float Cur_Y = BOMB_MAN->GetComponentLocation().Y;
-
-		if (Cur_Y > StageOnePos)
-		{
-			float Move_Y = Cur_Y - MoveSpeed * _DeltaTime;
-
-			if (Move_Y < StageOnePos)
-			{
-				Move_Y = StageOnePos;
-			}
-
-			BOMB_MAN->ChangeAnimation("MOVE");
-			BOMB_MAN->SetComponentLocation({ 65.0f, Move_Y });
-		}
-		else
-		{
-			BOMB_MAN->ChangeAnimation("BACK");
-			IsUpMoving = false; // 위 이동 종료
-		}
-	}
-
-	float Cur_Y = BOMB_MAN->GetComponentLocation().Y;
-	if (Cur_Y >= 290.0f)
-	{
-		IsStageONE = false;
-		IsStageTWO = true;
-		CHOOSE_00->SetActive(false);
-		CHOOSE_01->SetActive(true);
-	}
-	else
-	{
-		IsStageONE = true;
-		IsStageTWO = false;
-		CHOOSE_00->SetActive(true);
-		CHOOSE_01->SetActive(false);
 	}
 
 }

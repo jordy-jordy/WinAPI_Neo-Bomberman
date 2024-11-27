@@ -87,6 +87,7 @@ private:
 	// 게임 플레이 장면  관련
 	class ATileMap* WallTileMap = nullptr;
 	class APortal* Portal = nullptr;
+	class APlayer* Player = nullptr;
 
 	class USpriteRenderer* SpriteRendererSTAGE = nullptr;
 	class USpriteRenderer* SpriteRendererSPAWN = nullptr;

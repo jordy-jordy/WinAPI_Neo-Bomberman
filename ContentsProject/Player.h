@@ -40,17 +40,27 @@ public:
 		Bomb = _Bomb;
 	}
 
+	void SetPlayMode(class APlayGameMode* _data)
+	{
+		PlayMode = _data;
+	}
+
+	void SetPortal(class APortal* _data)
+	{
+		Portal = _data;
+	}
+
 	FVector2D InvertLOC(FVector2D _Dir);
 
 	bool CanMove(FVector2D _NextPOS_Win, FVector2D _NextPOS_Local);
 
 	bool ThereIsTILE = false;
+	bool ThereIsPortal = false;
 	bool ThereIsOutOfMap = false;
 
 	class USpriteRenderer* SpriteRendererHead = nullptr;
 	class USpriteRenderer* SpriteRendererBody = nullptr;
 
-	void SetPlayMode(class APlayGameMode* _data);
 
 
 protected:
@@ -97,5 +107,8 @@ private:
 	bool IsCleared = false;
 
 	class APlayGameMode* PlayMode = nullptr;
+
+	class APortal* Portal = nullptr;
+	bool IsPortalCanMove = false;
 };
 

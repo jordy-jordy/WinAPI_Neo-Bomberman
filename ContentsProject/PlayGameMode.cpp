@@ -46,7 +46,7 @@ void APlayGameMode::PlayerInit()
 	FVector2D LocalLocation = TileLocation + HalfTiles;
 	GetWorld()->GetPawn()->SetActorLocation(LocalLocation);
 
-	APlayer* Player = GetWorld()->GetPawn<APlayer>();
+	Player = GetWorld()->GetPawn<APlayer>();
 	Player->SetWallTileMap(WallTileMap);
 	Player->SetPlayMode(this);
 }
@@ -210,7 +210,8 @@ void APlayGameMode::BeginPlay()
 
 	// 포탈 세팅
 	PortalInit();
-
+	
+	Player->SetPortal(Portal);
 
 	///////////////////////////////////////////////////////////////////// 결과 장면 관련
 	TIME_Remain = APlayGameMode::StageTime;

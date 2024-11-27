@@ -9,6 +9,7 @@
 #include "Bomb.h"
 #include "ATileMap.h"
 #include "PlayGameMode.h"
+#include "Portal.h"
 
 
 void APlayer::RunSoundPlay()
@@ -96,6 +97,11 @@ void APlayer::Tick(float _DeltaTime)
 		SpriteRendererHead->SetOrder(ERenderOrder::TEXT_UI);
 		SpriteRendererBody->SetOrder(ERenderOrder::TEXT_UI);
 		IsCleared = true;
+	}
+
+	if (Portal->GET_ISCANMOVE() == true)
+	{
+		IsPortalCanMove = true;
 	}
 
 	if (IsCleared != true)
@@ -382,7 +388,9 @@ bool APlayer::CanMove(FVector2D _NextPOS_Win, FVector2D _NextPOS_Local)
 	if (TileData != nullptr)
 	{
 		if (TileData->SpriteIndex == 2 ||
-			TileData->SpriteIndex == 1)
+			TileData->SpriteIndex == 1 ||
+			TileData->SpriteIndex == 3 &&
+			IsPortalCanMove == false)
 		{
 			ThereIsTILE = true;
 		}
@@ -408,7 +416,6 @@ bool APlayer::CanMove(FVector2D _NextPOS_Win, FVector2D _NextPOS_Local)
 		ThereIsOutOfMap = false;
 	}
 
-
 	// 타일 밖으로 나가지 않으면서 진행 방향에 장애물이 있는지 체크
 	if (ThereIsOutOfMap == false && ThereIsTILE == false)
 	{
@@ -422,7 +429,4 @@ bool APlayer::CanMove(FVector2D _NextPOS_Win, FVector2D _NextPOS_Local)
 	return false;
 }
 
-void APlayer::SetPlayMode(APlayGameMode* _data)
-{
-	PlayMode = _data;
-}
+
