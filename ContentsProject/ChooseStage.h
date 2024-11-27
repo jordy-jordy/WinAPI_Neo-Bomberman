@@ -42,6 +42,11 @@ public:
 		Destroy();
 	}
 
+	bool GetCircleDrawDone()
+	{
+		return CircleDrawDone;
+	}
+
 
 protected:
 	void BeginPlay();
@@ -59,5 +64,7 @@ private:
 
 	bool IsStageONE = false;
 	bool IsStageTWO = false;
+
+	bool CircleDrawDone = false;
 
 };

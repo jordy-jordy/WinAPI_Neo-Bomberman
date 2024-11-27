@@ -87,12 +87,24 @@ void UChooseStage::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
-	if (IsStageONE == true && UEngineInput::GetInst().IsDown(VK_SPACE) == true)
+	// 이동 중이 아니어야 스페이스 키가 동작하도록 수정
+	if (IsStageONE == true &&
+		UEngineInput::GetInst().IsDown(VK_SPACE) == true &&
+		IsDownMoving == false && IsUpMoving == false)
 	{
 		BOMB_MAN->ChangeAnimation("DRAW");
 		CIRCLE->SetActive(true);
 		CIRCLE->ChangeAnimation("CIRCLE");
 	}
+
+	if (CIRCLE->IsActive() == true)
+	{
+		if (CIRCLE->IsCurAnimationEnd() == true)
+		{
+			CircleDrawDone = true;
+		}
+	}
+
 
 	// S 키를 눌렀을 때: 아래로 이동 시작
 	if (UEngineInput::GetInst().IsDown('S') == true)

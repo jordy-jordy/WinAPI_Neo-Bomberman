@@ -260,12 +260,14 @@ void ATitleGameMode::Tick(float _DeltaTime)
 			// 스테이지 선택 화면 활성화
 			CHOOSE->SetActive(true);
 
-			if (CHOOSE->GetIsStageONE() == true && UEngineInput::GetInst().IsDown(VK_SPACE))
+			bool Check = CHOOSE->GetCircleDrawDone();
+			if (Check == true && IsChooseStage == false)
 			{
 				StopTIme();
+				IsChooseStage = true;
 
 				// 1.5초 뒤에 페이드 인 실행
-				TimeEventer.PushEvent(1.5f, std::bind(&AFade::FadeIn, Actor_Fade), false, false);
+				TimeEventer.PushEvent(1.0f, std::bind(&AFade::FadeIn, Actor_Fade), false, false);
 
 				// 3초 뒤에 스테이지 선택 삭제
 				TimeEventer.PushEvent(3.0f, std::bind(&UChooseStage::DestroyChoose, CHOOSE), false, false);
@@ -288,7 +290,7 @@ void ATitleGameMode::Tick(float _DeltaTime)
 		if (COININSERT != nullptr)
 		{
 			COININSERT->SetActive(true); // 코인 인서트 장면 활성화
-			
+
 			if (true == UEngineInput::GetInst().IsDown('F'))
 			{
 				COIN_NUMBER += 1;

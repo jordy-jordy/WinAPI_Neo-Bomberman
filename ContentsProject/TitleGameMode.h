@@ -133,5 +133,7 @@ private:
 
 	bool IsStopTime = false;
 
+	bool IsChooseStage = false;
+
 };
 
