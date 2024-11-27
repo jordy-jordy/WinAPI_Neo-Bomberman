@@ -52,9 +52,6 @@
     <ClCompile Include="PlayGameMode.cpp">
       <Filter>02_ContentsObject\04_GameMode\02_PLAY</Filter>
     </ClCompile>
-    <ClCompile Include="EndGameMode.cpp">
-      <Filter>02_ContentsObject\04_GameMode\03_END</Filter>
-    </ClCompile>
     <ClCompile Include="TileMapGameMode.cpp">
       <Filter>02_ContentsObject\04_GameMode\00_TILEMAPEDIT</Filter>
     </ClCompile>
@@ -74,7 +71,7 @@
       <Filter>02_ContentsObject\01_Actors_Title</Filter>
     </ClCompile>
     <ClCompile Include="Result.cpp">
-      <Filter>02_ContentsObject\03_Actors_End</Filter>
+      <Filter>02_ContentsObject\02_Actors_Play</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -151,10 +148,7 @@
       <Filter>02_ContentsObject\01_Actors_Title</Filter>
     </ClInclude>
     <ClInclude Include="Result.h">
-      <Filter>02_ContentsObject\03_Actors_End</Filter>
-    </ClInclude>
-    <ClInclude Include="EndGameMode.h">
-      <Filter>02_ContentsObject\04_GameMode\03_END</Filter>
+      <Filter>02_ContentsObject\02_Actors_Play</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

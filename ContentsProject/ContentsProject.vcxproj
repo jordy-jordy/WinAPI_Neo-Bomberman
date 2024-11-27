@@ -183,10 +183,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="EndGameMode.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="Fade.h">
       <SubType>
       </SubType>
@@ -273,10 +269,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="CoinInsert.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="EndGameMode.cpp">
       <SubType>
       </SubType>
     </ClCompile>
