@@ -50,7 +50,6 @@ void ATitleGameMode::BeginPlay()
 		UImageManager::GetInst().Load(FilePath);
 	}
 
-
 	// 타이틀 레벨 리소스 로드
 	{
 		UEngineDirectory Title_Basic_Dir;
@@ -117,7 +116,6 @@ void ATitleGameMode::BeginPlay()
 		Title_Transit_Animation_Dir.Append("01_TITLE//06_TRASIT_ANIMATION");
 		UImageManager::GetInst().LoadFolder(Title_Transit_Animation_Dir.GetPathToString());
 	}
-
 
 	// 네오지오 로고 장면 세팅
 	TITLE = GetWorld()->SpawnActor<UTitleLogo>();
