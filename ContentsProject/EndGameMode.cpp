@@ -20,6 +20,9 @@ void AEndGameMode::BeginPlay()
 {
 	Super::BeginPlay();
 
+	TIME_Remain = APlayGameMode::StageTime;
+	SCORENUMBER_Gain = APlayGameMode::PlayerScore;
+
 	AResult* ResultScene = GetWorld()->SpawnActor<AResult>();
 
 	// 스코어(타임 - 분) 세팅
@@ -49,7 +52,7 @@ void AEndGameMode::BeginPlay()
 	SCORE_Bonus->SetTextScale({ 32, 20 });
 	SCORE_Bonus->SetAlignment(AScore::Alignment::Right);
 	SCORE_Bonus->SetOrder(ERenderOrder::TEXT_UI);
-	SCORE_Bonus->SetValue(100);
+	SCORE_Bonus->SetValue(SCORENUMBER_Bonus);
 	SCORE_Bonus->SetActive(true);
 
 	// 스코어(토탈) 세팅
@@ -59,7 +62,7 @@ void AEndGameMode::BeginPlay()
 	SCORE_Total->SetTextScale({ 32, 20 });
 	SCORE_Total->SetAlignment(AScore::Alignment::Right);
 	SCORE_Total->SetOrder(ERenderOrder::TEXT_UI);
-	SCORE_Total->SetValue(100);
+	SCORE_Total->SetValue(SCORENUMBER_Gain);
 	SCORE_Total->SetActive(true);
 
 }
@@ -69,13 +72,49 @@ void AEndGameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
-	TIME_Remain -= _DeltaTime;
-	
+	SCORENUMBER_Gain = APlayGameMode::PlayerScore;
+
+	if (IsZeroTime == false)
+	{
+		// DecreaseAmount를 부동소수점 오차 없이 정확히 계산
+		float DecreaseAmount = _DeltaTime * TimeDereaseSpeed;
+
+		// TIME_Remain과 TIME_Elapsed 모두 동일한 DecreaseAmount 적용
+		TIME_Remain -= DecreaseAmount;
+		TIME_Elapsed += DecreaseAmount;
+
+		// TIME_Remain이 음수로 내려가는 경우 방지
+		if (TIME_Remain < 0.0f)
+		{
+			DecreaseAmount += TIME_Remain; // 음수로 내려간 만큼 조정
+			TIME_Remain = 0.0f;
+			TIME_Elapsed += DecreaseAmount; // 남은 감소량만큼 누적
+			StopDecreaseTime();
+		}
+	}
+
 	int Remain_M = static_cast<int>(TIME_Remain) / 60;
 	int Remain_S = static_cast<int>(TIME_Remain) % 60;
 
+	// TIME_Remain이 음수가 되는 것을 방지했으므로 여기서 추가 처리 불필요
+
 	TIME_Minute->SetValue(Remain_M);
 	TIME_Second->SetValue(Remain_S);
+
+	int Bonus = static_cast<int>(TIME_Elapsed) * 10;
+	SCORE_Bonus->SetValue(Bonus);
+
+	if (IsZeroTime == true)
+	{
+		int Total = SCORENUMBER_Gain + Bonus;
+		StartTimer();
+		TimerFloat += _DeltaTime;
+		if (Timer == true && TimerFloat >= 1.3f)
+		{
+			SCORE_Total->SetValue(Total);
+		}
+	}
+
 
 
 

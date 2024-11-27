@@ -22,6 +22,10 @@
 #include "EndGameMode.h"
 
 
+float APlayGameMode::StageTime = 121.0f;
+int APlayGameMode::PlayerScore = 0;
+
+
 APlayGameMode::APlayGameMode()
 {
 }
@@ -216,6 +220,7 @@ void APlayGameMode::Tick(float _DeltaTime)
 	PortalON();
 	if (Portal->GET_ISCANMOVE() == true)
 	{
+		StopTIme();
 		MOVETO_BOSS();
 	}
 
@@ -226,10 +231,10 @@ void APlayGameMode::Tick(float _DeltaTime)
 
 	if (IsStopTime == false)
 	{
-		Time -= _DeltaTime;
+		StageTime -= _DeltaTime;
 
-		int M = static_cast<int>(Time) / 60;
-		int S = static_cast<int>(Time) % 60;
+		int M = static_cast<int>(StageTime) / 60;
+		int S = static_cast<int>(StageTime) % 60;
 
 		if (S < 0 || M < 0)
 		{
@@ -285,7 +290,6 @@ void APlayGameMode::MOVETO_BOSS()
 
 	if (PLAYER_INDEX == PORTAL_INDEX)
 	{
-		StopTIme();
 		UEngineAPICore::GetCore()->OpenLevel("BOSS");
 	}
 

@@ -43,10 +43,8 @@ public:
 		IsStopTime = true;
 	}
 
-	float GetRemainTime()
-	{
-		return Time;
-	}
+	static float StageTime;
+	static int PlayerScore;
 
 
 protected:
@@ -73,9 +71,6 @@ private:
 
 	class AFade* Actor_Fade = nullptr;
 
-	float Time = 121.0f;
-
-	int PlayerScore = 0;
 
 	bool IsStopTime = false;
 };

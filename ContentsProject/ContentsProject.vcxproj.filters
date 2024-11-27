@@ -132,9 +132,6 @@
     <ClInclude Include="PlayGameMode.h">
       <Filter>02_ContentsObject\04_GameMode\02_PLAY</Filter>
     </ClInclude>
-    <ClInclude Include="EndGameMode.h">
-      <Filter>02_ContentsObject\04_GameMode\03_END</Filter>
-    </ClInclude>
     <ClInclude Include="TileMapGameMode.h">
       <Filter>02_ContentsObject\04_GameMode\00_TILEMAPEDIT</Filter>
     </ClInclude>
@@ -155,6 +152,9 @@
     </ClInclude>
     <ClInclude Include="Result.h">
       <Filter>02_ContentsObject\03_Actors_End</Filter>
+    </ClInclude>
+    <ClInclude Include="EndGameMode.h">
+      <Filter>02_ContentsObject\04_GameMode\03_END</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
