@@ -11,7 +11,6 @@
 #include "TitleGameMode.h"
 #include "PlayGameMode.h"
 #include "BossGameMode.h"
-#include "EndGameMode.h"
 #include "TileMapGameMode.h"
 #include "BossMapGameMode.h"
 #include "Player.h"
