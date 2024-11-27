@@ -47,15 +47,18 @@ public:
 	bool ThereIsTILE = false;
 	bool ThereIsOutOfMap = false;
 
+	class USpriteRenderer* SpriteRendererHead = nullptr;
+	class USpriteRenderer* SpriteRendererBody = nullptr;
+
+	void SetPlayMode(class APlayGameMode* _data);
+
+
 protected:
 
 private:
 	float Speed = 300.0f;
 	int MySpriteIndex = 0;
 	int BOMBPOWER = 3;
-
-	class USpriteRenderer* SpriteRendererHead = nullptr;
-	class USpriteRenderer* SpriteRendererBody = nullptr;
 
 	float IdleAnimTime = 2.0f; // 2초 동안 입력이 없으면 실행되는 Idle 애니메이션
 	float IdleAnimTimer = 0.0f; // Idle 애니메이션 타이머
@@ -90,5 +93,9 @@ private:
 	FVector2D SIZE_LEFTBOT  = { -15,  15 };
 	FVector2D SIZE_RIGHTTOP = {  15, -15 };
 	FVector2D SIZE_RIGHTBOT = {  15,  15 };
+
+	bool IsCleared = false;
+
+	class APlayGameMode* PlayMode = nullptr;
 };
 

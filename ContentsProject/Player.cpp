@@ -8,6 +8,8 @@
 
 #include "Bomb.h"
 #include "ATileMap.h"
+#include "PlayGameMode.h"
+
 
 void APlayer::RunSoundPlay()
 {
@@ -36,6 +38,8 @@ APlayer::APlayer()
 		SpriteRendererHead->CreateAnimation("Run_Right_Head", "MainCharater_White.png", 25, 30, 0.1f);
 
 		SpriteRendererHead->CreateAnimation("Idle_Anim_Head", "MainCharater_White.png", { 580, 581 }, { 1.5f, 0.2f }, true);
+
+		SpriteRendererHead->CreateAnimation("Clear_Stage_Head", "MainCharater_White.png", 583, 589, 0.1f, false);
 	}
 
 	{
@@ -58,6 +62,8 @@ APlayer::APlayer()
 		SpriteRendererBody->CreateAnimation("Run_Right_Body", "MainCharater_White.png", 57, 62, 0.1f);
 
 		SpriteRendererBody->CreateAnimation("Idle_Anim_Body", "MainCharater_White.png", { 612, 613 }, { 1.5f, 0.2f }, true);
+
+		SpriteRendererBody->CreateAnimation("Clear_Stage_Body", "MainCharater_White.png", 615, 621, 0.1f, false);
 	}
 
 	SpriteRendererBody->ChangeAnimation("Idle_Down_Body");
@@ -82,41 +88,53 @@ void APlayer::BeginPlay()
 void APlayer::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
-
-	switch (CurPlayerState)
+	
+	if (PlayMode->GetIsPlayEnd() == true)
 	{
-	case PlayerState::Idle:
-		Idle(_DeltaTime);
-		break;
-	case PlayerState::Move:
-		Move(_DeltaTime);
-		break;
-	case PlayerState::Idle_Anim:
-		Idle_Anim(_DeltaTime);
-		break;
-	default:
-		break;
+		SpriteRendererHead->ChangeAnimation("Clear_Stage_Head");
+		SpriteRendererBody->ChangeAnimation("Clear_Stage_Body");
+		SpriteRendererHead->SetOrder(ERenderOrder::TEXT_UI);
+		SpriteRendererBody->SetOrder(ERenderOrder::TEXT_UI);
+		IsCleared = true;
 	}
 
-	if (true == UEngineInput::GetInst().IsDown(VK_SPACE))
+	if (IsCleared != true)
 	{
-		IdleAnimTimer = 0.0f;
-
-		FVector2D LocalLocation = GetActorLocation() - WallTileMap->GetActorLocation();
-		FIntPoint CurTileIndex = WallTileMap->LocationToIndex(LocalLocation);
-
-		if (false == WallTileMap->IsBomb(CurTileIndex))
+		switch (CurPlayerState)
 		{
-			PlaceBomb();
+		case PlayerState::Idle:
+			Idle(_DeltaTime);
+			break;
+		case PlayerState::Move:
+			Move(_DeltaTime);
+			break;
+		case PlayerState::Idle_Anim:
+			Idle_Anim(_DeltaTime);
+			break;
+		default:
+			break;
 		}
-	}
 
-	SpriteRendererHead->SetOrder(GetActorLocation().Y - WallTileMap->GetActorLocation().Y);
-	SpriteRendererBody->SetOrder(GetActorLocation().Y - WallTileMap->GetActorLocation().Y);
+		if (true == UEngineInput::GetInst().IsDown(VK_SPACE))
+		{
+			IdleAnimTimer = 0.0f;
 
-	if (nullptr == WallTileMap)
-	{
-		MSGASSERT("타일 맵이 세팅되지 않았습니다.")
+			FVector2D LocalLocation = GetActorLocation() - WallTileMap->GetActorLocation();
+			FIntPoint CurTileIndex = WallTileMap->LocationToIndex(LocalLocation);
+
+			if (false == WallTileMap->IsBomb(CurTileIndex))
+			{
+				PlaceBomb();
+			}
+		}
+
+		SpriteRendererHead->SetOrder(GetActorLocation().Y - WallTileMap->GetActorLocation().Y);
+		SpriteRendererBody->SetOrder(GetActorLocation().Y - WallTileMap->GetActorLocation().Y);
+
+		if (nullptr == WallTileMap)
+		{
+			MSGASSERT("타일 맵이 세팅되지 않았습니다.")
+		}
 	}
 }
 
@@ -404,3 +422,7 @@ bool APlayer::CanMove(FVector2D _NextPOS_Win, FVector2D _NextPOS_Local)
 	return false;
 }
 
+void APlayer::SetPlayMode(APlayGameMode* _data)
+{
+	PlayMode = _data;
+}

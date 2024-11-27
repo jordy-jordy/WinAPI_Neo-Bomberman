@@ -68,6 +68,11 @@ public:
 		return ShowedAllScore;
 	}
 
+	bool GetIsPlayEnd()
+	{
+		return IsPlayEnd;
+	}
+
 
 protected:
 	void Tick(float _DeltaTime) override;

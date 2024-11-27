@@ -48,6 +48,7 @@ void APlayGameMode::PlayerInit()
 
 	APlayer* Player = GetWorld()->GetPawn<APlayer>();
 	Player->SetWallTileMap(WallTileMap);
+	Player->SetPlayMode(this);
 }
 
 void APlayGameMode::PlayTileMapInit()
