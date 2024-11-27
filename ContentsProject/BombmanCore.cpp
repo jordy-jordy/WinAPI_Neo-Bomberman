@@ -45,73 +45,7 @@ void BombmanCore::BeginPlay()
 		UImageManager::GetInst().Load(FilePath);
 	}
 
-	// 타이틀 레벨 리소스 로드
-	{
-		UEngineDirectory Title_Basic_Dir;
-		Title_Basic_Dir.MoveParentToDirectory("Resources//Imgs");
-		Title_Basic_Dir.Append("01_TITLE//00_00_BASIC");
-		UImageManager::GetInst().LoadFolder(Title_Basic_Dir.GetPathToString());
-
-		UEngineDirectory Title_NeoGeo_Dir;
-		Title_NeoGeo_Dir.MoveParentToDirectory("Resources//Imgs");
-		Title_NeoGeo_Dir.Append("01_TITLE//00_Neo-Geo_LOGO");
-		UImageManager::GetInst().LoadFolder(Title_NeoGeo_Dir.GetPathToString());
-
-		UEngineDirectory Title_Hudson_Dir;
-		Title_Hudson_Dir.MoveParentToDirectory("Resources//Imgs");
-		Title_Hudson_Dir.Append("01_TITLE//02_HUDSON_LOGO");
-		UImageManager::GetInst().LoadFolder(Title_Hudson_Dir.GetPathToString());
-
-		UEngineDirectory Title_OP_Animation_Dir;
-		Title_OP_Animation_Dir.MoveParentToDirectory("Resources//Imgs");
-		Title_OP_Animation_Dir.Append("01_TITLE//03_OP_ANIMATION");
-		UImageManager::GetInst().LoadFolder(Title_OP_Animation_Dir.GetPathToString());
-
-		UEngineDirectory Title_CoinInsert_Dir;
-		Title_CoinInsert_Dir.MoveParentToDirectory("Resources//Imgs");
-		Title_CoinInsert_Dir.Append("01_TITLE//04_COIN_INSERT");
-		UImageManager::GetInst().LoadFolder(Title_CoinInsert_Dir.GetPathToString());
-
-		UEngineDirectory Title_ChooseStage_Dir;
-		Title_ChooseStage_Dir.MoveParentToDirectory("Resources//Imgs");
-		Title_ChooseStage_Dir.Append("01_TITLE//05_CHOOSE_STAGE");
-		UImageManager::GetInst().LoadFolder(Title_ChooseStage_Dir.GetPathToString());
-
-		UEngineDirectory Title_ChooseStage_BLK_Dir;
-		Title_ChooseStage_BLK_Dir.MoveParentToDirectory("Resources//Imgs");
-		Title_ChooseStage_BLK_Dir.Append("01_TITLE//05_CHOOSE_STAGE//05_CHOOSE_STAGE_01_CHA_BLK");
-		UImageManager::GetInst().LoadFolder(Title_ChooseStage_BLK_Dir.GetPathToString());
-
-		UEngineDirectory Title_ChooseStage_MOVE_Dir;
-		Title_ChooseStage_MOVE_Dir.MoveParentToDirectory("Resources//Imgs");
-		Title_ChooseStage_MOVE_Dir.Append("01_TITLE//05_CHOOSE_STAGE//05_CHOOSE_STAGE_03_CHA_MOVE");
-		UImageManager::GetInst().LoadFolder(Title_ChooseStage_MOVE_Dir.GetPathToString());
-
-		UEngineDirectory Title_ChooseStage_DRAW_Dir;
-		Title_ChooseStage_DRAW_Dir.MoveParentToDirectory("Resources//Imgs");
-		Title_ChooseStage_DRAW_Dir.Append("01_TITLE//05_CHOOSE_STAGE//05_CHOOSE_STAGE_02_CHA_DRAW");
-		UImageManager::GetInst().LoadFolder(Title_ChooseStage_DRAW_Dir.GetPathToString());
-
-		UEngineDirectory Title_ChooseStage_CIRCLE_Dir;
-		Title_ChooseStage_CIRCLE_Dir.MoveParentToDirectory("Resources//Imgs");
-		Title_ChooseStage_CIRCLE_Dir.Append("01_TITLE//05_CHOOSE_STAGE//05_CHOOSE_STAGE_03_CIRCLE");
-		UImageManager::GetInst().LoadFolder(Title_ChooseStage_CIRCLE_Dir.GetPathToString());
-
-		UImageManager& BlueCount = UImageManager::GetInst();
-		BlueCount.CuttingSprite("BlueCount.png", { 34, 32 });
-
-		UImageManager& PinkCount = UImageManager::GetInst();
-		PinkCount.CuttingSprite("PinkCount.png", { 34, 32 });
-
-		UImageManager& YellowCount = UImageManager::GetInst();
-		YellowCount.CuttingSprite("YellowCount.png", { 34, 32 });
-
-		UEngineDirectory Title_Transit_Animation_Dir;
-		Title_Transit_Animation_Dir.MoveParentToDirectory("Resources//Imgs");
-		Title_Transit_Animation_Dir.Append("01_TITLE//06_TRASIT_ANIMATION");
-		UImageManager::GetInst().LoadFolder(Title_Transit_Animation_Dir.GetPathToString());
-	}
-
+	// 타이틀 레벨 리소스는 타이틀 게임 모드의 비긴 플레이에서 불러오도록 수정
 
 	// 플레이어 관련 스프라이트
 	{

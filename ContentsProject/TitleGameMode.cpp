@@ -34,6 +34,91 @@ void ATitleGameMode::BeginPlay()
 {
 	Super::BeginPlay();
 
+	UEngineDirectory Dir;
+
+	if (false == Dir.MoveParentToDirectory("Resources//01_TITLE"))
+	{
+		MSGASSERT("리소스 폴더를 찾지 못했습니다.");
+		return;
+	}
+
+	std::vector<UEngineFile> ImageFiles = Dir.GetAllFile();
+
+	for (size_t i = 0; i < ImageFiles.size(); i++)
+	{
+		std::string FilePath = ImageFiles[i].GetPathToString();
+		UImageManager::GetInst().Load(FilePath);
+	}
+
+
+	// 타이틀 레벨 리소스 로드
+	{
+		UEngineDirectory Title_Basic_Dir;
+		Title_Basic_Dir.MoveParentToDirectory("Resources");
+		Title_Basic_Dir.Append("01_TITLE//00_00_BASIC");
+		UImageManager::GetInst().LoadFolder(Title_Basic_Dir.GetPathToString());
+
+		UEngineDirectory Title_NeoGeo_Dir;
+		Title_NeoGeo_Dir.MoveParentToDirectory("Resources");
+		Title_NeoGeo_Dir.Append("01_TITLE//00_Neo-Geo_LOGO");
+		UImageManager::GetInst().LoadFolder(Title_NeoGeo_Dir.GetPathToString());
+
+		UEngineDirectory Title_Hudson_Dir;
+		Title_Hudson_Dir.MoveParentToDirectory("Resources");
+		Title_Hudson_Dir.Append("01_TITLE//02_HUDSON_LOGO");
+		UImageManager::GetInst().LoadFolder(Title_Hudson_Dir.GetPathToString());
+
+		UEngineDirectory Title_OP_Animation_Dir;
+		Title_OP_Animation_Dir.MoveParentToDirectory("Resources");
+		Title_OP_Animation_Dir.Append("01_TITLE//03_OP_ANIMATION");
+		UImageManager::GetInst().LoadFolder(Title_OP_Animation_Dir.GetPathToString());
+
+		UEngineDirectory Title_CoinInsert_Dir;
+		Title_CoinInsert_Dir.MoveParentToDirectory("Resources");
+		Title_CoinInsert_Dir.Append("01_TITLE//04_COIN_INSERT");
+		UImageManager::GetInst().LoadFolder(Title_CoinInsert_Dir.GetPathToString());
+
+		UEngineDirectory Title_ChooseStage_Dir;
+		Title_ChooseStage_Dir.MoveParentToDirectory("Resources");
+		Title_ChooseStage_Dir.Append("01_TITLE//05_CHOOSE_STAGE");
+		UImageManager::GetInst().LoadFolder(Title_ChooseStage_Dir.GetPathToString());
+
+		UEngineDirectory Title_ChooseStage_BLK_Dir;
+		Title_ChooseStage_BLK_Dir.MoveParentToDirectory("Resources");
+		Title_ChooseStage_BLK_Dir.Append("01_TITLE//05_CHOOSE_STAGE//05_CHOOSE_STAGE_01_CHA_BLK");
+		UImageManager::GetInst().LoadFolder(Title_ChooseStage_BLK_Dir.GetPathToString());
+
+		UEngineDirectory Title_ChooseStage_MOVE_Dir;
+		Title_ChooseStage_MOVE_Dir.MoveParentToDirectory("Resources");
+		Title_ChooseStage_MOVE_Dir.Append("01_TITLE//05_CHOOSE_STAGE//05_CHOOSE_STAGE_03_CHA_MOVE");
+		UImageManager::GetInst().LoadFolder(Title_ChooseStage_MOVE_Dir.GetPathToString());
+
+		UEngineDirectory Title_ChooseStage_DRAW_Dir;
+		Title_ChooseStage_DRAW_Dir.MoveParentToDirectory("Resources");
+		Title_ChooseStage_DRAW_Dir.Append("01_TITLE//05_CHOOSE_STAGE//05_CHOOSE_STAGE_02_CHA_DRAW");
+		UImageManager::GetInst().LoadFolder(Title_ChooseStage_DRAW_Dir.GetPathToString());
+
+		UEngineDirectory Title_ChooseStage_CIRCLE_Dir;
+		Title_ChooseStage_CIRCLE_Dir.MoveParentToDirectory("Resources");
+		Title_ChooseStage_CIRCLE_Dir.Append("01_TITLE//05_CHOOSE_STAGE//05_CHOOSE_STAGE_03_CIRCLE");
+		UImageManager::GetInst().LoadFolder(Title_ChooseStage_CIRCLE_Dir.GetPathToString());
+
+		UImageManager& BlueCount = UImageManager::GetInst();
+		BlueCount.CuttingSprite("BlueCount.png", { 34, 32 });
+
+		UImageManager& PinkCount = UImageManager::GetInst();
+		PinkCount.CuttingSprite("PinkCount.png", { 34, 32 });
+
+		UImageManager& YellowCount = UImageManager::GetInst();
+		YellowCount.CuttingSprite("YellowCount.png", { 34, 32 });
+
+		UEngineDirectory Title_Transit_Animation_Dir;
+		Title_Transit_Animation_Dir.MoveParentToDirectory("Resources");
+		Title_Transit_Animation_Dir.Append("01_TITLE//06_TRASIT_ANIMATION");
+		UImageManager::GetInst().LoadFolder(Title_Transit_Animation_Dir.GetPathToString());
+	}
+
+
 	// 네오지오 로고 장면 세팅
 	TITLE = GetWorld()->SpawnActor<UTitleLogo>();
 
