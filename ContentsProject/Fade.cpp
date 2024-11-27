@@ -25,13 +25,37 @@ void AFade::FadeChange()
 {
 	float DeltaTime = UEngineAPICore::GetCore()->GetDeltaTime();
 	FadeValue += DeltaTime * FadeSpeed * FadeDir;
+
+	if (true == IsFadeOut && true == IsHalfFade)
+	{
+		if (FadeValue > FadeOutLimite)
+		{
+			FadeValue = FadeOutLimite;
+		}
+	}
+	if (true == IsFadeIn && true == IsHalfFade)
+	{
+		if (FadeValue > FadeInLimite)
+		{
+			FadeValue = FadeInLimite;
+		}
+	}
+
 	BackSpriteRenderer->SetAlphafloat(FadeValue);
 }
-
 
 void AFade::FadeIn()
 {
 	FadeValue = 0.0f;
+	FadeDir = 1.0f;
+	IsFadeOut = false;
+	IsFadeIn = true;
+	TimeEventer.PushEvent(2.0f, std::bind(&AFade::FadeChange, this), true, false);
+}
+
+void AFade::FadeInHalf()
+{
+	FadeValue = FadeInLimite;
 	FadeDir = 1.0f;
 	IsFadeOut = false;
 	IsFadeIn = true;

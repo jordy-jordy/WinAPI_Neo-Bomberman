@@ -39,6 +39,14 @@ public:
 		FadeDir = _DATA;
 	}
 
+	void FadeInPivot()
+	{
+
+	}
+
+	void FadeInHalf();
+
+
 	USpriteRenderer* GetRenderer()
 	{
 		return BackSpriteRenderer;
@@ -47,6 +55,20 @@ public:
 	bool IsFadeOut = false;
 	bool IsFadeIn = false;
 
+	void SetFadeInLimite(float _data)
+	{
+		FadeInLimite = _data;
+	}
+
+	void SetFadeOutLimite(float _data)
+	{
+		FadeOutLimite = _data;
+	}
+
+	void IsHalfFadeActive()
+	{
+		IsHalfFade = true;
+	}
 
 protected:
 
@@ -54,9 +76,15 @@ private:
 	USpriteRenderer* BackSpriteRenderer;
 	void LevelChangeStart() override;
 	void FadeChange();
+
+	float FadeInLimite = 0.0f;
+	float FadeOutLimite = 0.0f;
+
 	float FadeValue = 0.0f;
 	float FadeDir = 1.0f;
 	float FadeSpeed = 1.0f;
+
+	bool IsHalfFade = false;
 	
 
 };

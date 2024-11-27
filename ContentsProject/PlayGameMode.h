@@ -16,11 +16,15 @@ public:
 	APlayGameMode& operator=(const APlayGameMode& _Other) = delete;
 	APlayGameMode& operator=(APlayGameMode&& _Other) noexcept = delete;
 
-	void BeginPlay();
-
 	FVector2D WindowSize = { 608, 448 };
 	FVector2D WallTileMapLocation = { 96, 64 };
 
+	static float StageTime;
+	static int PlayerScore;
+
+	void BeginPlay();
+
+	// 플레이 장면 관련 함수들
 	bool IsMonsterAllDead();
 
 	void PlusScore(int _Score)
@@ -43,8 +47,26 @@ public:
 		IsStopTime = true;
 	}
 
-	static float StageTime;
-	static int PlayerScore;
+	// 결과 장면 관련 함수들
+	void StopDecreaseTime()
+	{
+		IsZeroTime = true;
+	}
+
+	void StartTimer()
+	{
+		Timer = true;
+	}
+
+	void StopTimer()
+	{
+		Timer = false;
+	}
+
+	bool GetShowedAllScore()
+	{
+		return ShowedAllScore;
+	}
 
 
 protected:
@@ -57,6 +79,7 @@ protected:
 	void MOVETO_BOSS();
 
 private:
+	// 게임 플레이 장면  관련
 	class ATileMap* WallTileMap = nullptr;
 	class APortal* Portal = nullptr;
 
@@ -69,9 +92,42 @@ private:
 	class AScore* Zero = nullptr;
 	class AScore* Score = nullptr;
 
-	class AFade* Actor_Fade = nullptr;
-
+	class AFade* Play_Fade = nullptr;
 
 	bool IsStopTime = false;
+
+	bool IsPlayEnd = false;
+
+	bool IsPlayFaded = false;
+
+	// 결과 장면 관련
+	class AResult* ResultScene = nullptr;
+	class AScore* TIME_Minute = nullptr;
+	class AScore* TIME_Second = nullptr;
+	class AScore* SCORE_Bonus = nullptr;
+	class AScore* SCORE_Total = nullptr;
+
+	class AFade* Result_Fade = nullptr;
+
+	int DIGIT_Minute = 1;
+	int DIGIT_Second = 2;
+
+	float TIME_Remain = 0.0f;
+	int SCORENUMBER_Gain = 0;
+	int SCORENUMBER_Bonus = 0;
+
+	float TIME_Elapsed = 0.0f;
+
+	bool IsZeroTime = false;
+
+	bool Timer = false;
+	float TimerFloat = 0.0f;
+
+	float TimeDereaseSpeed = 120.0f;
+
+	bool ShowedAllScore = false;
+
+	bool IsResultFaded = false;
+
 };
 

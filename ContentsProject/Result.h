@@ -18,6 +18,9 @@ public:
 
 	class USpriteRenderer* STAGECLEAR = nullptr;
 	class USpriteRenderer* RESULTINFO = nullptr;
+	class USpriteRenderer* RESULTBBMS = nullptr;
+
+	void SetMode(class APlayGameMode* _data);
 
 
 protected:
@@ -26,5 +29,14 @@ protected:
 
 
 private:
+	class APlayGameMode* PlayMode = nullptr;
+
+	FVector2D BBMs_CurPos = { 1000, 204 };
+	float BBMs_CurMoveSize = 0.0f;
+	float BBMs_TargetDownMoveSize = 10.0f;
+	float BBMs_TargetUpMoveSize = -10.0f;
+	float BBMs_TargetXMoveSize = 450.0f; // ¸ñÇ¥ X ÁÂÇ¥
+
+	bool IsMoved = false;
 
 };

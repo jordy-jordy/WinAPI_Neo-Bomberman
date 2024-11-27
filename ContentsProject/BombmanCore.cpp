@@ -234,7 +234,7 @@ void BombmanCore::BeginPlay()
 	UEngineAPICore::GetCore()->CreateLevel<ATitleGameMode, AActor>("TITLE");
 	UEngineAPICore::GetCore()->CreateLevel<APlayGameMode, APlayer>("STAGE01");
 	UEngineAPICore::GetCore()->CreateLevel<ABossGameMode, APlayer>("BOSS");
-	UEngineAPICore::GetCore()->CreateLevel<AEndGameMode, AActor>("END");
+	//UEngineAPICore::GetCore()->CreateLevel<AEndGameMode, AActor>("END");
 
 	UEngineAPICore::GetCore()->OpenLevel("TITLE");
 }
