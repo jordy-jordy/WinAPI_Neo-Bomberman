@@ -21,6 +21,8 @@ ABomb::ABomb()
 	SpriteRenderer->CreateAnimation("Bomb_Gone", "01_Bomb_00_Idle", 4, 4, IdleFrameSpeed, false);
 
 	TimeEventer.PushEvent(Bomb_Explode_Time, std::bind(&ABomb::Bomb_ExPlode, this), false, false);
+
+	SOUND_PLACEBOMB = UEngineSound::Play("01Play_02_PlaceBomb.wav");
 }
 
 ABomb::~ABomb()
@@ -214,6 +216,14 @@ void ABomb::Bomb_ExPlode()
 		return; // 이미 폭발한 경우 실행하지 않음
 	}
 	ISEXPLODING = true;
+
+	if (ON_SOUND_SOUND_BOMBEXPLODE == false)
+	{
+		SOUND_BOMBEXPLODE = UEngineSound::Play("01Play_03_BombExplode.wav");
+		SOUND_BOMBEXPLODE.SetVolume(0.4f);
+		ON_SOUND_SOUND_BOMBEXPLODE = true;
+	}
+
 
 	// 폭탄 중심 애니메이션 전환
 	SpriteRenderer->ChangeAnimation("Bomb_Gone");

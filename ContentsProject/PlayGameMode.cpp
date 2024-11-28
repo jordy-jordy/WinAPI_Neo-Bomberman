@@ -150,6 +150,24 @@ void APlayGameMode::BeginPlay()
 {
 	Super::BeginPlay();
 
+	// 사운드 경로 로드
+	{
+		UEngineDirectory Dir;
+		if (false == Dir.MoveParentToDirectory("Resources"))
+		{
+			MSGASSERT("리소스 폴더를 찾지 못했습니다.");
+			return;
+		}
+		Dir.Append("Sounds//01_PLAY");
+		std::vector<UEngineFile> ImageFiles = Dir.GetAllFile();
+		for (size_t i = 0; i < ImageFiles.size(); i++)
+		{
+			std::string FilePath = ImageFiles[i].GetPathToString();
+			UEngineSound::Load(FilePath);
+		}
+	}
+
+
 	Play_Fade = GetWorld()->SpawnActor<AFade>();
 	Play_Fade->SetFadeSpeed(1.5f);
 	Play_Fade->SetActive(false);
@@ -270,6 +288,13 @@ void APlayGameMode::Tick(float _DeltaTime)
 	///////////////////////////////////////////////////////////////////// 플레이 장면 관련
 	if (IsPlayEnd == false)
 	{
+		if (ON_SOUND_PLAY == false)
+		{
+			SOUND_PLAY = UEngineSound::Play("01Play_00_Stage1.mp3");
+			SOUND_PLAY.SetVolume(0.4f);
+			ON_SOUND_PLAY = true;
+		}
+
 		if (IsPlayFaded == false)
 		{
 			Play_Fade->SetActive(true);
@@ -324,6 +349,15 @@ void APlayGameMode::Tick(float _DeltaTime)
 	///////////////////////////////////////////////////////////////////// 결과 장면 관련
 	if (IsPlayEnd == true)
 	{
+		SOUND_PLAY.Stop();
+
+		if (ON_SOUND_RESULT == false)
+		{
+			SOUND_RESULT = UEngineSound::Play("01Play_07_StageClear.mp3");
+			SOUND_RESULT.SetVolume(0.4f);
+			ON_SOUND_RESULT = true;
+		}
+
 		if (IsResultFaded == false)
 		{
 			Result_Fade->SetActive(true);
@@ -404,6 +438,12 @@ void APlayGameMode::PortalON()
 	IsMonsterAllDead();
 	if (IsMonsterAllDead() == true)
 	{
+		if (ON_SOUND_PORTAL == false)
+		{
+			SOUND_PORTAL = UEngineSound::Play("01Play_04_PortalOn.wav");
+			ON_SOUND_PORTAL = true;
+		}
+
 		Portal->PORTAL_SWITCH(true);
 	}
 }

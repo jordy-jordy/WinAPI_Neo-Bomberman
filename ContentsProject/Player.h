@@ -1,5 +1,7 @@
 #pragma once
 #include <EngineCore/Actor.h>
+#include <EnginePlatform/EngineSound.h>
+
 
 enum class PlayerState
 {
@@ -61,6 +63,10 @@ public:
 	class USpriteRenderer* SpriteRendererHead = nullptr;
 	class USpriteRenderer* SpriteRendererBody = nullptr;
 
+	USoundPlayer Get_SOUND_MOVE()
+	{
+		return SOUND_MOVE;
+	}
 
 
 protected:
@@ -110,5 +116,9 @@ private:
 
 	class APortal* Portal = nullptr;
 	bool IsPortalCanMove = false;
+
+	class USoundPlayer SOUND_MOVE;
+	bool ON_SOUND_MOVE = false;
+
 };
 

@@ -1,5 +1,7 @@
 #pragma once
 #include <EngineCore/Actor.h>
+#include <EnginePlatform/EngineSound.h>
+
 
 enum class EDirection
 {
@@ -58,6 +60,13 @@ private:
 	float ExplodeFrameSpeed = 0.05f;
 
 	bool ISEXPLODING = false;
+
+	class USoundPlayer SOUND_PLACEBOMB;
+	bool ON_SOUND_PLACEBOMB = false;
+
+	class USoundPlayer SOUND_BOMBEXPLODE;
+	bool ON_SOUND_SOUND_BOMBEXPLODE = false;
+
 
 };
 

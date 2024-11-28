@@ -1,5 +1,6 @@
 #pragma once
 #include <EngineCore/GameMode.h>
+#include <EnginePlatform/EngineSound.h>
 
 
 // Ό³Έν :
@@ -134,6 +135,15 @@ private:
 	bool ShowedAllScore = false;
 
 	bool IsResultFaded = false;
+
+	class USoundPlayer SOUND_PLAY;
+	bool ON_SOUND_PLAY = false;
+
+	class USoundPlayer SOUND_PORTAL;
+	bool ON_SOUND_PORTAL = false;
+
+	class USoundPlayer SOUND_RESULT;
+	bool ON_SOUND_RESULT = false;
 
 };
 

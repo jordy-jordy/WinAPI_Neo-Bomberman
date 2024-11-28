@@ -179,22 +179,23 @@ FVector2D APlayer::InvertLOC(FVector2D _Dir)
 // 폭탄 설치
 void APlayer::PlaceBomb()
 {
-	FVector2D TileSize = WallTileMap->GetTileSize(); // 32
-	FVector2D TileHalfSize = WallTileMap->GetTileHalfSize(); // 16
-
 	FVector2D PlayerLocation = GetActorLocation(); // 112, 80 (+ 16이 더해져 있음) // 윈도우의 LEFT TOP을 기준으로 책정
-	FIntPoint PLAYERINDEX = WallTileMap->LocationToIndex(PlayerLocation);
 	FVector2D TileMapLocation = WallTileMap->GetActorLocation(); // 96, 64 // 윈도우의 LEFT TOP을 기준으로 책정
 	FVector2D LocalLocation = PlayerLocation - TileMapLocation; // 타일맵의 LEFT TOP을 기준으로 책정되도록 계산
 
 	FIntPoint BOMB_SET_Index = WallTileMap->LocationToIndex(LocalLocation); // 타일맵 기준 인덱스
-	FVector2D BOMB_SET_LOCATION = WallTileMap->IndexToTileLocation(PLAYERINDEX) + FVector2D(TileHalfSize.X, TileHalfSize.Y);
 
 	// 폭탄 설치 가능 여부 재확인
 	if (WallTileMap->IsBomb(BOMB_SET_Index))
 	{
 		return; // 이미 폭탄이 설치된 경우
 	}
+
+	FVector2D TileSize = WallTileMap->GetTileSize(); // 32
+	FVector2D TileHalfSize = WallTileMap->GetTileHalfSize(); // 16
+
+	FIntPoint PLAYERINDEX = WallTileMap->LocationToIndex(PlayerLocation);
+	FVector2D BOMB_SET_LOCATION = WallTileMap->IndexToTileLocation(PLAYERINDEX) + FVector2D(TileHalfSize.X, TileHalfSize.Y);
 
 	ABomb* Bomb = GetWorld()->SpawnActor<ABomb>();
 
@@ -257,6 +258,9 @@ void APlayer::Idle_Anim(float _DeltaTime)
 
 void APlayer::Idle(float _DeltaTime)
 {
+	SOUND_MOVE.Stop();
+	ON_SOUND_MOVE = false;
+
 	SpriteRendererBody->ChangeAnimation("Idle_Down_Body");
 	SpriteRendererHead->ChangeAnimation("Idle_Down_Head");
 
@@ -281,6 +285,13 @@ void APlayer::Idle(float _DeltaTime)
 
 void APlayer::Move(float _DeltaTime)
 {
+	if (ON_SOUND_MOVE == false)
+	{
+		SOUND_MOVE = UEngineSound::Play("01Play_01_Walking.mp3");
+		SOUND_MOVE.Loop();
+		ON_SOUND_MOVE = true;
+	}
+
 	FVector2D Vector = FVector2D::ZERO;
 
 	if (true == UEngineInput::GetInst().IsPress('D'))
