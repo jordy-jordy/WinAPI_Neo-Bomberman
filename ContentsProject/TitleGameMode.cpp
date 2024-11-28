@@ -227,15 +227,19 @@ void ATitleGameMode::Tick(float _DeltaTime)
 
 			if (TRANSIT->MAINRENDERER->IsCurAnimationEnd() == true)
 			{
-				Actor_Fade->SetActive(true);
-				if (ISFADING_ANI_TRANSIT == false)
+				Transit_Time += _DeltaTime;
+				if (Transit_Time >= 1.7f)
 				{
-					Actor_Fade->FadeIn();
-					ISFADING_ANI_TRANSIT = true;
-				}
+					Actor_Fade->SetActive(true);
+					if (ISFADING_ANI_TRANSIT == false)
+					{
+						Actor_Fade->FadeIn();
+						ISFADING_ANI_TRANSIT = true;
+					}
 
-				TimeEventer.PushEvent(2.0f, std::bind(&ATitleGameMode::OpenPlayLevel, this), false, false);
-				TimeEventer.PushEvent(2.0f, std::bind(&ATransit_Ani::DestroyChoose, TRANSIT), false, false);
+					TimeEventer.PushEvent(2.0f, std::bind(&ATitleGameMode::OpenPlayLevel, this), false, false);
+					TimeEventer.PushEvent(2.0f, std::bind(&ATransit_Ani::DestroyChoose, TRANSIT), false, false);
+				}
 			}
 
 			if (true == UEngineInput::GetInst().IsDown(VK_SPACE))
@@ -415,7 +419,7 @@ void ATitleGameMode::Tick(float _DeltaTime)
 		if (TITLE->MAINRENDERER->IsCurAnimationEnd() == true)
 		{
 			CHANGEDELAY += _DeltaTime;
-			if (CHANGEDELAY >= 3.0f)
+			if (CHANGEDELAY >= 4.0f)
 			{
 				ISPASS_TITLELOGO = true;
 				TITLE->MAINRENDERER->ChangeAnimation("OP_Animation");

@@ -155,6 +155,7 @@ private:
 	class USoundPlayer SOUND_TRANSITANIM;
 	bool ON_SOUND_TRANSITANIM = false;
 
+	float Transit_Time = 0.0f;
 
 };
 
