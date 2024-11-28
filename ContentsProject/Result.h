@@ -23,6 +23,11 @@ public:
 
 	void SetMode(class APlayGameMode* _data);
 
+	bool GetIsInfoMoved()
+	{
+		return IsInfoMoved;
+	}
+
 
 protected:
 	void BeginPlay() override;
@@ -36,9 +41,14 @@ private:
 	float BBMs_CurMoveSize = 0.0f;
 	float BBMs_TargetDownMoveSize = 10.0f;
 	float BBMs_TargetUpMoveSize = -10.0f;
-	float BBMs_TargetXMoveSize = 450.0f; // ¸ñÇ¥ X ÁÂÇ¥
+	float BBMs_TargetPosX = 450.0f; // ¸ñÇ¥ X ÁÂÇ¥
 
 	bool IsMoved = false;
+	bool IsInfoMoved = false;
 
+	FVector2D INFO_CurPos = { -300, 224 };
+	FVector2D INFO_CenterPos = { 0, 0 };
+
+	float FlowedTime = 0.0f;
 
 };

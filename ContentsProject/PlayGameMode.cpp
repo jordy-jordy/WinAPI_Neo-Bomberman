@@ -368,10 +368,38 @@ void APlayGameMode::Tick(float _DeltaTime)
 		}
 
 		ResultScene->SetActive(true);
+		
+		bool InfoMovingCheck = ResultScene->GetIsInfoMoved();
+		if (InfoMovingCheck != true)
+		{
+			return;
+		}
+		
+		TimeFlowing0 += _DeltaTime;
+		if (TimeFlowing0 <= 0.8f)
+		{
+			return;
+		}
+
+		int CurRemain_M = static_cast<int>(StageTime) / 60;
+		int CurRemain_S = static_cast<int>(StageTime) % 60;
+
 		TIME_Minute->SetActive(true);
+		TIME_Minute->SetValue(CurRemain_M);
 		TIME_Second->SetActive(true);
+		TIME_Second->SetValue(CurRemain_S);
 		SCORE_Bonus->SetActive(true);
 		SCORE_Total->SetActive(true);
+
+		SCORENUMBER_Gain = APlayGameMode::PlayerScore;
+		SCORE_Total->SetValue(SCORENUMBER_Gain);
+
+		TimeFlowing1 += _DeltaTime;
+		if (TimeFlowing1 <= 1.0f)
+		{
+			return;
+		}
+
 
 		if (IsZeroTime == false)
 		{
@@ -379,11 +407,11 @@ void APlayGameMode::Tick(float _DeltaTime)
 			float DecreaseAmount = _DeltaTime * TimeDereaseSpeed;
 
 			// TIME_Remain과 TIME_Elapsed 모두 동일한 DecreaseAmount 적용
-			TIME_Remain -= DecreaseAmount;
+			StageTime -= DecreaseAmount;
 			TIME_Elapsed += DecreaseAmount;
 			
 			// 현재 정수 TIME_Remain 값을 계산
-			int Current_TIME_Remain = static_cast<int>(TIME_Remain);
+			int Current_TIME_Remain = static_cast<int>(StageTime);
 
 			// TIME_Remain의 정수 부분이 이전 값과 다를 때만 소리 재생
 			if (Current_TIME_Remain != Prev_TIME_Remain)
@@ -393,17 +421,17 @@ void APlayGameMode::Tick(float _DeltaTime)
 			}
 
 			// TIME_Remain이 음수로 내려가는 경우 방지
-			if (TIME_Remain < 0.0f)
+			if (StageTime < 0.0f)
 			{
-				DecreaseAmount += TIME_Remain; // 음수로 내려간 만큼 조정
-				TIME_Remain = 0.0f;
+				DecreaseAmount += StageTime; // 음수로 내려간 만큼 조정
+				StageTime = 0.0f;
 				TIME_Elapsed += DecreaseAmount; // 남은 감소량만큼 누적
 				StopDecreaseTime();
 			}
 		}
 
-		int Remain_M = static_cast<int>(TIME_Remain) / 60;
-		int Remain_S = static_cast<int>(TIME_Remain) % 60;
+		int Remain_M = static_cast<int>(StageTime) / 60;
+		int Remain_S = static_cast<int>(StageTime) % 60;
 
 		// TIME_Remain이 음수가 되는 것을 방지했으므로 여기서 추가 처리 불필요
 
@@ -415,7 +443,6 @@ void APlayGameMode::Tick(float _DeltaTime)
 
 		if (IsZeroTime == true)
 		{
-			SCORENUMBER_Gain = APlayGameMode::PlayerScore;
 			int Total = SCORENUMBER_Gain + Bonus;
 			StartTimer();
 			TimerFloat += _DeltaTime;
@@ -427,8 +454,10 @@ void APlayGameMode::Tick(float _DeltaTime)
 					ON_SOUND_NUMBERSDE = true;
 				}
 
+				SCORE_Bonus->SetValue(0);
 				SCORE_Total->SetValue(Total);
 				ShowedAllScore = true;
+				StopTimer();
 			}
 		}
 	}

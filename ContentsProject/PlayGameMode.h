@@ -155,5 +155,8 @@ private:
 	class USoundPlayer SOUND_NUMBERSDE;
 	bool ON_SOUND_NUMBERSDE = false;
 
+	float TimeFlowing0 = 0.0f;
+	float TimeFlowing1 = 0.0f;
+
 };
 
