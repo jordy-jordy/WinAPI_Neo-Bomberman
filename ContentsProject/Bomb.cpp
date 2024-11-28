@@ -23,6 +23,7 @@ ABomb::ABomb()
 	TimeEventer.PushEvent(Bomb_Explode_Time, std::bind(&ABomb::Bomb_ExPlode, this), false, false);
 
 	SOUND_PLACEBOMB = UEngineSound::Play("01Play_02_PlaceBomb.wav");
+	SOUND_PLACEBOMB.SetVolume(2.0f);
 }
 
 ABomb::~ABomb()
@@ -217,12 +218,8 @@ void ABomb::Bomb_ExPlode()
 	}
 	ISEXPLODING = true;
 
-	if (ON_SOUND_SOUND_BOMBEXPLODE == false)
-	{
-		SOUND_BOMBEXPLODE = UEngineSound::Play("01Play_03_BombExplode.wav");
-		SOUND_BOMBEXPLODE.SetVolume(0.4f);
-		ON_SOUND_SOUND_BOMBEXPLODE = true;
-	}
+	SOUND_BOMBEXPLODE = UEngineSound::Play("01Play_03_BombExplode.wav");
+	SOUND_BOMBEXPLODE.SetVolume(1.0f);
 
 
 	// 폭탄 중심 애니메이션 전환

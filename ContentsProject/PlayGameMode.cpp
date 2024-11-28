@@ -458,7 +458,19 @@ void APlayGameMode::MOVETO_BOSS()
 
 	if (PLAYER_INDEX == PORTAL_INDEX)
 	{
+		Player->SetActorLocation(Portal->GetActorLocation());
+
+		if (ON_PLAYER_TAKEPORTAL == false)
+		{
+			PLAYER_TAKEPORTAL = UEngineSound::Play("01Play_05_PortalMove.wav");
+			PLAYER_TAKEPORTAL.SetVolume(1.0f);
+			ON_PLAYER_TAKEPORTAL = true;
+		}
+
 		IsPlayEnd = true;
+		PLAYER_MOVESOUND = Player->Get_SOUND_MOVE();
+		PLAYER_MOVESOUND.Stop();
+
 		//UEngineAPICore::GetCore()->OpenLevel("BOSS");
 	}
 

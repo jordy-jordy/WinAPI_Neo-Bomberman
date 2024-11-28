@@ -139,6 +139,10 @@ private:
 	class USoundPlayer SOUND_PLAY;
 	bool ON_SOUND_PLAY = false;
 
+	class USoundPlayer PLAYER_MOVESOUND;
+	class USoundPlayer PLAYER_TAKEPORTAL;
+	bool ON_PLAYER_TAKEPORTAL = false;
+
 	class USoundPlayer SOUND_PORTAL;
 	bool ON_SOUND_PORTAL = false;
 
