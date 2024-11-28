@@ -1,5 +1,6 @@
 #pragma once
 #include <EngineCore/GameMode.h>
+#include <EnginePlatform/EngineSound.h>
 
 
 enum class SCENES
@@ -120,7 +121,6 @@ private:
 	bool ISPASS_CHOOSE_STAGE = false;
 	bool ISPASS_ANI_TRANSIT = false;
 
-
 	bool ISFIRSTFADE_TITLELOGO = false;
 	bool ISFIRSTFADE_ANI_OP = false;
 	bool ISFIRSTFADE_COIN_INSERT = false;
@@ -134,6 +134,25 @@ private:
 	bool IsStopTime = false;
 
 	bool IsChooseStage = false;
+
+	class USoundPlayer SOUND_NGLOGO;
+	bool ON_SOUND_NGLOGO = false;
+
+	class USoundPlayer SOUND_OPANIM;
+	bool ON_SOUND_OPANIM = false;
+
+	class USoundPlayer SOUND_BBMLOGO;
+	bool ON_SOUND_BBMLOGO = false;
+
+	class USoundPlayer SOUND_COININSERT;
+	bool ON_SOUND_COININSERT = false;
+
+	class USoundPlayer SOUND_CHOOSESTAGE;
+	bool ON_SOUND_CHOOSESTAGE = false;
+
+	class USoundPlayer SOUND_TRANSITANIM;
+	bool ON_SOUND_TRANSITANIM = false;
+
 
 };
 

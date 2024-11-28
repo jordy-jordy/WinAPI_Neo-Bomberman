@@ -35,5 +35,6 @@ private:
 
 	class AScore* COINs = nullptr;
 
+
 };
 

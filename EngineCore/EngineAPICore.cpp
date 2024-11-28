@@ -129,6 +129,8 @@ void UEngineAPICore::Tick()
 	DeltaTimer.TimeCheck();
 	float DeltaTime = DeltaTimer.GetDeltaTime();
 
+	DeltaTime *= GlobalTimeScale;
+
 	// 꼭해줘야 한다.
 	UEngineSound::Update();
 

@@ -92,6 +92,12 @@ void UChooseStage::Tick(float _DeltaTime)
 		UEngineInput::GetInst().IsDown(VK_SPACE) == true &&
 		IsDownMoving == false && IsUpMoving == false)
 	{
+		if (ON_SOUND_SELECTSTAGE == false)
+		{
+			SOUND_SELECTSTAGE = UEngineSound::Play("00Title_04_MenuSelect.mp3");
+			ON_SOUND_SELECTSTAGE = true;
+		}
+
 		StopMove = true;
 		BOMB_MAN->ChangeAnimation("DRAW");
 		CIRCLE->SetActive(true);
@@ -125,6 +131,14 @@ void UChooseStage::Tick(float _DeltaTime)
 		// 아래 이동 로직
 		if (IsDownMoving == true)
 		{
+			// 사운드 재생은 이동 상태가 "처음" 시작될 때만 실행
+			if (ON_SOUND_SCROLLSTAGE_DOWN == false)
+			{
+				SOUND_SCROLLSTAGE = UEngineSound::Play("00Title_04_MenuScroll.mp3");
+				ON_SOUND_SCROLLSTAGE_DOWN = true; // 사운드 재생 플래그 설정
+				ON_SOUND_SCROLLSTAGE_UP = false; // 반대 방향 사운드 플래그 초기화
+			}
+
 			float Cur_Y = BOMB_MAN->GetComponentLocation().Y;
 
 			if (Cur_Y < StageTwoPos)
@@ -141,6 +155,7 @@ void UChooseStage::Tick(float _DeltaTime)
 			}
 			else
 			{
+				ON_SOUND_SCROLLSTAGE_DOWN = false; // 이동 완료 후 플래그 초기화
 				BOMB_MAN->ChangeAnimation("BACK");
 				IsDownMoving = false; // 아래 이동 종료
 			}
@@ -149,6 +164,14 @@ void UChooseStage::Tick(float _DeltaTime)
 		// 위 이동 로직
 		if (IsUpMoving == true)
 		{
+			// 사운드 재생은 이동 상태가 "처음" 시작될 때만 실행
+			if (ON_SOUND_SCROLLSTAGE_UP == false)
+			{
+				SOUND_SCROLLSTAGE = UEngineSound::Play("00Title_04_MenuScroll.mp3");
+				ON_SOUND_SCROLLSTAGE_UP = true; // 사운드 재생 플래그 설정
+				ON_SOUND_SCROLLSTAGE_DOWN = false; // 반대 방향 사운드 플래그 초기화
+			}
+
 			float Cur_Y = BOMB_MAN->GetComponentLocation().Y;
 
 			if (Cur_Y > StageOnePos)
@@ -165,6 +188,7 @@ void UChooseStage::Tick(float _DeltaTime)
 			}
 			else
 			{
+				ON_SOUND_SCROLLSTAGE_UP = false; // 이동 완료 후 플래그 초기화
 				BOMB_MAN->ChangeAnimation("BACK");
 				IsUpMoving = false; // 위 이동 종료
 			}

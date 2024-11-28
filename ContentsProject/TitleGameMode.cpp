@@ -11,6 +11,7 @@
 #include <EngineBase/EngineRandom.h>
 #include <EngineCore/SpriteRenderer.h>
 
+
 #include "TitleLogo.h"
 #include "CoinInsert.h"
 #include "ChooseStage.h"
@@ -34,8 +35,8 @@ void ATitleGameMode::BeginPlay()
 {
 	Super::BeginPlay();
 
+	// 이미지 경로 로드
 	UEngineDirectory Dir;
-
 	if (false == Dir.MoveParentToDirectory("Resources//01_TITLE"))
 	{
 		MSGASSERT("리소스 폴더를 찾지 못했습니다.");
@@ -49,6 +50,24 @@ void ATitleGameMode::BeginPlay()
 		std::string FilePath = ImageFiles[i].GetPathToString();
 		UImageManager::GetInst().Load(FilePath);
 	}
+
+	// 사운드 경로 로드
+	{
+		UEngineDirectory Dir;
+		if (false == Dir.MoveParentToDirectory("Resources"))
+		{
+			MSGASSERT("리소스 폴더를 찾지 못했습니다.");
+			return;
+		}
+		Dir.Append("Sounds//00_TITLE");
+		std::vector<UEngineFile> ImageFiles = Dir.GetAllFile();
+		for (size_t i = 0; i < ImageFiles.size(); i++)
+		{
+			std::string FilePath = ImageFiles[i].GetPathToString();
+			UEngineSound::Load(FilePath);
+		}
+	}
+
 
 	// 타이틀 레벨 리소스 로드
 	{
@@ -189,6 +208,13 @@ void ATitleGameMode::Tick(float _DeltaTime)
 
 	if (InitCurState() == SCENES::ANI_TRANSIT)
 	{
+		if (ON_SOUND_TRANSITANIM == false)
+		{
+			SOUND_TRANSITANIM = UEngineSound::Play("00Title_05_Story_Intro.mp3");
+			SOUND_TRANSITANIM.SetVolume(0.4f);
+			ON_SOUND_TRANSITANIM = true;
+		}
+
 		if (ISFIRSTFADE_ANI_TRANSIT == false)
 		{
 			Actor_Fade->SetActive(false);
@@ -229,12 +255,20 @@ void ATitleGameMode::Tick(float _DeltaTime)
 		if (TRANSIT->IsDestroy() == true)
 		{
 			TRANSIT = nullptr;
+			SOUND_TRANSITANIM.Stop();
 		}
 
 	}
 
 	if (InitCurState() == SCENES::CHOOSE_STAGE)
 	{
+		if (ON_SOUND_CHOOSESTAGE == false)
+		{
+			SOUND_CHOOSESTAGE = UEngineSound::Play("00Title_04_Select_Mode.mp3");
+			SOUND_CHOOSESTAGE.SetVolume(0.4f);
+			ON_SOUND_CHOOSESTAGE = true;
+		}
+
 		if (IsStopTime == false)
 		{
 			TIMEs_StageChoose->SetActive(true);
@@ -282,17 +316,27 @@ void ATitleGameMode::Tick(float _DeltaTime)
 			TIMEs_StageChoose->SetActive(false);
 			CHOOSE = nullptr;
 			ISPASS_CHOOSE_STAGE = true;
+			SOUND_CHOOSESTAGE.Stop();
 		}
 	}
 
 	if (InitCurState() == SCENES::COIN_INSERT)
 	{
+		if (ON_SOUND_BBMLOGO == false)
+		{
+			SOUND_BBMLOGO = UEngineSound::Play("00Title_02_TitleScreen.mp3");
+			SOUND_BBMLOGO.SetVolume(0.4f);
+			ON_SOUND_BBMLOGO = true;
+		}
+
 		if (COININSERT != nullptr)
 		{
 			COININSERT->SetActive(true); // 코인 인서트 장면 활성화
 
 			if (true == UEngineInput::GetInst().IsDown('F'))
 			{
+				SOUND_COININSERT = UEngineSound::Play("00Title_03_Coin.mp3");
+				SOUND_COININSERT.SetVolume(0.4f);
 				COIN_NUMBER += 1;
 				COINs->SetValue(COIN_NUMBER);
 			}
@@ -309,11 +353,19 @@ void ATitleGameMode::Tick(float _DeltaTime)
 		if (COININSERT == nullptr)
 		{
 			ISPASS_COIN_INSERT = true;
+			SOUND_BBMLOGO.Stop();
 		}
 	}
 
 	if (InitCurState() == SCENES::ANI_OP)
 	{
+		if (ON_SOUND_OPANIM == false)
+		{
+			SOUND_OPANIM = UEngineSound::Play("00Title_01_Attract_Intro.mp3");
+			SOUND_OPANIM.SetVolume(0.4f);
+			ON_SOUND_OPANIM = true;
+		}
+
 		if (COINs != nullptr)
 		{
 			COINs->SetActive(true); // 스코어 (코인) 활성화
@@ -345,12 +397,20 @@ void ATitleGameMode::Tick(float _DeltaTime)
 
 		if (TITLE == nullptr)
 		{
+			SOUND_OPANIM.Stop();
 			ISPASS_ANI_OP = true;
 		}
 	}
 
 	if (InitCurState() == SCENES::TITLELOGO)
 	{
+		if (ON_SOUND_NGLOGO == false)
+		{
+			SOUND_NGLOGO = UEngineSound::Play("00Title_00_Neo-Geo_Opening_Theme.mp3");
+			SOUND_NGLOGO.SetVolume(0.7f);
+			ON_SOUND_NGLOGO = true;
+		}
+
 		// 타이틀 로고를 끝까지 봤을때
 		if (TITLE->MAINRENDERER->IsCurAnimationEnd() == true)
 		{
@@ -359,6 +419,7 @@ void ATitleGameMode::Tick(float _DeltaTime)
 			{
 				ISPASS_TITLELOGO = true;
 				TITLE->MAINRENDERER->ChangeAnimation("OP_Animation");
+				SOUND_NGLOGO.Stop();
 				TITLE->BASE00->SetActive(true);
 				TITLE->BASE01->SetActive(true);
 				LEVEL4->SetActive(true);
@@ -372,6 +433,7 @@ void ATitleGameMode::Tick(float _DeltaTime)
 		{
 			ISPASS_TITLELOGO = true;
 			TITLE->MAINRENDERER->ChangeAnimation("OP_Animation");
+			SOUND_NGLOGO.Stop();
 			TITLE->BASE00->SetActive(true);
 			TITLE->BASE01->SetActive(true);
 			LEVEL4->SetActive(true);
@@ -384,6 +446,7 @@ void ATitleGameMode::Tick(float _DeltaTime)
 		{
 			ISPASS_TITLELOGO = true;
 			ISPASS_ANI_OP = true;
+			SOUND_NGLOGO.Stop();
 			COINs->SetActive(true); // 스코어 (코인) 활성화
 			TITLE->Destroy(); // 타이틀로고 액터 삭제
 			TITLE = nullptr;

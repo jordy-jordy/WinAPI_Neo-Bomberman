@@ -1,5 +1,7 @@
 #pragma once
 #include <EngineCore/Actor.h>
+#include <EnginePlatform/EngineSound.h>
+
 
 // Ό³Έν :
 class UChooseStage : public AActor
@@ -69,4 +71,10 @@ private:
 
 	bool StopMove = false;
 
+	class USoundPlayer SOUND_SCROLLSTAGE;
+	bool ON_SOUND_SCROLLSTAGE_UP = false;
+	bool ON_SOUND_SCROLLSTAGE_DOWN = false;
+
+	class USoundPlayer SOUND_SELECTSTAGE;
+	bool ON_SOUND_SELECTSTAGE = false;
 };
