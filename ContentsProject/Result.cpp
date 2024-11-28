@@ -32,6 +32,14 @@ AResult::AResult()
 	RESULTBBMS->SetPivotType(PivotType::Top);
 	RESULTBBMS->SetComponentLocation(BBMs_CurPos);
 	RESULTBBMS->SetActive(false);
+
+	RESULTSTAMP = CreateDefaultSubObject<USpriteRenderer>();
+	RESULTSTAMP->SetSprite("STAGECLEAR_STAMP.png");
+	RESULTSTAMP->SetOrder(23000);
+	RESULTSTAMP->SetSpriteScale(1.0f);
+	RESULTSTAMP->SetPivotType(PivotType::Top);
+	RESULTSTAMP->SetComponentLocation({ 209, 218 });
+	RESULTSTAMP->SetActive(false);
 };
 
 
@@ -152,6 +160,8 @@ void AResult::Tick(float _DeltaTime)
 				if (BBMs_CurPos.X < BBMs_TargetPosX)
 				{
 					BBMs_CurPos.X = BBMs_TargetPosX; // 목표 위치에 도달하면 고정
+					RESULTSTAMP->SetActive(true);
+
 				}
 			}
 

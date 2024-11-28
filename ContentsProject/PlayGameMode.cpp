@@ -376,7 +376,7 @@ void APlayGameMode::Tick(float _DeltaTime)
 		}
 		
 		TimeFlowing0 += _DeltaTime;
-		if (TimeFlowing0 <= 0.8f)
+		if (TimeFlowing0 <= 0.3f)
 		{
 			return;
 		}
@@ -454,6 +454,7 @@ void APlayGameMode::Tick(float _DeltaTime)
 					ON_SOUND_NUMBERSDE = true;
 				}
 
+				SCORE_Bonus->SetDigitCount(1);
 				SCORE_Bonus->SetValue(0);
 				SCORE_Total->SetValue(Total);
 				ShowedAllScore = true;

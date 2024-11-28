@@ -20,6 +20,8 @@ public:
 	class USpriteRenderer* STAGECLEAR = nullptr;
 	class USpriteRenderer* RESULTINFO = nullptr;
 	class USpriteRenderer* RESULTBBMS = nullptr;
+	class USpriteRenderer* RESULTSTAMP = nullptr;
+
 
 	void SetMode(class APlayGameMode* _data);
 
