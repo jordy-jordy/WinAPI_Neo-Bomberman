@@ -30,6 +30,7 @@ public:
 		return IsInfoMoved;
 	}
 
+	bool IsBBMsActive = false;
 
 protected:
 	void BeginPlay() override;

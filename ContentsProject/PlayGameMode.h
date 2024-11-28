@@ -155,6 +155,9 @@ private:
 	class USoundPlayer SOUND_NUMBERSDE;
 	bool ON_SOUND_NUMBERSDE = false;
 
+	class USoundPlayer SOUND_GOODRESULT;
+	bool ON_SOUND_GOODRESULT = false;
+
 	float TimeFlowing0 = 0.0f;
 	float TimeFlowing1 = 0.0f;
 

@@ -461,8 +461,16 @@ void APlayGameMode::Tick(float _DeltaTime)
 				StopTimer();
 			}
 		}
-	}
 
+		if (ResultScene->IsBBMsActive == true)
+		{
+			if (ON_SOUND_GOODRESULT == false)
+			{
+				SOUND_GOODRESULT = UEngineSound::Play("01Play_07_ResultsGood.mp3");
+				ON_SOUND_GOODRESULT = true;
+			}
+		}
+	}
 }
 
 
@@ -487,6 +495,7 @@ void APlayGameMode::PortalON()
 		if (ON_SOUND_PORTAL == false)
 		{
 			SOUND_PORTAL = UEngineSound::Play("01Play_04_PortalOn.wav");
+			SOUND_PORTAL.SetVolume(SoundVolume * 3.5f);
 			ON_SOUND_PORTAL = true;
 		}
 
@@ -509,7 +518,7 @@ void APlayGameMode::MOVETO_BOSS()
 		if (ON_PLAYER_TAKEPORTAL == false)
 		{
 			PLAYER_TAKEPORTAL = UEngineSound::Play("01Play_05_PortalMove.wav");
-			PLAYER_TAKEPORTAL.SetVolume(SoundVolume);
+			PLAYER_TAKEPORTAL.SetVolume(SoundVolume * 1.5f);
 			ON_PLAYER_TAKEPORTAL = true;
 		}
 

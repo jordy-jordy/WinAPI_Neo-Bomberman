@@ -67,6 +67,7 @@ private:
 	class USoundPlayer SOUND_BOMBEXPLODE;
 	bool ON_SOUND_SOUND_BOMBEXPLODE = false;
 
+	float SoundVolume = 1.0f;
 
 };
 

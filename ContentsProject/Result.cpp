@@ -121,10 +121,11 @@ void AResult::Tick(float _DeltaTime)
 	{
 		FlowedTime += _DeltaTime;
 
-		if (FlowedTime >= 1.5f)
+		if (FlowedTime >= 1.1f)
 		{
 			STAGECLEAR->SetActive(false);
 			RESULTBBMS->SetActive(true);
+			IsBBMsActive = true;
 
 			// 이동 속도 설정
 			float MoveSpeed = 30.0f * _DeltaTime;
@@ -161,7 +162,6 @@ void AResult::Tick(float _DeltaTime)
 				{
 					BBMs_CurPos.X = BBMs_TargetPosX; // 목표 위치에 도달하면 고정
 					RESULTSTAMP->SetActive(true);
-
 				}
 			}
 

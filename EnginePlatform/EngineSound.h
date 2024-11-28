@@ -38,7 +38,7 @@ public:
 
 	void SetVolume(float _Volume)
 	{
-		_Volume = UEngineMath::Clamp(_Volume, 0.0f, 1.0f);
+		//_Volume = UEngineMath::Clamp(_Volume, 0.0f, 1.0f);
 
 		Control->setVolume(_Volume);
 	}

@@ -288,6 +288,7 @@ void APlayer::Move(float _DeltaTime)
 	if (ON_SOUND_MOVE == false)
 	{
 		SOUND_MOVE = UEngineSound::Play("01Play_01_Walking.mp3");
+		SOUND_MOVE.SetVolume(SoundVolume * 3.0);
 		SOUND_MOVE.Loop();
 		ON_SOUND_MOVE = true;
 	}

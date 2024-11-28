@@ -120,5 +120,7 @@ private:
 	class USoundPlayer SOUND_MOVE;
 	bool ON_SOUND_MOVE = false;
 
+	float SoundVolume = 1.0f;
+
 };
 
