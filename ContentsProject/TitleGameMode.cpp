@@ -211,7 +211,7 @@ void ATitleGameMode::Tick(float _DeltaTime)
 		if (ON_SOUND_TRANSITANIM == false)
 		{
 			SOUND_TRANSITANIM = UEngineSound::Play("00Title_05_Story_Intro.mp3");
-			SOUND_TRANSITANIM.SetVolume(0.4f);
+			SOUND_TRANSITANIM.SetVolume(SoundVolume);
 			ON_SOUND_TRANSITANIM = true;
 		}
 
@@ -265,7 +265,7 @@ void ATitleGameMode::Tick(float _DeltaTime)
 		if (ON_SOUND_CHOOSESTAGE == false)
 		{
 			SOUND_CHOOSESTAGE = UEngineSound::Play("00Title_04_Select_Mode.mp3");
-			SOUND_CHOOSESTAGE.SetVolume(0.4f);
+			SOUND_CHOOSESTAGE.SetVolume(SoundVolume);
 			ON_SOUND_CHOOSESTAGE = true;
 		}
 
@@ -325,7 +325,7 @@ void ATitleGameMode::Tick(float _DeltaTime)
 		if (ON_SOUND_BBMLOGO == false)
 		{
 			SOUND_BBMLOGO = UEngineSound::Play("00Title_02_TitleScreen.mp3");
-			SOUND_BBMLOGO.SetVolume(0.4f);
+			SOUND_BBMLOGO.SetVolume(SoundVolume);
 			ON_SOUND_BBMLOGO = true;
 		}
 
@@ -336,7 +336,7 @@ void ATitleGameMode::Tick(float _DeltaTime)
 			if (true == UEngineInput::GetInst().IsDown('F'))
 			{
 				SOUND_COININSERT = UEngineSound::Play("00Title_03_Coin.mp3");
-				SOUND_COININSERT.SetVolume(0.4f);
+				SOUND_COININSERT.SetVolume(SoundVolume * 0.3f);
 				COIN_NUMBER += 1;
 				COINs->SetValue(COIN_NUMBER);
 			}
@@ -362,7 +362,7 @@ void ATitleGameMode::Tick(float _DeltaTime)
 		if (ON_SOUND_OPANIM == false)
 		{
 			SOUND_OPANIM = UEngineSound::Play("00Title_01_Attract_Intro.mp3");
-			SOUND_OPANIM.SetVolume(0.4f);
+			SOUND_OPANIM.SetVolume(SoundVolume);
 			ON_SOUND_OPANIM = true;
 		}
 
@@ -407,7 +407,7 @@ void ATitleGameMode::Tick(float _DeltaTime)
 		if (ON_SOUND_NGLOGO == false)
 		{
 			SOUND_NGLOGO = UEngineSound::Play("00Title_00_Neo-Geo_Opening_Theme.mp3");
-			SOUND_NGLOGO.SetVolume(0.7f);
+			SOUND_NGLOGO.SetVolume(SoundVolume);
 			ON_SOUND_NGLOGO = true;
 		}
 

@@ -1,6 +1,7 @@
 #pragma once
-
 #include <EngineCore/Actor.h>
+#include <EnginePlatform/EngineSound.h>
+
 
 // 설명 :
 class AResult : public AActor
@@ -38,5 +39,6 @@ private:
 	float BBMs_TargetXMoveSize = 450.0f; // 목표 X 좌표
 
 	bool IsMoved = false;
+
 
 };

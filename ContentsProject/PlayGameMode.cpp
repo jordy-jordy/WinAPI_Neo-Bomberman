@@ -291,7 +291,7 @@ void APlayGameMode::Tick(float _DeltaTime)
 		if (ON_SOUND_PLAY == false)
 		{
 			SOUND_PLAY = UEngineSound::Play("01Play_00_Stage1.mp3");
-			SOUND_PLAY.SetVolume(0.4f);
+			SOUND_PLAY.SetVolume(SoundVolume);
 			ON_SOUND_PLAY = true;
 		}
 
@@ -354,7 +354,7 @@ void APlayGameMode::Tick(float _DeltaTime)
 		if (ON_SOUND_RESULT == false)
 		{
 			SOUND_RESULT = UEngineSound::Play("01Play_07_StageClear.mp3");
-			SOUND_RESULT.SetVolume(0.4f);
+			SOUND_RESULT.SetVolume(SoundVolume);
 			ON_SOUND_RESULT = true;
 		}
 
@@ -381,6 +381,16 @@ void APlayGameMode::Tick(float _DeltaTime)
 			// TIME_Remain과 TIME_Elapsed 모두 동일한 DecreaseAmount 적용
 			TIME_Remain -= DecreaseAmount;
 			TIME_Elapsed += DecreaseAmount;
+			
+			// 현재 정수 TIME_Remain 값을 계산
+			int Current_TIME_Remain = static_cast<int>(TIME_Remain);
+
+			// TIME_Remain의 정수 부분이 이전 값과 다를 때만 소리 재생
+			if (Current_TIME_Remain != Prev_TIME_Remain)
+			{
+				SOUND_NUMBERSDE = UEngineSound::Play("01Play_07_NumberDecrease.wav");
+				Prev_TIME_Remain = Current_TIME_Remain; // 이전 값 업데이트
+			}
 
 			// TIME_Remain이 음수로 내려가는 경우 방지
 			if (TIME_Remain < 0.0f)
@@ -411,6 +421,12 @@ void APlayGameMode::Tick(float _DeltaTime)
 			TimerFloat += _DeltaTime;
 			if (Timer == true && TimerFloat >= 1.3f)
 			{
+				if (ON_SOUND_NUMBERSDE == false)
+				{
+					SOUND_NUMBERSDE = UEngineSound::Play("01Play_07_NumberDecrease.wav");
+					ON_SOUND_NUMBERSDE = true;
+				}
+
 				SCORE_Total->SetValue(Total);
 				ShowedAllScore = true;
 			}
@@ -463,7 +479,7 @@ void APlayGameMode::MOVETO_BOSS()
 		if (ON_PLAYER_TAKEPORTAL == false)
 		{
 			PLAYER_TAKEPORTAL = UEngineSound::Play("01Play_05_PortalMove.wav");
-			PLAYER_TAKEPORTAL.SetVolume(1.0f);
+			PLAYER_TAKEPORTAL.SetVolume(SoundVolume);
 			ON_PLAYER_TAKEPORTAL = true;
 		}
 

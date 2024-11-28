@@ -120,6 +120,7 @@ private:
 	int DIGIT_Second = 2;
 
 	float TIME_Remain = 0.0f;
+	int Prev_TIME_Remain = static_cast<int>(TIME_Remain);
 	int SCORENUMBER_Gain = 0;
 	int SCORENUMBER_Bonus = 0;
 
@@ -136,6 +137,8 @@ private:
 
 	bool IsResultFaded = false;
 
+	float SoundVolume = 1.0f;
+
 	class USoundPlayer SOUND_PLAY;
 	bool ON_SOUND_PLAY = false;
 
@@ -148,6 +151,9 @@ private:
 
 	class USoundPlayer SOUND_RESULT;
 	bool ON_SOUND_RESULT = false;
+
+	class USoundPlayer SOUND_NUMBERSDE;
+	bool ON_SOUND_NUMBERSDE = false;
 
 };
 

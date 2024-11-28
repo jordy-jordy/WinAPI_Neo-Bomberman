@@ -135,6 +135,8 @@ private:
 
 	bool IsChooseStage = false;
 
+	float SoundVolume = 1.0f;
+
 	class USoundPlayer SOUND_NGLOGO;
 	bool ON_SOUND_NGLOGO = false;
 
