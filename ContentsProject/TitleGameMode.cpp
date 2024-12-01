@@ -20,6 +20,7 @@
 #include "ChooseStage.h"
 #include "Transit_Ani.h"
 #include "Fade.h"
+#include "EndGameMode.h"
 
 
 ATitleGameMode::ATitleGameMode()
@@ -195,6 +196,8 @@ void ATitleGameMode::BeginPlay()
 	CREDIT->SetComponentLocation({ 488, 432 });
 	CREDIT->SetActive(false);
 
+	// EndGameMode의 TITLE 포인터를 현재 인스턴스로 설정
+	AEndGameMode::SetTITLE(this);
 }
 
 void ATitleGameMode::Tick(float _DeltaTime)

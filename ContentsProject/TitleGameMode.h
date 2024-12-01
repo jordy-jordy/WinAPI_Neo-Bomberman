@@ -97,12 +97,44 @@ public:
 		ISPASS_COIN_INSERT = false;
 		ISPASS_CHOOSE_STAGE = false;
 		ISPASS_ANI_TRANSIT = false;
+
+		COIN_NUMBER = 0;
+		StageChooseTime_NUMBER = 21.0f;
+		TIME_DELAY = 0.0f;
+
+		DIGITCOUNT_Coins = 2;
+		DIGITCOUNT_StageChooseTime = 2;
+
+		ISPASS_TITLELOGO = false;
+		ISPASS_ANI_OP = false;
+		ISPASS_COIN_INSERT = false;
+		ISPASS_CHOOSE_STAGE = false;
+		ISPASS_ANI_TRANSIT = false;
+		
+		ISFIRSTFADE_TITLELOGO = false;
+		ISFIRSTFADE_ANI_OP = false;
+		ISFIRSTFADE_COIN_INSERT = false;
+		ISFIRSTFADE_CHOOSE_STAGE = false;
+		ISFIRSTFADE_ANI_TRANSIT = false;
+		
+		ISFADING_ANI_TRANSIT = false;
+		CHANGEDELAY = 0.0f;
+		IsStopTime = false;
+		IsChooseStage = false;
+		SoundVolume = 1.0f;
+		ON_SOUND_NGLOGO = false;
+		ON_SOUND_OPANIM = false;
+		ON_SOUND_BBMLOGO = false;
+		ON_SOUND_COININSERT = false;
+		ON_SOUND_CHOOSESTAGE = false;
+		ON_SOUND_TRANSITANIM = false;
+		Transit_Time = 0.0f;
 	}
 
 	void CHOOSETO_TRANSITANI();
 	void TRANSITANITO_PLAY();
 
-
+	class UTitleLogo* TITLE = nullptr;
 
 
 protected:
@@ -113,7 +145,6 @@ private:
 	class USpriteRenderer* LEVEL4 = nullptr;
 	class USpriteRenderer* CREDIT = nullptr;
 
-	class UTitleLogo* TITLE = nullptr;
 	class UCoinInsert* COININSERT = nullptr;
 	class UChooseStage* CHOOSE = nullptr;
 	class ATransit_Ani* TRANSIT = nullptr;

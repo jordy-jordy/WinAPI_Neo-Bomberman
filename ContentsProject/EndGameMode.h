@@ -2,6 +2,8 @@
 #include <EngineCore/GameMode.h>
 #include <EnginePlatform/EngineSound.h>
 
+#include "TitleGameMode.h"
+
 
 class AEndGameMode : public AGameMode
 {
@@ -20,6 +22,11 @@ public:
 
 	void MOVETO_TITLE();
 
+	static void SetTITLE(ATitleGameMode* _Data)
+	{
+		TITLELEVEL = _Data;
+	}
+
 
 protected:
 	void Tick(float _DeltaTime) override;
@@ -30,7 +37,7 @@ private:
 
 	class AFade* END_Fade = nullptr;
 
-	class ATitleGameMode* TITLE = nullptr;
+	static ATitleGameMode* TITLELEVEL; // TitleGameMode를 저장할 스태틱 멤버
 
 };
 

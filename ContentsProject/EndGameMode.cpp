@@ -8,6 +8,7 @@
 #include "Fade.h"
 #include "TitleGameMode.h"
 
+ATitleGameMode* AEndGameMode::TITLELEVEL = nullptr; // 스태틱 멤버 초기화
 
 AEndGameMode::AEndGameMode()
 {
@@ -37,8 +38,13 @@ void AEndGameMode::Tick(float _DeltaTime)
 	{
 		END_Fade->FadeIn();
 
-		TimeEventer.PushEvent(2.0f, std::bind(&AEndGameMode::MOVETO_TITLE, this), false, false);
+		// TITLE 포인터를 통해 ResetState 호출
+		if (TITLELEVEL != nullptr)
+		{
+			TITLELEVEL->ResetState();
+		}
 
+		TimeEventer.PushEvent(2.0f, std::bind(&AEndGameMode::MOVETO_TITLE, this), false, false);
 	}
 
 
