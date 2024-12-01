@@ -90,6 +90,15 @@ public:
 		IsStopTime = true;
 	}
 
+	void ResetState()
+	{
+		ISPASS_TITLELOGO = false;
+		ISPASS_ANI_OP = false;
+		ISPASS_COIN_INSERT = false;
+		ISPASS_CHOOSE_STAGE = false;
+		ISPASS_ANI_TRANSIT = false;
+	}
+
 
 protected:
 	void BeginPlay() override;

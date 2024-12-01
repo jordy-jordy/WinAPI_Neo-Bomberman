@@ -18,6 +18,8 @@ public:
 
 	void BeginPlay();
 
+	void MOVETO_TITLE();
+
 
 protected:
 	void Tick(float _DeltaTime) override;
@@ -26,6 +28,9 @@ protected:
 private:
 	class AEnding* EndingCut = nullptr;
 
+	class AFade* END_Fade = nullptr;
+
+	class ATitleGameMode* TITLE = nullptr;
 
 };
 

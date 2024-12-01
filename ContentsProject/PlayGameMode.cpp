@@ -176,6 +176,11 @@ void APlayGameMode::BeginPlay()
 	Result_Fade->SetFadeSpeed(1.5f);
 	Result_Fade->SetActive(false);
 
+	ResultToEnd_Fade = GetWorld()->SpawnActor<AFade>();
+	ResultToEnd_Fade->SetFadeOrder(30000);
+	ResultToEnd_Fade->SetFadeSpeed(1.2f);
+	ResultToEnd_Fade->SetActive(false);
+
 	///////////////////////////////////////////////////////////////////// 플레이 장면 관련
 	// 백그라운드 세팅
 	APlayMap* STAGE1_BG = GetWorld()->SpawnActor<APlayMap>();
@@ -470,6 +475,15 @@ void APlayGameMode::Tick(float _DeltaTime)
 				ON_SOUND_GOODRESULT = true;
 			}
 		}
+
+		if (ResultScene->IsMovingDone == true && true == UEngineInput::GetInst().IsDown(VK_SPACE))
+		{
+			ResultToEnd_Fade->SetActive(true);
+			ResultToEnd_Fade->FadeIn();
+
+			TimeEventer.PushEvent(3.0f, std::bind(&APlayGameMode::MOVETO_END, this), false, false);
+
+		}
 	}
 }
 
@@ -526,10 +540,15 @@ void APlayGameMode::MOVETO_BOSS()
 		PLAYER_MOVESOUND = Player->Get_SOUND_MOVE();
 		PLAYER_MOVESOUND.Stop();
 
-		//UEngineAPICore::GetCore()->OpenLevel("BOSS");
 	}
 
 }
+
+void APlayGameMode::MOVETO_END()
+{
+	UEngineAPICore::GetCore()->OpenLevel("END");
+}
+
 
 
 

@@ -31,6 +31,7 @@ public:
 	}
 
 	bool IsBBMsActive = false;
+	bool IsMovingDone = false;
 
 protected:
 	void BeginPlay() override;

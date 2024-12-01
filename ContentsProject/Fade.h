@@ -1,6 +1,8 @@
 #pragma once
 #include <EngineCore/Actor.h>
 
+#include "ContentsEnum.h"
+
 // Ό³Έν :
 class AFade : public AActor
 {
@@ -39,13 +41,12 @@ public:
 		FadeDir = _DATA;
 	}
 
-	void FadeInPivot()
-	{
-
-	}
-
 	void FadeInHalf();
 
+	void SetFadeOrder(int _data)
+	{
+		FadeOrder = _data;
+	}
 
 	USpriteRenderer* GetRenderer()
 	{
@@ -85,6 +86,9 @@ private:
 	float FadeSpeed = 1.0f;
 
 	bool IsHalfFade = false;
+
+	ERenderOrder FadeType = ERenderOrder::FADE;
+	int FadeOrder = 0;
 	
 
 };

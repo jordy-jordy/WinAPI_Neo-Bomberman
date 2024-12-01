@@ -74,6 +74,9 @@ public:
 		return IsPlayEnd;
 	}
 
+	void MOVETO_END();
+
+
 
 protected:
 	void Tick(float _DeltaTime) override;
@@ -115,6 +118,7 @@ private:
 	class AScore* SCORE_Total = nullptr;
 
 	class AFade* Result_Fade = nullptr;
+	class AFade* ResultToEnd_Fade = nullptr;
 
 	int DIGIT_Minute = 1;
 	int DIGIT_Second = 2;
@@ -161,5 +165,6 @@ private:
 	float TimeFlowing0 = 0.0f;
 	float TimeFlowing1 = 0.0f;
 
+	bool IsResultDonefForFade = false;
 };
 

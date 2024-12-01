@@ -162,6 +162,7 @@ void AResult::Tick(float _DeltaTime)
 				{
 					BBMs_CurPos.X = BBMs_TargetPosX; // 목표 위치에 도달하면 고정
 					RESULTSTAMP->SetActive(true);
+					IsMovingDone = true;
 				}
 			}
 

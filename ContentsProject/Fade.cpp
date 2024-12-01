@@ -9,7 +9,7 @@ AFade* AFade::MainFade = nullptr;
 AFade::AFade()
 {
 	BackSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-	BackSpriteRenderer->SetOrder(ERenderOrder::FADE);
+	BackSpriteRenderer->SetOrder(FadeType);
 	BackSpriteRenderer->SetSprite("Fade.bmp");
 	FVector2D MapScale = BackSpriteRenderer->SetSpriteScale(1.0f);
 	BackSpriteRenderer->SetComponentLocation(MapScale.Half());
@@ -23,6 +23,11 @@ AFade::~AFade()
 
 void AFade::FadeChange()
 {
+	if (FadeOrder > 0)
+	{
+		BackSpriteRenderer->SetOrder(FadeOrder);
+	}
+
 	float DeltaTime = UEngineAPICore::GetCore()->GetDeltaTime();
 	FadeValue += DeltaTime * FadeSpeed * FadeDir;
 

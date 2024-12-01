@@ -256,12 +256,12 @@ void ATitleGameMode::Tick(float _DeltaTime)
 			}
 		}
 
-		if (TRANSIT->IsDestroy() == true)
+		if (TRANSIT != nullptr && TRANSIT->IsDestroy() == true)
 		{
 			TRANSIT = nullptr;
 			SOUND_TRANSITANIM.Stop();
+			ISPASS_ANI_TRANSIT = true;
 		}
-
 	}
 
 	if (InitCurState() == SCENES::CHOOSE_STAGE)
