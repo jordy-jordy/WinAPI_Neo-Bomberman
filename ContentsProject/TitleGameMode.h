@@ -99,6 +99,11 @@ public:
 		ISPASS_ANI_TRANSIT = false;
 	}
 
+	void CHOOSETO_TRANSITANI();
+	void TRANSITANITO_PLAY();
+
+
+
 
 protected:
 	void BeginPlay() override;

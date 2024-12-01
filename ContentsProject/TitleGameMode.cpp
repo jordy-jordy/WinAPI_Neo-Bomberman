@@ -237,8 +237,9 @@ void ATitleGameMode::Tick(float _DeltaTime)
 						ISFADING_ANI_TRANSIT = true;
 					}
 
+					TimeEventer.PushEvent(2.0f, std::bind(&ATitleGameMode::TRANSITANITO_PLAY, this), false, false);
 					TimeEventer.PushEvent(2.0f, std::bind(&ATitleGameMode::OpenPlayLevel, this), false, false);
-					TimeEventer.PushEvent(2.0f, std::bind(&ATransit_Ani::DestroyChoose, TRANSIT), false, false);
+					return;
 				}
 			}
 
@@ -251,16 +252,10 @@ void ATitleGameMode::Tick(float _DeltaTime)
 					ISFADING_ANI_TRANSIT = true;
 				}
 
+				TimeEventer.PushEvent(2.0f, std::bind(&ATitleGameMode::TRANSITANITO_PLAY, this), false, false);
 				TimeEventer.PushEvent(2.0f, std::bind(&ATitleGameMode::OpenPlayLevel, this), false, false);
-				TimeEventer.PushEvent(2.0f, std::bind(&ATransit_Ani::DestroyChoose, TRANSIT), false, false);
+				return;
 			}
-		}
-
-		if (TRANSIT != nullptr && TRANSIT->IsDestroy() == true)
-		{
-			TRANSIT = nullptr;
-			SOUND_TRANSITANIM.Stop();
-			ISPASS_ANI_TRANSIT = true;
 		}
 	}
 
@@ -304,23 +299,11 @@ void ATitleGameMode::Tick(float _DeltaTime)
 				StopTIme();
 				IsChooseStage = true;
 
-				// 1.5초 뒤에 페이드 인 실행
+				// 1.0초 뒤에 페이드 인 실행
 				TimeEventer.PushEvent(1.0f, std::bind(&AFade::FadeIn, Actor_Fade), false, false);
-
-				// 3초 뒤에 스테이지 선택 삭제
-				TimeEventer.PushEvent(3.0f, std::bind(&UChooseStage::DestroyChoose, CHOOSE), false, false);
-
+				TimeEventer.PushEvent(2.0f, std::bind(&ATitleGameMode::CHOOSETO_TRANSITANI, this), false, false);
 				return;
 			}
-		}
-
-		// CHOOSE 가 삭제 되었으면 포인터도 null 로 초기화
-		if (CHOOSE->IsDestroy() == true)
-		{
-			TIMEs_StageChoose->SetActive(false);
-			CHOOSE = nullptr;
-			ISPASS_CHOOSE_STAGE = true;
-			SOUND_CHOOSESTAGE.Stop();
 		}
 	}
 
@@ -348,16 +331,11 @@ void ATitleGameMode::Tick(float _DeltaTime)
 			// 코인을 넣고 스테이지 선택 화면으로 전환
 			if (COIN_NUMBER > 0 && true == UEngineInput::GetInst().IsDown(VK_SPACE))
 			{
-				COININSERT->Destroy();
-				COININSERT = nullptr;
+				SOUND_BBMLOGO.Stop();
+				ISPASS_COIN_INSERT = true;
+				COININSERT->SetActive(false);
 				return;
 			}
-		}
-
-		if (COININSERT == nullptr)
-		{
-			ISPASS_COIN_INSERT = true;
-			SOUND_BBMLOGO.Stop();
 		}
 	}
 
@@ -383,8 +361,9 @@ void ATitleGameMode::Tick(float _DeltaTime)
 				CHANGEDELAY += _DeltaTime;
 				if (CHANGEDELAY >= 3.5f)
 				{
-					TITLE->Destroy(); // 타이틀로고 액터 삭제
-					TITLE = nullptr;
+					SOUND_OPANIM.Stop();
+					ISPASS_ANI_OP = true;
+					TITLE->SetActive(false);
 					CHANGEDELAY = 0.0f;
 					return;
 				}
@@ -393,16 +372,11 @@ void ATitleGameMode::Tick(float _DeltaTime)
 			// 애니메이션 도중 키를 눌렀을 때 (인서트 코인 장면으로 전환)
 			if (true == UEngineInput::GetInst().IsDown(VK_SPACE) || true == UEngineInput::GetInst().IsDown('F'))
 			{
-				TITLE->Destroy(); // 타이틀로고 액터 삭제
-				TITLE = nullptr;
+				SOUND_OPANIM.Stop();
+				ISPASS_ANI_OP = true;
+				TITLE->SetActive(false);
 				return;
 			}
-		}
-
-		if (TITLE == nullptr)
-		{
-			SOUND_OPANIM.Stop();
-			ISPASS_ANI_OP = true;
 		}
 	}
 
@@ -421,9 +395,9 @@ void ATitleGameMode::Tick(float _DeltaTime)
 			CHANGEDELAY += _DeltaTime;
 			if (CHANGEDELAY >= 4.0f)
 			{
+				SOUND_NGLOGO.Stop();
 				ISPASS_TITLELOGO = true;
 				TITLE->MAINRENDERER->ChangeAnimation("OP_Animation");
-				SOUND_NGLOGO.Stop();
 				TITLE->BASE00->SetActive(true);
 				TITLE->BASE01->SetActive(true);
 				LEVEL4->SetActive(true);
@@ -435,9 +409,9 @@ void ATitleGameMode::Tick(float _DeltaTime)
 		// 오프닝 애니메이션으로 넘어갈 때
 		if (true == UEngineInput::GetInst().IsDown(VK_SPACE))
 		{
+			SOUND_NGLOGO.Stop();
 			ISPASS_TITLELOGO = true;
 			TITLE->MAINRENDERER->ChangeAnimation("OP_Animation");
-			SOUND_NGLOGO.Stop();
 			TITLE->BASE00->SetActive(true);
 			TITLE->BASE01->SetActive(true);
 			LEVEL4->SetActive(true);
@@ -448,12 +422,10 @@ void ATitleGameMode::Tick(float _DeltaTime)
 		// 바로 인서트 코인 장면으로 넘어갈 때
 		if (true == UEngineInput::GetInst().IsDown('F'))
 		{
+			SOUND_NGLOGO.Stop();
 			ISPASS_TITLELOGO = true;
 			ISPASS_ANI_OP = true;
-			SOUND_NGLOGO.Stop();
 			COINs->SetActive(true); // 스코어 (코인) 활성화
-			TITLE->Destroy(); // 타이틀로고 액터 삭제
-			TITLE = nullptr;
 			LEVEL4->SetActive(true);
 			CREDIT->SetActive(true);
 			return;
@@ -465,4 +437,19 @@ void ATitleGameMode::Tick(float _DeltaTime)
 void ATitleGameMode::OpenPlayLevel()
 {
 	UEngineAPICore::GetCore()->OpenLevel("STAGE01");
+}
+
+void ATitleGameMode::CHOOSETO_TRANSITANI()
+{
+	SOUND_CHOOSESTAGE.Stop();
+	ISPASS_CHOOSE_STAGE = true;
+	TIMEs_StageChoose->SetActive(false);
+	CHOOSE->SetActive(false);
+}
+
+void ATitleGameMode::TRANSITANITO_PLAY()
+{
+	SOUND_TRANSITANIM.Stop();
+	ISPASS_ANI_TRANSIT = true;
+	TRANSIT->SetActive(false);
 }
