@@ -73,6 +73,12 @@
     <ClCompile Include="Result.cpp">
       <Filter>02_ContentsObject\02_Actors_Play</Filter>
     </ClCompile>
+    <ClCompile Include="EndGameMode.cpp">
+      <Filter>02_ContentsObject\04_GameMode\03_END</Filter>
+    </ClCompile>
+    <ClCompile Include="Ending.cpp">
+      <Filter>02_ContentsObject\03_Actors_End</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -149,6 +155,12 @@
     </ClInclude>
     <ClInclude Include="Result.h">
       <Filter>02_ContentsObject\02_Actors_Play</Filter>
+    </ClInclude>
+    <ClInclude Include="EndGameMode.h">
+      <Filter>02_ContentsObject\04_GameMode\03_END</Filter>
+    </ClInclude>
+    <ClInclude Include="Ending.h">
+      <Filter>02_ContentsObject\03_Actors_End</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

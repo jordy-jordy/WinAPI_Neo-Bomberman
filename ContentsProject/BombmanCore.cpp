@@ -11,6 +11,7 @@
 #include "TitleGameMode.h"
 #include "PlayGameMode.h"
 #include "BossGameMode.h"
+#include "EndGameMode.h"
 #include "TileMapGameMode.h"
 #include "BossMapGameMode.h"
 #include "Player.h"
@@ -213,6 +214,11 @@ void BombmanCore::BeginPlay()
 
 		UImageManager& NUMBERS = UImageManager::GetInst();
 		NUMBERS.CuttingSprite("ResultCount.png", { 32, 20 });
+
+		UEngineDirectory End_Ending_Dir;
+		End_Ending_Dir.MoveParentToDirectory("Resources//Imgs");
+		End_Ending_Dir.Append("03_END//02_Ending");
+		UImageManager::GetInst().LoadFolder(End_Ending_Dir.GetPathToString());
 	}
 
 	// 타일 맵 제작용 BG
@@ -233,9 +239,9 @@ void BombmanCore::BeginPlay()
 	UEngineAPICore::GetCore()->CreateLevel<ATitleGameMode, AActor>("TITLE");
 	UEngineAPICore::GetCore()->CreateLevel<APlayGameMode, APlayer>("STAGE01");
 	UEngineAPICore::GetCore()->CreateLevel<ABossGameMode, APlayer>("BOSS");
-	//UEngineAPICore::GetCore()->CreateLevel<AEndGameMode, AActor>("END");
+	UEngineAPICore::GetCore()->CreateLevel<AEndGameMode, AActor>("END");
 
-	UEngineAPICore::GetCore()->OpenLevel("TITLE");
+	UEngineAPICore::GetCore()->OpenLevel("END");
 }
 
 void BombmanCore::Tick()
