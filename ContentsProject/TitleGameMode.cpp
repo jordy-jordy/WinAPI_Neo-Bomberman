@@ -27,6 +27,7 @@ ATitleGameMode::ATitleGameMode()
 {
 }
 
+
 ATitleGameMode::~ATitleGameMode()
 {
 }
@@ -68,7 +69,6 @@ void ATitleGameMode::BeginPlay()
 			UEngineSound::Load(FilePath);
 		}
 	}
-
 
 	// 타이틀 레벨 리소스 로드
 	{
@@ -434,11 +434,11 @@ void ATitleGameMode::Tick(float _DeltaTime)
 			return;
 		}
 	}
-
 }
 
 void ATitleGameMode::OpenPlayLevel()
 {
+	UEngineAPICore::GetCore()->ResetLevel<ATitleGameMode, AActor>("TITLE");
 	UEngineAPICore::GetCore()->OpenLevel("STAGE01");
 }
 

@@ -63,21 +63,14 @@ void AEndGameMode::Tick(float _DeltaTime)
 	{
 		END_Fade->FadeIn();
 
-		// TITLE 포인터를 통해 ResetState 호출
-		if (TITLELEVEL != nullptr)
-		{
-			TITLELEVEL->ResetState();
-		}
-
 		TimeEventer.PushEvent(1.5f, std::bind(&AEndGameMode::MOVETO_TITLE, this), false, false);
 	}
-
-
 }
 
 void AEndGameMode::MOVETO_TITLE()
 {
 	SOUND_ENDROLL.Stop();
+	UEngineAPICore::GetCore()->ResetLevel<AEndGameMode, AActor>("END");
 	UEngineAPICore::GetCore()->OpenLevel("TITLE");
 }
 

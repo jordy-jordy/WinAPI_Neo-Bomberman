@@ -85,17 +85,17 @@ void UImageManager::Load(std::string_view _KeyName, std::string_view Path)
 
 	std::string UpperName = UEngineString::ToUpper(_KeyName);
 
-	if (true == Images.contains(UpperName))
-	{
-		MSGASSERT("로드된 이미지를 또 로드할 수 없습니다." + UpperName);
-		return;
-	}
+	//if (true == Images.contains(UpperName))
+	//{
+	//	MSGASSERT("로드된 이미지를 또 로드할 수 없습니다." + UpperName);
+	//	return;
+	//}
 
-	if (true == Sprites.contains(UpperName))
-	{
-		MSGASSERT("로드된 이미지를 또 로드할 수 없습니다." + UpperName);
-		return;
-	}
+	//if (true == Sprites.contains(UpperName))
+	//{
+	//	MSGASSERT("로드된 이미지를 또 로드할 수 없습니다." + UpperName);
+	//	return;
+	//}
 
 	UEngineWinImage* NewImage = new UEngineWinImage();
 	NewImage->Load(WindowImage, Path);
@@ -125,11 +125,11 @@ void UImageManager::LoadFolder(std::string_view _KeyName, std::string_view _Path
 
 	std::string UpperName = UEngineString::ToUpper(_KeyName);
 
-	if (true == Sprites.contains(UpperName))
-	{
-		MSGASSERT("로드된 이미지를 또 로드할 수 없습니다." + UpperName);
-		return;
-	}
+	//if (true == Sprites.contains(UpperName))
+	//{
+	//	MSGASSERT("로드된 이미지를 또 로드할 수 없습니다." + UpperName);
+	//	return;
+	//}
 
 
 	UEngineSprite* NewSprite = new UEngineSprite();

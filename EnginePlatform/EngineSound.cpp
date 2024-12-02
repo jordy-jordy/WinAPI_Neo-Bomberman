@@ -159,12 +159,12 @@ void UEngineSound::Load(std::string_view _Name, std::string_view _Path)
 
 	UEngineSound* NewSound = new UEngineSound();
 
-	if (false != UEngineSound::Sounds.contains(UpperString))
-	{
-		delete NewSound;
-		MSGASSERT("이미 로드한 사운드를 또 로드하려고 했습니다." + UpperString);
-		return;
-	}
+	//if (false != UEngineSound::Sounds.contains(UpperString))
+	//{
+	//	delete NewSound;
+	//	MSGASSERT("이미 로드한 사운드를 또 로드하려고 했습니다." + UpperString);
+	//	return;
+	//}
 
 	if (false == NewSound->ResLoad(_Path))
 	{

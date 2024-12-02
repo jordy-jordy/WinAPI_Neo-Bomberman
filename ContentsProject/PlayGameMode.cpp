@@ -542,7 +542,8 @@ void APlayGameMode::MOVETO_BOSS()
 
 void APlayGameMode::MOVETO_END()
 {
-	SOUND_NUMBERSDE.Stop();
+	SOUND_GOODRESULT.Stop();
+	UEngineAPICore::GetCore()->ResetLevel<APlayGameMode, APlayer>("STAGE01");
 	UEngineAPICore::GetCore()->OpenLevel("END");
 }
 
