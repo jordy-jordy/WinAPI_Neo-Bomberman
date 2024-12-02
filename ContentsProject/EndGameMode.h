@@ -39,5 +39,9 @@ private:
 
 	static ATitleGameMode* TITLELEVEL; // TitleGameMode를 저장할 스태틱 멤버
 
+	class USoundPlayer SOUND_ENDROLL;
+	bool ON_SOUND_ENDROLL = false;
+
+
 };
 

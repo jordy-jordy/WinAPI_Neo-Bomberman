@@ -405,7 +405,6 @@ void APlayGameMode::Tick(float _DeltaTime)
 			return;
 		}
 
-
 		if (IsZeroTime == false)
 		{
 			// DecreaseAmount를 부동소수점 오차 없이 정확히 계산
@@ -481,8 +480,7 @@ void APlayGameMode::Tick(float _DeltaTime)
 			ResultToEnd_Fade->SetActive(true);
 			ResultToEnd_Fade->FadeIn();
 
-			TimeEventer.PushEvent(3.0f, std::bind(&APlayGameMode::MOVETO_END, this), false, false);
-
+			TimeEventer.PushEvent(2.5f, std::bind(&APlayGameMode::MOVETO_END, this), false, false);
 		}
 	}
 }
@@ -539,13 +537,12 @@ void APlayGameMode::MOVETO_BOSS()
 		IsPlayEnd = true;
 		PLAYER_MOVESOUND = Player->Get_SOUND_MOVE();
 		PLAYER_MOVESOUND.Stop();
-
 	}
-
 }
 
 void APlayGameMode::MOVETO_END()
 {
+	SOUND_NUMBERSDE.Stop();
 	UEngineAPICore::GetCore()->OpenLevel("END");
 }
 
