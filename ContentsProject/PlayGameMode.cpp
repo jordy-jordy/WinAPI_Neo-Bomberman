@@ -150,6 +150,9 @@ void APlayGameMode::BeginPlay()
 {
 	Super::BeginPlay();
 
+	APlayGameMode::StageTime = 121.0f;
+	APlayGameMode::PlayerScore = 0;
+
 	// 사운드 경로 로드
 	{
 		UEngineDirectory Dir;
@@ -166,7 +169,6 @@ void APlayGameMode::BeginPlay()
 			UEngineSound::Load(FilePath);
 		}
 	}
-
 
 	Play_Fade = GetWorld()->SpawnActor<AFade>();
 	Play_Fade->SetFadeSpeed(1.5f);
