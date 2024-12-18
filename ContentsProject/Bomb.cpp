@@ -55,6 +55,25 @@ void ABomb::Tick(float _DeltaTime)
 	SpriteRenderer->SetOrder(GetActorLocation().Y - WallTileMap->GetActorLocation().Y);
 }
 
+void ABomb::CheckMonstersInExplosionRange(const std::list<AMonster*>& AllMonsters, const FVector2D& TargetPos, ATileMap* WallTileMap) 
+{
+	FIntPoint TilePos_INDEX = WallTileMap->LocationToIndex(TargetPos);
+
+	for (auto StartIter = AllMonsters.begin(); StartIter != AllMonsters.end(); ++StartIter)
+	{
+		AMonster* CurMonster = *StartIter;
+		if (!CurMonster)
+			continue;
+
+		FIntPoint MonsterINDEX = CurMonster->GetMonsterPos_INDEX(CurMonster->GetActorLocation(), WallTileMap);
+
+		if (MonsterINDEX == TilePos_INDEX)
+		{
+			CurMonster->SWITCHDEAD(true);
+		}
+	}
+}
+
 void ABomb::SetWallTileMap(ATileMap* _TileMap, FIntPoint _Index)
 {
 	WallTileMap = _TileMap;
@@ -119,21 +138,7 @@ void ABomb::HandleExplosion(EDirection Direction, int Power)
 		ExplosionEffects.push_back(Explode_Mid);
 
 		// 몬스터 체크. iterator로 순회 돌림
-		std::list<AMonster*>::iterator StartIter = AllMonsters.begin();
-		std::list<AMonster*>::iterator EndIter = AllMonsters.end();
-
-		for (; StartIter != EndIter; ++StartIter)
-		{
-			AMonster* CurMonster = *StartIter;
-
-			FIntPoint MonsterINDEX = CurMonster->GetMonsterPos_INDEX(CurMonster->GetActorLocation(), WallTileMap);
-			FIntPoint TilePos_INDEX = WallTileMap->LocationToIndex(TargetPos);
-
-			if (MonsterINDEX == TilePos_INDEX)
-			{
-				CurMonster->SWITCHDEAD(true);
-			}
-		}
+		CheckMonstersInExplosionRange(AllMonsters, TargetPos, WallTileMap);
 
 		if (TargetTile->Bomb != nullptr)
 		{
@@ -165,22 +170,8 @@ void ABomb::HandleExplosion(EDirection Direction, int Power)
 
 		ExplosionEffects.push_back(Explode_End);
 
-		// iterator로 순회 돌림
-		std::list<AMonster*>::iterator StartIter = AllMonsters.begin();
-		std::list<AMonster*>::iterator EndIter = AllMonsters.end();
-
-		for (; StartIter != EndIter; ++StartIter)
-		{
-			AMonster* CurMonster = *StartIter;
-
-			FIntPoint MonsterINDEX = CurMonster->GetMonsterPos_INDEX(CurMonster->GetActorLocation(), WallTileMap);
-			FIntPoint TilePos_INDEX = WallTileMap->LocationToIndex(TargetPos);
-
-			if (MonsterINDEX == TilePos_INDEX)
-			{
-				CurMonster->SWITCHDEAD(true);
-			}
-		}
+		// 몬스터 체크. iterator로 순회 돌림
+		CheckMonstersInExplosionRange(AllMonsters, TargetPos, WallTileMap);
 
 		if (FinalTile->Bomb != nullptr)
 		{

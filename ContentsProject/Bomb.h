@@ -2,6 +2,8 @@
 #include <EngineCore/Actor.h>
 #include <EnginePlatform/EngineSound.h>
 
+#include <list>
+
 
 enum class EDirection
 {
@@ -30,6 +32,8 @@ public:
 
 	void HandleExplosion(EDirection Direction, int Power);
 	void HandleTileDestruction(const FVector2D& TargetPosition);
+	void CheckMonstersInExplosionRange(const std::list<class AMonster*>& AllMonsters, const FVector2D& TargetPos, ATileMap* WallTileMap);
+
 
 protected:
 	friend class APlayer;
