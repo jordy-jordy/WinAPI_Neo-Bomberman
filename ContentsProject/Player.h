@@ -74,7 +74,7 @@ protected:
 private:
 	float Speed = 300.0f;
 	int MySpriteIndex = 0;
-	int BOMBPOWER = 3;
+	int BOMBPOWER = 1;
 
 	float IdleAnimTime = 2.0f; // 2초 동안 입력이 없으면 실행되는 Idle 애니메이션
 	float IdleAnimTimer = 0.0f; // Idle 애니메이션 타이머

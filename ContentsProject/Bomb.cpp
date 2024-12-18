@@ -9,6 +9,23 @@
 #include "Mushroom.h"
 
 
+// 방향 벡터와 스프라이트 이름을 static 변수로 정의
+static std::vector<FVector2D> DirectionVectors = 
+{
+	{ -32, 0 },  // Left
+	{ 32, 0 },   // Right
+	{ 0, -32 },  // Up
+	{ 0, 32 }    // Down
+};
+
+static std::vector<std::pair<std::string, std::string>> ExplosionSprites = 
+{
+	{"ExplodeLeftMid.png", "ExplodeLeft.png"},   // Left
+	{"ExplodeRightMid.png", "ExplodeRight.png"}, // Right
+	{"ExplodeUpMid.png", "ExplodeUp.png"},       // Up
+	{"ExplodeDownMid.png", "ExplodeDown.png"}    // Down
+};
+
 ABomb::ABomb()
 {
 	SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
@@ -66,34 +83,13 @@ void ABomb::ClearBombTile()
 
 void ABomb::HandleExplosion(EDirection Direction, int Power)
 {
-	FVector2D DirectionVector;
-	std::string MidSpriteName;
-	std::string EndSpriteName;
+	// Direction 처리 코드
+	FVector2D DirectionVector = DirectionVectors[static_cast<int>(Direction)];
+	std::string MidSpriteName = ExplosionSprites[static_cast<int>(Direction)].first;
+	std::string EndSpriteName = ExplosionSprites[static_cast<int>(Direction)].second;
 
-	// 방향별 설정
-	switch (Direction)
-	{
-	case EDirection::Left:
-		DirectionVector = { -32, 0 };
-		MidSpriteName = "ExplodeLeftMid.png";
-		EndSpriteName = "ExplodeLeft.png";
-		break;
-	case EDirection::Right:
-		DirectionVector = { 32, 0 };
-		MidSpriteName = "ExplodeRightMid.png";
-		EndSpriteName = "ExplodeRight.png";
-		break;
-	case EDirection::Up:
-		DirectionVector = { 0, -32 };
-		MidSpriteName = "ExplodeUpMid.png";
-		EndSpriteName = "ExplodeUp.png";
-		break;
-	case EDirection::Down:
-		DirectionVector = { 0, 32 };
-		MidSpriteName = "ExplodeDownMid.png";
-		EndSpriteName = "ExplodeDown.png";
-		break;
-	}
+	// 스프라이트를 저장하는 벡터
+	std::vector<USpriteRenderer*> ExplosionEffects;
 
 	FVector2D BombPos_Location = GetActorLocation() - WallTileMap->GetActorLocation(); // 폭발 중심 계산
 
@@ -108,7 +104,7 @@ void ABomb::HandleExplosion(EDirection Direction, int Power)
 		FVector2D TargetPos = BombPos_Location + TilePos_Location;
 
 		Tile* TargetTile = WallTileMap->GetTileRef(TargetPos - WallTileMap->GetTileHalfSize());
-		if (TargetTile == nullptr || TargetTile->SpriteIndex == 2 || TargetTile->SpriteIndex == 3) // 장애물이나 끝
+		if (TargetTile == nullptr || TargetTile->SpriteIndex == 2 || TargetTile->SpriteIndex == 3)
 		{
 			break;
 		}
@@ -119,10 +115,10 @@ void ABomb::HandleExplosion(EDirection Direction, int Power)
 		Explode_Mid->SetComponentScale({ 32, 32 });
 		Explode_Mid->SetComponentLocation(TilePos_Location);
 		Explode_Mid->SetOrder(ERenderOrder::BOMB);
-		FVector2D ExplodePos = BombPos_Location + Explode_Mid->GetComponentLocation();
-		FIntPoint TilePos_INDEX = WallTileMap->LocationToIndex(ExplodePos);
 
-		// iterator로 순회 돌림
+		ExplosionEffects.push_back(Explode_Mid);
+
+		// 몬스터 체크. iterator로 순회 돌림
 		std::list<AMonster*>::iterator StartIter = AllMonsters.begin();
 		std::list<AMonster*>::iterator EndIter = AllMonsters.end();
 
@@ -141,16 +137,16 @@ void ABomb::HandleExplosion(EDirection Direction, int Power)
 
 		if (TargetTile->Bomb != nullptr)
 		{
-			TargetTile->Bomb->Bomb_ExPlode(); 
+			TargetTile->Bomb->Bomb_ExPlode();
 		}
+
+		SpreadCount = i;
 
 		if (TargetTile->SpriteIndex == 1) // 파괴 가능한 타일
 		{
 			HandleTileDestruction(TargetPos);
 			break;
 		}
-
-		SpreadCount = i;
 	}
 
 	// 마지막 스프라이트 처리
@@ -166,8 +162,8 @@ void ABomb::HandleExplosion(EDirection Direction, int Power)
 		Explode_End->SetComponentScale({ 32, 32 });
 		Explode_End->SetComponentLocation(TilePos_Location);
 		Explode_End->SetOrder(ERenderOrder::BOMB);
-		FVector2D ExplodePos = BombPos_Location + Explode_End->GetComponentLocation();
-		FIntPoint TilePos_INDEX = WallTileMap->LocationToIndex(ExplodePos);
+
+		ExplosionEffects.push_back(Explode_End);
 
 		// iterator로 순회 돌림
 		std::list<AMonster*>::iterator StartIter = AllMonsters.begin();
@@ -196,6 +192,17 @@ void ABomb::HandleExplosion(EDirection Direction, int Power)
 			HandleTileDestruction(TargetPos);
 		}
 	}
+
+	//// 스프라이트 정리 (for 루프 사용)
+	//for (size_t i = 0; i < ExplosionEffects.size(); ++i)
+	//{
+	//	if (ExplosionEffects[i] != nullptr)
+	//	{
+	//		ExplosionEffects[i]->Destroy();
+	//	}
+	//}
+
+	//ExplosionEffects.clear();
 }
 
 void ABomb::HandleTileDestruction(const FVector2D& TargetPos)
