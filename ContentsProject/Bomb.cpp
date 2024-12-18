@@ -107,14 +107,14 @@ void ABomb::HandleExplosion(EDirection Direction, int Power)
 	std::string MidSpriteName = ExplosionSprites[static_cast<int>(Direction)].first;
 	std::string EndSpriteName = ExplosionSprites[static_cast<int>(Direction)].second;
 
+	// 현재 스폰되어 있는 모든 몬스터를 가져옴
+	std::list <AMonster*> AllMonsters;
+	AllMonsters = GetWorld()->GetActorsFromClass<AMonster>();
+
 	// 스프라이트를 저장하는 벡터
 	std::vector<USpriteRenderer*> ExplosionEffects;
 
 	FVector2D BombPos_Location = GetActorLocation() - WallTileMap->GetActorLocation(); // 폭발 중심 계산
-
-	// 현재 스폰되어 있는 모든 몬스터를 가져옴
-	std::list <AMonster*> AllMonsters;
-	AllMonsters = GetWorld()->GetActorsFromClass<AMonster>();
 
 	int SpreadCount = 0;
 	for (int i = 1; i <= Power - 1; ++i)
