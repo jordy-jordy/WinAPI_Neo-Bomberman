@@ -111,7 +111,7 @@ void ABomb::HandleExplosion(EDirection Direction, int Power)
 	std::list <AMonster*> AllMonsters;
 	AllMonsters = GetWorld()->GetActorsFromClass<AMonster>();
 
-	// 스프라이트를 저장하는 벡터
+	// 폭탄 폭발 스프라이트를 저장하는 벡터
 	std::vector<USpriteRenderer*> ExplosionEffects;
 
 	FVector2D BombPos_Location = GetActorLocation() - WallTileMap->GetActorLocation(); // 폭발 중심 계산
