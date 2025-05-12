@@ -171,8 +171,7 @@ FVector2D APlayer::InvertLOC(FVector2D _Dir)
 	{
 		return CUSTOM_VECTOR_DOWN;
 	}
-
-	return {0, 0};
+		return {0, 0};
 }
 
 
@@ -206,9 +205,6 @@ void APlayer::PlaceBomb()
 	Bomb->SetActorLocation(BOMB_SET_LOCATION);
 
 	Bomb->SetPower(BOMBPOWER);
-
-	ChangeState(PlayerState::Idle);
-
 }
 
 

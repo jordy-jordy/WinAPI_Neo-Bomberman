@@ -85,7 +85,7 @@ protected:
 	void MonsterInit();
 	void PortalInit();
 	void PortalON();
-	void MOVETO_BOSS();
+	void MOVETO_RESULT();
 
 private:
 	// 게임 플레이 장면  관련
