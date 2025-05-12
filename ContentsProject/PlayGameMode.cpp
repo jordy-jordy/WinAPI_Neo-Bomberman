@@ -203,7 +203,7 @@ void APlayGameMode::Tick(float _DeltaTime)
 		if (Portal->GET_ISCANMOVE() == true)
 		{
 			StopTIme();
-			MOVETO_RESULT();
+			PLAYER_TO_PORTAL();
 		}
 
 		if (true == UEngineInput::GetInst().IsDown('L'))
@@ -511,7 +511,7 @@ void APlayGameMode::PortalON()
 	Portal->PORTAL_SWITCH(true);
 }
 
-void APlayGameMode::MOVETO_RESULT()
+void APlayGameMode::PLAYER_TO_PORTAL()
 {
 	FVector2D PLAYER_POS = GetWorld()->GetPawn()->GetActorLocation() - WallTileMapLocation;
 	FVector2D PORTAL_POS = Portal->GetActorLocation() - WallTileMapLocation;
